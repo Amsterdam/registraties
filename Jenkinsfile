@@ -76,7 +76,7 @@ if (BRANCH == "master") {
     }
 
     stage('Waiting for approval') {
-        slackSend channel: '#ci-channel', color: 'warning', message: basisregistratie-wonen is waiting for Production Release - please confirm'
+        slackSend channel: '#ci-channel', color: 'warning', message: 'basisregistratie-wonen is waiting for Production Release - please confirm'
         timeout(10) {
           input "Deploy to Production?"
         }
