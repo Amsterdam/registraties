@@ -1,50 +1,45 @@
-/**
- *
- * App
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- */
-
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
+import { compose } from 'redux';
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+
+import Map from 'containers/MapContainer';
+import NotFoundPage from 'containers/NotFoundPage';
 import Footer from 'components/Footer';
+import MainMenu from 'components/MainMenu';
+import HeaderContainer from 'containers/HeaderContainer';
+import GlobalError from 'containers/GlobalError';
 
-import GlobalStyle from '../../global-styles';
+import reducer from './reducer';
+import saga from './saga';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
-
-export default function App() {
-  return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Header />
+export const App = () => (
+  <div className="container app-container">
+    <GlobalError />
+    <div className="container">
+      <HeaderContainer />
+    </div>
+    <div className="container-fluid">
+      <MainMenu />
+    </div>
+    <div className="content container">
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
+        <Route exact path="/" component={Map} />
         <Route path="" component={NotFoundPage} />
       </Switch>
+    </div>
+    <div className="container-fluid">
       <Footer />
-      <GlobalStyle />
-    </AppWrapper>
-  );
-}
+    </div>
+  </div>
+);
+
+const withReducer = injectReducer({ key: 'global', reducer });
+const withSaga = injectSaga({ key: 'global', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+)(App);

@@ -1,17 +1,17 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.7.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "basisregistratie-wonen",
+  "version": "0.0.1",
+  "description": "Disclosure of data related to accomodation objects. Only available to logged in users.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git@github.com:Amsterdam/basisregistratie-wonen.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8.10.0"
   },
-  "author": "Max Stoiber",
-  "license": "MIT",
+  "author": "Datapunt Amsterdam",
+  "license": "MPL-2.0",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
@@ -42,7 +42,13 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "build:acc": "cross-env NODE_ENV=acceptance webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:prod": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "dyson:server": "nodemon --watch test/mock/api --exec babel-node --presets=latest test/mock/api",
+    "dyson:sample": "nodemon --watch test/mock/sample --exec babel-node --presets=latest ./test/mock/sample",
+    "start:dev": "npm-run-all -p dyson:server start:proxy-dev",
+    "start:proxy-dev": "cross-env NODE_ENV=development node server -- --proxyConfig=proxy.conf.dev.js --port=3001"
   },
   "lint-staged": {
     "*.js": [
@@ -88,7 +94,12 @@
     "reselect": "4.0.0",
     "sanitize.css": "4.1.0",
     "styled-components": "4.0.2",
-    "warning": "4.0.2"
+    "warning": "4.0.2",
+    "amsterdam-stijl": "^3.0.5",
+    "leaflet": "^1.4.0",
+    "moment": "^2.24.0",
+    "proj4": "^2.5.0",
+    "react-router-redux": "^5.0.0-alpha.8"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
@@ -161,6 +172,13 @@
     "webpack-dev-middleware": "3.4.0",
     "webpack-hot-middleware": "2.24.3 ",
     "webpack-pwa-manifest": "3.7.1",
-    "whatwg-fetch": "3.0.0"
+    "whatwg-fetch": "3.0.0",
+    "babel-plugin-inline-react-svg": "^0.5.4",
+    "dyson": "^2.0.3",
+    "dyson-generators": "^0.2.0",
+    "dyson-image": "^0.2.0",
+    "node-sass": "*",
+    "npm-run-all": "^4.0.5",
+    "sass-loader": "*"
   }
 }

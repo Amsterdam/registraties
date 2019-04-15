@@ -1,0 +1,11 @@
+{
+  "name": "basisregistratie-wonen",
+  "title": "Ontsluiten Basisregistraties voor Wonen",
+  "description": "Disclosure of accommodation objects. Available only to authenticated users",
+  "fields": [
+    {
+      "fieldName": "jhipsterVersion",
+      "fieldType": "String"
+    }
+  ]
+}

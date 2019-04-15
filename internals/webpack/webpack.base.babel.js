@@ -26,6 +26,11 @@ module.exports = options => ({
   module: {
     rules: [
       {
+        test: /.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+
+      {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         exclude: /node_modules/,
         use: {
@@ -131,4 +136,11 @@ module.exports = options => ({
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
   performance: options.performance || {},
+
+  externals: {
+    globalConfig: JSON.stringify(
+      // eslint-disable-next-line global-require
+      require(path.resolve(process.cwd(),'environment.conf.json')),
+    ),
+  },
 });

@@ -6,9 +6,13 @@
  * reducers accidentally picking up actions they shouldn't.
  *
  * Follow this format:
- * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
+ * export const YOUR_ACTION_CONSTANT = 'basisregistratie-wonen/YourContainer/YOUR_ACTION_CONSTANT';
  */
+export const AUTHENTICATE_USER = 'basisregistratie-wonen/App/AUTHENTICATE_USER';
+export const AUTHORIZE_USER = 'basisregistratie-wonen/App/AUTHORIZE_USER';
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
+export const SHOW_GLOBAL_ERROR = 'basisregistratie-wonen/App/SHOW_GLOBAL_ERROR';
+export const RESET_GLOBAL_ERROR = 'basisregistratie-wonen/App/RESET_GLOBAL_ERROR';
+
+export const LOGIN = 'basisregistratie-wonen/App/LOGIN';
+export const LOGOUT = 'basisregistratie-wonen/App/LOGOUT';

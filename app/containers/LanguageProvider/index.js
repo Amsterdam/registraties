@@ -3,7 +3,7 @@
  * LanguageProvider
  *
  * this component connects the redux state language locale to the
- * IntlProvider component and i18n messages (loaded from `app/translations`)
+ * IntlProvider component and i18n messages (loaded from `src/translations`)
  */
 
 import React from 'react';
@@ -13,20 +13,13 @@ import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
 
 import { makeSelectLocale } from './selectors';
+import { DEFAULT_LOCALE } from '../../i18n';
 
-export class LanguageProvider extends React.PureComponent {
-  render() {
-    return (
-      <IntlProvider
-        locale={this.props.locale}
-        key={this.props.locale}
-        messages={this.props.messages[this.props.locale]}
-      >
-        {React.Children.only(this.props.children)}
-      </IntlProvider>
-    );
-  }
-}
+export const LanguageProvider = ({ locale, messages, children }) => (
+  <IntlProvider locale={locale} key={locale} messages={messages[locale]} defaultLocale={DEFAULT_LOCALE}>
+    {React.Children.only(children)}
+  </IntlProvider>
+);
 
 LanguageProvider.propTypes = {
   locale: PropTypes.string,
@@ -34,8 +27,9 @@ LanguageProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const mapStateToProps = createSelector(makeSelectLocale(), locale => ({
-  locale,
-}));
+const mapStateToProps = createSelector(
+  makeSelectLocale(),
+  locale => ({ locale }),
+);
 
 export default connect(mapStateToProps)(LanguageProvider);

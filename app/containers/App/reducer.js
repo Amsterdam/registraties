@@ -12,32 +12,34 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import { AUTHORIZE_USER, SHOW_GLOBAL_ERROR, RESET_GLOBAL_ERROR } from './constants';
 
 // The initial state of the App
-const initialState = fromJS({
+export const initialState = fromJS({
   loading: false,
   error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
-  },
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_REPOS:
+    case AUTHORIZE_USER:
       return state
-        .set('loading', true)
+        .set('userName', action.payload.userName)
+        .set('userScopes', fromJS(action.payload.userScopes))
+        .set('accessToken', action.payload.accessToken);
+
+    case SHOW_GLOBAL_ERROR:
+      return state
+        .set('error', !!action.payload)
+        .set('errorMessage', action.payload)
+        .set('loading', false);
+
+    case RESET_GLOBAL_ERROR:
+      return state
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
-    case LOAD_REPOS_SUCCESS:
-      return state
-        .setIn(['userData', 'repositories'], action.repos)
-        .set('loading', false)
-        .set('currentUser', action.username);
-    case LOAD_REPOS_ERROR:
-      return state.set('error', action.error).set('loading', false);
+        .set('errorMessage', '')
+        .set('loading', false);
+
     default:
       return state;
   }

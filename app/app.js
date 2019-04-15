@@ -14,8 +14,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import FontFaceObserver from 'fontfaceobserver';
-import history from 'utils/history';
-import 'sanitize.css/sanitize.css';
+import moment from 'moment';
+import 'moment/src/locale/nl';
+import createHistory from 'history/createBrowserHistory';
+import 'leaflet/dist/leaflet';
 
 // Import root app
 import App from 'containers/App';
@@ -24,7 +26,7 @@ import App from 'containers/App';
 import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon and the .htaccess file
-import '!file-loader?name=[name].[ext]!./images/favicon.ico';
+import '!file-loader?name=[name].[ext]!./images/favicon.png';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 
 import configureStore from './configureStore';
@@ -41,8 +43,11 @@ openSansObserver.load().then(() => {
   document.body.classList.add('fontLoaded');
 });
 
+moment.locale('nl');
+
 // Create redux store with history
 const initialState = {};
+const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
