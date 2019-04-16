@@ -1,22 +1,6 @@
 version: '3.5'
 services:
-  web: # NGINX
-    build:
-      args:
-        - BUILD_ENV=acc
-      context: .
-    environment:
-      - TZ=Europe/Amsterdam
-    ipc: host
+  web:
+    build: .
     ports:
       - "3001:80"
-  # networks_mode: "host"
-
-  test:
-    build:
-      context: .
-      target: builder
-    environment:
-      - NODE_ENV=development
-      - TZ=Europe/Amsterdam
-    command: npm run test

@@ -1,43 +1,45 @@
-FROM node:10.10 AS builder
+FROM node:10.15-stretch AS builder
 LABEL maintainer="datapunt@amsterdam.nl"
 
 ARG BUILD_ENV=prod
 ARG BUILD_NUMBER=0
-WORKDIR /app
+
+WORKDIR /deploy
 
 # Run updates and cleanup
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
       netcat \
-      git
-RUN rm -rf /var/lib/apt/lists/*
+      git && \
+    rm -rf /var/lib/apt/lists/*
 
 #  Changing git URL because network is blocking git protocol...
 RUN git config --global url."https://".insteadOf git://
 RUN git config --global url."https://github.com/".insteadOf git@github.com:
 
+COPY package.json package-lock.json /deploy/
+COPY internals /deploy/internals/
 
-# Install NPM dependencies. Also:
-RUN npm --production=false \
+RUN npm config set registry https://repo.datapunt.amsterdam.nl/repository/npm-group/ && \
+    npm --production=false \
         --unsafe-perm \
         --verbose \
-       install
-RUN npm cache clean --force
+        ci && \
+    npm cache clean --force
+
+# Build dependencies
+COPY . /deploy/
 
 # Build
+ENV NODE_PATH=/deploy/
 ENV NODE_ENV=production
-RUN echo "run build" ${BUILD_ENV}
-# RUN npm rebuild node-sass
-RUN npm run build:${BUILD_ENV}
-RUN echo "build ${BUILD_NUMBER} - `date`" > /src/build/version.txt
-
-# Test
+RUN npm run build
 
 
 # Deploy
 FROM nginx:stable-alpine
 ARG BUILD_ENV=prod
-COPY --from=builder /src/build/. /usr/share/nginx/html/
+COPY --from=builder /deploy/build/. /usr/share/nginx/html/
 
 COPY default.conf /etc/nginx/conf.d/
 
