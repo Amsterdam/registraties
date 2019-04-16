@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'amsterdam-stijl/dist/css/ams-stijl.css';
 
 const GlobalStyle = createGlobalStyle`
   html,
