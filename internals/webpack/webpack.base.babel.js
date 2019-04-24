@@ -122,10 +122,11 @@ module.exports = options => ({
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      HOST: 'localhost',
+      PORT: 8080,
+      HTTPS: false,
     }),
   ]),
   resolve: {
@@ -140,7 +141,7 @@ module.exports = options => ({
   externals: {
     globalConfig: JSON.stringify(
       // eslint-disable-next-line global-require
-      require(path.resolve(process.cwd(),'environment.conf.json')),
+      require(path.resolve(process.cwd(), 'environment.conf.json')),
     ),
   },
 });

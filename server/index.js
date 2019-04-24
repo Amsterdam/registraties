@@ -1,5 +1,6 @@
 /* eslint consistent-return:0 import/order:0 */
-
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
 const logger = require('./logger');
 
@@ -7,12 +8,20 @@ const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
-const ngrok =
-  (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
-    ? require('ngrok')
-    : false;
+const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const { resolve } = require('path');
 const app = express();
+const SSL = isDev && process.env.HTTPS;
+let options = {};
+
+if (isDev) {
+  const key = fs.readFileSync(`${__dirname}/cert/server.key`);
+  const cert = fs.readFileSync(`${__dirname}/cert/server.crt`);
+  options = {
+    key,
+    cert,
+  };
+}
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
@@ -28,6 +37,9 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
+const server = SSL ? https.createServer(options, app) : app;
+const scheme = SSL ? 'https' : 'http';
+
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
   req.url = req.url + '.gz'; // eslint-disable-line
@@ -36,7 +48,7 @@ app.get('*.js', (req, res, next) => {
 });
 
 // Start your app.
-app.listen(port, host, async err => {
+server.listen(port, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
@@ -49,8 +61,8 @@ app.listen(port, host, async err => {
     } catch (e) {
       return logger.error(e);
     }
-    logger.appStarted(port, prettyHost, url);
+    logger.appStarted(port, prettyHost, url, scheme);
   } else {
-    logger.appStarted(port, prettyHost);
+    logger.appStarted(port, prettyHost, undefined, scheme);
   }
 });
