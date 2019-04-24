@@ -1,5 +1,8 @@
 const scope = 'basisregistratie-wonen/AccommodationObjectPage';
 
+export const LOAD_DATA_SUCCESS = `${scope}/LOAD_DATA_SUCCESS`;
+export const LOAD_DATA_FAILED = `${scope}/LOAD_DATA_FAILED`;
+
 export const LOAD_BAG_DATA = `${scope}/LOAD_BAG_DATA`;
 export const LOAD_BAG_DATA_FAILED = `${scope}/LOAD_BAG_DATA_FAILED`;
 export const LOAD_BAG_DATA_SUCCESS = `${scope}/LOAD_BAG_DATA_SUCCESS`;

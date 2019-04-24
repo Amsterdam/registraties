@@ -23,7 +23,19 @@ import {
   LOAD_BAG_DATA,
   LOAD_BAG_DATA_FAILED,
   LOAD_BAG_DATA_SUCCESS,
+  LOAD_DATA_SUCCESS,
+  LOAD_DATA_FAILED,
 } from './constants';
+
+export const loadDataSuccess = payload => ({
+  type: LOAD_DATA_SUCCESS,
+  payload,
+});
+
+export const loadDataFailed = payload => ({
+  type: LOAD_DATA_FAILED,
+  payload,
+});
 
 export const loadBAGData = payload => ({
   type: LOAD_BAG_DATA,
