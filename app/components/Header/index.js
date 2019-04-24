@@ -10,7 +10,7 @@ import LogoPrint from '../../../node_modules/amsterdam-stijl/dist/images/logos/a
 const Header = ({ isAuthenticated, userName, onLoginLogoutButtonClick }) => (
   <div className="header-component has_header_modern no-print">
     <div className="row header-wrapper">
-      <div className="col-sm-6 grid-header-logo">
+      <header className="col-sm-6 grid-header-logo">
         <h1 className="sitelogo">
           <a className="mainlogo" href={CONFIGURATION.ROOT}>
             <span className="logoset">
@@ -24,7 +24,8 @@ const Header = ({ isAuthenticated, userName, onLoginLogoutButtonClick }) => (
             </span>
           </a>
         </h1>
-      </div>
+        <span className="header-title">Basisregistratie wonen</span>
+      </header>
       <div className="col-sm-6">
         <nav>
           <ul className="links">
