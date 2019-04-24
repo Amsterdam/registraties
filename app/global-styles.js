@@ -16,8 +16,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: AvenirNextLTW01-Regular, Helvetica Neue, Helvetica, Arial, sans-serif;
   }
 
-  p {
-    line-height: 26px;
+  p, li {
+    line-height: 25px;
   }
 
   a, a:hover {
@@ -26,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
 
   a:hover::before {
     background-image: url("~amsterdam-stijl/dist/images/svg/caret-left-blue.svg") !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.4em !important;
   }
 
   ul li {
@@ -64,7 +69,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .container {
-      width: auto;
+      width: 100%;
     }
   }
 
