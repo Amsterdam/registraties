@@ -1,16 +1,18 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
+import AccommodationObjectPage from 'containers/AccommodationObjectPage';
 import Map from 'containers/MapContainer';
 import NotFoundPage from 'containers/NotFoundPage';
 import Footer from 'components/Footer';
-import MainMenu from 'components/MainMenu';
 import HeaderContainer from 'containers/HeaderContainer';
 import GlobalError from 'containers/GlobalError';
+import { isAuthenticated } from 'shared/services/auth/auth';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -23,12 +25,15 @@ export const App = () => (
     <div className="container">
       <HeaderContainer />
     </div>
-    <div className="container-fluid">
-      <MainMenu />
-    </div>
     <div className="content container">
       <Switch>
         <Route exact path="/" component={Map} />
+        {!isAuthenticated() && <Redirect to="/" />}
+        <Route
+          exact
+          path="/:adresseerbaarobjectId-:nummeraanduidingId-:openbareruimteId/"
+          component={AccommodationObjectPage}
+        />
         <Route path="" component={NotFoundPage} />
       </Switch>
     </div>
