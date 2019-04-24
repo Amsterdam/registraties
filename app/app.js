@@ -18,6 +18,8 @@ import moment from 'moment';
 import 'moment/src/locale/nl';
 import createHistory from 'history/createBrowserHistory';
 import 'leaflet/dist/leaflet';
+import { authenticate } from 'shared/services/auth/auth';
+import { authenticateUser } from 'containers/App/actions';
 
 // Import root app
 import App from 'containers/App';
@@ -81,10 +83,10 @@ if (!window.Intl) {
   })
     .then(() =>
       Promise.all([
-        import('intl/locale-data/jsonp/en.js'),
-        import('intl/locale-data/jsonp/de.js'),
+        import('intl/locale-data/jsonp/en.js'), // eslint-disable-line prettier/prettier
+        import('intl/locale-data/jsonp/nl.js'),
       ]),
-    ) // eslint-disable-line prettier/prettier
+    )
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;
@@ -99,3 +101,7 @@ if (!window.Intl) {
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
+
+// Authenticate and start the authorization process
+const credentials = authenticate();
+store.dispatch(authenticateUser(credentials));

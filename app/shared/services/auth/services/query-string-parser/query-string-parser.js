@@ -18,7 +18,7 @@ export default function(queryString) {
   return queryString
     .substring(1)
     .split('&')
-    .reduce((params, query) => {
+    .reduceRight((params, query) => {
       const keyValue = query.split('=');
       const key = keyValue[0];
       keyValue.shift();
@@ -27,5 +27,5 @@ export default function(queryString) {
         ...params,
         [decodeURIComponent(key)]: decodeURIComponent(value),
       };
-    });
+    }, {});
 }

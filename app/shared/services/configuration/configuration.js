@@ -3,9 +3,14 @@ import globalConfig from 'globalConfig'; // eslint-disable-line import/extension
 const domainName = 'wonen.amsterdam.nl';
 const apiDomainName = 'api.data.amsterdam.nl';
 
+const { HOST } = process.env;
+const { HTTPS } = process.env;
+const { PORT } = process.env;
+const scheme = HTTPS ? 'https' : 'http';
+
 const defaultConfig = {
   API_ROOT: `https://acc.${apiDomainName}/`,
-  ROOT: 'http://localhost:3001/',
+  ROOT: `${scheme}://${HOST}:${PORT}/`,
   AUTH_ROOT: 'https://acc.api.data.amsterdam.nl/',
 };
 
@@ -40,7 +45,5 @@ const CONFIGURATION = {
   // the external configuration override form environment.conf.json
   ...globalConfig,
 };
-
-// console.log('environment configuration', CONFIGURATION); // eslint-disable-line no-console
 
 export default CONFIGURATION;

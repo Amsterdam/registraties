@@ -29,12 +29,23 @@ const ERROR_MESSAGES = {
 // success
 const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state'];
 
-// All the scopes this City Daty frontend needs for communication with
-// the backend APIs
 const scopes = [
-  // Signals
-  'SIG/ALL',
+  // Kadaster
+  // Alle attributen van een kadastraal niet-natuurlijk subject,
+  // inclusief alle rechten op kadastrale objecten
+  'BRK/RS',
+  // Alle atrributen van een kadastraal subject (natuurlijk en
+  // niet-natuurlijk), inclusief alle rechten op kadastrale objecten
+  'BRK/RSN',
+  // Alle attributen van een kadastraal object, inclusief koopsom,
+  // koopsom_valuta_code, koopjaar, cultuurcode_onbebouwd,
+  // cultuurcode_bebouwd en zakelijke rechten van de bijbehorende
+  // kadastrale subjecten
+  'BRK/RO',
+  // Handelsregister
+  'HR/R', // Leesrechten
 ];
+const clientId = 'citydata';
 
 const domainList = ['datapunt', 'grip'];
 
@@ -50,7 +61,7 @@ const encodedScopes = encodeURIComponent(scopes.join(' '));
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
 export const AUTH_PATH = domain =>
-  `oauth2/authorize?idp_id=${getDomain(domain)}&response_type=token&client_id=sia&scope=${encodedScopes}`;
+  `oauth2/authorize?idp_id=${getDomain(domain)}&response_type=token&client_id=${clientId}&scope=${encodedScopes}`;
 
 // The keys of values we need to store in the session storage
 //
@@ -194,10 +205,12 @@ export function login(domain) {
   sessionStorage.setItem(STATE_TOKEN, stateToken);
   sessionStorage.setItem(OAUTH_DOMAIN, domain);
 
-  const redirectUri = encodeURIComponent(`${location.protocol}//${location.host}/manage/incidents`);
-  location.assign(
-    `${CONFIGURATION.AUTH_ROOT}${AUTH_PATH(domain)}&state=${encodedStateToken}&redirect_uri=${redirectUri}`,
-  );
+  const redirectUri = encodeURIComponent(`${location.protocol}//${location.host}/`);
+  const newLocation = `${CONFIGURATION.AUTH_ROOT}${AUTH_PATH(
+    domain,
+  )}&state=${encodedStateToken}&redirect_uri=${redirectUri}`;
+
+  location.assign(newLocation);
 }
 
 export function logout() {
@@ -262,6 +275,7 @@ export function authenticate() {
   }
 
   returnPath = getReturnPath();
+
   if (returnPath) {
     // Timeout needed because the change is otherwise not being handled in
     // Firefox browsers. This is possibly due to AngularJS changing the
@@ -272,6 +286,7 @@ export function authenticate() {
   }
 
   const accessToken = getAccessToken();
+
   if (accessToken) {
     const credentials = {
       userName: getName(),
