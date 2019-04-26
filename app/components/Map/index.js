@@ -14,7 +14,7 @@ class Map extends Component {
   componentDidMount() {
     const { center, onSearchSelect } = this.props;
 
-    amaps.createMap({
+    this.map = amaps.createMap({
       center,
       target: 'mapdiv',
       search: true,
@@ -27,7 +27,7 @@ class Map extends Component {
   }
 
   componentWillUnmount() {
-    amaps.on('search-select', () => {});
+    this.map.remove();
   }
 
   render() {
