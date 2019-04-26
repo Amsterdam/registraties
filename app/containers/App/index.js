@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -31,7 +30,7 @@ export const App = () => (
         {!isAuthenticated() && <Redirect to="/" />}
         <Route
           exact
-          path="/:adresseerbaarobjectId-:nummeraanduidingId-:openbareruimteId/"
+          path="/:natRegId,:adresseerbaarObjectId,:nummeraanduidingId,:openbareRuimteId,:latitude,:longitude/"
           component={AccommodationObjectPage}
         />
         <Route path="" component={NotFoundPage} />
