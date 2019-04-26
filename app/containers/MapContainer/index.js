@@ -1,22 +1,48 @@
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import Map from '../../components/Map';
+import PropTypes from 'prop-types';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-const MapContainer = withRouter(({ history }) => (
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+
+import Map from '../../components/Map';
+import reducer from './reducer';
+import saga from './saga';
+import { searchSelect } from './actions';
+
+const MapContainer = ({ searchSelectAction }) => (
   <Fragment>
     <Map
-      onSearchSelect={({ resultObject }) => {
-        const {
-          adresseerbaarobject_id: adresseerbaarobjectId,
-          nummeraanduiding_id: nummeraanduidingId,
-          openbareruimte_id: openbareruimteId,
-        } = resultObject;
-
-        history.push(`/${adresseerbaarobjectId}-${nummeraanduidingId}-${openbareruimteId}/`);
+      onSearchSelect={response => {
+        searchSelectAction(response);
       }}
       center={{ latitude: 52.372829, longitude: 4.900773 }}
     />
   </Fragment>
-));
+);
 
-export default MapContainer;
+MapContainer.propTypes = {
+  searchSelectAction: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      searchSelectAction: searchSelect,
+    },
+    dispatch,
+  );
+
+const withConnect = connect(
+  null,
+  mapDispatchToProps,
+);
+const withReducer = injectReducer({ key: 'search', reducer });
+const withSaga = injectSaga({ key: 'search', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(MapContainer);
