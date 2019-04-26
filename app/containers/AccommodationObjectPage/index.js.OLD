@@ -2,14 +2,42 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { FormattedDate, FormattedMessage, FormattedNumber, injectIntl, intlShape } from 'react-intl';
+import CSVDownloadContainer from 'containers/CSVDownload';
+
 import amaps from 'amsterdam-amaps/dist/amaps';
 import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
 import 'leaflet/dist/leaflet.css';
 
-import CSVDownloadContainer from 'containers/CSVDownload';
-import withSelector from 'containers/withSelector';
-import { loadBAGData } from 'containers/withSelector/actions';
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
+
+import { loadBAGData } from './actions';
+import {
+  kadasterObjectReducer,
+  ligplaatsReducer,
+  nummeraanduidingReducer,
+  // openbareRuimteReducer,
+  pandReducer,
+  verblijfsobjectReducer,
+  bagReducer,
+  kadasterSubjectReducer,
+  handelsregisterReducer,
+} from './reducer';
+// import mapReducer from '../MapContainer/reducer';
+import saga from './saga';
+import {
+  selectAdres,
+  selectHandelsregisterData,
+  selectKadasterObjectData,
+  selectKadasterSubjectData,
+  selectLigplaatsData,
+  selectNummeraanduidingData,
+  // selectOpenbareRuimteData,
+  selectPandData,
+  selectVerblijfsobjectData,
+} from './selectors';
 
 import './style.scss';
 import { MapWrapper, MapContainer, Heading, Key } from './styled';
@@ -167,6 +195,17 @@ AccommodationObjectPageComponent.propTypes = {
   }).isRequired,
 };
 
+const mapStateToProps = createStructuredSelector({
+  adres: selectAdres(),
+  handelsregister: selectHandelsregisterData(),
+  kadasterObject: selectKadasterObjectData(),
+  kadasterSubject: selectKadasterSubjectData(),
+  ligplaats: selectLigplaatsData(),
+  nummeraanduiding: selectNummeraanduidingData(),
+  pand: selectPandData(),
+  verblijfsobject: selectVerblijfsobjectData(),
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -176,13 +215,22 @@ const mapDispatchToProps = dispatch =>
   );
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
-const WithSelector = withSelector(AccommodationObjectPageComponent);
+const withSaga = injectSaga({ key: 'global', saga });
+const withIntl = injectIntl(AccommodationObjectPageComponent);
 
 export default compose(
+  injectReducer({ key: 'bag', reducer: bagReducer }),
+  injectReducer({ key: 'handelsregister', reducer: handelsregisterReducer }),
+  injectReducer({ key: 'kadasterObject', reducer: kadasterObjectReducer }),
+  injectReducer({ key: 'kadasterSubject', reducer: kadasterSubjectReducer }),
+  injectReducer({ key: 'ligplaats', reducer: ligplaatsReducer }),
+  injectReducer({ key: 'nummeraanduiding', reducer: nummeraanduidingReducer }),
+  injectReducer({ key: 'pand', reducer: pandReducer }),
+  injectReducer({ key: 'verblijfsobject', reducer: verblijfsobjectReducer }),
+  withSaga,
   withConnect,
-  injectIntl,
-)(WithSelector);
+)(withIntl);

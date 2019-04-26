@@ -1,4 +1,29 @@
 :target {
   background-color: yellow;
-  margin-top: 20px;
+  margin-bottom: 0px;
+  padding-bottom: 20px;
+}
+
+:target + * {
+  background-color: yellow;
+  margin-top: 0;
+  padding-top: 20px;
+}
+
+@supports (display: flow-root) {
+  .cf {
+    display: flow-root;
+  }
+}
+
+@supports not (display: flow-root) {
+  .cf:before,
+  .cf:after {
+    content: " ";
+    display: table;
+  }
+
+  .cf:after {
+    clear: both;
+  }
 }
