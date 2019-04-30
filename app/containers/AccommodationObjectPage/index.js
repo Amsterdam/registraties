@@ -84,7 +84,7 @@ export class AccommodationObjectPageComponent extends Component {
     }
 
     return (
-      <Fragment key={title}>
+      <Fragment key={title || Math.random()}>
         {title && <h3 id={title}>{title}</h3>}
 
         {data ? (
