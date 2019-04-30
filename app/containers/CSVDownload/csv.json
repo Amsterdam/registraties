@@ -1,0 +1,35 @@
+{
+  "brko": {
+    "id": "NL.KAD.OnroerendeZaak.11520395170000",
+    "objectnummer": "3951",
+    "koopsom": 64000000,
+    "koopjaar": "2018"
+  },
+  "brks": {},
+  "num": {
+    "nummeraanduidingidentificatie": "0363200000406187",
+    "adres": "Weesperstraat 113",
+    "postcode": "1018VN",
+    "huisnummer": 113,
+    "hoofdadres": true
+  },
+  "pnd": {
+    "pandidentificatie": "0363100012165490",
+    "status": { "code": "31", "omschrijving": "Pand in gebruik" },
+    "oorspronkelijk_bouwjaar": "1891",
+    "hoogste_bouwlaag": null,
+    "laagste_bouwlaag": null
+  },
+  "vbo": {
+    "verblijfsobjectidentificatie": "0363010000864314",
+    "status": { "code": "21", "omschrijving": "Verblijfsobject in gebruik" },
+    "oppervlakte": 6474,
+    "bouwlagen": null,
+    "aantal_kamers": null,
+    "eigendomsverhouding": { "code": "01", "omschrijving": "Huur" },
+    "gebruik": { "code": "3141", "omschrijving": "kantoor" },
+    "indicatie_geconstateerd": false,
+    "aanduiding_in_onderzoek": false,
+    "gebruiksdoelen": [{ "code": "1500", "omschrijving": "kantoorfunctie", "code_plus": "", "omschrijving_plus": "" }]
+  }
+}
