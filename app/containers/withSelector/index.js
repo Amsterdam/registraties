@@ -17,12 +17,12 @@ import {
 } from './reducer';
 import {
   makeSelectAdres,
-  // makeSelectAllData,
   makeSelectHandelsregisterData,
   makeSelectKadasterObjectData,
   makeSelectKadasterSubjectData,
   makeSelectNummeraanduidingData,
   makeSelectPandData,
+  makeSelectSummary,
   makeSelectVerblijfsobjectData,
 } from './selectors';
 import saga from './saga';
@@ -36,6 +36,7 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
+    summary: makeSelectSummary(),
     adres: makeSelectAdres(),
     handelsregister: makeSelectHandelsregisterData(),
     kadasterObject: makeSelectKadasterObjectData(),

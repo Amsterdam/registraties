@@ -7,7 +7,6 @@ export const selectBAG = state => state.get('bag');
 const selectHandelsregister = state => state.get('handelsregister');
 const selectKadasterObject = state => state.get('kadasterObject');
 const selectKadasterSubject = state => state.get('kadasterSubject');
-const selectLigplaats = state => state.get('ligplaats');
 const selectNummeraanduiding = state => state.get('nummeraanduiding');
 const selectPand = state => state.get('pand');
 const selectSearch = state => state.get('search');
@@ -133,7 +132,7 @@ export const makeSelectAdres = () =>
       return undefined;
     }
 
-    return state.find(({ key }) => key === 'adres').formattedValue;
+    return state.filter(({ key }) => key === 'adres' || key === 'postcode');
   });
 
 export const makeSelectPandData = () =>
@@ -217,30 +216,12 @@ export const makeSelectKadasterSubjectLinks = () =>
 export const makeSelectHandelsregisterData = () =>
   createSelector(
     selectHandelsregister,
-    state => // eslint-disable-line
+    (
+      state, // eslint-disable-line
+    ) =>
       // debugger;
       undefined,
   );
-
-export const makeSelectLigplaatsData = () =>
-  createSelector(selectLigplaats, state => {
-    const data = state.get('data');
-
-    if (!data || !isArray(data)) {
-      return undefined;
-    }
-
-    const keys = [
-      'aanduiding_in_onderzoek',
-      'begin_geldigheid',
-      'einde_geldigheid',
-      'hoofdadres',
-      'indicatie_geconstateerd',
-      'status',
-    ];
-
-    return getFormattedData({ data, keys });
-  });
 
 export const makeSelectSearchData = () =>
   createSelector(selectSearch, state => {
@@ -255,18 +236,36 @@ export const makeSelectSearchData = () =>
     };
   });
 
-export const makeSelectAllData = () =>
+export const makeSelectSummary = () =>
   createSelector(
     [
-      makeSelectVerblijfsobjectData,
-      makeSelectNummeraanduidingData,
-      makeSelectPandData,
-      makeSelectKadasterObjectData,
-      makeSelectKadasterSubjectData,
-      makeSelectLigplaatsData,
+      makeSelectVerblijfsobjectData(),
+      makeSelectNummeraanduidingData(),
+      makeSelectPandData(),
+      makeSelectKadasterObjectData(),
     ],
     // eslint-disable-next-line
-    (verblijfsobjectData, nummeraanduidingData, pandData, kadasterObjectData, kadasterSubjectData, ligplaatsData) => {
-      // debugger;
+    (vbo = [], num = [], pnd = [], brko = []) => {
+      const summary = {};
+
+      const find = (obj, id) => obj && obj.find(({ key }) => key === id);
+
+      if (num.length) {
+        summary['Nummeraanduiding-ID'] = find(num, 'nummeraanduidingidentificatie').value;
+      }
+
+      if (vbo.length) {
+        summary['VBO-ID'] = find(vbo, 'verblijfsobjectidentificatie').value;
+      }
+
+      if (pnd.length) {
+        summary['Pand-ID'] = find(pnd, 'pandidentificatie').value;
+      }
+
+      if (brko.length) {
+        summary.Kadastraalobjectnummer = find(brko, 'objectnummer').value;
+      }
+
+      return summary;
     },
   );

@@ -16,9 +16,6 @@ import {
   loadKadasterSubjectData,
   loadKadasterSubjectDataFailed,
   loadKadasterSubjectDataSuccess,
-  loadLigplaatsData,
-  loadLigplaatsDataFailed,
-  loadLigplaatsDataSuccess,
   loadNummeraanduidingData,
   loadNummeraanduidingFailed,
   loadNummeraanduidingSuccess,
@@ -37,7 +34,6 @@ import { selectBAG, makeSelectKadasterSubjectLinks, makeSelectFromSubject } from
 import {
   LOAD_BAG_DATA,
   LOAD_KADASTER_OBJECT_DATA,
-  LOAD_LIGPLAATS_DATA,
   LOAD_NUMMERAANDUIDING_DATA,
   LOAD_PAND_DATA,
   LOAD_PANDLIST_DATA,
@@ -53,7 +49,6 @@ const BRK_OBJECT_API = 'brk/object-expand/?verblijfsobjecten__id=';
 // const BRK_SUBJECT_API = 'brk/subject/';
 const NUMMERAANDUIDING_API = 'bag/nummeraanduiding/';
 const PAND_API = 'bag/pand/';
-const LIGPLAATS_API = 'bag/ligplaats/';
 const requestOptions = {
   headers: getAuthHeaders(),
   mode: 'cors',
@@ -134,24 +129,8 @@ export function* fetchNummeraanduidingData(action) {
       yield put(loadVerblijfsobjectData(adresseerbaarObjectId));
       yield put(loadPandlistData(adresseerbaarObjectId));
     }
-
-    if (data.ligplaats) {
-      yield put(loadLigplaatsData(adresseerbaarObjectId));
-    }
   } catch (error) {
     yield put(loadNummeraanduidingFailed(error));
-  }
-}
-
-export function* fetchLigplaatsData(action) {
-  const { adresseerbaarObjectId } = action.payload;
-
-  try {
-    const data = yield call(request, `${API_ROOT}${LIGPLAATS_API}${adresseerbaarObjectId}/`);
-
-    yield put(loadLigplaatsDataSuccess(data));
-  } catch (error) {
-    yield put(loadLigplaatsDataFailed(error));
   }
 }
 
@@ -210,7 +189,6 @@ export default function* watchAccommodationObjectPageSaga() {
     // takeLatest(LOAD_HR_DATA, fetchHandelsregisterData),
     takeLatest(LOAD_KADASTER_OBJECT_DATA, fetchKadastraalObjectData),
     takeLatest(LOAD_KADASTER_SUBJECT_DATA, fetchKadastraalSubjectData),
-    takeLatest(LOAD_LIGPLAATS_DATA, fetchLigplaatsData),
     takeLatest(LOAD_NUMMERAANDUIDING_DATA, fetchNummeraanduidingData),
     takeLatest(LOAD_PAND_DATA, fetchPandData),
     takeLatest(LOAD_PANDLIST_DATA, fetchPandlistData),

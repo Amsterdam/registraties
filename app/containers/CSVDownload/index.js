@@ -4,7 +4,7 @@ import { parse } from 'json2csv';
 
 import { isArray, isObject } from 'utils';
 import withSelector from 'containers/withSelector';
-import CSVDownload from 'components/CSVDownload';
+import DownloadLink from 'components/DownloadLink';
 
 class CSVDownloadContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -107,7 +107,7 @@ class CSVDownloadContainer extends Component {
   }
 
   render() {
-    return <CSVDownload name="basisregistratie_wonen_export.csv" onClick={this.onClick} />;
+    return <DownloadLink name="basisregistratie_wonen_export.csv" onClick={this.onClick} />;
   }
 }
 

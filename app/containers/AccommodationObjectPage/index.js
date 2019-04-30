@@ -64,7 +64,7 @@ export class AccommodationObjectPageComponent extends Component {
     const sections = Array.from(this.sections);
 
     return (
-      <ul className="links horizontal">
+      <ul className="tabs">
         {sections.map(section => (
           <li key={section}>
             <a href={`#${section}`}>
@@ -103,7 +103,16 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const { adres, kadasterObject, kadasterSubject, nummeraanduiding, pand, verblijfsobject } = this.props;
+    const {
+      adres,
+      kadasterObject,
+      kadasterSubject,
+      nummeraanduiding,
+      pand,
+      summary,
+      verblijfsobject,
+      intl,
+    } = this.props;
 
     return (
       <div className="row">
@@ -119,27 +128,55 @@ export class AccommodationObjectPageComponent extends Component {
             {pand && this.renderSection('Pand', pand)}
           </section>
 
-          <section>
-            <header>
-              <h2>BRK Objecten</h2>
-            </header>
+          {(kadasterObject || kadasterSubject) && (
+            <section>
+              <header>
+                <h2>BRK Objecten</h2>
+              </header>
 
-            {kadasterObject && this.renderSection('Kadastraal object', kadasterObject)}
-            {kadasterSubject &&
-              kadasterSubject.map((subject, index) => this.renderSection(index <= 0 && 'Kadastraal subject', subject))}
-          </section>
+              {kadasterObject && this.renderSection('Kadastraal object', kadasterObject)}
+              {kadasterSubject &&
+                kadasterSubject.map((subject, index) =>
+                  this.renderSection(index <= 0 && 'Kadastraal subject', subject),
+                )}
+            </section>
+          )}
         </article>
 
         <aside className="col-3">
-          <Heading>Overzicht</Heading>
+          <section>
+            <header>
+              <Heading>Overzicht</Heading>
+              {adres &&
+                adres.map(item => (
+                  <p>
+                    <div key={item.key}>{this.printValue(item)}</div>
+                  </p>
+                ))}
+            </header>
 
-          <MapWrapper>
-            <h3>{adres}</h3>
-            <MapContainer className="cf" id="mapdiv" />
-          </MapWrapper>
+            {Object.keys(summary).length && (
+              <ul>
+                {Object.keys(summary).map(key => (
+                  <li key={key}>
+                    <Key lang={intl.locale}>{key}</Key>: <small>{summary[key]}</small>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-          <Heading>Exporteren</Heading>
-          <CSVDownloadContainer />
+            <MapWrapper>
+              <MapContainer className="cf" id="mapdiv" />
+            </MapWrapper>
+          </section>
+
+          <section>
+            <header>
+              <h3>Exporteren</h3>
+            </header>
+
+            <CSVDownloadContainer />
+          </section>
         </aside>
       </div>
     );
@@ -153,6 +190,7 @@ AccommodationObjectPageComponent.propTypes = {
   kadasterSubject: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
   nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
   pand: PropTypes.arrayOf(PropTypes.shape({})),
+  summary: PropTypes.arrayOf(PropTypes.shape({})),
   verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
   intl: intlShape.isRequired,
   match: PropTypes.shape({
@@ -177,9 +215,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const WithSelector = withSelector(AccommodationObjectPageComponent);
-
 export default compose(
   withConnect,
   injectIntl,
-)(WithSelector);
+  withSelector,
+)(AccommodationObjectPageComponent);
