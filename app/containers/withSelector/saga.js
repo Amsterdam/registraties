@@ -33,7 +33,7 @@ import {
   loadVerblijfsobjectDataFailed,
   loadVerblijfsobjectDataSuccess,
 } from './actions';
-import { selectBAG, selectKadasterSubjectLinks, selectFromSubject } from './selectors';
+import { selectBAG, makeSelectKadasterSubjectLinks, makeSelectFromSubject } from './selectors';
 import {
   LOAD_BAG_DATA,
   LOAD_KADASTER_OBJECT_DATA,
@@ -43,7 +43,7 @@ import {
   LOAD_PANDLIST_DATA,
   LOAD_VERBLIJFSOBJECT_DATA,
   LOAD_KADASTER_SUBJECT_DATA,
-  LOAD_HR_DATA,
+  // LOAD_HR_DATA,
 } from './constants';
 
 const { API_ROOT } = configuration;
@@ -64,7 +64,8 @@ export function* fetchData(action) {
   const { adresseerbaarObjectId, nummeraanduidingId } = action.payload;
 
   try {
-    yield all([put(loadKadasterObjectData(adresseerbaarObjectId)), put(loadNummeraanduidingData(nummeraanduidingId))]);
+    yield put(loadKadasterObjectData(adresseerbaarObjectId));
+    yield put(loadNummeraanduidingData(nummeraanduidingId));
   } catch (error) {
     yield put(loadDataFailed(error));
   }
@@ -92,12 +93,12 @@ export function* fetchKadastraalObjectData(action) {
 
 export function* fetchKadastraalSubjectData() {
   try {
-    const rechten = yield select(selectKadasterSubjectLinks());
+    const rechten = yield select(makeSelectKadasterSubjectLinks());
     const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
 
     yield put(loadKadasterSubjectDataSuccess(data));
 
-    const kvkNummers = yield select(selectFromSubject('kvknummer'));
+    const kvkNummers = yield select(makeSelectFromSubject('kvknummer'));
 
     if (kvkNummers.length) {
       yield put(loadHandelsregisterData());
@@ -108,7 +109,7 @@ export function* fetchKadastraalSubjectData() {
 }
 
 export function* fetchHandelsregisterData() {
-  const rsins = yield select(selectFromSubject('rsin'));
+  const rsins = yield select(makeSelectFromSubject('rsin'));
 
   try {
     const data = yield all([...rsins.map(rsin => call(request, `${API_ROOT}${HR_API}${rsin}/`, requestOptions))]);
@@ -158,7 +159,7 @@ export function* fetchVerblijfsobjectData(action) {
   const { adresseerbaarObjectId } = action.payload;
 
   try {
-    const data = yield call(request, `${API_ROOT}${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`);
+    const data = yield call(request, `${API_ROOT}${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
 
     yield put(loadVerblijfsobjectDataSuccess(data));
   } catch (error) {
@@ -170,7 +171,11 @@ export function* fetchPandlistData(action) {
   const { adresseerbaarObjectId } = action.payload;
 
   try {
-    const data = yield call(request, `${API_ROOT}${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`);
+    const data = yield call(
+      request,
+      `${API_ROOT}${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`,
+      requestOptions,
+    );
 
     if (data.count) {
       const { landelijk_id: landelijkId } = data.results[0];
@@ -202,7 +207,7 @@ export default function* watchAccommodationObjectPageSaga() {
 
   yield all([
     takeLatest(LOAD_BAG_DATA, fetchData),
-    takeLatest(LOAD_HR_DATA, fetchHandelsregisterData),
+    // takeLatest(LOAD_HR_DATA, fetchHandelsregisterData),
     takeLatest(LOAD_KADASTER_OBJECT_DATA, fetchKadastraalObjectData),
     takeLatest(LOAD_KADASTER_SUBJECT_DATA, fetchKadastraalSubjectData),
     takeLatest(LOAD_LIGPLAATS_DATA, fetchLigplaatsData),

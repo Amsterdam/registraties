@@ -7,25 +7,25 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import {
+  bagReducer,
+  handelsregisterReducer,
   kadasterObjectReducer,
+  kadasterSubjectReducer,
   ligplaatsReducer,
   nummeraanduidingReducer,
   pandReducer,
   verblijfsobjectReducer,
-  bagReducer,
-  kadasterSubjectReducer,
-  handelsregisterReducer,
 } from './reducer';
 import {
-  selectAdres,
-  selectAllData,
-  selectHandelsregisterData,
-  selectKadasterObjectData,
-  selectKadasterSubjectData,
-  selectLigplaatsData,
-  selectNummeraanduidingData,
-  selectPandData,
-  selectVerblijfsobjectData,
+  makeSelectAdres,
+  // makeSelectAllData,
+  makeSelectHandelsregisterData,
+  makeSelectKadasterObjectData,
+  makeSelectKadasterSubjectData,
+  makeSelectLigplaatsData,
+  makeSelectNummeraanduidingData,
+  makeSelectPandData,
+  makeSelectVerblijfsobjectData,
 } from './selectors';
 import saga from './saga';
 
@@ -38,15 +38,14 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
-    adres: selectAdres(),
-    all: selectAllData,
-    handelsregister: selectHandelsregisterData(),
-    kadasterObject: selectKadasterObjectData(),
-    kadasterSubject: selectKadasterSubjectData(),
-    ligplaats: selectLigplaatsData(),
-    nummeraanduiding: selectNummeraanduidingData(),
-    pand: selectPandData(),
-    verblijfsobject: selectVerblijfsobjectData(),
+    adres: makeSelectAdres(),
+    handelsregister: makeSelectHandelsregisterData(),
+    kadasterObject: makeSelectKadasterObjectData(),
+    kadasterSubject: makeSelectKadasterSubjectData(),
+    ligplaats: makeSelectLigplaatsData(),
+    nummeraanduiding: makeSelectNummeraanduidingData(),
+    pand: makeSelectPandData(),
+    verblijfsobject: makeSelectVerblijfsobjectData(),
   });
 
   const withConnect = connect(mapStateToProps);

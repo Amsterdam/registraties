@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 // import DataFormatter, { dateFormatter, stringFormatter, keyNameFormatter, numberFormatter } from 'utils/DataFormatter';
+import { isValidDate, isObject, isArray, isValidKey, isValidValue } from 'utils';
 import messages from './messages';
 
 export const selectBAG = state => state.get('bag');
@@ -12,8 +13,6 @@ const selectPand = state => state.get('pand');
 const selectSearch = state => state.get('search');
 const selectVerblijfsobject = state => state.get('verblijfsobject');
 
-const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 'toestandsdatum'];
-
 // replace underscores and capitalise a key
 const formattedKey = key =>
   key
@@ -21,17 +20,6 @@ const formattedKey = key =>
     .map((part, index) => (index === 0 ? `${part.charAt(0).toUpperCase()}${part.slice(1)}` : part))
     .join(' ')
     .trim();
-// filter for keys by presence in a given list
-const isValidKey = keys => key => keys.includes(key);
-// filter for valid property value
-const isValidValue = data => key =>
-  !(data[key] && data[key].constructor && data[key].constructor.name === 'Object' && !data[key].omschrijving);
-// filter for valid date value
-const isValidDate = (key, value) => dateFields.includes(key) && !Number.isNaN(Date.parse(value));
-const isObject = value => value.constructor && value.constructor.name === 'Object';
-const isArray = value =>
-  value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
-
 // const dataFormatter = new DataFormatter();
 // dataFormatter
 //   .use(keyNameFormatter)
@@ -92,7 +80,7 @@ const getFormattedData = ({ data, keys }) =>
     })
     .filter(Boolean);
 
-export const selectVerblijfsobjectData = () =>
+export const makeSelectVerblijfsobjectData = () =>
   createSelector(selectVerblijfsobject, state => {
     const data = state.get('data');
 
@@ -117,7 +105,7 @@ export const selectVerblijfsobjectData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const selectNummeraanduidingData = () =>
+export const makeSelectNummeraanduidingData = () =>
   createSelector(selectNummeraanduiding, state => {
     const data = state.get('data');
 
@@ -139,8 +127,8 @@ export const selectNummeraanduidingData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const selectAdres = () =>
-  createSelector(selectNummeraanduidingData(), state => {
+export const makeSelectAdres = () =>
+  createSelector(makeSelectNummeraanduidingData(), state => {
     if (!state || !isArray(state) || !state.length) {
       return undefined;
     }
@@ -148,7 +136,7 @@ export const selectAdres = () =>
     return state.find(({ key }) => key === 'adres').formattedValue;
   });
 
-export const selectPandData = () =>
+export const makeSelectPandData = () =>
   createSelector(selectPand, state => {
     const data = state.get('data');
 
@@ -161,7 +149,7 @@ export const selectPandData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const selectKadasterObjectData = () =>
+export const makeSelectKadasterObjectData = () =>
   createSelector(selectKadasterObject, state => {
     const { results } = state.get('data') || {};
 
@@ -176,7 +164,7 @@ export const selectKadasterObjectData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const selectKadasterSubjectData = () =>
+export const makeSelectKadasterSubjectData = () =>
   createSelector(selectKadasterSubject, state => {
     const data = state.get('data');
 
@@ -201,7 +189,7 @@ export const selectKadasterSubjectData = () =>
     return data.map(subject => getFormattedData({ data: subject, keys }));
   });
 
-export const selectFromSubject = key =>
+export const makeSelectFromSubject = key =>
   createSelector(selectKadasterSubject, state => {
     const data = state.get('data');
 
@@ -212,7 +200,7 @@ export const selectFromSubject = key =>
     return data.map(item => item[key]).filter(Boolean);
   });
 
-export const selectKadasterSubjectLinks = () =>
+export const makeSelectKadasterSubjectLinks = () =>
   createSelector(selectKadasterObject, state => {
     const { results } = state.get('data') || {};
 
@@ -226,7 +214,7 @@ export const selectKadasterSubjectLinks = () =>
     return rechten.map(data => data.kadastraal_subject._links.self.href);
   });
 
-export const selectHandelsregisterData = () =>
+export const makeSelectHandelsregisterData = () =>
   createSelector(
     selectHandelsregister,
     state => // eslint-disable-line
@@ -234,7 +222,7 @@ export const selectHandelsregisterData = () =>
       undefined,
   );
 
-export const selectLigplaatsData = () =>
+export const makeSelectLigplaatsData = () =>
   createSelector(selectLigplaats, state => {
     const data = state.get('data');
 
@@ -254,7 +242,7 @@ export const selectLigplaatsData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const selectSearchData = () =>
+export const makeSelectSearchData = () =>
   createSelector(selectSearch, state => {
     if (!state || !state.get('latlng')) {
       return undefined;
@@ -267,15 +255,15 @@ export const selectSearchData = () =>
     };
   });
 
-export const selectAllData = () =>
+export const makeSelectAllData = () =>
   createSelector(
     [
-      selectVerblijfsobjectData,
-      selectNummeraanduidingData,
-      selectPandData,
-      selectKadasterObjectData,
-      selectKadasterSubjectData,
-      selectLigplaatsData,
+      makeSelectVerblijfsobjectData,
+      makeSelectNummeraanduidingData,
+      makeSelectPandData,
+      makeSelectKadasterObjectData,
+      makeSelectKadasterSubjectData,
+      makeSelectLigplaatsData,
     ],
     // eslint-disable-next-line
     (verblijfsobjectData, nummeraanduidingData, pandData, kadasterObjectData, kadasterSubjectData, ligplaatsData) => {
