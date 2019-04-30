@@ -64,7 +64,7 @@ export class AccommodationObjectPageComponent extends Component {
     const sections = Array.from(this.sections);
 
     return (
-      <ul className="links">
+      <ul className="links horizontal">
         {sections.map(section => (
           <li key={section}>
             <a href={`#${section}`}>
@@ -103,19 +103,19 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const { adres, kadasterObject, kadasterSubject, ligplaats, nummeraanduiding, pand, verblijfsobject } = this.props;
+    const { adres, kadasterObject, kadasterSubject, nummeraanduiding, pand, verblijfsobject } = this.props;
 
     return (
       <div className="row">
         <article className="col-9">
           <section>
             <header>
+              <nav className="cf">{this.renderTOC()}</nav>
               <h2>BAG Objecten</h2>
             </header>
 
             {nummeraanduiding && this.renderSection('Nummeraanduiding', nummeraanduiding)}
             {verblijfsobject && this.renderSection('Verblijfsobjecten', verblijfsobject)}
-            {ligplaats && this.renderSection('Ligplaats', ligplaats)}
             {pand && this.renderSection('Pand', pand)}
           </section>
 
@@ -132,8 +132,6 @@ export class AccommodationObjectPageComponent extends Component {
 
         <aside className="col-3">
           <Heading>Overzicht</Heading>
-
-          <nav>{this.renderTOC()}</nav>
 
           <MapWrapper>
             <h3>{adres}</h3>
@@ -153,7 +151,6 @@ AccommodationObjectPageComponent.propTypes = {
   handelsregister: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
   kadasterObject: PropTypes.arrayOf(PropTypes.shape({})),
   kadasterSubject: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  ligplaats: PropTypes.arrayOf(PropTypes.shape({})),
   nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
   pand: PropTypes.arrayOf(PropTypes.shape({})),
   verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),

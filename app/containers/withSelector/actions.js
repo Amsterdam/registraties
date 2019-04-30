@@ -10,9 +10,6 @@ import {
   LOAD_KADASTER_SUBJECT_DATA_NO_RESULTS,
   LOAD_KADASTER_SUBJECT_DATA_SUCCESS,
   LOAD_KADASTER_SUBJECT_DATA,
-  LOAD_LIGPLAATS_DATA_FAILED,
-  LOAD_LIGPLAATS_DATA_SUCCESS,
-  LOAD_LIGPLAATS_DATA,
   LOAD_NUMMERAANDUIDING_DATA_FAILED,
   LOAD_NUMMERAANDUIDING_DATA_SUCCESS,
   LOAD_NUMMERAANDUIDING_DATA,
@@ -171,21 +168,6 @@ export const loadOpenbareRuimteDataSuccess = payload => ({
 
 export const loadOpenbareRuimteDataFailed = payload => ({
   type: LOAD_OPENBARE_RUIMTE_DATA_FAILED,
-  payload,
-});
-
-export const loadLigplaatsData = adresseerbaarObjectId => ({
-  type: LOAD_LIGPLAATS_DATA,
-  payload: { adresseerbaarObjectId },
-});
-
-export const loadLigplaatsDataSuccess = payload => ({
-  type: LOAD_LIGPLAATS_DATA_SUCCESS,
-  payload,
-});
-
-export const loadLigplaatsDataFailed = payload => ({
-  type: LOAD_LIGPLAATS_DATA_FAILED,
   payload,
 });
 

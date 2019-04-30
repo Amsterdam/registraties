@@ -8,9 +8,6 @@ import {
   LOAD_KADASTER_SUBJECT_DATA_FAILED,
   LOAD_KADASTER_SUBJECT_DATA_SUCCESS,
   LOAD_KADASTER_SUBJECT_DATA,
-  LOAD_LIGPLAATS_DATA_FAILED,
-  LOAD_LIGPLAATS_DATA_SUCCESS,
-  LOAD_LIGPLAATS_DATA,
   LOAD_NUMMERAANDUIDING_DATA_FAILED,
   LOAD_NUMMERAANDUIDING_DATA_SUCCESS,
   LOAD_NUMMERAANDUIDING_DATA,
@@ -147,22 +144,6 @@ export const handelsregisterReducer = (state = initialState, action) => {
       return state.set('data', action.payload);
 
     case LOAD_HR_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
-
-    default:
-      return state;
-  }
-};
-
-export const ligplaatsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOAD_LIGPLAATS_DATA:
-      return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
-
-    case LOAD_LIGPLAATS_DATA_SUCCESS:
-      return state.set('data', action.payload);
-
-    case LOAD_LIGPLAATS_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:
