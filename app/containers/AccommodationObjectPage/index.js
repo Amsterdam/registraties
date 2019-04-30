@@ -11,6 +11,8 @@ import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
 
+import { isArray } from 'utils';
+
 import './style.scss';
 import { MapWrapper, MapContainer, Heading, Key } from './styled';
 
@@ -78,26 +80,33 @@ export class AccommodationObjectPageComponent extends Component {
 
   renderSection(title, data) {
     const { intl } = this.props;
+    const sectionData = data.length === 1 && isArray(data[0]) ? data[0] : data;
 
     if (title) {
       this.sections.add(title);
     }
 
+    const renderList = listData => (
+      <ul>
+        {listData.map(listItem => (
+          <li key={listItem.key || Math.random()}>
+            {isArray(listItem) ? (
+              renderList(listItem)
+            ) : (
+              <Fragment>
+                <Key lang={intl.locale}>{listItem.formattedKey}</Key>: {this.printValue(listItem)}
+              </Fragment>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+
     return (
-      <Fragment key={title || Math.random()}>
+      <Fragment key={title}>
         {title && <h3 id={title}>{title}</h3>}
 
-        {data ? (
-          <ul>
-            {data.map(item => (
-              <li key={item.key}>
-                <Key lang={intl.locale}>{item.formattedKey}</Key>: {this.printValue(item)}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <span>geen data</span>
-        )}
+        {renderList(sectionData)}
       </Fragment>
     );
   }
@@ -105,8 +114,9 @@ export class AccommodationObjectPageComponent extends Component {
   render() {
     const {
       adres,
-      kadasterObject,
-      kadasterSubject,
+      kadastraalObject,
+      kadastraalSubjectNNP,
+      kadastraalSubjectNP,
       nummeraanduiding,
       pand,
       summary,
@@ -120,25 +130,27 @@ export class AccommodationObjectPageComponent extends Component {
           <section>
             <header>
               <nav className="cf">{this.renderTOC()}</nav>
-              <h2>BAG Objecten</h2>
+              <Heading>BAG Objecten</Heading>
             </header>
 
             {nummeraanduiding && this.renderSection('Nummeraanduiding', nummeraanduiding)}
-            {verblijfsobject && this.renderSection('Verblijfsobjecten', verblijfsobject)}
+
+            {verblijfsobject && this.renderSection('Verblijfsobject', verblijfsobject)}
+
             {pand && this.renderSection('Pand', pand)}
           </section>
 
-          {(kadasterObject || kadasterSubject) && (
+          {(kadastraalObject || kadastraalSubjectNP || kadastraalSubjectNNP) && (
             <section>
               <header>
-                <h2>BRK Objecten</h2>
+                <Heading>BRK Objecten</Heading>
               </header>
 
-              {kadasterObject && this.renderSection('Kadastraal object', kadasterObject)}
-              {kadasterSubject &&
-                kadasterSubject.map((subject, index) =>
-                  this.renderSection(index <= 0 && 'Kadastraal subject', subject),
-                )}
+              {kadastraalObject && this.renderSection('Kadastraal object', kadastraalObject)}
+
+              {kadastraalSubjectNP && this.renderSection('Kadastraal subject NP', kadastraalSubjectNP)}
+
+              {kadastraalSubjectNNP && this.renderSection('Kadastraal subject NNP', kadastraalSubjectNNP)}
             </section>
           )}
         </article>
@@ -147,12 +159,7 @@ export class AccommodationObjectPageComponent extends Component {
           <section>
             <header>
               <Heading>Overzicht</Heading>
-              {adres &&
-                adres.map(item => (
-                  <p>
-                    <div key={item.key}>{this.printValue(item)}</div>
-                  </p>
-                ))}
+              {adres && adres.map(item => <div key={item.key}>{this.printValue(item)}</div>)}
             </header>
 
             {Object.keys(summary).length && (
@@ -183,14 +190,27 @@ export class AccommodationObjectPageComponent extends Component {
   }
 }
 
+AccommodationObjectPageComponent.defaultProps = {
+  adres: undefined,
+  handelsregister: undefined,
+  kadastraalObject: undefined,
+  kadastraalSubjectNNP: undefined,
+  kadastraalSubjectNP: undefined,
+  nummeraanduiding: undefined,
+  pand: undefined,
+  summary: undefined,
+  verblijfsobject: undefined,
+};
+
 AccommodationObjectPageComponent.propTypes = {
-  adres: PropTypes.string,
+  adres: PropTypes.arrayOf(PropTypes.shape({})),
   handelsregister: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  kadasterObject: PropTypes.arrayOf(PropTypes.shape({})),
-  kadasterSubject: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  kadastraalObject: PropTypes.arrayOf(PropTypes.shape({})),
+  kadastraalSubjectNNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  kadastraalSubjectNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
   nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
   pand: PropTypes.arrayOf(PropTypes.shape({})),
-  summary: PropTypes.arrayOf(PropTypes.shape({})),
+  summary: PropTypes.shape({}),
   verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
   intl: intlShape.isRequired,
   match: PropTypes.shape({

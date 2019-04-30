@@ -12,4 +12,11 @@ export const isValidKey = keys => key => keys.includes(key);
 
 // filter for valid property value
 export const isValidValue = data => key =>
-  !(data[key] && data[key].constructor && data[key].constructor.name === 'Object' && !data[key].omschrijving);
+  !(
+    data[key] &&
+    data[key].constructor &&
+    data[key].constructor.name === 'Object' &&
+    (!data[key].omschrijving && !data[key].count)
+  );
+
+export const isCount = value => isObject(value) && value.count;

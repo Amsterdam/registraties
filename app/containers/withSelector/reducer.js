@@ -1,31 +1,5 @@
 import { fromJS } from 'immutable';
-
-import {
-  LOAD_BAG_DATA,
-  LOAD_KADASTER_OBJECT_DATA_FAILED,
-  LOAD_KADASTER_OBJECT_DATA_SUCCESS,
-  LOAD_KADASTER_OBJECT_DATA,
-  LOAD_KADASTER_SUBJECT_DATA_FAILED,
-  LOAD_KADASTER_SUBJECT_DATA_SUCCESS,
-  LOAD_KADASTER_SUBJECT_DATA,
-  LOAD_NUMMERAANDUIDING_DATA_FAILED,
-  LOAD_NUMMERAANDUIDING_DATA_SUCCESS,
-  LOAD_NUMMERAANDUIDING_DATA,
-  LOAD_OPENBARE_RUIMTE_DATA_FAILED,
-  LOAD_OPENBARE_RUIMTE_DATA_SUCCESS,
-  LOAD_OPENBARE_RUIMTE_DATA,
-  LOAD_PAND_DATA_FAILED,
-  LOAD_PAND_DATA_SUCCESS,
-  LOAD_PAND_DATA,
-  LOAD_VERBLIJFSOBJECT_DATA_FAILED,
-  LOAD_VERBLIJFSOBJECT_DATA_SUCCESS,
-  LOAD_VERBLIJFSOBJECT_DATA,
-  FETCHING_KADASTER_OBJECT_DATA,
-  LOAD_KADASTER_OBJECT_DATA_NO_RESULTS,
-  LOAD_HR_DATA,
-  LOAD_HR_DATA_SUCCESS,
-  LOAD_HR_DATA_FAILED,
-} from './constants';
+import * as constants from './constants';
 
 // The initial state of the App
 export const initialState = fromJS({
@@ -35,7 +9,7 @@ export const initialState = fromJS({
 
 export const bagReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_BAG_DATA:
+    case constants.LOAD_BAG_DATA:
       return state
         .set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId)
         .set('nummeraanduidingId', action.payload.nummeraanduidingId)
@@ -48,13 +22,13 @@ export const bagReducer = (state = initialState, action) => {
 
 export const pandReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_PAND_DATA:
+    case constants.LOAD_PAND_DATA:
       return state.set('landelijkId', action.payload.landelijkId);
 
-    case LOAD_PAND_DATA_SUCCESS:
+    case constants.LOAD_PAND_DATA_SUCCESS:
       return state.set('data', action.payload);
 
-    case LOAD_PAND_DATA_FAILED:
+    case constants.LOAD_PAND_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:
@@ -64,13 +38,13 @@ export const pandReducer = (state = initialState, action) => {
 
 export const nummeraanduidingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_NUMMERAANDUIDING_DATA:
+    case constants.LOAD_NUMMERAANDUIDING_DATA:
       return state.set('nummeraanduidingId', action.payload.nummeraanduidingId);
 
-    case LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
+    case constants.LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
       return state.set('data', action.payload);
 
-    case LOAD_NUMMERAANDUIDING_DATA_FAILED:
+    case constants.LOAD_NUMMERAANDUIDING_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:
@@ -78,40 +52,21 @@ export const nummeraanduidingReducer = (state = initialState, action) => {
   }
 };
 
-export const openbareRuimteReducer = (state = initialState, action) => {
+export const kadastraalObjectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_OPENBARE_RUIMTE_DATA:
-      return state.set('openbareRuimteId', action.payload.openbareRuimteId);
-
-    case LOAD_OPENBARE_RUIMTE_DATA_SUCCESS:
-      return state.set('data', action.payload);
-
-    case LOAD_OPENBARE_RUIMTE_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
-
-    default:
-      return state;
-  }
-};
-
-export const kadasterObjectReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCHING_KADASTER_OBJECT_DATA:
-      return state.set('loading', true);
-
-    case LOAD_KADASTER_OBJECT_DATA:
+    case constants.LOAD_KADASTRAAL_OBJECT_DATA:
       return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
 
-    case LOAD_KADASTER_OBJECT_DATA_SUCCESS:
+    case constants.LOAD_KADASTRAAL_OBJECT_DATA_SUCCESS:
       return state.set('data', action.payload).set('loading', false);
 
-    case LOAD_KADASTER_OBJECT_DATA_FAILED:
+    case constants.LOAD_KADASTRAAL_OBJECT_DATA_FAILED:
       return state
         .set('error', action.payload)
         .set('loading', false)
         .set('data', {});
 
-    case LOAD_KADASTER_OBJECT_DATA_NO_RESULTS:
+    case constants.LOAD_KADASTRAAL_OBJECT_DATA_NO_RESULTS:
       return state.set('data', {});
 
     default:
@@ -119,15 +74,15 @@ export const kadasterObjectReducer = (state = initialState, action) => {
   }
 };
 
-export const kadasterSubjectReducer = (state = initialState, action) => {
+export const kadastraalSubjectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_KADASTER_SUBJECT_DATA:
+    case constants.LOAD_KADASTRAAL_SUBJECT_DATA:
       return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
 
-    case LOAD_KADASTER_SUBJECT_DATA_SUCCESS:
+    case constants.LOAD_KADASTRAAL_SUBJECT_DATA_SUCCESS:
       return state.set('data', action.payload);
 
-    case LOAD_KADASTER_SUBJECT_DATA_FAILED:
+    case constants.LOAD_KADASTRAAL_SUBJECT_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:
@@ -137,13 +92,13 @@ export const kadasterSubjectReducer = (state = initialState, action) => {
 
 export const handelsregisterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_HR_DATA:
+    case constants.LOAD_HR_DATA:
       return state.set('kvkNummers', action.payload);
 
-    case LOAD_HR_DATA_SUCCESS:
+    case constants.LOAD_HR_DATA_SUCCESS:
       return state.set('data', action.payload);
 
-    case LOAD_HR_DATA_FAILED:
+    case constants.LOAD_HR_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:
@@ -153,13 +108,26 @@ export const handelsregisterReducer = (state = initialState, action) => {
 
 export const verblijfsobjectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_VERBLIJFSOBJECT_DATA:
+    case constants.LOAD_VERBLIJFSOBJECT_DATA:
       return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
 
-    case LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
+    case constants.LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
       return state.set('data', action.payload);
 
-    case LOAD_VERBLIJFSOBJECT_DATA_FAILED:
+    case constants.LOAD_VERBLIJFSOBJECT_DATA_FAILED:
+      return state.set('error', action.payload).set('data', {});
+
+    default:
+      return state;
+  }
+};
+
+export const vestigingReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case constants.LOAD_VESTIGING_DATA_SUCCESS:
+      return state.set('data', action.payload);
+
+    case constants.LOAD_VESTIGING_DATA_FAILED:
       return state.set('error', action.payload).set('data', {});
 
     default:

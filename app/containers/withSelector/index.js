@@ -6,28 +6,12 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
-import {
-  bagReducer,
-  handelsregisterReducer,
-  kadasterObjectReducer,
-  kadasterSubjectReducer,
-  nummeraanduidingReducer,
-  pandReducer,
-  verblijfsobjectReducer,
-} from './reducer';
-import {
-  makeSelectAdres,
-  makeSelectHandelsregisterData,
-  makeSelectKadasterObjectData,
-  makeSelectKadasterSubjectData,
-  makeSelectNummeraanduidingData,
-  makeSelectPandData,
-  makeSelectSummary,
-  makeSelectVerblijfsobjectData,
-} from './selectors';
+import * as reducers from './reducer';
+import * as selectors from './selectors';
 import saga from './saga';
 
 const withSelectors = WrappedComponent => {
+  // component needs to be a class, so that it can have state
   // eslint-disable-next-line
   class SelectorContainer extends Component {
     render() {
@@ -36,27 +20,30 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
-    summary: makeSelectSummary(),
-    adres: makeSelectAdres(),
-    handelsregister: makeSelectHandelsregisterData(),
-    kadasterObject: makeSelectKadasterObjectData(),
-    kadasterSubject: makeSelectKadasterSubjectData(),
-    nummeraanduiding: makeSelectNummeraanduidingData(),
-    pand: makeSelectPandData(),
-    verblijfsobject: makeSelectVerblijfsobjectData(),
+    summary: selectors.makeSelectSummary(),
+    adres: selectors.makeSelectAdres(),
+    handelsregister: selectors.makeSelectHandelsregisterData(),
+    kadastraalObject: selectors.makeSelectKadastraalObjectData(),
+    kadastraalSubjectNNP: selectors.makeSelectKadastraalSubjectNNPData(),
+    kadastraalSubjectNP: selectors.makeSelectKadastraalSubjectNPData(),
+    nummeraanduiding: selectors.makeSelectNummeraanduidingData(),
+    pand: selectors.makeSelectPandData(),
+    verblijfsobject: selectors.makeSelectVerblijfsobjectData(),
+    vestiging: selectors.makeSelectVestigingData(),
   });
 
   const withConnect = connect(mapStateToProps);
   const withSaga = injectSaga({ key: 'global', saga });
 
   const ComposedSelectorContainer = compose(
-    injectReducer({ key: 'bag', reducer: bagReducer }),
-    injectReducer({ key: 'handelsregister', reducer: handelsregisterReducer }),
-    injectReducer({ key: 'kadasterObject', reducer: kadasterObjectReducer }),
-    injectReducer({ key: 'kadasterSubject', reducer: kadasterSubjectReducer }),
-    injectReducer({ key: 'nummeraanduiding', reducer: nummeraanduidingReducer }),
-    injectReducer({ key: 'pand', reducer: pandReducer }),
-    injectReducer({ key: 'verblijfsobject', reducer: verblijfsobjectReducer }),
+    injectReducer({ key: 'bag', reducer: reducers.bagReducer }),
+    injectReducer({ key: 'handelsregister', reducer: reducers.handelsregisterReducer }),
+    injectReducer({ key: 'kadastraalObject', reducer: reducers.kadastraalObjectReducer }),
+    injectReducer({ key: 'kadastraalSubject', reducer: reducers.kadastraalSubjectReducer }),
+    injectReducer({ key: 'nummeraanduiding', reducer: reducers.nummeraanduidingReducer }),
+    injectReducer({ key: 'pand', reducer: reducers.pandReducer }),
+    injectReducer({ key: 'verblijfsobject', reducer: reducers.verblijfsobjectReducer }),
+    injectReducer({ key: 'vestiging', reducer: reducers.vestigingReducer }),
     withSaga,
     withConnect,
   )(SelectorContainer);

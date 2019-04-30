@@ -10,6 +10,12 @@
   padding-top: 20px;
 }
 
+ul ul {
+  padding: 0;
+  margin-bottom: 1em;
+  list-style: none;
+}
+
 @supports (display: flow-root) {
   .cf {
     display: flow-root;

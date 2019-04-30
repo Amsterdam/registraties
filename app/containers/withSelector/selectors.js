@@ -1,30 +1,24 @@
 import { createSelector } from 'reselect';
-// import DataFormatter, { dateFormatter, stringFormatter, keyNameFormatter, numberFormatter } from 'utils/DataFormatter';
-import { isValidDate, isObject, isArray, isValidKey, isValidValue } from 'utils';
+import { isValidDate, isObject, isArray, isValidKey, isValidValue, isCount } from 'utils';
 import messages from './messages';
 
 export const selectBAG = state => state.get('bag');
 const selectHandelsregister = state => state.get('handelsregister');
-const selectKadasterObject = state => state.get('kadasterObject');
-const selectKadasterSubject = state => state.get('kadasterSubject');
+const selectKadastraalObject = state => state.get('kadastraalObject');
+const selectKadastraalSubject = state => state.get('kadastraalSubject');
 const selectNummeraanduiding = state => state.get('nummeraanduiding');
 const selectPand = state => state.get('pand');
 const selectSearch = state => state.get('search');
 const selectVerblijfsobject = state => state.get('verblijfsobject');
+const selectVestiging = state => state.get('vestiging');
 
-// replace underscores and capitalise a key
+// replace underscores and capitalise the key
 const formattedKey = key =>
   key
     .split('_')
     .map((part, index) => (index === 0 ? `${part.charAt(0).toUpperCase()}${part.slice(1)}` : part))
     .join(' ')
     .trim();
-// const dataFormatter = new DataFormatter();
-// dataFormatter
-//   .use(keyNameFormatter)
-//   .use(stringFormatter)
-//   .use(numberFormatter)
-//   .use(dateFormatter);
 
 const getFormattedData = ({ data, keys }) =>
   Object.keys(data)
@@ -34,6 +28,7 @@ const getFormattedData = ({ data, keys }) =>
       const value = data[key];
       let formattedValue;
       let type = typeof value;
+      let readableKey = key;
 
       if (value === '') {
         return null;
@@ -49,6 +44,10 @@ const getFormattedData = ({ data, keys }) =>
       } else if (value === null) {
         type = 'boolean';
         formattedValue = messages.unknown;
+      } else if (isCount(value)) {
+        type = 'number';
+        readableKey = `Aantal ${key}`;
+        formattedValue = value.count;
       } else {
         try {
           if (isObject(value) && value.omschrijving) {
@@ -72,7 +71,7 @@ const getFormattedData = ({ data, keys }) =>
       return {
         type,
         key,
-        formattedKey: formattedKey(key),
+        formattedKey: formattedKey(readableKey),
         value,
         formattedValue,
       };
@@ -143,13 +142,20 @@ export const makeSelectPandData = () =>
       return undefined;
     }
 
-    const keys = ['hoogste_bouwlaag', 'laagste_bouwlaag', 'oorspronkelijk_bouwjaar', 'pandidentificatie', 'status'];
+    const keys = [
+      'hoogste_bouwlaag',
+      'laagste_bouwlaag',
+      'oorspronkelijk_bouwjaar',
+      'pandidentificatie',
+      'status',
+      'verblijfsobjecten',
+    ];
 
     return getFormattedData({ data, keys });
   });
 
-export const makeSelectKadasterObjectData = () =>
-  createSelector(selectKadasterObject, state => {
+export const makeSelectKadastraalObjectData = () =>
+  createSelector(selectKadastraalObject, state => {
     const { results } = state.get('data') || {};
 
     if (!results || !isArray(results)) {
@@ -163,11 +169,21 @@ export const makeSelectKadasterObjectData = () =>
     return getFormattedData({ data, keys });
   });
 
-export const makeSelectKadasterSubjectData = () =>
-  createSelector(selectKadasterSubject, state => {
+/**
+ * Natuurlijk persoon
+ */
+export const makeSelectKadastraalSubjectNPData = () =>
+  createSelector(selectKadastraalSubject, state => {
     const data = state.get('data');
 
     if (!data || !isArray(data)) {
+      return undefined;
+    }
+
+    // eslint-disable-next-line camelcase
+    const natuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => is_natuurlijk_persoon);
+
+    if (!natuurlijkPersoonData) {
       return undefined;
     }
 
@@ -180,16 +196,37 @@ export const makeSelectKadasterSubjectData = () =>
       'geboortedatum',
       'geboorteplaats',
       'geboorteland',
-      'is_natuurlijk_persoon',
       'overlijdensdatum',
-      'rsin',
     ];
 
     return data.map(subject => getFormattedData({ data: subject, keys }));
   });
 
+/**
+ * Niet-natuurlijk persoon
+ */
+export const makeSelectKadastraalSubjectNNPData = () =>
+  createSelector(selectKadastraalSubject, state => {
+    const data = state.get('data');
+
+    if (!data || !isArray(data)) {
+      return undefined;
+    }
+
+    // eslint-disable-next-line camelcase
+    const nietNatuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => !is_natuurlijk_persoon);
+
+    if (!nietNatuurlijkPersoonData) {
+      return undefined;
+    }
+
+    const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
+
+    return data.map(subject => getFormattedData({ data: subject, keys }));
+  });
+
 export const makeSelectFromSubject = key =>
-  createSelector(selectKadasterSubject, state => {
+  createSelector(selectKadastraalSubject, state => {
     const data = state.get('data');
 
     if (!data || !isArray(data)) {
@@ -199,8 +236,19 @@ export const makeSelectFromSubject = key =>
     return data.map(item => item[key]).filter(Boolean);
   });
 
-export const makeSelectKadasterSubjectLinks = () =>
-  createSelector(selectKadasterObject, state => {
+export const makeSelectFromObject = key =>
+  createSelector(selectKadastraalObject, state => {
+    const { results } = state.get('data') || {};
+
+    if (!results || !isArray(results)) {
+      return undefined;
+    }
+
+    return results.map(item => item[key]).filter(Boolean);
+  });
+
+export const makeSelectKadastraalSubjectLinks = () =>
+  createSelector(selectKadastraalObject, state => {
     const { results } = state.get('data') || {};
 
     if (!results || !isArray(results) || !results.length) {
@@ -236,16 +284,27 @@ export const makeSelectSearchData = () =>
     };
   });
 
+export const makeSelectVestigingData = () =>
+  createSelector(selectVestiging, state => {
+    if (!state || !state.get('latlng')) {
+      return undefined;
+    }
+
+    return {};
+  });
+
 export const makeSelectSummary = () =>
   createSelector(
     [
       makeSelectVerblijfsobjectData(),
       makeSelectNummeraanduidingData(),
       makeSelectPandData(),
-      makeSelectKadasterObjectData(),
+      makeSelectKadastraalObjectData(),
+      makeSelectKadastraalSubjectNNPData(),
+      makeSelectKadastraalSubjectNPData(),
     ],
     // eslint-disable-next-line
-    (vbo = [], num = [], pnd = [], brko = []) => {
+    (vbo = [], num = [], pnd = [], brko = [], nnp = [], np = []) => {
       const summary = {};
 
       const find = (obj, id) => obj && obj.find(({ key }) => key === id);
@@ -263,7 +322,12 @@ export const makeSelectSummary = () =>
       }
 
       if (brko.length) {
-        summary.Kadastraalobjectnummer = find(brko, 'objectnummer').value;
+        summary['Kadastraal objectnummer'] = find(brko, 'objectnummer').value;
+      }
+
+      if (nnp.length) {
+        summary['KvK-nummer'] = nnp.map(nnpItem => find(nnpItem, 'kvknummer').value).join(', ');
+        summary.RSIN = nnp.map(nnpItem => find(nnpItem, 'rsin').value).join(', ');
       }
 
       return summary;
