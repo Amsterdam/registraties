@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { SEARCH_SELECT } from './constants';
 
 export function* searchSelect(action) {

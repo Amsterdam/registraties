@@ -1,20 +1,4 @@
-:target {
-  background-color: yellow;
-  margin-bottom: 0px;
-  padding-bottom: 20px;
-}
-
-:target + * {
-  background-color: yellow;
-  margin-top: 0;
-  padding-top: 20px;
-}
-
-ul ul {
-  padding: 0;
-  margin-bottom: 1em;
-  list-style: none;
-}
+@import '~amsterdam-stijl/dist/scss/ams-colorpalette';
 
 @supports (display: flow-root) {
   .cf {
@@ -31,5 +15,26 @@ ul ul {
 
   .cf:after {
     clear: both;
+  }
+}
+
+a.stelselpediaLink {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: rgba($ams-donkerblauw, 0.5);
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+
+  &:hover {
+    background-color: $ams-donkerblauw;
+    color: white;
   }
 }

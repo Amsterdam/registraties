@@ -1,136 +1,122 @@
-import { fromJS } from 'immutable';
+import produce from 'immer';
 import * as constants from './constants';
 
 // The initial state of the App
-export const initialState = fromJS({
+export const initialState = {
   loading: false,
   error: false,
-});
-
-export const bagReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_BAG_DATA:
-      return state
-        .set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId)
-        .set('nummeraanduidingId', action.payload.nummeraanduidingId)
-        .set('openbareRuimteId', action.payload.openbareRuimteId);
-
-    default:
-      return state;
-  }
 };
 
-export const pandReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_PAND_DATA:
-      return state.set('landelijkId', action.payload.landelijkId);
+/* eslint-disable default-case, no-param-reassign */
+export const bagReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_BAG_DATA:
+        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        draft.nummeraanduidingId = action.payload.nummeraanduidingId;
+        draft.openbareRuimteId = action.payload.openbareRuimteId;
+        break;
+    }
+  });
 
-    case constants.LOAD_PAND_DATA_SUCCESS:
-      return state.set('data', action.payload);
+export const pandReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_PAND_DATA:
+        draft.landelijkId = action.payload.landelijkId;
+        break;
 
-    case constants.LOAD_PAND_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
+      case constants.LOAD_PAND_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-    default:
-      return state;
-  }
-};
+      case constants.LOAD_PAND_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
 
-export const nummeraanduidingReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_NUMMERAANDUIDING_DATA:
-      return state.set('nummeraanduidingId', action.payload.nummeraanduidingId);
+export const nummeraanduidingReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_NUMMERAANDUIDING_DATA:
+        draft.nummeraanduidingId = action.payload.nummeraanduidingId;
+        break;
 
-    case constants.LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
-      return state.set('data', action.payload);
+      case constants.LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-    case constants.LOAD_NUMMERAANDUIDING_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
+      case constants.LOAD_NUMMERAANDUIDING_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
 
-    default:
-      return state;
-  }
-};
+export const kadastraalObjectReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_KADASTRAAL_OBJECT_DATA:
+        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        break;
 
-export const kadastraalObjectReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_KADASTRAAL_OBJECT_DATA:
-      return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
+      case constants.LOAD_KADASTRAAL_OBJECT_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-    case constants.LOAD_KADASTRAAL_OBJECT_DATA_SUCCESS:
-      return state.set('data', action.payload).set('loading', false);
+      case constants.LOAD_KADASTRAAL_OBJECT_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
 
-    case constants.LOAD_KADASTRAAL_OBJECT_DATA_FAILED:
-      return state
-        .set('error', action.payload)
-        .set('loading', false)
-        .set('data', {});
+export const kadastraalSubjectReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_KADASTRAAL_SUBJECT_DATA:
+        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        break;
 
-    case constants.LOAD_KADASTRAAL_OBJECT_DATA_NO_RESULTS:
-      return state.set('data', {});
+      case constants.LOAD_KADASTRAAL_SUBJECT_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-    default:
-      return state;
-  }
-};
+      case constants.LOAD_KADASTRAAL_SUBJECT_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
 
-export const kadastraalSubjectReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_KADASTRAAL_SUBJECT_DATA:
-      return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
+export const verblijfsobjectReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_VERBLIJFSOBJECT_DATA:
+        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        break;
 
-    case constants.LOAD_KADASTRAAL_SUBJECT_DATA_SUCCESS:
-      return state.set('data', action.payload);
+      case constants.LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-    case constants.LOAD_KADASTRAAL_SUBJECT_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
+      case constants.LOAD_VERBLIJFSOBJECT_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
 
-    default:
-      return state;
-  }
-};
+export const vestigingReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_VESTIGING_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
 
-export const handelsregisterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_HR_DATA:
-      return state.set('kvkNummers', action.payload);
+      case constants.LOAD_VESTIGING_DATA_FAILED:
+        draft.error = action.payload;
+        break;
 
-    case constants.LOAD_HR_DATA_SUCCESS:
-      return state.set('data', action.payload);
-
-    case constants.LOAD_HR_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
-
-    default:
-      return state;
-  }
-};
-
-export const verblijfsobjectReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_VERBLIJFSOBJECT_DATA:
-      return state.set('adresseerbaarObjectId', action.payload.adresseerbaarObjectId);
-
-    case constants.LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
-      return state.set('data', action.payload);
-
-    case constants.LOAD_VERBLIJFSOBJECT_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
-
-    default:
-      return state;
-  }
-};
-
-export const vestigingReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.LOAD_VESTIGING_DATA_SUCCESS:
-      return state.set('data', action.payload);
-
-    case constants.LOAD_VESTIGING_DATA_FAILED:
-      return state.set('error', action.payload).set('data', {});
-
-    default:
-      return state;
-  }
-};
+      case constants.LOAD_VESTIGING_DATA_NO_RESULTS:
+        draft.data = undefined;
+        break;
+    }
+  });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { parse } from 'json2csv';
 
@@ -50,6 +51,7 @@ class CSVDownloadContainer extends Component {
 
     this.state = {
       data: {
+        notitie: '',
         timestamp: 0,
       },
     };
@@ -66,7 +68,7 @@ class CSVDownloadContainer extends Component {
       return acc;
     };
 
-    const data = { ...this.state.data, timestamp: new Date().getTime() };
+    const data = { timestamp: new Date().getTime(), ...this.state.data, ...this.props.data };
     const unwind = [];
 
     const getKeys = (obj, parentKey, separator = '.') =>
@@ -110,6 +112,14 @@ class CSVDownloadContainer extends Component {
     return <DownloadLink name="basisregistratie_wonen_export.csv" onClick={this.onClick} />;
   }
 }
+
+CSVDownloadContainer.defaultProps = {
+  data: {},
+};
+
+CSVDownloadContainer.propTypes = {
+  data: PropTypes.shape({}),
+};
 
 const composed = compose(withSelector)(CSVDownloadContainer);
 

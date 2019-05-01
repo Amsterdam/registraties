@@ -21,10 +21,15 @@ export const OBJECTS = {
     NAME: 'Kadastraal object',
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/',
   },
-  KADASTRAAL_SUBJECT: {
-    ABBR: 'brks',
-    NAME: 'Kadastraal subject',
-    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-1/',
+  KADASTRAAL_SUBJECT_NP: {
+    ABBR: 'brks_np',
+    NAME: 'Kadastraal subject NP',
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/persoon/natuurlijk-persoon/',
+  },
+  KADASTRAAL_SUBJECT_NNP: {
+    ABBR: 'brks_nnp',
+    NAME: 'Kadastraal subject NNP',
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/persoon/niet-natuurlijk-pers/',
   },
   VESTIGING: {
     ABBR: 'ves',
@@ -32,15 +37,7 @@ export const OBJECTS = {
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/vestiging/',
   },
 };
-
-export const LOAD_DATA_SUCCESS = `${scope}/LOAD_DATA_SUCCESS`;
-export const LOAD_DATA_FAILED = `${scope}/LOAD_DATA_FAILED`;
-
 export const LOAD_BAG_DATA = `${scope}/LOAD_BAG_DATA`;
-
-export const LOAD_HR_DATA = `${scope}/LOAD_HR_DATA`;
-export const LOAD_HR_DATA_SUCCESS = `${scope}/LOAD_HR_DATA_SUCCESS`;
-export const LOAD_HR_DATA_FAILED = `${scope}/LOAD_HR_DATA_FAILED`;
 
 export const LOAD_NUMMERAANDUIDING_DATA = `${scope}/LOAD_NUMMERAANDUIDING_DATA`;
 export const LOAD_NUMMERAANDUIDING_DATA_SUCCESS = `${scope}/LOAD_NUMMERAANDUIDING_SUCCESS`;
@@ -72,3 +69,4 @@ export const LOAD_VERBLIJFSOBJECT_DATA_FAILED = `${scope}/LOAD_VERBLIJFSOBJECT_D
 export const LOAD_VESTIGING_DATA = `${scope}/LOAD_VESTIGING_DATA`;
 export const LOAD_VESTIGING_DATA_SUCCESS = `${scope}/LOAD_VESTIGING_DATA_SUCCESS`;
 export const LOAD_VESTIGING_DATA_FAILED = `${scope}/LOAD_VESTIGING_DATA_FAILED`;
+export const LOAD_VESTIGING_DATA_NO_RESULTS = `${scope}/LOAD_VESTIGING_DATA_NO_RESULTS`;

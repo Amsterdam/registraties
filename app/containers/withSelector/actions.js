@@ -1,15 +1,5 @@
 import * as constants from './constants';
 
-export const loadDataSuccess = payload => ({
-  type: constants.LOAD_DATA_SUCCESS,
-  payload,
-});
-
-export const loadDataFailed = payload => ({
-  type: constants.LOAD_DATA_FAILED,
-  payload,
-});
-
 export const loadBAGData = ({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId }) => ({
   type: constants.LOAD_BAG_DATA,
   payload: { adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId },
@@ -52,21 +42,6 @@ export const loadKadastraalSubjectDataFailed = payload => ({
 
 export const loadKadastraalSubjectDataNoResults = payload => ({
   type: constants.LOAD_KADASTRAAL_SUBJECT_DATA_NO_RESULTS,
-  payload,
-});
-
-export const loadHandelsregisterData = kvkNummers => ({
-  type: constants.LOAD_HR_DATA,
-  payload: { kvkNummers },
-});
-
-export const loadHandelsregisterDataSuccess = payload => ({
-  type: constants.LOAD_HR_DATA_SUCCESS,
-  payload,
-});
-
-export const loadHandelsregisterDataFailed = payload => ({
-  type: constants.LOAD_HR_DATA_FAILED,
   payload,
 });
 
@@ -161,5 +136,10 @@ export const loadVestigingDataSuccess = payload => ({
 
 export const loadVestigingDataFailed = payload => ({
   type: constants.LOAD_VESTIGING_DATA_FAILED,
+  payload,
+});
+
+export const loadVestigingDataNoResults = payload => ({
+  type: constants.LOAD_VESTIGING_DATA_NO_RESULTS,
   payload,
 });

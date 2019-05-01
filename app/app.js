@@ -12,11 +12,8 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router/immutable';
-import FontFaceObserver from 'fontfaceobserver';
-import moment from 'moment';
-import 'moment/src/locale/nl';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'connected-react-router';
+import history from 'utils/history';
 import 'leaflet/dist/leaflet';
 import { authenticate } from 'shared/services/auth/auth';
 import { authenticateUser } from 'containers/App/actions';
@@ -36,20 +33,10 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Open Sans', {});
-
-// When Open Sans is loaded, add a font-family using Open Sans to the body
-openSansObserver.load().then(() => {
-  document.body.classList.add('fontLoaded');
-});
-
-moment.locale('nl');
+// moment.locale('nl');
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 

@@ -1,23 +1,57 @@
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectGlobal = state => state.get('global');
+const selectGlobal = state => state.global || initialState;
 
-const selectRoute = state => state.get('route');
+const selectRoute = state => state.route;
 
-const makeSelectUserName = () => createSelector(selectGlobal, globalState => globalState.get('userName'));
+const makeSelectStatus = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.status,
+  );
 
-const makeSelectAccessToken = () => createSelector(selectGlobal, globalState => globalState.get('accessToken'));
+const makeSelectUserName = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.userName,
+  );
 
-const makeSelectLoading = () => createSelector(selectGlobal, globalState => globalState.get('loading'));
+const makeSelectAccessToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.accessToken,
+  );
 
-const makeSelectError = () => createSelector(selectGlobal, globalState => globalState.get('error'));
+const makeSelectLoading = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.loading,
+  );
 
-const makeSelectErrorMessage = () => createSelector(selectGlobal, globalState => globalState.get('errorMessage'));
+const makeSelectError = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.error,
+  );
 
-const makeSelectLocation = () => createSelector(selectRoute, routeState => routeState.get('location').toJS());
+const makeSelectErrorMessage = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.errorMessage,
+  );
+
+const makeSelectLocation = () =>
+  createSelector(
+    selectRoute,
+    routeState => routeState.location,
+  );
 
 const makeSelectIsAuthenticated = () =>
-  createSelector(selectGlobal, globalState => !globalState.get('accessToken') === false);
+  createSelector(
+    selectGlobal,
+    globalState => !globalState.accessToken === false,
+  );
 
 export {
   makeSelectAccessToken,
@@ -26,6 +60,7 @@ export {
   makeSelectIsAuthenticated,
   makeSelectLoading,
   makeSelectLocation,
+  makeSelectStatus,
   makeSelectUserName,
   selectGlobal,
 };

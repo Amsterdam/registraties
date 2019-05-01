@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
+import { makeSelectStatus } from 'containers/App/selectors';
+
 import * as reducers from './reducer';
 import * as selectors from './selectors';
 import saga from './saga';
@@ -21,8 +23,8 @@ const withSelectors = WrappedComponent => {
 
   const mapStateToProps = createStructuredSelector({
     summary: selectors.makeSelectSummary(),
+    status: makeSelectStatus(),
     adres: selectors.makeSelectAdres(),
-    handelsregister: selectors.makeSelectHandelsregisterData(),
     kadastraalObject: selectors.makeSelectKadastraalObjectData(),
     kadastraalSubjectNNP: selectors.makeSelectKadastraalSubjectNNPData(),
     kadastraalSubjectNP: selectors.makeSelectKadastraalSubjectNPData(),
@@ -37,7 +39,6 @@ const withSelectors = WrappedComponent => {
 
   const ComposedSelectorContainer = compose(
     injectReducer({ key: 'bag', reducer: reducers.bagReducer }),
-    injectReducer({ key: 'handelsregister', reducer: reducers.handelsregisterReducer }),
     injectReducer({ key: 'kadastraalObject', reducer: reducers.kadastraalObjectReducer }),
     injectReducer({ key: 'kadastraalSubject', reducer: reducers.kadastraalSubjectReducer }),
     injectReducer({ key: 'nummeraanduiding', reducer: reducers.nummeraanduidingReducer }),

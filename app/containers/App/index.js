@@ -5,9 +5,9 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import AccommodationObjectPage from 'containers/AccommodationObjectPage';
-import Map from 'containers/MapContainer';
-import NotFoundPage from 'containers/NotFoundPage';
+import AccommodationObjectPage from 'containers/AccommodationObjectPage/Loadable';
+import Map from 'containers/MapContainer/Loadable';
+import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Footer from 'components/Footer';
 import HeaderContainer from 'containers/HeaderContainer';
 import GlobalError from 'containers/GlobalError';

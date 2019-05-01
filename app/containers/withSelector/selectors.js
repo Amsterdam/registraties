@@ -2,15 +2,14 @@ import { createSelector } from 'reselect';
 import { isValidDate, isObject, isArray, isValidKey, isValidValue, isCount } from 'utils';
 import messages from './messages';
 
-export const selectBAG = state => state.get('bag');
-const selectHandelsregister = state => state.get('handelsregister');
-const selectKadastraalObject = state => state.get('kadastraalObject');
-const selectKadastraalSubject = state => state.get('kadastraalSubject');
-const selectNummeraanduiding = state => state.get('nummeraanduiding');
-const selectPand = state => state.get('pand');
-const selectSearch = state => state.get('search');
-const selectVerblijfsobject = state => state.get('verblijfsobject');
-const selectVestiging = state => state.get('vestiging');
+export const selectBAG = state => state.bag;
+const selectKadastraalObject = state => state.kadastraalObject;
+const selectKadastraalSubject = state => state.kadastraalSubject;
+const selectNummeraanduiding = state => state.nummeraanduiding;
+const selectPand = state => state.pand;
+const selectSearch = state => state.search;
+const selectVerblijfsobject = state => state.verblijfsobject;
+const selectVestiging = state => state.vestiging;
 
 // replace underscores and capitalise the key
 const formattedKey = key =>
@@ -20,10 +19,12 @@ const formattedKey = key =>
     .join(' ')
     .trim();
 
-const getFormattedData = ({ data, keys }) =>
-  Object.keys(data)
+const getFormattedData = ({ data, keys }) => {
+  const filteredKeys = Object.keys(data)
     .filter(isValidKey(keys))
-    .filter(isValidValue(data))
+    .filter(isValidValue(data));
+
+  return filteredKeys
     .map(key => {
       const value = data[key];
       let formattedValue;
@@ -77,221 +78,275 @@ const getFormattedData = ({ data, keys }) =>
       };
     })
     .filter(Boolean);
+};
 
 export const makeSelectVerblijfsobjectData = () =>
-  createSelector(selectVerblijfsobject, state => {
-    const data = state.get('data');
+  createSelector(
+    selectVerblijfsobject,
+    state => {
+      const { data } = state;
 
-    if (!data) {
-      return undefined;
-    }
+      if (!data) {
+        return undefined;
+      }
 
-    const keys = [
-      'aanduiding_in_onderzoek',
-      'aantal_kamers',
-      'bouwlagen',
-      'eigendomsverhouding',
-      'gebruik',
-      'gebruiksdoelen',
-      'indicatie_geconstateerd',
-      'oppervlakte',
-      'status',
-      'verhuurbare-eenheden',
-      'verblijfsobjectidentificatie',
-    ];
+      const keys = [
+        'aanduiding_in_onderzoek',
+        'aantal_kamers',
+        'bouwlagen',
+        'eigendomsverhouding',
+        'gebruik',
+        'gebruiksdoelen',
+        'indicatie_geconstateerd',
+        'oppervlakte',
+        'status',
+        'verhuurbare-eenheden',
+        'verblijfsobjectidentificatie',
+      ];
 
-    return getFormattedData({ data, keys });
-  });
+      return getFormattedData({ data, keys });
+    },
+  );
 
 export const makeSelectNummeraanduidingData = () =>
-  createSelector(selectNummeraanduiding, state => {
-    const data = state.get('data');
+  createSelector(
+    selectNummeraanduiding,
+    state => {
+      const { data } = state;
 
-    if (!data) {
-      return undefined;
-    }
+      if (!data) {
+        return undefined;
+      }
 
-    const keys = [
-      'adres',
-      'hoofdadres',
-      'huisletter',
-      'huisnummer',
-      'huisnummer_toevoeging',
-      'nummeraanduidingidentificatie',
-      'postcode',
-      'woonplaats',
-    ];
+      const keys = [
+        'adres',
+        'hoofdadres',
+        'huisletter',
+        'huisnummer',
+        'huisnummer_toevoeging',
+        'nummeraanduidingidentificatie',
+        'postcode',
+        'woonplaats',
+      ];
 
-    return getFormattedData({ data, keys });
-  });
+      return getFormattedData({ data, keys });
+    },
+  );
 
 export const makeSelectAdres = () =>
-  createSelector(makeSelectNummeraanduidingData(), state => {
-    if (!state || !isArray(state) || !state.length) {
-      return undefined;
-    }
+  createSelector(
+    makeSelectNummeraanduidingData(),
+    state => {
+      if (!state || !isArray(state) || !state.length) {
+        return undefined;
+      }
 
-    return state.filter(({ key }) => key === 'adres' || key === 'postcode');
-  });
+      return state.filter(({ key }) => key === 'adres' || key === 'postcode');
+    },
+  );
 
 export const makeSelectPandData = () =>
-  createSelector(selectPand, state => {
-    const data = state.get('data');
+  createSelector(
+    selectPand,
+    state => {
+      const { data } = state;
 
-    if (!data) {
-      return undefined;
-    }
+      if (!data) {
+        return undefined;
+      }
 
-    const keys = [
-      'hoogste_bouwlaag',
-      'laagste_bouwlaag',
-      'oorspronkelijk_bouwjaar',
-      'pandidentificatie',
-      'status',
-      'verblijfsobjecten',
-    ];
+      const keys = [
+        'hoogste_bouwlaag',
+        'laagste_bouwlaag',
+        'oorspronkelijk_bouwjaar',
+        'pandidentificatie',
+        'status',
+        'verblijfsobjecten',
+      ];
 
-    return getFormattedData({ data, keys });
-  });
+      return getFormattedData({ data, keys });
+    },
+  );
 
 export const makeSelectKadastraalObjectData = () =>
-  createSelector(selectKadastraalObject, state => {
-    const { results } = state.get('data') || {};
+  createSelector(
+    selectKadastraalObject,
+    state => {
+      const { data: { results } = {} } = state;
 
-    if (!results || !isArray(results)) {
-      return undefined;
-    }
+      if (!results || !isArray(results)) {
+        return undefined;
+      }
 
-    const data = results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
+      const data = results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
 
-    const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer'];
+      const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer'];
 
-    return getFormattedData({ data, keys });
-  });
+      return getFormattedData({ data, keys });
+    },
+  );
 
 /**
  * Natuurlijk persoon
  */
 export const makeSelectKadastraalSubjectNPData = () =>
-  createSelector(selectKadastraalSubject, state => {
-    const data = state.get('data');
+  createSelector(
+    selectKadastraalSubject,
+    state => {
+      const { data } = state;
 
-    if (!data || !isArray(data)) {
-      return undefined;
-    }
+      if (!data || !isArray(data)) {
+        return undefined;
+      }
 
-    // eslint-disable-next-line camelcase
-    const natuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => is_natuurlijk_persoon);
+      // eslint-disable-next-line camelcase
+      const natuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => is_natuurlijk_persoon);
 
-    if (!natuurlijkPersoonData) {
-      return undefined;
-    }
+      if (!natuurlijkPersoonData) {
+        return undefined;
+      }
 
-    const keys = [
-      'id',
-      'geslacht',
-      'naam',
-      'voornamen',
-      'voorvoegsels',
-      'geboortedatum',
-      'geboorteplaats',
-      'geboorteland',
-      'overlijdensdatum',
-    ];
+      const keys = [
+        'id',
+        'geslacht',
+        'naam',
+        'voornamen',
+        'voorvoegsels',
+        'geboortedatum',
+        'geboorteplaats',
+        'geboorteland',
+        'overlijdensdatum',
+      ];
 
-    return data.map(subject => getFormattedData({ data: subject, keys }));
-  });
+      return data.map(subject => getFormattedData({ data: subject, keys }));
+    },
+  );
 
 /**
  * Niet-natuurlijk persoon
  */
 export const makeSelectKadastraalSubjectNNPData = () =>
-  createSelector(selectKadastraalSubject, state => {
-    const data = state.get('data');
+  createSelector(
+    selectKadastraalSubject,
+    state => {
+      const { data } = state;
 
-    if (!data || !isArray(data)) {
-      return undefined;
-    }
+      if (!data || !isArray(data)) {
+        return undefined;
+      }
 
-    // eslint-disable-next-line camelcase
-    const nietNatuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => !is_natuurlijk_persoon);
+      // eslint-disable-next-line camelcase
+      const nietNatuurlijkPersoonData = data.find(({ is_natuurlijk_persoon }) => !is_natuurlijk_persoon);
 
-    if (!nietNatuurlijkPersoonData) {
-      return undefined;
-    }
+      if (!nietNatuurlijkPersoonData) {
+        return undefined;
+      }
 
-    const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
+      const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-    return data.map(subject => getFormattedData({ data: subject, keys }));
-  });
+      return data.map(subject => getFormattedData({ data: subject, keys }));
+    },
+  );
 
 export const makeSelectFromSubject = key =>
-  createSelector(selectKadastraalSubject, state => {
-    const data = state.get('data');
+  createSelector(
+    selectKadastraalSubject,
+    state => {
+      const { data } = state;
 
-    if (!data || !isArray(data)) {
-      return undefined;
-    }
+      if (!data || !isArray(data)) {
+        return undefined;
+      }
 
-    return data.map(item => item[key]).filter(Boolean);
-  });
+      return data.map(item => item[key]).filter(Boolean);
+    },
+  );
 
 export const makeSelectFromObject = key =>
-  createSelector(selectKadastraalObject, state => {
-    const { results } = state.get('data') || {};
+  createSelector(
+    selectKadastraalObject,
+    state => {
+      const { data: { results } = {} } = state;
 
-    if (!results || !isArray(results)) {
-      return undefined;
-    }
+      if (!results || !isArray(results)) {
+        return undefined;
+      }
 
-    return results.map(item => item[key]).filter(Boolean);
-  });
+      return results.map(item => item[key]).filter(Boolean);
+    },
+  );
+
+export const makeSelectFromPand = key =>
+  createSelector(
+    selectPand,
+    state => {
+      const { data } = state;
+
+      return data ? data[key] : undefined;
+    },
+  );
 
 export const makeSelectKadastraalSubjectLinks = () =>
-  createSelector(selectKadastraalObject, state => {
-    const { results } = state.get('data') || {};
-
-    if (!results || !isArray(results) || !results.length) {
-      return undefined;
-    }
-
-    const { rechten } = results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
-
-    // eslint-disable-next-line no-underscore-dangle
-    return rechten.map(data => data.kadastraal_subject._links.self.href);
-  });
-
-export const makeSelectHandelsregisterData = () =>
   createSelector(
-    selectHandelsregister,
-    (
-      state, // eslint-disable-line
-    ) =>
-      // debugger;
-      undefined,
+    selectKadastraalObject,
+    state => {
+      const { data: { results } = {} } = state;
+
+      if (!results || !isArray(results) || !results.length) {
+        return undefined;
+      }
+
+      const { rechten } =
+        results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
+
+      // eslint-disable-next-line no-underscore-dangle
+      return rechten.map(data => data.kadastraal_subject._links.self.href);
+    },
   );
 
 export const makeSelectSearchData = () =>
-  createSelector(selectSearch, state => {
-    if (!state || !state.get('latlng')) {
-      return undefined;
-    }
+  createSelector(
+    selectSearch,
+    state => {
+      if (!state || !state.latlng) {
+        return undefined;
+      }
 
-    return {
-      latlng: state.get('latlng'),
-      location: state.get('location'),
-      ...state.get('resultObject'),
-    };
-  });
+      return {
+        latlng: state.latlng,
+        location: state.location,
+        ...state.resultObject,
+      };
+    },
+  );
 
 export const makeSelectVestigingData = () =>
-  createSelector(selectVestiging, state => {
-    if (!state || !state.get('latlng')) {
-      return undefined;
-    }
+  createSelector(
+    selectVestiging,
+    state => {
+      const { data } = state;
 
-    return {};
-  });
+      if (!data) {
+        return undefined;
+      }
+
+      const filtered = data
+        .map(({ count, results }) => count > 0 && results)
+        .filter(Boolean)
+        .reduce((acc, val) => {
+          acc.push(...val);
+          return acc;
+        }, []);
+      const keys = ['naam', 'locatie', '_links'];
+      const formatted = filtered.map(vestiging => getFormattedData({ data: vestiging, keys }));
+
+      if (!formatted.length) {
+        return undefined;
+      }
+      // debugger;
+      return formatted.length === 1 ? formatted[0] : formatted;
+    },
+  );
 
 export const makeSelectSummary = () =>
   createSelector(
@@ -301,10 +356,8 @@ export const makeSelectSummary = () =>
       makeSelectPandData(),
       makeSelectKadastraalObjectData(),
       makeSelectKadastraalSubjectNNPData(),
-      makeSelectKadastraalSubjectNPData(),
     ],
-    // eslint-disable-next-line
-    (vbo = [], num = [], pnd = [], brko = [], nnp = [], np = []) => {
+    (vbo = [], num = [], pnd = [], brko = [], nnp = []) => {
       const summary = {};
 
       const find = (obj, id) => obj && obj.find(({ key }) => key === id);
