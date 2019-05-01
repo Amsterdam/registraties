@@ -7,16 +7,17 @@ import amaps from 'amsterdam-amaps/dist/amaps';
 import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
 import 'leaflet/dist/leaflet.css';
 
+import { isArray, isObject } from 'utils';
+
 import LoadingIndicator from 'components/LoadingIndicator';
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
-import { OBJECTS } from 'containers/withSelector/constants';
-
-import { isArray } from 'utils';
+import { OBJECTS } from 'containers/App/constants';
+import messages from 'containers/App/messages';
 
 import './style.scss';
-import { MapWrapper, MapContainer, Heading, Key, Textarea, Ul } from './styled';
+import { MapWrapper, MapContainer, Heading, Key, Textarea, Ul, Tabs } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -87,14 +88,16 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   renderSummary(summary) {
-    const { intl } = this.props;
+    const {
+      intl: { locale, formatMessage },
+    } = this.props;
 
     return (
       Object.keys(summary).length && (
         <ul className="list-unstyled">
           {Object.keys(summary).map(key => (
             <li key={key}>
-              <Key lang={intl.locale}>{key}</Key>: <small>{summary[key]}</small>
+              <Key lang={locale}>{formatMessage(summary[key].label)}</Key>: <small>{summary[key].value}</small>
             </li>
           ))}
         </ul>
@@ -103,35 +106,51 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   renderSection(cfg, data) {
-    const { intl } = this.props;
+    const {
+      intl: { formatMessage, locale },
+    } = this.props;
     const { NAME, STELSELPEDIA_LINK } = cfg;
     const sectionData = data.length === 1 && isArray(data[0]) ? data[0] : data;
-
-    this.sections.add(NAME);
+    const name = formatMessage(NAME);
+    this.sections.add(name);
 
     const renderList = listData => (
       <Ul>
-        {listData.map(listItem => (
-          <li key={listItem.key || Math.random()}>
-            {isArray(listItem) ? (
-              renderList(listItem)
-            ) : (
-              <Fragment>
-                <Key lang={intl.locale}>{listItem.formattedKey}</Key>: {this.printValue(listItem)}
-              </Fragment>
-            )}
-          </li>
-        ))}
+        {listData.map(listItem => {
+          let readableKey = listItem.formattedKey;
+
+          if (isObject(readableKey) && readableKey.id) {
+            readableKey = formatMessage(readableKey, { entity: listItem.key });
+          }
+
+          return (
+            <li key={listItem.key || Math.random()}>
+              {isArray(listItem) ? (
+                renderList(listItem)
+              ) : (
+                <Fragment>
+                  <Key lang={locale}>{readableKey}</Key>: {this.printValue(listItem)}
+                </Fragment>
+              )}
+            </li>
+          );
+        })}
       </Ul>
     );
 
     return (
-      <Fragment key={NAME}>
-        {NAME && (
+      <Fragment key={name}>
+        {name && (
           <Fragment>
-            <h3 id={NAME}>
-              {NAME}
-              <a className="stelselpediaLink" href={STELSELPEDIA_LINK} target="_blank" rel="noopener noreferrer">
+            <h3 id={name}>
+              {name}
+              <a
+                className="stelselpediaLink"
+                href={STELSELPEDIA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={formatMessage(messages.to_stelselpedia, { name })}
+              >
                 <span>i</span>
               </a>
             </h3>
@@ -155,26 +174,31 @@ export class AccommodationObjectPageComponent extends Component {
   render() {
     const {
       adres,
+      intl,
       kadastraalObject,
       kadastraalSubjectNNP,
       kadastraalSubjectNP,
       nummeraanduiding,
       pand,
-      summary,
       status,
+      summary,
       verblijfsobject,
       vestiging,
     } = this.props;
 
     const { notitie } = this.state;
+    const { formatMessage } = intl;
 
     return (
       <div className="row">
-        <nav className="cf">{this.renderTOC()}</nav>
+        <Tabs className="cf">{this.renderTOC()}</Tabs>
+
         <article className="col-8">
           <section>
             <header>
-              <Heading>BAG Objecten</Heading>
+              <Heading>
+                <FormattedMessage {...messages.bag_objects} />
+              </Heading>
             </header>
 
             {nummeraanduiding && this.renderSection(OBJECTS.NUMMERAANDUIDING, nummeraanduiding)}
@@ -187,7 +211,9 @@ export class AccommodationObjectPageComponent extends Component {
           {(kadastraalObject || kadastraalSubjectNP || kadastraalSubjectNNP) && (
             <section>
               <header>
-                <Heading>BRK Objecten</Heading>
+                <Heading>
+                  <FormattedMessage {...messages.brk_objects} />
+                </Heading>
               </header>
 
               {kadastraalObject && this.renderSection(OBJECTS.KADASTRAAL_OBJECT, kadastraalObject)}
@@ -204,7 +230,9 @@ export class AccommodationObjectPageComponent extends Component {
         <aside className="col-4">
           <section>
             <header>
-              <Heading>Overzicht</Heading>
+              <Heading>
+                <FormattedMessage {...messages.overview} />
+              </Heading>
               {adres && adres.map(item => <p key={item.key}>{this.printValue(item)}</p>)}
             </header>
 
@@ -215,28 +243,37 @@ export class AccommodationObjectPageComponent extends Component {
             </MapWrapper>
           </section>
 
-          <section className="invoer">
-            <header>
-              <h3>Notitie</h3>
-            </header>
+          {status === 'pending' && <LoadingIndicator />}
+          {status === 'success' && (
+            <Fragment>
+              <section className="invoer">
+                <header>
+                  <h3>
+                    <FormattedMessage {...messages.note} />
+                  </h3>
+                </header>
 
-            <Textarea
-              className="input"
-              name="notitie"
-              id="areaNotitie"
-              row="5"
-              placeholder="Je notitie wordt niet bewaard, maar is wel te zien in de export."
-              onChange={this.onInput}
-            />
-          </section>
+                <Textarea
+                  className="input"
+                  name="notitie"
+                  id="areaNotitie"
+                  row="5"
+                  placeholder={formatMessage(messages.note_remark)}
+                  onChange={this.onInput}
+                />
+              </section>
 
-          <section>
-            <header>
-              <h3>Exporteren</h3>
-            </header>
+              <section>
+                <header>
+                  <h3>
+                    <FormattedMessage {...messages.export_cta} />
+                  </h3>
+                </header>
 
-            {status === 'success' ? <CSVDownloadContainer data={{ notitie }} /> : <LoadingIndicator />}
-          </section>
+                <CSVDownloadContainer data={{ notitie }} />
+              </section>
+            </Fragment>
+          )}
         </aside>
       </div>
     );
@@ -266,7 +303,7 @@ AccommodationObjectPageComponent.propTypes = {
   summary: PropTypes.shape({}),
   status: PropTypes.string,
   verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
-  vestiging: PropTypes.arrayOf(PropTypes.shape({})),
+  vestiging: PropTypes.array,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({

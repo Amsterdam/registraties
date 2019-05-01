@@ -1,4 +1,4 @@
-import * as constants from './constants';
+import * as constants from 'containers/App/constants';
 
 export const loadBAGData = ({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId }) => ({
   type: constants.LOAD_BAG_DATA,

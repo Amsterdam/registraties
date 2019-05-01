@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+
 import { isValidDate, isObject, isArray, isValidKey, isValidValue, isCount } from 'utils';
-import messages from './messages';
+import messages from 'containers/App/messages';
 
 export const selectBAG = state => state.bag;
 const selectKadastraalObject = state => state.kadastraalObject;
@@ -20,16 +21,15 @@ const formattedKey = key =>
     .trim();
 
 const getFormattedData = ({ data, keys }) => {
-  const filteredKeys = Object.keys(data)
-    .filter(isValidKey(keys))
-    .filter(isValidValue(data));
+  const objKeys = Object.keys(data);
+  const filteredKeys = keys ? objKeys.filter(isValidKey(keys)).filter(isValidValue(data)) : objKeys;
 
   return filteredKeys
     .map(key => {
       const value = data[key];
       let formattedValue;
       let type = typeof value;
-      let readableKey = key;
+      let readableKey = formattedKey(key);
 
       if (value === '') {
         return null;
@@ -47,12 +47,16 @@ const getFormattedData = ({ data, keys }) => {
         formattedValue = messages.unknown;
       } else if (isCount(value)) {
         type = 'number';
-        readableKey = `Aantal ${key}`;
+        readableKey = messages.amount_of;
         formattedValue = value.count;
       } else {
         try {
-          if (isObject(value) && value.omschrijving) {
-            formattedValue = value.omschrijving;
+          if (isObject(value)) {
+            if (value.omschrijving) {
+              formattedValue = value.omschrijving;
+            } else {
+              return getFormattedData({ data: value });
+            }
           }
 
           if (isArray(value)) {
@@ -72,7 +76,7 @@ const getFormattedData = ({ data, keys }) => {
       return {
         type,
         key,
-        formattedKey: formattedKey(readableKey),
+        formattedKey: readableKey,
         value,
         formattedValue,
       };
@@ -337,13 +341,27 @@ export const makeSelectVestigingData = () =>
           acc.push(...val);
           return acc;
         }, []);
-      const keys = ['naam', 'locatie', '_links'];
-      const formatted = filtered.map(vestiging => getFormattedData({ data: vestiging, keys }));
+      const keys = ['naam', 'locatie'];
+
+      const formatted = filtered
+        .map(vestiging => getFormattedData({ data: vestiging, keys }))
+        .map(item =>
+          item.reduce((acc, vestiging) => {
+            if (isArray(vestiging)) {
+              vestiging.forEach(prop => {
+                acc.push(prop);
+              });
+            } else {
+              acc.push(vestiging);
+            }
+            return acc;
+          }, []),
+        );
 
       if (!formatted.length) {
         return undefined;
       }
-      // debugger;
+
       return formatted.length === 1 ? formatted[0] : formatted;
     },
   );
@@ -363,24 +381,43 @@ export const makeSelectSummary = () =>
       const find = (obj, id) => obj && obj.find(({ key }) => key === id);
 
       if (num.length) {
-        summary['Nummeraanduiding-ID'] = find(num, 'nummeraanduidingidentificatie').value;
+        summary.number_indication_id = {
+          label: messages.number_indication_id,
+          value: find(num, 'nummeraanduidingidentificatie').value,
+        };
       }
 
       if (vbo.length) {
-        summary['VBO-ID'] = find(vbo, 'verblijfsobjectidentificatie').value;
+        summary.accommodation_object_id = {
+          label: messages.accommodation_object_id,
+          value: find(vbo, 'verblijfsobjectidentificatie').value,
+        };
       }
 
       if (pnd.length) {
-        summary['Pand-ID'] = find(pnd, 'pandidentificatie').value;
+        summary.house_id = {
+          label: messages.house_id,
+          value: find(pnd, 'pandidentificatie').value,
+        };
       }
 
       if (brko.length) {
-        summary['Kadastraal objectnummer'] = find(brko, 'objectnummer').value;
+        summary.cadastral_object_nr = {
+          label: messages.cadastral_object_nr,
+          value: find(brko, 'objectnummer').value,
+        };
       }
 
       if (nnp.length) {
-        summary['KvK-nummer'] = nnp.map(nnpItem => find(nnpItem, 'kvknummer').value).join(', ');
-        summary.RSIN = nnp.map(nnpItem => find(nnpItem, 'rsin').value).join(', ');
+        summary.chamber_of_commerce_nr = {
+          label: messages.chamber_of_commerce_nr,
+          value: nnp.map(nnpItem => find(nnpItem, 'kvknummer').value).join(', '),
+        };
+
+        summary.RSIN = {
+          label: messages.rsin,
+          value: nnp.map(nnpItem => find(nnpItem, 'rsin').value).join(', '),
+        };
       }
 
       return summary;

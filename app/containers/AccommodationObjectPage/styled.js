@@ -54,3 +54,10 @@ export const Ul = styled.ul`
     }
   }
 `;
+
+export const Tabs = styled.nav.attrs({
+  className: 'cf',
+})`
+  flex-basis: 100;
+  width: 100%;
+`;

@@ -109,7 +109,7 @@ class CSVDownloadContainer extends Component {
   }
 
   render() {
-    return <DownloadLink name="basisregistratie_wonen_export.csv" onClick={this.onClick} />;
+    return <DownloadLink onClick={this.onClick} />;
   }
 }
 

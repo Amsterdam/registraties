@@ -41,7 +41,10 @@ const translationMessages = {
   nl: formatTranslationMessages('nl', nlTranslationMessages),
 };
 
+const scope = 'basisregistratie-wonen';
+
 exports.appLocales = appLocales;
 exports.formatTranslationMessages = formatTranslationMessages;
 exports.translationMessages = translationMessages;
 exports.DEFAULT_LOCALE = DEFAULT_LOCALE;
+exports.scope = scope;

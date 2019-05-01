@@ -1,5 +1,5 @@
 import produce from 'immer';
-import * as constants from './constants';
+import * as constants from 'containers/App/constants';
 
 // The initial state of the App
 export const initialState = {

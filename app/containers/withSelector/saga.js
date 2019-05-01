@@ -5,6 +5,7 @@ import { getAuthHeaders } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import appSaga from 'containers/App/saga';
 import { statusSuccess, statusFailed, statusPending } from 'containers/App/actions';
+import { LOAD_BAG_DATA } from 'containers/App/constants';
 
 import {
   loadKadastraalObjectDataFailed,
@@ -26,7 +27,6 @@ import {
   loadVestigingDataSuccess,
 } from './actions';
 import { makeSelectKadastraalSubjectLinks, makeSelectFromObject } from './selectors';
-import { LOAD_BAG_DATA } from './constants';
 
 const { API_ROOT } = configuration;
 const VERBLIJFSOBJECT_API = 'bag/verblijfsobject/';
