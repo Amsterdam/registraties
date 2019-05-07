@@ -95,21 +95,6 @@ export const loadPandlistDataNoResults = payload => ({
   payload,
 });
 
-export const loadOpenbareRuimteData = openbareRuimteId => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA,
-  payload: { openbareRuimteId },
-});
-
-export const loadOpenbareRuimteDataSuccess = payload => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS,
-  payload,
-});
-
-export const loadOpenbareRuimteDataFailed = payload => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA_FAILED,
-  payload,
-});
-
 export const loadVerblijfsobjectData = adresseerbaarObjectId => ({
   type: constants.LOAD_VERBLIJFSOBJECT_DATA,
   payload: { adresseerbaarObjectId },

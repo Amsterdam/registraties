@@ -7,6 +7,9 @@ import { defineMessages } from 'react-intl';
 import { scope } from '../../i18n';
 
 export default defineMessages({
+  close: {
+    id: `${scope}.close`,
+  },
   yes: {
     id: `${scope}.yes`,
   },

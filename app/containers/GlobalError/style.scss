@@ -1,9 +1,30 @@
+@import '~amsterdam-stijl/dist/scss/ams-colorpalette';
+@import '~amsterdam-stijl/dist/scss/ams-mixins';
+@import '~amsterdam-stijl/dist/scss/ams-extends';
+
 .global-error {
-  background-color: #ec0000;
-  padding: 20px 10px 20px 20px;
-  text-align: center;
+  background-color: $ams-rood;
+  color: white;
+  padding: 11px 60px 11px 20px;
+  display: flex;
+
+  & > p {
+    margin: 0;
+    flex: 0 1 auto;
+  }
 
   &__close-button {
+    background: transparent url('~amsterdam-stijl/dist/images/svg/close-icon-white.svg') center no-repeat;
+    height: 20px;
     margin-left: 10px;
+    width: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    float: right;
+
+    & > * {
+      @include visuallyhidden;
+    }
   }
 }

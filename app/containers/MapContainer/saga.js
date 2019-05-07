@@ -6,16 +6,14 @@ export function* searchSelect(action) {
   const { resultObject, latlng } = action.payload;
 
   const {
-    id: natRegId,
     adresseerbaarobject_id: adresseerbaarObjectId,
     nummeraanduiding_id: nummeraanduidingId,
     openbareruimte_id: openbareruimteId,
   } = resultObject;
 
   const [longitude, latitude] = latlng.coordinates;
-  yield put(
-    push(`/${natRegId},${adresseerbaarObjectId},${nummeraanduidingId},${openbareruimteId},${latitude},${longitude}/`),
-  );
+
+  yield put(push(`/${adresseerbaarObjectId},${nummeraanduidingId},${openbareruimteId},${latitude},${longitude}/`));
 }
 
 export default function* watchMapSaga() {

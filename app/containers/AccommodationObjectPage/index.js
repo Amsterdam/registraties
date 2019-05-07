@@ -7,22 +7,30 @@ import amaps from 'amsterdam-amaps/dist/amaps';
 import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
 import 'leaflet/dist/leaflet.css';
 
-import { isArray, isObject } from 'utils';
-
 import LoadingIndicator from 'components/LoadingIndicator';
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
-import { OBJECTS } from 'containers/App/constants';
+import { LOAD_DATA_PENDING, LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
 import './style.scss';
-import { MapWrapper, MapContainer, Heading, Key, Textarea, Ul, Tabs } from './styled';
+import { MapWrapper, MapContainer, Heading, Textarea, Tabs } from './styled';
+
+import Verblijfsobject from './components/Verblijfsobject';
+import KadastraalObject from './components/KadastraalObject';
+import KadastraalSubjectNP from './components/KadastraalSubjectNP';
+import KadastraalSubjectNNP from './components/KadastraalSubjectNNP';
+import Nummeraanduiding from './components/Nummeraanduiding';
+import Pand from './components/Pand';
+import Vestiging from './components/Vestiging';
+import Summary from './components/Summary';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.map = null;
     this.sections = new Set();
 
     this.state = {
@@ -33,26 +41,27 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   componentDidMount() {
-    const {
-      adresseerbaarObjectId,
-      nummeraanduidingId,
-      openbareRuimteId,
-      latitude,
-      longitude,
-    } = this.props.match.params;
-
-    this.map = amaps.createMap({
-      center: {
-        latitude,
-        longitude,
-      },
-      target: 'mapdiv',
-      search: false,
-      zoom: 15,
-      marker: true,
-    });
+    const { adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId } = this.props.match.params;
 
     this.props.loadBAGData({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { status } = this.props;
+    const { latitude, longitude } = this.props.match.params;
+
+    if (status !== prevProps.status && status === LOAD_DATA_SUCCESS) {
+      this.map = amaps.createMap({
+        center: {
+          latitude,
+          longitude,
+        },
+        target: 'mapdiv',
+        search: false,
+        zoom: 15,
+        marker: true,
+      });
+    }
   }
 
   printValue(meta) {
@@ -65,6 +74,17 @@ export class AccommodationObjectPageComponent extends Component {
         return <FormattedDate value={formattedValue} />;
       case 'number':
         return <FormattedNumber value={formattedValue} />;
+      case 'currency':
+        return (
+          <FormattedNumber
+            value={formattedValue}
+            style="currency" // eslint-disable-line
+            currency="EUR"
+            currencyDisplay="symbol"
+            minimumFractionDigits={0}
+            maximumFractionDigits={0}
+          />
+        );
       case 'string':
       default:
         return formattedValue;
@@ -87,81 +107,6 @@ export class AccommodationObjectPageComponent extends Component {
     );
   }
 
-  renderSummary(summary) {
-    const {
-      intl: { locale, formatMessage },
-    } = this.props;
-
-    return (
-      Object.keys(summary).length && (
-        <ul className="list-unstyled">
-          {Object.keys(summary).map(key => (
-            <li key={key}>
-              <Key lang={locale}>{formatMessage(summary[key].label)}</Key>: <small>{summary[key].value}</small>
-            </li>
-          ))}
-        </ul>
-      )
-    );
-  }
-
-  renderSection(cfg, data) {
-    const {
-      intl: { formatMessage, locale },
-    } = this.props;
-    const { NAME, STELSELPEDIA_LINK } = cfg;
-    const sectionData = data.length === 1 && isArray(data[0]) ? data[0] : data;
-    const name = formatMessage(NAME);
-    this.sections.add(name);
-
-    const renderList = listData => (
-      <Ul>
-        {listData.map(listItem => {
-          let readableKey = listItem.formattedKey;
-
-          if (isObject(readableKey) && readableKey.id) {
-            readableKey = formatMessage(readableKey, { entity: listItem.key });
-          }
-
-          return (
-            <li key={listItem.key || Math.random()}>
-              {isArray(listItem) ? (
-                renderList(listItem)
-              ) : (
-                <Fragment>
-                  <Key lang={locale}>{readableKey}</Key>: {this.printValue(listItem)}
-                </Fragment>
-              )}
-            </li>
-          );
-        })}
-      </Ul>
-    );
-
-    return (
-      <Fragment key={name}>
-        {name && (
-          <Fragment>
-            <h3 id={name}>
-              {name}
-              <a
-                className="stelselpediaLink"
-                href={STELSELPEDIA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={formatMessage(messages.to_stelselpedia, { name })}
-              >
-                <span>i</span>
-              </a>
-            </h3>
-          </Fragment>
-        )}
-
-        {renderList(sectionData)}
-      </Fragment>
-    );
-  }
-
   onInput(event) {
     event.persist();
     const {
@@ -172,20 +117,7 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const {
-      adres,
-      intl,
-      kadastraalObject,
-      kadastraalSubjectNNP,
-      kadastraalSubjectNP,
-      nummeraanduiding,
-      pand,
-      status,
-      summary,
-      verblijfsobject,
-      vestiging,
-    } = this.props;
-
+    const { adres, intl, status } = this.props;
     const { notitie } = this.state;
     const { formatMessage } = intl;
 
@@ -201,51 +133,52 @@ export class AccommodationObjectPageComponent extends Component {
               </Heading>
             </header>
 
-            {nummeraanduiding && this.renderSection(OBJECTS.NUMMERAANDUIDING, nummeraanduiding)}
+            <Nummeraanduiding />
 
-            {verblijfsobject && this.renderSection(OBJECTS.VERBLIJFSOBJECT, verblijfsobject)}
+            <Verblijfsobject />
 
-            {pand && this.renderSection(OBJECTS.PAND, pand)}
+            <Pand />
           </section>
-
-          {(kadastraalObject || kadastraalSubjectNP || kadastraalSubjectNNP) && (
-            <section>
-              <header>
-                <Heading>
-                  <FormattedMessage {...messages.brk_objects} />
-                </Heading>
-              </header>
-
-              {kadastraalObject && this.renderSection(OBJECTS.KADASTRAAL_OBJECT, kadastraalObject)}
-
-              {kadastraalSubjectNP && this.renderSection(OBJECTS.KADASTRAAL_SUBJECT_NP, kadastraalSubjectNP)}
-
-              {kadastraalSubjectNNP && this.renderSection(OBJECTS.KADASTRAAL_SUBJECT_NNP, kadastraalSubjectNNP)}
-
-              {vestiging && this.renderSection(OBJECTS.VESTIGING, vestiging)}
-            </section>
-          )}
-        </article>
-
-        <aside className="col-4">
           <section>
             <header>
               <Heading>
-                <FormattedMessage {...messages.overview} />
+                <FormattedMessage {...messages.brk_objects} />
               </Heading>
-              {adres && adres.map(item => <p key={item.key}>{this.printValue(item)}</p>)}
             </header>
 
-            {summary && this.renderSummary(summary)}
+            <KadastraalObject
+              onLoad={() => {
+                this.sections.add('Kadastraal Object');
+              }}
+            />
 
-            <MapWrapper>
-              <MapContainer className="cf" id="mapdiv" />
-            </MapWrapper>
+            <KadastraalSubjectNP />
+
+            <KadastraalSubjectNNP />
+
+            <Vestiging />
           </section>
+        </article>
 
-          {status === 'pending' && <LoadingIndicator />}
-          {status === 'success' && (
+        <aside className="col-4">
+          {status === LOAD_DATA_PENDING && <LoadingIndicator />}
+          {status === LOAD_DATA_SUCCESS && (
             <Fragment>
+              <section>
+                <header>
+                  <Heading>
+                    <FormattedMessage {...messages.overview} />
+                  </Heading>
+                  {adres && adres.map(item => <p key={item.key}>{this.printValue(item)}</p>)}
+                </header>
+
+                <Summary />
+
+                <MapWrapper>
+                  <MapContainer className="cf" id="mapdiv" />
+                </MapWrapper>
+              </section>
+
               <section className="invoer">
                 <header>
                   <h3>
@@ -282,28 +215,28 @@ export class AccommodationObjectPageComponent extends Component {
 
 AccommodationObjectPageComponent.defaultProps = {
   adres: undefined,
-  kadastraalObject: undefined,
-  kadastraalSubjectNNP: undefined,
-  kadastraalSubjectNP: undefined,
-  nummeraanduiding: undefined,
-  pand: undefined,
-  summary: undefined,
+  // kadastraalObject: undefined,
+  // kadastraalSubjectNNP: undefined,
+  // kadastraalSubjectNP: undefined,
+  // nummeraanduiding: undefined,
+  // pand: undefined,
+  // summary: undefined,
   status: undefined,
-  verblijfsobject: undefined,
-  vestiging: undefined,
+  // verblijfsobject: undefined,
+  // vestiging: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
   adres: PropTypes.arrayOf(PropTypes.shape({})),
-  kadastraalObject: PropTypes.arrayOf(PropTypes.shape({})),
-  kadastraalSubjectNNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  kadastraalSubjectNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
-  pand: PropTypes.arrayOf(PropTypes.shape({})),
-  summary: PropTypes.shape({}),
+  // kadastraalObject: PropTypes.arrayOf(PropTypes.shape({})),
+  // kadastraalSubjectNNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  // kadastraalSubjectNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  // nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
+  // pand: PropTypes.arrayOf(PropTypes.shape({})),
+  // summary: PropTypes.shape({}),
   status: PropTypes.string,
-  verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
-  vestiging: PropTypes.array,
+  // verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
+  // vestiging: PropTypes.array,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({

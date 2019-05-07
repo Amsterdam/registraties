@@ -1,4 +1,5 @@
 {
+  "basisregistratie-wonen.close": "Sluiten",
   "basisregistratie-wonen.no": "Nee",
   "basisregistratie-wonen.yes": "Ja",
   "basisregistratie-wonen.unknown": "n.b.",
@@ -24,5 +25,8 @@
   "basisregistratie-wonen.csv_file_name": "basisregistratie_wonen_export",
   "basisregistratie-wonen.amount_of": "Aantal {entity}",
   "basisregistratie-wonen.to_stelselpedia": "Naar definitie van {name} op Stelselpedia (opent in een nieuw venster).",
-  "basisregistratie-wonen.rsin": "RSIN"
+  "basisregistratie-wonen.rsin": "RSIN",
+  "basisregistratie-wonen.unable_to_fetch": "Er kan geen verbinding gemaakt worden met de externe data bronnen. Toegang is alleen mogelijk via het netwerk van de gemeente Amsterdam. Controleer de netwerkverbinding.",
+  "basisregistratie-wonen.session_expired": "Er kan geen verbinding gemaakt worden met de externe data bronnen. Waarschijnlijk is de sessie verlopen. Log opnieuw in.",
+  "basisregistratie-wonen.unauthorized": "Je moet ingelogd zijn om alle gegevens uit de basisregistratie te kunnen raadplegen."
 }

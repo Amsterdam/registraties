@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { isValidDate, isObject, isArray, isValidKey, isValidValue, isCount } from 'utils';
+import { formatData, isArray } from 'utils';
 import messages from 'containers/App/messages';
 
 export const selectBAG = state => state.bag;
@@ -11,78 +11,6 @@ const selectPand = state => state.pand;
 const selectSearch = state => state.search;
 const selectVerblijfsobject = state => state.verblijfsobject;
 const selectVestiging = state => state.vestiging;
-
-// replace underscores and capitalise the key
-const formattedKey = key =>
-  key
-    .split('_')
-    .map((part, index) => (index === 0 ? `${part.charAt(0).toUpperCase()}${part.slice(1)}` : part))
-    .join(' ')
-    .trim();
-
-const getFormattedData = ({ data, keys }) => {
-  const objKeys = Object.keys(data);
-  const filteredKeys = keys ? objKeys.filter(isValidKey(keys)).filter(isValidValue(data)) : objKeys;
-
-  return filteredKeys
-    .map(key => {
-      const value = data[key];
-      let formattedValue;
-      let type = typeof value;
-      let readableKey = formattedKey(key);
-
-      if (value === '') {
-        return null;
-      }
-
-      if (typeof value === 'boolean') {
-        formattedValue = value ? messages.yes : messages.no;
-      } else if (isValidDate(key, value)) {
-        type = 'date';
-        formattedValue = new Date(value);
-      } else if (typeof value === 'string' || typeof value === 'number') {
-        formattedValue = value;
-      } else if (value === null) {
-        type = 'boolean';
-        formattedValue = messages.unknown;
-      } else if (isCount(value)) {
-        type = 'number';
-        readableKey = messages.amount_of;
-        formattedValue = value.count;
-      } else {
-        try {
-          if (isObject(value)) {
-            if (value.omschrijving) {
-              formattedValue = value.omschrijving;
-            } else {
-              return getFormattedData({ data: value });
-            }
-          }
-
-          if (isArray(value)) {
-            const valueList = value
-              .filter(obj => !!obj.omschrijving)
-              .map(obj => obj.omschrijving)
-              .filter(Boolean);
-            if (valueList.length) {
-              formattedValue = valueList.length === 1 ? valueList[0] : valueList;
-            }
-          }
-        } catch (e) {
-          return null;
-        }
-      }
-
-      return {
-        type,
-        key,
-        formattedKey: readableKey,
-        value,
-        formattedValue,
-      };
-    })
-    .filter(Boolean);
-};
 
 export const makeSelectVerblijfsobjectData = () =>
   createSelector(
@@ -108,7 +36,7 @@ export const makeSelectVerblijfsobjectData = () =>
         'verblijfsobjectidentificatie',
       ];
 
-      return getFormattedData({ data, keys });
+      return formatData({ data, keys });
     },
   );
 
@@ -133,7 +61,7 @@ export const makeSelectNummeraanduidingData = () =>
         'woonplaats',
       ];
 
-      return getFormattedData({ data, keys });
+      return formatData({ data, keys });
     },
   );
 
@@ -168,7 +96,7 @@ export const makeSelectPandData = () =>
         'verblijfsobjecten',
       ];
 
-      return getFormattedData({ data, keys });
+      return formatData({ data, keys });
     },
   );
 
@@ -178,7 +106,7 @@ export const makeSelectKadastraalObjectData = () =>
     state => {
       const { data: { results } = {} } = state;
 
-      if (!results || !isArray(results)) {
+      if (!results || !isArray(results) || !results.length) {
         return undefined;
       }
 
@@ -186,7 +114,7 @@ export const makeSelectKadastraalObjectData = () =>
 
       const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer'];
 
-      return getFormattedData({ data, keys });
+      return formatData({ data, keys });
     },
   );
 
@@ -199,7 +127,7 @@ export const makeSelectKadastraalSubjectNPData = () =>
     state => {
       const { data } = state;
 
-      if (!data || !isArray(data)) {
+      if (!data || !isArray(data) || !data.length) {
         return undefined;
       }
 
@@ -222,7 +150,7 @@ export const makeSelectKadastraalSubjectNPData = () =>
         'overlijdensdatum',
       ];
 
-      return data.map(subject => getFormattedData({ data: subject, keys }));
+      return data.map(subject => formatData({ data: subject, keys }));
     },
   );
 
@@ -235,7 +163,7 @@ export const makeSelectKadastraalSubjectNNPData = () =>
     state => {
       const { data } = state;
 
-      if (!data || !isArray(data)) {
+      if (!data || !isArray(data) || !data.length) {
         return undefined;
       }
 
@@ -248,7 +176,7 @@ export const makeSelectKadastraalSubjectNNPData = () =>
 
       const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-      return data.map(subject => getFormattedData({ data: subject, keys }));
+      return data.map(subject => formatData({ data: subject, keys }));
     },
   );
 
@@ -258,7 +186,7 @@ export const makeSelectFromSubject = key =>
     state => {
       const { data } = state;
 
-      if (!data || !isArray(data)) {
+      if (!data || !isArray(data) || !data.length) {
         return undefined;
       }
 
@@ -272,7 +200,7 @@ export const makeSelectFromObject = key =>
     state => {
       const { data: { results } = {} } = state;
 
-      if (!results || !isArray(results)) {
+      if (!results || !isArray(results) || !results.length) {
         return undefined;
       }
 
@@ -302,6 +230,10 @@ export const makeSelectKadastraalSubjectLinks = () =>
 
       const { rechten } =
         results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
+
+      if (!rechten) {
+        return undefined;
+      }
 
       // eslint-disable-next-line no-underscore-dangle
       return rechten.map(data => data.kadastraal_subject._links.self.href);
@@ -344,7 +276,7 @@ export const makeSelectVestigingData = () =>
       const keys = ['naam', 'locatie'];
 
       const formatted = filtered
-        .map(vestiging => getFormattedData({ data: vestiging, keys }))
+        .map(vestiging => formatData({ data: vestiging, keys }))
         .map(item =>
           item.reduce((acc, vestiging) => {
             if (isArray(vestiging)) {

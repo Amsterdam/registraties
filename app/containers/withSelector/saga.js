@@ -4,7 +4,15 @@ import request from 'utils/request';
 import { getAuthHeaders } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import appSaga from 'containers/App/saga';
-import { statusSuccess, statusFailed, statusPending } from 'containers/App/actions';
+import {
+  statusSuccess,
+  statusFailed,
+  statusPending,
+  statusUnableToFetch,
+  statusUnauthorized,
+  showGlobalError,
+} from 'containers/App/actions';
+import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 import { LOAD_BAG_DATA } from 'containers/App/constants';
 
 import {
@@ -25,6 +33,7 @@ import {
   loadVestigingDataFailed,
   loadVestigingDataNoResults,
   loadVestigingDataSuccess,
+  loadKadastraalSubjectDataNoResults,
 } from './actions';
 import { makeSelectKadastraalSubjectLinks, makeSelectFromObject } from './selectors';
 
@@ -49,6 +58,23 @@ export function* fetchData(action) {
 
     yield put(statusSuccess());
   } catch (error) {
+    if (error.message === 'Failed to fetch') {
+      // unable to fetch
+      yield put(showGlobalError('unable_to_fetch'));
+      yield put(statusUnableToFetch());
+    } else if (error.response && error.response.status === 401) {
+      // unauthorized
+      const isAuthorized = yield select(makeSelectIsAuthenticated());
+
+      if (isAuthorized) {
+        yield put(showGlobalError('session_expired'));
+      } else {
+        yield put(showGlobalError('unauthorized'));
+      }
+
+      yield put(statusUnauthorized());
+    }
+
     yield put(statusFailed(error));
   }
 }
@@ -58,27 +84,35 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
     const data = yield call(request, `${API_ROOT}${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
     const { count } = data;
 
-    yield put(loadKadastraalObjectDataSuccess(data));
-
     if (count) {
+      yield put(loadKadastraalObjectDataSuccess(data));
+
       yield call(fetchKadastraalSubjectData);
       yield call(fetchVestigingData);
     } else {
       yield put(loadKadastraalObjectDataNoResults());
+      yield put(loadKadastraalSubjectDataFailed());
+      yield put(loadVestigingDataFailed());
     }
   } catch (error) {
     yield put(loadKadastraalObjectDataFailed(error));
+    throw error;
   }
 }
 
 export function* fetchKadastraalSubjectData() {
   try {
     const rechten = yield select(makeSelectKadastraalSubjectLinks());
-    const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
+    if (rechten) {
+      const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
 
-    yield put(loadKadastraalSubjectDataSuccess(data));
+      yield put(loadKadastraalSubjectDataSuccess(data));
+    } else {
+      yield put(loadKadastraalSubjectDataNoResults());
+    }
   } catch (error) {
     yield put(loadKadastraalSubjectDataFailed());
+    throw error;
   }
 }
 
@@ -86,20 +120,22 @@ export function* fetchVestigingData() {
   const brkObjectIds = yield select(makeSelectFromObject('id'));
 
   try {
-    const data = yield all([
-      ...brkObjectIds.map(brkObjectId =>
-        call(request, `${API_ROOT}${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
-      ),
-    ]);
+    if (brkObjectIds && brkObjectIds.length) {
+      const data = yield all([
+        ...brkObjectIds.map(brkObjectId =>
+          call(request, `${API_ROOT}${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
+        ),
+      ]);
 
-    if (!data.length) {
-      yield put(loadVestigingDataNoResults());
-      return;
+      if (!data.length) {
+        yield put(loadVestigingDataNoResults());
+      }
+
+      yield put(loadVestigingDataSuccess(data));
     }
-
-    yield put(loadVestigingDataSuccess(data));
   } catch (error) {
     yield put(loadVestigingDataFailed());
+    throw error;
   }
 }
 
@@ -115,6 +151,7 @@ export function* fetchNummeraanduidingData(nummeraanduidingId, adresseerbaarObje
     }
   } catch (error) {
     yield put(loadNummeraanduidingFailed(error));
+    throw error;
   }
 }
 
@@ -125,6 +162,7 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
     yield put(loadVerblijfsobjectDataSuccess(data));
   } catch (error) {
     yield put(loadVerblijfsobjectDataFailed(error));
+    throw error;
   }
 }
 
@@ -137,15 +175,16 @@ export function* fetchPandlistData(adresseerbaarObjectId) {
     );
 
     if (data.count) {
+      yield put(loadPandlistDataSuccess());
+
       const { landelijk_id: landelijkId } = data.results[0];
       yield call(fetchPandData, landelijkId);
     } else {
       yield put(loadPandlistDataNoResults());
     }
-
-    yield put(loadPandlistDataSuccess());
   } catch (error) {
     yield put(loadPandlistDataFailed(error));
+    throw error;
   }
 }
 
@@ -156,6 +195,7 @@ export function* fetchPandData(landelijkId) {
     yield put(loadPandDataSuccess(data));
   } catch (error) {
     yield put(loadPandDataFailed(error));
+    throw error;
   }
 }
 

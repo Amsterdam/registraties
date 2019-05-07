@@ -8,6 +8,8 @@ import {
   LOAD_DATA_SUCCESS,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
+  UNAUTHORIZED,
+  UNABLE_TO_FETCH,
 } from './constants';
 
 // The initial state of the App
@@ -23,17 +25,19 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 export default (state = initialState, action) =>
   produce(state, draft => {
+    const { payload } = action;
+
     switch (action.type) {
-      case AUTHENTICATE_USER:
       case AUTHORIZE_USER:
-        draft.userName = action.payload.userName;
-        draft.userScopes = action.payload.userScopes;
-        draft.accessToken = action.payload.accessToken;
+      case AUTHENTICATE_USER:
+        draft.userName = (payload && payload.userName) || '';
+        draft.userScopes = (payload && payload.userScopes) || [];
+        draft.accessToken = (payload && payload.accessToken) || null;
         break;
 
       case SHOW_GLOBAL_ERROR:
-        draft.error = !!action.payload;
-        draft.errorMessage = action.payload;
+        draft.error = !!payload;
+        draft.errorMessage = payload;
         draft.loading = false;
         break;
 
@@ -44,15 +48,23 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA_PENDING:
-        draft.status = 'pending';
+        draft.status = LOAD_DATA_PENDING;
         break;
 
       case LOAD_DATA_SUCCESS:
-        draft.status = 'success';
+        draft.status = LOAD_DATA_SUCCESS;
         break;
 
       case LOAD_DATA_FAILED:
-        draft.status = 'failed';
+        draft.status = LOAD_DATA_FAILED;
+        break;
+
+      case UNAUTHORIZED:
+        draft.status = UNAUTHORIZED;
+        break;
+
+      case UNABLE_TO_FETCH:
+        draft.status = UNABLE_TO_FETCH;
         break;
     }
   });

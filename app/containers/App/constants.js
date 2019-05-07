@@ -2,6 +2,9 @@ import { scope } from '../../i18n';
 
 const containerScope = `${scope}/App`;
 
+export const UNABLE_TO_FETCH = `${containerScope}/App/UNABLE_TO_FETCH`;
+export const UNAUTHORIZED = `${containerScope}/App/UNAUTHORIZED`;
+
 export const AUTHENTICATE_USER = `${containerScope}/App/AUTHENTICATE_USER`;
 export const AUTHORIZE_USER = `${containerScope}/App/AUTHORIZE_USER`;
 
@@ -50,7 +53,7 @@ export const LOAD_VESTIGING_DATA_FAILED = `${containerScope}/LOAD_VESTIGING_DATA
 export const LOAD_VESTIGING_DATA_NO_RESULTS = `${containerScope}/LOAD_VESTIGING_DATA_NO_RESULTS`;
 export const OBJECTS = {
   NUMMERAANDUIDING: {
-    ABBREV: 'num',
+    ABBR: 'num',
     NAME: { id: 'basisregistratie-wonen.number_indication' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/',
   },

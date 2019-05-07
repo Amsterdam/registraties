@@ -22,16 +22,16 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
-    summary: selectors.makeSelectSummary(),
+    // summary: selectors.makeSelectSummary(),
     status: makeSelectStatus(),
     adres: selectors.makeSelectAdres(),
-    kadastraalObject: selectors.makeSelectKadastraalObjectData(),
-    kadastraalSubjectNNP: selectors.makeSelectKadastraalSubjectNNPData(),
-    kadastraalSubjectNP: selectors.makeSelectKadastraalSubjectNPData(),
-    nummeraanduiding: selectors.makeSelectNummeraanduidingData(),
-    pand: selectors.makeSelectPandData(),
-    verblijfsobject: selectors.makeSelectVerblijfsobjectData(),
-    vestiging: selectors.makeSelectVestigingData(),
+    // kadastraalObject: selectors.makeSelectKadastraalObjectData(),
+    // kadastraalSubjectNNP: selectors.makeSelectKadastraalSubjectNNPData(),
+    // kadastraalSubjectNP: selectors.makeSelectKadastraalSubjectNPData(),
+    // nummeraanduiding: selectors.makeSelectNummeraanduidingData(),
+    // pand: selectors.makeSelectPandData(),
+    // verblijfsobject: selectors.makeSelectVerblijfsobjectData(),
+    // vestiging: selectors.makeSelectVestigingData(),
   });
 
   const withConnect = connect(mapStateToProps);

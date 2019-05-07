@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl, intlShape } from 'react-intl';
 import { makeSelectError, makeSelectErrorMessage } from 'containers/App/selectors';
+import appMessages from 'containers/App/messages';
 import { resetGlobalError } from '../App/actions';
 
+import errorMessages from './messages';
 import './style.scss';
 
-export const GlobalError = ({ error, errorMessage, onClose }) => (
+export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
       <div className="global-error">
-        {errorMessage}
+        <p>{intl.formatMessage(errorMessages[errorMessage])}</p>
         <button type="button" className="global-error__close-button" onClick={onClose}>
-          sluit
+          <span>{intl.formatMessage(appMessages.close)}</span>
         </button>
       </div>
     ) : (
@@ -30,6 +33,7 @@ GlobalError.defaultProps = {
 GlobalError.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  intl: intlShape.isRequired,
   onClose: PropTypes.func,
 };
 
@@ -50,4 +54,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(GlobalError);
+export default compose(
+  injectIntl,
+  withConnect,
+)(GlobalError);

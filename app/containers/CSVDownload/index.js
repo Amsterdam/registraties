@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { parse } from 'json2csv';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { isArray, isObject } from 'utils';
 import withSelector from 'containers/withSelector';
 import DownloadLink from 'components/DownloadLink';
+import messages from 'containers/App/messages';
+
+const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
+  <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} {...rest} />
+));
+
+IntlDownloadLink.propTypes = {
+  intl: intlShape,
+};
 
 class CSVDownloadContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -109,7 +119,7 @@ class CSVDownloadContainer extends Component {
   }
 
   render() {
-    return <DownloadLink onClick={this.onClick} />;
+    return <IntlDownloadLink onClick={this.onClick} />;
   }
 }
 

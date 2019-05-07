@@ -8,6 +8,8 @@ import {
   LOAD_DATA_SUCCESS,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
+  UNAUTHORIZED,
+  UNABLE_TO_FETCH,
 } from './constants';
 
 export function authenticateUser(credentials) {
@@ -63,5 +65,15 @@ export const statusSuccess = payload => ({
 
 export const statusFailed = payload => ({
   type: LOAD_DATA_FAILED,
+  payload,
+});
+
+export const statusUnableToFetch = payload => ({
+  type: UNABLE_TO_FETCH,
+  payload,
+});
+
+export const statusUnauthorized = payload => ({
+  type: UNAUTHORIZED,
   payload,
 });
