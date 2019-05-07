@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -11,14 +11,22 @@ import Section from '../Section';
 
 class KadastraalObject extends Component {
   render() {
-    const { data, onLoad } = this.props;
-    return data && <Section cfg={OBJECTS.KADASTRAAL_OBJECT} data={data} ref={onLoad} />;
+    const { data, onSuccess } = this.props;
+    return (
+      <Fragment>
+        {data && <span ref={onSuccess} />}
+        <Section cfg={OBJECTS.KADASTRAAL_OBJECT} data={data} />
+      </Fragment>
+    );
   }
 }
 
 KadastraalObject.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
-  onLoad: PropTypes.func.isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({})),
+    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  ]),
+  onSuccess: PropTypes.func.isRequired,
 };
 
 KadastraalObject.defaultProps = {

@@ -22,16 +22,8 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
-    // summary: selectors.makeSelectSummary(),
     status: makeSelectStatus(),
     adres: selectors.makeSelectAdres(),
-    // kadastraalObject: selectors.makeSelectKadastraalObjectData(),
-    // kadastraalSubjectNNP: selectors.makeSelectKadastraalSubjectNNPData(),
-    // kadastraalSubjectNP: selectors.makeSelectKadastraalSubjectNPData(),
-    // nummeraanduiding: selectors.makeSelectNummeraanduidingData(),
-    // pand: selectors.makeSelectPandData(),
-    // verblijfsobject: selectors.makeSelectVerblijfsobjectData(),
-    // vestiging: selectors.makeSelectVestigingData(),
   });
 
   const withConnect = connect(mapStateToProps);
@@ -40,8 +32,10 @@ const withSelectors = WrappedComponent => {
   const ComposedSelectorContainer = compose(
     injectReducer({ key: 'bag', reducer: reducers.bagReducer }),
     injectReducer({ key: 'kadastraalObject', reducer: reducers.kadastraalObjectReducer }),
-    injectReducer({ key: 'kadastraalSubject', reducer: reducers.kadastraalSubjectReducer }),
+    injectReducer({ key: 'kadastraalSubjectNNP', reducer: reducers.kadastraalSubjectNNPReducer }),
+    injectReducer({ key: 'kadastraalSubjectNP', reducer: reducers.kadastraalSubjectNPReducer }),
     injectReducer({ key: 'nummeraanduiding', reducer: reducers.nummeraanduidingReducer }),
+    injectReducer({ key: 'openbareRuimte', reducer: reducers.openbareRuimteReducer }),
     injectReducer({ key: 'pand', reducer: reducers.pandReducer }),
     injectReducer({ key: 'verblijfsobject', reducer: reducers.verblijfsobjectReducer }),
     injectReducer({ key: 'vestiging', reducer: reducers.vestigingReducer }),

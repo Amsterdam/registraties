@@ -60,7 +60,7 @@ const isValidValue = data =>
   key => {
     const value = data[key];
     const valueIsObject = isObject(value);
-    const readableKeys = ['omschrijving', 'count', 'kvk_adres'];
+    const readableKeys = ['omschrijving', 'count', 'kvk_adres', 'naam'];
     const hasReadableValue = valueIsObject && Object.keys(value).some(valueKey => readableKeys.includes(valueKey));
 
     return (!valueIsObject && value !== '') || hasReadableValue;
@@ -159,10 +159,10 @@ export const formatData = ({ data, keys }) => {
       } else {
         try {
           if (isObject(value)) {
-            if (value.omschrijving) {
+            if (value.omschrijving || value.naam) {
               // Most values of type 'object' contain a value for the field with key 'omschrijving'. We use that as the
               // formatted value for the current field.
-              formattedValue = value.omschrijving;
+              formattedValue = value.omschrijving || value.naam;
             } else {
               // The vestiging endpoint dataset contains nested objects. A recursive call to `formatData` returns those values
               return formatData({ data: value });

@@ -1,43 +1,18 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedDate, FormattedMessage, FormattedNumber, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
+import LoadingIndicator from 'components/LoadingIndicator';
 import messages from 'containers/App/messages';
 import { isArray, isObject } from 'utils';
 
 import { Ul, Key } from '../../styled';
-
-const printValue = meta => {
-  const { type, formattedValue } = meta;
-
-  switch (type) {
-    case 'boolean':
-      return <FormattedMessage {...formattedValue} />;
-    case 'date':
-      return <FormattedDate value={formattedValue} />;
-    case 'number':
-      return <FormattedNumber value={formattedValue} />;
-    case 'currency':
-      return (
-        <FormattedNumber
-          value={formattedValue}
-          style="currency" // eslint-disable-line
-          currency="EUR"
-          currencyDisplay="symbol"
-          minimumFractionDigits={0}
-          maximumFractionDigits={0}
-        />
-      );
-    case 'string':
-    default:
-      return formattedValue;
-  }
-};
+import printValue from '../../printValue';
 
 const Section = ({ cfg, data, intl }) => {
   const { formatMessage, locale } = intl;
   const { NAME, STELSELPEDIA_LINK } = cfg;
-  const sectionData = data.length === 1 && isArray(data[0]) ? data[0] : data;
+  const sectionData = data && data.length === 1 && isArray(data[0]) ? data[0] : data;
   const name = formatMessage(NAME);
 
   const renderList = listData => (
@@ -64,26 +39,31 @@ const Section = ({ cfg, data, intl }) => {
     </Ul>
   );
 
+  const Title = () => (
+    <h3 id={name}>
+      {name}
+      <a
+        className="stelselpediaLink"
+        href={STELSELPEDIA_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={formatMessage(messages.to_stelselpedia, { name })}
+      >
+        <span>i</span>
+      </a>
+    </h3>
+  );
+
   return (
     <Fragment key={name}>
-      {name && (
+      {name && data !== null && (
         <Fragment>
-          <h3 id={name}>
-            {name}
-            <a
-              className="stelselpediaLink"
-              href={STELSELPEDIA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={formatMessage(messages.to_stelselpedia, { name })}
-            >
-              <span>i</span>
-            </a>
-          </h3>
+          <Title />
         </Fragment>
       )}
 
-      {renderList(sectionData)}
+      {data === undefined && <LoadingIndicator />}
+      {data && renderList(sectionData)}
     </Fragment>
   );
 };

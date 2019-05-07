@@ -29,7 +29,11 @@ export const Textarea = styled.textarea`
 export const Ul = styled.ul`
   padding: 0;
   list-style: none;
-  margin-bottom: 1em;
+  padding-bottom: 30px;
+
+  &:not(:last-child):not(:first-child) {
+    border-bottom: 4px solid #767676;
+  }
 
   li {
     padding-left: 23px;

@@ -70,18 +70,35 @@ export const kadastraalObjectReducer = (state = initialState, action) =>
     }
   });
 
-export const kadastraalSubjectReducer = (state = initialState, action) =>
+export const kadastraalSubjectNPReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case constants.LOAD_KADASTRAAL_SUBJECT_DATA:
+      case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
         break;
 
-      case constants.LOAD_KADASTRAAL_SUBJECT_DATA_SUCCESS:
+      case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_SUCCESS:
         draft.data = action.payload;
         break;
 
-      case constants.LOAD_KADASTRAAL_SUBJECT_DATA_FAILED:
+      case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
+
+export const kadastraalSubjectNNPReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA:
+        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_FAILED:
         draft.error = action.payload;
         break;
     }
@@ -117,6 +134,19 @@ export const vestigingReducer = (state = initialState, action) =>
 
       case constants.LOAD_VESTIGING_DATA_NO_RESULTS:
         draft.data = undefined;
+        break;
+    }
+  });
+
+export const openbareRuimteReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
+
+      case constants.LOAD_OPENBARE_RUIMTE_DATA_FAILED:
+        draft.error = action.payload;
         break;
     }
   });

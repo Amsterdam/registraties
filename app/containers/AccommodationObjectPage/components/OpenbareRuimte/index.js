@@ -5,35 +5,35 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { OBJECTS } from 'containers/App/constants';
-import { makeSelectNummeraanduidingData } from 'containers/withSelector/selectors';
+import { makeSelectOpenbareRuimteData } from 'containers/withSelector/selectors';
 
 import Section from '../Section';
 
-class Nummeraanduiding extends Component {
+class OpenbareRuimte extends Component {
   render() {
     const { data, onSuccess } = this.props;
     return (
       <Fragment>
         {data && <span ref={onSuccess} />}
-        <Section cfg={OBJECTS.NUMMERAANDUIDING} data={data} />
+        <Section cfg={OBJECTS.OPENBARE_RUIMTE} data={data} />
       </Fragment>
     );
   }
 }
 
-Nummeraanduiding.propTypes = {
+OpenbareRuimte.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})),
   onSuccess: PropTypes.func.isRequired,
 };
 
-Nummeraanduiding.defaultProps = {
+OpenbareRuimte.defaultProps = {
   data: null,
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectNummeraanduidingData(),
+  data: makeSelectOpenbareRuimteData(),
 });
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(withConnect)(Nummeraanduiding);
+export default compose(withConnect)(OpenbareRuimte);

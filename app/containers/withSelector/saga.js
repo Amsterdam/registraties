@@ -19,8 +19,12 @@ import {
   loadKadastraalObjectDataFailed,
   loadKadastraalObjectDataNoResults,
   loadKadastraalObjectDataSuccess,
-  loadKadastraalSubjectDataFailed,
-  loadKadastraalSubjectDataSuccess,
+  loadKadastraalSubjectNPDataFailed,
+  loadKadastraalSubjectNPDataNoResults,
+  loadKadastraalSubjectNPDataSuccess,
+  loadKadastraalSubjectNNPDataFailed,
+  loadKadastraalSubjectNNPDataNoResults,
+  loadKadastraalSubjectNNPDataSuccess,
   loadNummeraanduidingFailed,
   loadNummeraanduidingSuccess,
   loadPandDataFailed,
@@ -33,11 +37,17 @@ import {
   loadVestigingDataFailed,
   loadVestigingDataNoResults,
   loadVestigingDataSuccess,
-  loadKadastraalSubjectDataNoResults,
+  loadOpenbareRuimteDataSuccess,
+  loadOpenbareRuimteDataFailed,
 } from './actions';
-import { makeSelectKadastraalSubjectLinks, makeSelectFromObject } from './selectors';
+import {
+  makeSelectKadastraalSubjectNPLinks,
+  makeSelectKadastraalSubjectNNPLinks,
+  makeSelectFromObject,
+} from './selectors';
 
 const { API_ROOT } = configuration;
+const OPENBARE_RUIMTE_API = 'bag/openbareruimte/';
 const VERBLIJFSOBJECT_API = 'bag/verblijfsobject/';
 const HR_API = 'handelsregister/';
 const BRK_OBJECT_API = 'brk/object-expand/?verblijfsobjecten__id=';
@@ -50,9 +60,10 @@ const requestOptions = {
 export function* fetchData(action) {
   yield put(statusPending());
 
-  const { adresseerbaarObjectId, nummeraanduidingId } = action.payload;
+  const { adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId } = action.payload;
 
   try {
+    yield call(fetchOpenbareRuimteData, openbareRuimteId);
     yield call(fetchKadastraalObjectData, adresseerbaarObjectId);
     yield call(fetchNummeraanduidingData, nummeraanduidingId, adresseerbaarObjectId);
 
@@ -79,6 +90,17 @@ export function* fetchData(action) {
   }
 }
 
+export function* fetchOpenbareRuimteData(openbareRuimteId) {
+  try {
+    const data = yield call(request, `${API_ROOT}${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, requestOptions);
+
+    yield put(loadOpenbareRuimteDataSuccess(data));
+  } catch (error) {
+    yield put(loadOpenbareRuimteDataFailed(error));
+    throw error;
+  }
+}
+
 export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
   try {
     const data = yield call(request, `${API_ROOT}${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
@@ -87,12 +109,11 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
     if (count) {
       yield put(loadKadastraalObjectDataSuccess(data));
 
-      yield call(fetchKadastraalSubjectData);
+      yield call(fetchKadastraalSubjectNPData);
+      yield call(fetchKadastraalSubjectNNPData);
       yield call(fetchVestigingData);
     } else {
       yield put(loadKadastraalObjectDataNoResults());
-      yield put(loadKadastraalSubjectDataFailed());
-      yield put(loadVestigingDataFailed());
     }
   } catch (error) {
     yield put(loadKadastraalObjectDataFailed(error));
@@ -100,18 +121,36 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
   }
 }
 
-export function* fetchKadastraalSubjectData() {
+export function* fetchKadastraalSubjectNPData() {
   try {
-    const rechten = yield select(makeSelectKadastraalSubjectLinks());
+    const rechten = yield select(makeSelectKadastraalSubjectNPLinks());
+
     if (rechten) {
       const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
 
-      yield put(loadKadastraalSubjectDataSuccess(data));
+      yield put(loadKadastraalSubjectNPDataSuccess(data));
     } else {
-      yield put(loadKadastraalSubjectDataNoResults());
+      yield put(loadKadastraalSubjectNPDataNoResults());
     }
   } catch (error) {
-    yield put(loadKadastraalSubjectDataFailed());
+    yield put(loadKadastraalSubjectNPDataFailed());
+    throw error;
+  }
+}
+
+export function* fetchKadastraalSubjectNNPData() {
+  try {
+    const rechten = yield select(makeSelectKadastraalSubjectNNPLinks());
+
+    if (rechten) {
+      const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
+
+      yield put(loadKadastraalSubjectNNPDataSuccess(data));
+    } else {
+      yield put(loadKadastraalSubjectNNPDataNoResults());
+    }
+  } catch (error) {
+    yield put(loadKadastraalSubjectNNPDataFailed());
     throw error;
   }
 }

@@ -64,4 +64,13 @@ export default defineMessages({
   csv_file_name: {
     id: `${scope}.csv_file_name`,
   },
+  public_space_id: {
+    id: `${scope}.public_space_id`,
+  },
+  public_space: {
+    id: `${scope}.public_space`,
+  },
+  area: {
+    id: `${scope}.area`,
+  },
 });

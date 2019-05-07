@@ -5,35 +5,38 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { OBJECTS } from 'containers/App/constants';
-import { makeSelectNummeraanduidingData } from 'containers/withSelector/selectors';
+import { makeSelectGebiedData } from 'containers/withSelector/selectors';
 
 import Section from '../Section';
 
-class Nummeraanduiding extends Component {
+class Gebied extends Component {
   render() {
     const { data, onSuccess } = this.props;
     return (
       <Fragment>
         {data && <span ref={onSuccess} />}
-        <Section cfg={OBJECTS.NUMMERAANDUIDING} data={data} />
+        <Section cfg={OBJECTS.GEBIED} data={data} />
       </Fragment>
     );
   }
 }
 
-Nummeraanduiding.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
+Gebied.propTypes = {
+  data: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({})),
+    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+  ]),
   onSuccess: PropTypes.func.isRequired,
 };
 
-Nummeraanduiding.defaultProps = {
+Gebied.defaultProps = {
   data: null,
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectNummeraanduidingData(),
+  data: makeSelectGebiedData(),
 });
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(withConnect)(Nummeraanduiding);
+export default compose(withConnect)(Gebied);

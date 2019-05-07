@@ -2,16 +2,15 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedDate, FormattedMessage, FormattedNumber, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import amaps from 'amsterdam-amaps/dist/amaps';
 import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
 import 'leaflet/dist/leaflet.css';
 
-import LoadingIndicator from 'components/LoadingIndicator';
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
-import { LOAD_DATA_PENDING, LOAD_DATA_SUCCESS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
 import './style.scss';
@@ -24,14 +23,18 @@ import KadastraalSubjectNNP from './components/KadastraalSubjectNNP';
 import Nummeraanduiding from './components/Nummeraanduiding';
 import Pand from './components/Pand';
 import Vestiging from './components/Vestiging';
+import OpenbareRuimte from './components/OpenbareRuimte';
+import Gebied from './components/Gebied';
 import Summary from './components/Summary';
+
+import printValue from './printValue';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
     super(props);
 
     this.map = null;
-    this.sections = new Set();
+    this.toc = [];
 
     this.state = {
       notitie: '',
@@ -64,39 +67,10 @@ export class AccommodationObjectPageComponent extends Component {
     }
   }
 
-  printValue(meta) {
-    const { type, formattedValue } = meta;
-
-    switch (type) {
-      case 'boolean':
-        return <FormattedMessage {...formattedValue} />;
-      case 'date':
-        return <FormattedDate value={formattedValue} />;
-      case 'number':
-        return <FormattedNumber value={formattedValue} />;
-      case 'currency':
-        return (
-          <FormattedNumber
-            value={formattedValue}
-            style="currency" // eslint-disable-line
-            currency="EUR"
-            currencyDisplay="symbol"
-            minimumFractionDigits={0}
-            maximumFractionDigits={0}
-          />
-        );
-      case 'string':
-      default:
-        return formattedValue;
-    }
-  }
-
   renderTOC() {
-    const sections = Array.from(this.sections);
-
     return (
       <ul className="tabs">
-        {sections.map(section => (
+        {this.toc.filter(Boolean).map(section => (
           <li key={section}>
             <a href={`#${section}`}>
               <span className="linklabel">{section}</span>
@@ -128,62 +102,89 @@ export class AccommodationObjectPageComponent extends Component {
         <article className="col-8">
           <section>
             <header>
-              <Heading>
-                <FormattedMessage {...messages.bag_objects} />
-              </Heading>
+              <Heading>{intl.formatMessage(messages.bag_objects)}</Heading>
             </header>
 
-            <Nummeraanduiding />
-
-            <Verblijfsobject />
-
-            <Pand />
-          </section>
-          <section>
-            <header>
-              <Heading>
-                <FormattedMessage {...messages.brk_objects} />
-              </Heading>
-            </header>
-
-            <KadastraalObject
-              onLoad={() => {
-                this.sections.add('Kadastraal Object');
+            <OpenbareRuimte
+              onSuccess={() => {
+                this.toc[0] = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
               }}
             />
 
-            <KadastraalSubjectNP />
+            <Nummeraanduiding
+              onSuccess={() => {
+                this.toc[1] = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
+              }}
+            />
 
-            <KadastraalSubjectNNP />
+            <Verblijfsobject
+              onSuccess={() => {
+                this.toc[2] = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
+              }}
+            />
 
-            <Vestiging />
+            <Pand
+              onSuccess={() => {
+                this.toc[3] = intl.formatMessage(OBJECTS.PAND.NAME);
+              }}
+            />
+          </section>
+          <section>
+            <header>
+              <Heading>{intl.formatMessage(messages.brk_objects)}</Heading>
+            </header>
+
+            <KadastraalObject
+              onSuccess={() => {
+                this.toc[4] = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
+              }}
+            />
+
+            <KadastraalSubjectNP
+              onSuccess={() => {
+                this.toc[5] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
+              }}
+            />
+
+            <KadastraalSubjectNNP
+              onSuccess={() => {
+                this.toc[6] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
+              }}
+            />
+
+            <Vestiging
+              onSuccess={() => {
+                this.toc[7] = intl.formatMessage(OBJECTS.VESTIGING.NAME);
+              }}
+            />
+
+            <Gebied
+              onSuccess={() => {
+                this.toc[8] = intl.formatMessage(OBJECTS.GEBIED.NAME);
+              }}
+            />
           </section>
         </article>
 
         <aside className="col-4">
-          {status === LOAD_DATA_PENDING && <LoadingIndicator />}
+          <section>
+            <header>
+              <Heading>{intl.formatMessage(messages.overview)}</Heading>
+              {adres && adres.map(item => <p key={item.key}>{printValue(item)}</p>)}
+            </header>
+
+            <Summary />
+
+            <MapWrapper>
+              <MapContainer className="cf" id="mapdiv" />
+            </MapWrapper>
+          </section>
+
           {status === LOAD_DATA_SUCCESS && (
             <Fragment>
-              <section>
-                <header>
-                  <Heading>
-                    <FormattedMessage {...messages.overview} />
-                  </Heading>
-                  {adres && adres.map(item => <p key={item.key}>{this.printValue(item)}</p>)}
-                </header>
-
-                <Summary />
-
-                <MapWrapper>
-                  <MapContainer className="cf" id="mapdiv" />
-                </MapWrapper>
-              </section>
-
               <section className="invoer">
                 <header>
-                  <h3>
-                    <FormattedMessage {...messages.note} />
-                  </h3>
+                  <h3>{intl.formatMessage(messages.note)}</h3>
                 </header>
 
                 <Textarea
@@ -198,9 +199,7 @@ export class AccommodationObjectPageComponent extends Component {
 
               <section>
                 <header>
-                  <h3>
-                    <FormattedMessage {...messages.export_cta} />
-                  </h3>
+                  <h3>{intl.formatMessage(messages.export_cta)}</h3>
                 </header>
 
                 <CSVDownloadContainer data={{ notitie }} />
@@ -215,28 +214,12 @@ export class AccommodationObjectPageComponent extends Component {
 
 AccommodationObjectPageComponent.defaultProps = {
   adres: undefined,
-  // kadastraalObject: undefined,
-  // kadastraalSubjectNNP: undefined,
-  // kadastraalSubjectNP: undefined,
-  // nummeraanduiding: undefined,
-  // pand: undefined,
-  // summary: undefined,
   status: undefined,
-  // verblijfsobject: undefined,
-  // vestiging: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
   adres: PropTypes.arrayOf(PropTypes.shape({})),
-  // kadastraalObject: PropTypes.arrayOf(PropTypes.shape({})),
-  // kadastraalSubjectNNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  // kadastraalSubjectNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  // nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
-  // pand: PropTypes.arrayOf(PropTypes.shape({})),
-  // summary: PropTypes.shape({}),
   status: PropTypes.string,
-  // verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
-  // vestiging: PropTypes.array,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({

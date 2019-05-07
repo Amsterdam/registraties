@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -11,8 +11,13 @@ import Section from '../Section';
 
 class Vestiging extends Component {
   render() {
-    const { data } = this.props;
-    return data && <Section cfg={OBJECTS.VESTIGING} data={data} />;
+    const { data, onSuccess } = this.props;
+    return (
+      <Fragment>
+        {data && <span ref={onSuccess} />}
+        <Section cfg={OBJECTS.VESTIGING} data={data} />
+      </Fragment>
+    );
   }
 }
 
@@ -21,6 +26,7 @@ Vestiging.propTypes = {
     PropTypes.arrayOf(PropTypes.shape({})),
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
   ]),
+  onSuccess: PropTypes.func.isRequired,
 };
 
 Vestiging.defaultProps = {
