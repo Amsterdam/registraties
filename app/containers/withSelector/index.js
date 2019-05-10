@@ -7,9 +7,9 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import { makeSelectStatus } from 'containers/App/selectors';
+import { makeSelectCoordinates } from './selectors';
 
 import * as reducers from './reducer';
-import * as selectors from './selectors';
 import saga from './saga';
 
 const withSelectors = WrappedComponent => {
@@ -22,8 +22,8 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
+    coordinates: makeSelectCoordinates(),
     status: makeSelectStatus(),
-    adres: selectors.makeSelectAdres(),
   });
 
   const withConnect = connect(mapStateToProps);
@@ -34,6 +34,7 @@ const withSelectors = WrappedComponent => {
     injectReducer({ key: 'kadastraalObject', reducer: reducers.kadastraalObjectReducer }),
     injectReducer({ key: 'kadastraalSubjectNNP', reducer: reducers.kadastraalSubjectNNPReducer }),
     injectReducer({ key: 'kadastraalSubjectNP', reducer: reducers.kadastraalSubjectNPReducer }),
+    injectReducer({ key: 'ligplaats', reducer: reducers.ligplaatsReducer }),
     injectReducer({ key: 'nummeraanduiding', reducer: reducers.nummeraanduidingReducer }),
     injectReducer({ key: 'openbareRuimte', reducer: reducers.openbareRuimteReducer }),
     injectReducer({ key: 'pand', reducer: reducers.pandReducer }),

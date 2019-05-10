@@ -11,9 +11,11 @@ import AccommodationObjectPage from 'containers/AccommodationObjectPage/Loadable
 import Map from 'containers/MapContainer/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Footer from 'components/Footer';
-import HeaderContainer from 'containers/HeaderContainer';
+import HeaderContainer from 'containers/Header';
 import GlobalError from 'containers/GlobalError';
 import { isAuthenticated } from 'shared/services/auth/auth';
+
+import { ThemeProvider } from '@datapunt/asc-ui';
 
 import { showGlobalError } from './actions';
 import reducer from './reducer';
@@ -29,27 +31,25 @@ export const App = ({ showError }) => {
   });
 
   return (
-    <div className="container app-container">
-      <div className="container">
+    <ThemeProvider>
+      <div className="container app-container">
         <HeaderContainer />
+        {/* <SearchContainer /> */}
+        <GlobalError />
+        <div className="content container">
+          <Switch>
+            <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
+            <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
+            <Route exact path="/" component={Map} />
+            <Route path="" component={NotFoundPage} />
+          </Switch>
+        </div>
+        <div className="container-fluid">
+          <Footer />
+        </div>
+        <GlobalStyles />
       </div>
-      <GlobalError />
-      <div className="content container">
-        <Switch>
-          <Route
-            exact
-            path="/:adresseerbaarObjectId,:nummeraanduidingId,:openbareRuimteId,:latitude,:longitude/"
-            component={AccommodationObjectPage}
-          />
-          <Route exact path="/" component={Map} />
-          <Route path="" component={NotFoundPage} />
-        </Switch>
-      </div>
-      <div className="container-fluid">
-        <Footer />
-      </div>
-      <GlobalStyles />
-    </div>
+    </ThemeProvider>
   );
 };
 

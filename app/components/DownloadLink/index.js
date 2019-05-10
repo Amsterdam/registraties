@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '@datapunt/asc-ui';
 
 import './style.scss';
 
 const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
-  <a
-    href="data:text/plain;charset=utf-8,"
-    className="action primary"
+  <Button
+    as="a"
+    href={null}
+    // className="action secondary"
     download={name}
     onClick={onClick}
     tabIndex={disabled ? -1 : 0}
     disabled={disabled}
+    size="small"
     {...rest}
   >
     {label}
-  </a>
+  </Button>
 );
 
 DownloadLink.defaultProps = {

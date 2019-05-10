@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
 import { makeSelectSummary } from 'containers/withSelector/selectors';
-import { Key } from '../../styled';
+import { Key } from 'containers/AccommodationObjectPage/styled';
 
 // eslint-disable-next-line
 class Summary extends Component {

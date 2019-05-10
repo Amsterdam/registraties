@@ -1,15 +1,16 @@
 import { createSelector } from 'reselect';
 
-import { formatData, isArray } from 'utils';
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+import { formatData, isArray, isObject } from 'utils';
 import messages from 'containers/App/messages';
 
 export const selectBAG = state => state.bag;
 const selectKadastraalObject = state => state.kadastraalObject;
 const selectKadastraalSubjectNP = state => state.kadastraalSubjectNP;
 const selectKadastraalSubjectNNP = state => state.kadastraalSubjectNNP;
+const selectLigplaats = state => state.ligplaats;
 const selectNummeraanduiding = state => state.nummeraanduiding;
 const selectPand = state => state.pand;
-const selectSearch = state => state.search;
 const selectVerblijfsobject = state => state.verblijfsobject;
 const selectVestiging = state => state.vestiging;
 const selectOpenbareRuimte = state => state.openbareRuimte;
@@ -17,7 +18,8 @@ const selectOpenbareRuimte = state => state.openbareRuimte;
 export const makeSelectVerblijfsobjectData = () =>
   createSelector(
     selectVerblijfsobject,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -39,14 +41,15 @@ export const makeSelectVerblijfsobjectData = () =>
         'verhuurbare-eenheden',
       ];
 
-      return formatData({ data, keys });
+      return formatData({ data, keys, locale });
     },
   );
 
 export const makeSelectNummeraanduidingData = () =>
   createSelector(
     selectNummeraanduiding,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -67,7 +70,49 @@ export const makeSelectNummeraanduidingData = () =>
         'einde_geldigheid',
       ];
 
-      return formatData({ data, keys });
+      return formatData({ data, keys, locale });
+    },
+  );
+
+export const makeSelectVBONummeraanduidingId = () =>
+  createSelector(
+    selectVerblijfsobject,
+    state => {
+      const { data } = state;
+
+      if (!data) {
+        return undefined;
+      }
+
+      return data.hoofdadres.landelijk_id;
+    },
+  );
+
+export const makeSelectLIGNummeraanduidingId = () =>
+  createSelector(
+    selectLigplaats,
+    state => {
+      const { data } = state;
+
+      if (!data) {
+        return undefined;
+      }
+
+      return data.hoofdadres.landelijk_id;
+    },
+  );
+
+export const makeSelectOpenbareRuimteId = () =>
+  createSelector(
+    selectNummeraanduiding,
+    state => {
+      const { data } = state;
+
+      if (!data) {
+        return undefined;
+      }
+
+      return data.openbare_ruimte.landelijk_id;
     },
   );
 
@@ -86,7 +131,8 @@ export const makeSelectAdres = () =>
 export const makeSelectPandData = () =>
   createSelector(
     selectPand,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -102,34 +148,24 @@ export const makeSelectPandData = () =>
         'verblijfsobjecten',
       ];
 
-      return formatData({ data, keys });
+      return formatData({ data, keys, locale });
     },
   );
 
 export const makeSelectKadastraalObjectData = () =>
   createSelector(
     selectKadastraalObject,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
         return undefined;
       }
 
-      // const data = results.length > 1 ? results.find(({ koopsom, koopjaar }) => koopsom && koopjaar) : results[0];
-      // debugger;
-      //       const data = results.find(kadastraalObject =>
-      //         kadastraalObject.rechten.some(({ kadastraal_subject: subject }) => subject.naam),
-      //       );
-
-      //       if (!data) {
-      //         return null;
-      //       }
-
       const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer'];
 
-      return results.map(object => formatData({ data: object, keys }));
-      // return formatData({ data, keys });
+      return results.map(object => formatData({ data: object, keys, locale }));
     },
   );
 
@@ -139,7 +175,8 @@ export const makeSelectKadastraalObjectData = () =>
 export const makeSelectKadastraalSubjectNPData = () =>
   createSelector(
     selectKadastraalSubjectNP,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
@@ -157,7 +194,7 @@ export const makeSelectKadastraalSubjectNPData = () =>
         'voorvoegsels',
       ];
 
-      return data.map(subject => formatData({ data: subject, keys }));
+      return data.map(subject => formatData({ data: subject, keys, locale }));
     },
   );
 
@@ -167,7 +204,8 @@ export const makeSelectKadastraalSubjectNPData = () =>
 export const makeSelectKadastraalSubjectNNPData = () =>
   createSelector(
     selectKadastraalSubjectNNP,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
@@ -176,7 +214,7 @@ export const makeSelectKadastraalSubjectNNPData = () =>
 
       const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-      return data.map(subject => formatData({ data: subject, keys }));
+      return data.map(subject => formatData({ data: subject, keys, locale }));
     },
   );
 
@@ -194,17 +232,7 @@ export const makeSelectFromObject = key =>
     },
   );
 
-export const makeSelectFromPand = key =>
-  createSelector(
-    selectPand,
-    state => {
-      const { data } = state;
-
-      return data ? data[key] : undefined;
-    },
-  );
-
-export const makeSelectKadastraalSubjectNPLinks = () =>
+export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
   createSelector(
     selectKadastraalObject,
     state => {
@@ -214,62 +242,29 @@ export const makeSelectKadastraalSubjectNPLinks = () =>
         return undefined;
       }
 
-      const foundSubjects = results.find(kadastraalObject =>
-        kadastraalObject.rechten.some(({ kadastraal_subject: subject }) => subject.naam),
-      );
+      const foundSubjects = results
+        // property 'rechten' only present when a session is authorized
+        .filter(({ rechten }) => !!rechten)
+        .find(kadastraalObject =>
+          kadastraalObject.rechten.some(({ kadastraal_subject: subject }) =>
+            isNatuurlijkPersoon ? subject.naam : !subject.naam,
+          ),
+        );
 
-      if (!foundSubjects || !foundSubjects.rechten) {
+      if (!foundSubjects) {
         return null;
       }
 
       // eslint-disable-next-line no-underscore-dangle
       return foundSubjects.rechten.map(data => data.kadastraal_subject._links.self.href);
-    },
-  );
-
-export const makeSelectKadastraalSubjectNNPLinks = () =>
-  createSelector(
-    selectKadastraalObject,
-    state => {
-      const { data: { results } = {} } = state;
-
-      if (!results || !isArray(results) || !results.length) {
-        return undefined;
-      }
-
-      const foundSubjects = results.find(kadastraalObject =>
-        kadastraalObject.rechten.some(({ kadastraal_subject: subject }) => !subject.naam),
-      );
-
-      if (!foundSubjects || !foundSubjects.rechten) {
-        return null;
-      }
-
-      // eslint-disable-next-line no-underscore-dangle
-      return foundSubjects.rechten.map(data => data.kadastraal_subject._links.self.href);
-    },
-  );
-
-export const makeSelectSearchData = () =>
-  createSelector(
-    selectSearch,
-    state => {
-      if (!state || !state.latlng) {
-        return undefined;
-      }
-
-      return {
-        latlng: state.latlng,
-        location: state.location,
-        ...state.resultObject,
-      };
     },
   );
 
 export const makeSelectVestigingData = () =>
   createSelector(
     selectVestiging,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -286,7 +281,7 @@ export const makeSelectVestigingData = () =>
       const keys = ['naam', 'locatie'];
 
       const formatted = filtered
-        .map(vestiging => formatData({ data: vestiging, keys }))
+        .map(vestiging => formatData({ data: vestiging, keys, locale }))
         .map(item =>
           item.reduce((acc, vestiging) => {
             if (isArray(vestiging)) {
@@ -311,7 +306,8 @@ export const makeSelectVestigingData = () =>
 export const makeSelectOpenbareRuimteData = () =>
   createSelector(
     selectOpenbareRuimte,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -320,14 +316,15 @@ export const makeSelectOpenbareRuimteData = () =>
 
       const keys = ['naam', 'type', 'openbare_ruimte_identificatie'];
 
-      return formatData({ data, keys });
+      return formatData({ data, keys, locale });
     },
   );
 
 export const makeSelectGebiedData = () =>
   createSelector(
     selectNummeraanduiding,
-    state => {
+    makeSelectLocale(),
+    (state, locale) => {
       const { data } = state;
 
       if (!data) {
@@ -335,10 +332,35 @@ export const makeSelectGebiedData = () =>
       }
 
       data.wijk = data.buurtcombinatie;
-      delete data.buurtcombinatie;
+
       const keys = ['buurt', 'wijk', 'stadsdeel'];
 
-      return formatData({ data, keys });
+      return formatData({ data, keys, locale });
+    },
+  );
+
+export const makeSelectCoordinates = () =>
+  createSelector(
+    selectVerblijfsobject,
+    selectLigplaats,
+    (vbo, lig) => {
+      const data = vbo.data || lig.data;
+
+      if (!data || (!data.bbox && !data.geometrie)) {
+        return undefined;
+      }
+
+      let x;
+      let y;
+
+      if (data.geometrie.type === 'Point') {
+        [x, y] = data.geometrie.coordinates;
+      } else {
+        x = Math.floor((data.bbox[2] + data.bbox[0]) / 2);
+        y = Math.floor((data.bbox[3] + data.bbox[1]) / 2);
+      }
+
+      return { x, y };
     },
   );
 
@@ -355,61 +377,97 @@ export const makeSelectSummary = () =>
     (vbo = [], num = [], pnd = [], brko = [], nnp = [], opr = []) => {
       const summary = {};
 
-      const find = (obj, id) =>
-        obj &&
-        obj.find(item => {
-          if (isArray(item)) {
-            return find(item, id);
-          }
+      const getValue = (dataset, id, valueSeparator = ', ') => {
+        const values = new Set();
 
-          return item.key === id;
+        dataset.forEach(item => {
+          if (isObject(item) && !!item.key && item.key === id) {
+            values.add(item.value);
+          } else if (isArray(item)) {
+            const matchingItem = item.find(({ key }) => key === id);
+
+            if (matchingItem) {
+              values.add(matchingItem.value);
+            }
+          }
         });
 
+        const valuesArray = Array.from(values);
+
+        return valueSeparator ? valuesArray.join(valueSeparator) : valuesArray;
+      };
+
       if (opr && opr.length) {
+        const oprId = getValue(opr, 'openbare_ruimte_identificatie');
+
         summary.public_space_id = {
           label: messages.public_space_id,
-          value: find(opr, 'openbare_ruimte_identificatie').value,
+          value: oprId,
         };
       }
 
       if (num && num.length) {
-        summary.number_indication_id = {
-          label: messages.number_indication_id,
-          value: find(num, 'nummeraanduidingidentificatie').value,
+        const numId = getValue(num, 'nummeraanduidingidentificatie');
+
+        summary.number_identification_id = {
+          label: messages.number_identification_id,
+          value: numId,
         };
       }
 
       if (vbo && vbo.length) {
+        const vboId = getValue(vbo, 'verblijfsobjectidentificatie');
+
         summary.accommodation_object_id = {
           label: messages.accommodation_object_id,
-          value: find(vbo, 'verblijfsobjectidentificatie').value,
+          value: vboId,
         };
       }
 
       if (pnd && pnd.length) {
+        const pndId = getValue(pnd, 'pandidentificatie');
+
         summary.house_id = {
           label: messages.house_id,
-          value: find(pnd, 'pandidentificatie').value,
+          value: pndId,
         };
       }
 
       if (brko && brko.length) {
-        summary.cadastral_object_nr = {
-          label: messages.cadastral_object_nr,
-          value: find(brko, 'objectnummer').value,
-        };
+        const objectNrs = getValue(brko, 'objectnummer', null);
+
+        if (objectNrs.length) {
+          const label = objectNrs.length > 1 ? messages.cadastral_object_nrs : messages.cadastral_object_nr;
+
+          summary.cadastral_object_nr = {
+            label,
+            value: objectNrs.join(', '),
+          };
+        }
       }
 
       if (nnp && nnp.length) {
-        summary.chamber_of_commerce_nr = {
-          label: messages.chamber_of_commerce_nr,
-          value: nnp.map(nnpItem => find(nnpItem, 'kvknummer').value).join(', '),
-        };
+        const kvkNrs = getValue(nnp, 'kvknummer', null);
 
-        summary.RSIN = {
-          label: messages.rsin,
-          value: nnp.map(nnpItem => find(nnpItem, 'rsin').value).join(', '),
-        };
+        if (kvkNrs.length) {
+          const kvkNrsLabel = kvkNrs.length > 1 ? messages.chamber_of_commerce_nrs : messages.chamber_of_commerce_nr;
+
+          summary.chamber_of_commerce_nr = {
+            label: kvkNrsLabel,
+            value: kvkNrs.join(', '),
+          };
+        }
+
+        const rsinNrs = getValue(nnp, 'rsin', null);
+
+        if (rsinNrs.length) {
+          const rsinNrsLabel = rsinNrs.length > 1 ? messages.rsins : messages.rsin;
+
+          summary.RSIN = {
+            label: rsinNrsLabel,
+            value: rsinNrs.join(', '),
+          };
+        }
       }
 
       return summary;

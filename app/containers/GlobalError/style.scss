@@ -10,7 +10,8 @@
 
   & > p {
     margin: 0;
-    flex: 0 1 auto;
+    float: left;
+    max-width: calc(100% - 30px);
   }
 
   &__close-button {

@@ -6,8 +6,8 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import messages from 'containers/App/messages';
 import { isArray, isObject } from 'utils';
 
-import { Ul, Key } from '../../styled';
-import printValue from '../../printValue';
+import { Ul, Key } from 'containers/AccommodationObjectPage/styled';
+import printValue from 'containers/AccommodationObjectPage/printValue';
 
 const Section = ({ cfg, data, intl }) => {
   const { formatMessage, locale } = intl;

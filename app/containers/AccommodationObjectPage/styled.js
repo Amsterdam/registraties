@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const MapWrapper = styled.div`
   height: 200px;
@@ -11,7 +11,17 @@ export const MapContainer = styled.div`
 `;
 
 export const Heading = styled.h2`
-  margin-top: 0;
+  ${({ marginCollapse }) =>
+    marginCollapse &&
+    css`
+      margin-top: 0;
+    `}
+
+  ${({ small }) =>
+    small &&
+    css`
+      font-size: 20px;
+    `}
 `;
 
 export const Key = styled.strong`

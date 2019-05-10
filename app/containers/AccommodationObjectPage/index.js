@@ -1,11 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-import amaps from 'amsterdam-amaps/dist/amaps';
-import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
-import 'leaflet/dist/leaflet.css';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
@@ -13,21 +10,22 @@ import { loadBAGData } from 'containers/withSelector/actions';
 import { OBJECTS, LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
+import Verblijfsobject from 'components/Verblijfsobject';
+import KadastraalObject from 'components/KadastraalObject';
+import KadastraalSubjectNP from 'components/KadastraalSubjectNP';
+import KadastraalSubjectNNP from 'components/KadastraalSubjectNNP';
+import Nummeraanduiding from 'components/Nummeraanduiding';
+import Pand from 'components/Pand';
+import Vestiging from 'components/Vestiging';
+import OpenbareRuimte from 'components/OpenbareRuimte';
+import Gebied from 'components/Gebied';
+import Adres from 'components/Adres';
+import Summary from 'components/Summary';
+import TOC from 'components/TOC';
+import Map from 'components/Map';
+
 import './style.scss';
-import { MapWrapper, MapContainer, Heading, Textarea, Tabs } from './styled';
-
-import Verblijfsobject from './components/Verblijfsobject';
-import KadastraalObject from './components/KadastraalObject';
-import KadastraalSubjectNP from './components/KadastraalSubjectNP';
-import KadastraalSubjectNNP from './components/KadastraalSubjectNNP';
-import Nummeraanduiding from './components/Nummeraanduiding';
-import Pand from './components/Pand';
-import Vestiging from './components/Vestiging';
-import OpenbareRuimte from './components/OpenbareRuimte';
-import Gebied from './components/Gebied';
-import Summary from './components/Summary';
-
-import printValue from './printValue';
+import { MapWrapper, MapContainer, Heading, Textarea } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -43,42 +41,24 @@ export class AccommodationObjectPageComponent extends Component {
     this.onInput = this.onInput.bind(this);
   }
 
-  componentDidMount() {
-    const { adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId } = this.props.match.params;
+  initiateFetch() {
+    this.toc = [];
+    const { vboId, ligId } = this.props.match.params;
 
-    this.props.loadBAGData({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId });
+    this.props.loadBAGData({ vboId, ligId });
+  }
+
+  componentDidMount() {
+    this.initiateFetch();
   }
 
   componentDidUpdate(prevProps) {
-    const { status } = this.props;
-    const { latitude, longitude } = this.props.match.params;
-
-    if (status !== prevProps.status && status === LOAD_DATA_SUCCESS) {
-      this.map = amaps.createMap({
-        center: {
-          latitude,
-          longitude,
-        },
-        target: 'mapdiv',
-        search: false,
-        zoom: 15,
-        marker: true,
-      });
+    if (
+      prevProps.match.params.vboId !== this.props.match.params.vboId ||
+      prevProps.match.params.ligId !== this.props.match.params.ligId
+    ) {
+      this.initiateFetch();
     }
-  }
-
-  renderTOC() {
-    return (
-      <ul className="tabs">
-        {this.toc.filter(Boolean).map(section => (
-          <li key={section}>
-            <a href={`#${section}`}>
-              <span className="linklabel">{section}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    );
   }
 
   onInput(event) {
@@ -91,18 +71,16 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const { adres, intl, status } = this.props;
+    const { intl, status, coordinates } = this.props;
     const { notitie } = this.state;
     const { formatMessage } = intl;
 
     return (
       <div className="row">
-        <Tabs className="cf">{this.renderTOC()}</Tabs>
-
         <article className="col-8">
           <section>
             <header>
-              <Heading>{intl.formatMessage(messages.bag_objects)}</Heading>
+              <Heading marginCollapse>{intl.formatMessage(messages.bag_objects)}</Heading>
             </header>
 
             <OpenbareRuimte
@@ -131,7 +109,7 @@ export class AccommodationObjectPageComponent extends Component {
           </section>
           <section>
             <header>
-              <Heading>{intl.formatMessage(messages.brk_objects)}</Heading>
+              <Heading marginCollapse>{intl.formatMessage(messages.brk_objects)}</Heading>
             </header>
 
             <KadastraalObject
@@ -167,24 +145,30 @@ export class AccommodationObjectPageComponent extends Component {
         </article>
 
         <aside className="col-4">
-          <section>
-            <header>
-              <Heading>{intl.formatMessage(messages.overview)}</Heading>
-              {adres && adres.map(item => <p key={item.key}>{printValue(item)}</p>)}
-            </header>
-
-            <Summary />
-
-            <MapWrapper>
-              <MapContainer className="cf" id="mapdiv" />
-            </MapWrapper>
-          </section>
+          <TOC sections={this.toc} />
 
           {status === LOAD_DATA_SUCCESS && (
-            <Fragment>
+            <>
+              <section>
+                <header>
+                  <Heading small>{intl.formatMessage(messages.overview)}</Heading>
+                  <Adres />
+                </header>
+
+                <Summary />
+
+                {coordinates && (
+                  <MapWrapper>
+                    <MapContainer className="cf">
+                      <Map coords={coordinates} marker search={false} zoom={14} />
+                    </MapContainer>
+                  </MapWrapper>
+                )}
+              </section>
+
               <section className="invoer">
                 <header>
-                  <h3>{intl.formatMessage(messages.note)}</h3>
+                  <Heading small>{intl.formatMessage(messages.note)}</Heading>
                 </header>
 
                 <Textarea
@@ -199,12 +183,12 @@ export class AccommodationObjectPageComponent extends Component {
 
               <section>
                 <header>
-                  <h3>{intl.formatMessage(messages.export_cta)}</h3>
+                  <Heading small>{intl.formatMessage(messages.export_cta)}</Heading>
                 </header>
 
                 <CSVDownloadContainer data={{ notitie }} />
               </section>
-            </Fragment>
+            </>
           )}
         </aside>
       </div>
@@ -213,22 +197,22 @@ export class AccommodationObjectPageComponent extends Component {
 }
 
 AccommodationObjectPageComponent.defaultProps = {
-  adres: undefined,
+  coordinates: undefined,
   status: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
-  adres: PropTypes.arrayOf(PropTypes.shape({})),
+  coordinates: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }),
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      adresseerbaarObjectId: PropTypes.string.isRequired,
-      nummeraanduidingId: PropTypes.string.isRequired,
-      openbareRuimteId: PropTypes.string.isRequired,
-      latitude: PropTypes.string.isRequired,
-      longitude: PropTypes.string.isRequired,
+      vboId: PropTypes.string,
+      ligId: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

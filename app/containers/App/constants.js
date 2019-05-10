@@ -56,25 +56,34 @@ export const LOAD_VERBLIJFSOBJECT_DATA = `${containerScope}/LOAD_VERBLIJFSOBJECT
 export const LOAD_VERBLIJFSOBJECT_DATA_SUCCESS = `${containerScope}/LOAD_VERBLIJFSOBJECT_DATA_SUCCESS`;
 export const LOAD_VERBLIJFSOBJECT_DATA_FAILED = `${containerScope}/LOAD_VERBLIJFSOBJECT_DATA_FAILED`;
 
+export const LOAD_LIGPLAATS_DATA = `${containerScope}/LOAD_LIGPLAATS_DATA`;
+export const LOAD_LIGPLAATS_DATA_SUCCESS = `${containerScope}/LOAD_LIGPLAATS_DATA_SUCCESS`;
+export const LOAD_LIGPLAATS_DATA_FAILED = `${containerScope}/LOAD_LIGPLAATS_DATA_FAILED`;
+
 export const LOAD_VESTIGING_DATA = `${containerScope}/LOAD_VESTIGING_DATA`;
 export const LOAD_VESTIGING_DATA_SUCCESS = `${containerScope}/LOAD_VESTIGING_DATA_SUCCESS`;
 export const LOAD_VESTIGING_DATA_FAILED = `${containerScope}/LOAD_VESTIGING_DATA_FAILED`;
 export const LOAD_VESTIGING_DATA_NO_RESULTS = `${containerScope}/LOAD_VESTIGING_DATA_NO_RESULTS`;
 export const OBJECTS = {
+  OPENBARE_RUIMTE: {
+    ABBR: 'opr',
+    NAME: { id: 'basisregistratie-wonen.public_space' },
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/',
+  },
   NUMMERAANDUIDING: {
     ABBR: 'num',
-    NAME: { id: 'basisregistratie-wonen.number_indication' },
+    NAME: { id: 'basisregistratie-wonen.number_identification' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/',
-  },
-  PAND: {
-    ABBR: 'pnd',
-    NAME: { id: 'basisregistratie-wonen.house' },
-    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-pand/',
   },
   VERBLIJFSOBJECT: {
     ABBR: 'vbo',
     NAME: { id: 'basisregistratie-wonen.accommodation_object' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-0/',
+  },
+  PAND: {
+    ABBR: 'pnd',
+    NAME: { id: 'basisregistratie-wonen.house' },
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-pand/',
   },
   KADASTRAAL_OBJECT: {
     ABBR: 'brko',
@@ -95,11 +104,6 @@ export const OBJECTS = {
     ABBR: 'ves',
     NAME: { id: 'basisregistratie-wonen.establishment' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/vestiging/',
-  },
-  OPENBARE_RUIMTE: {
-    ABBR: 'opr',
-    NAME: { id: 'basisregistratie-wonen.public_space' },
-    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/',
   },
   GEBIED: {
     ABBR: 'geb',

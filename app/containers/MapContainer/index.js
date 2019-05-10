@@ -11,11 +11,11 @@ import reducer from './reducer';
 import saga from './saga';
 import { searchSelect } from './actions';
 
-const MapContainer = ({ searchSelectAction }) => (
+const MapContainer = ({ onSelect }) => (
   <Fragment>
     <Map
       onSearchSelect={response => {
-        searchSelectAction(response);
+        onSelect(response);
       }}
       center={{ latitude: 52.372829, longitude: 4.900773 }}
     />
@@ -23,13 +23,13 @@ const MapContainer = ({ searchSelectAction }) => (
 );
 
 MapContainer.propTypes = {
-  searchSelectAction: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      searchSelectAction: searchSelect,
+      onSelect: searchSelect,
     },
     dispatch,
   );
@@ -38,8 +38,8 @@ const withConnect = connect(
   null,
   mapDispatchToProps,
 );
-const withReducer = injectReducer({ key: 'search', reducer });
-const withSaga = injectSaga({ key: 'search', saga });
+const withReducer = injectReducer({ key: 'map', reducer });
+const withSaga = injectSaga({ key: 'map', saga });
 
 export default compose(
   withReducer,

@@ -12,9 +12,8 @@ export const bagReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case constants.LOAD_BAG_DATA:
-        draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
-        draft.nummeraanduidingId = action.payload.nummeraanduidingId;
-        draft.openbareRuimteId = action.payload.openbareRuimteId;
+        draft.vboId = action.payload.vboId;
+        draft.ligId = action.payload.ligId;
         break;
     }
   });
@@ -22,6 +21,10 @@ export const bagReducer = (state = initialState, action) =>
 export const pandReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_PAND_DATA:
         draft.landelijkId = action.payload.landelijkId;
         break;
@@ -39,6 +42,10 @@ export const pandReducer = (state = initialState, action) =>
 export const nummeraanduidingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_NUMMERAANDUIDING_DATA:
         draft.nummeraanduidingId = action.payload.nummeraanduidingId;
         break;
@@ -56,6 +63,10 @@ export const nummeraanduidingReducer = (state = initialState, action) =>
 export const kadastraalObjectReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_KADASTRAAL_OBJECT_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
         break;
@@ -73,6 +84,10 @@ export const kadastraalObjectReducer = (state = initialState, action) =>
 export const kadastraalSubjectNPReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
         break;
@@ -90,6 +105,10 @@ export const kadastraalSubjectNPReducer = (state = initialState, action) =>
 export const kadastraalSubjectNNPReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
         break;
@@ -107,6 +126,10 @@ export const kadastraalSubjectNNPReducer = (state = initialState, action) =>
 export const verblijfsobjectReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_VERBLIJFSOBJECT_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
         break;
@@ -121,9 +144,34 @@ export const verblijfsobjectReducer = (state = initialState, action) =>
     }
   });
 
+export const ligplaatsReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
+      case constants.LOAD_LIGPLAATS_DATA:
+        draft.ligId = action.payload.ligId;
+        break;
+
+      case constants.LOAD_LIGPLAATS_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
+
+      case constants.LOAD_LIGPLAATS_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
+
 export const vestigingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_VESTIGING_DATA_SUCCESS:
         draft.data = action.payload;
         break;
@@ -141,6 +189,10 @@ export const vestigingReducer = (state = initialState, action) =>
 export const openbareRuimteReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
       case constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS:
         draft.data = action.payload;
         break;

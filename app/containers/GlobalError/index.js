@@ -14,7 +14,7 @@ import './style.scss';
 export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
-      <div className="global-error">
+      <div className="global-error cf">
         <p>{intl.formatMessage(errorMessages[errorMessage])}</p>
         <button type="button" className="global-error__close-button" onClick={onClose}>
           <span>{intl.formatMessage(appMessages.close)}</span>

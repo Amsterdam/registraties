@@ -12,11 +12,8 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectUserName } from 'containers/App/selectors';
 import Header from 'components/Header';
 
-import { doLogin, doLogout } from '../App/actions';
-
-import './style.scss';
-
-import { isAuthenticated } from '../../shared/services/auth/auth';
+import { doLogin, doLogout } from 'containers/App/actions';
+import { isAuthenticated } from 'shared/services/auth/auth';
 
 export class HeaderContainer extends React.Component {
   constructor(props) {

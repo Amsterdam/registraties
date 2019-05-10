@@ -1,4 +1,5 @@
 import messages from 'containers/App/messages';
+import { translationMessages } from '../i18n';
 
 const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 'toestandsdatum', 'geboortedatum'];
 
@@ -20,6 +21,13 @@ export const isObject = value => value && value.constructor && value.constructor
  */
 export const isArray = value =>
   value && value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
+
+/**
+ * Array of arrays detector
+ *
+ * @param {Any} value
+ */
+export const isArrayOfArrays = value => value && isArray(value) && value.every(item => isArray(item));
 
 /**
  * Date detector
@@ -125,9 +133,10 @@ const formatKey = key =>
  * @param {String[]} options.keys - list of keys who's values are allowed to be returned
  * @returns {Object[]}
  */
-export const formatData = ({ data, keys }) => {
+export const formatData = ({ data, keys, locale = 'default' }) => {
   const objKeys = Object.keys(data);
   const filteredKeys = keys ? objKeys.filter(isValidKey(keys)).filter(isValidValue(data)) : objKeys;
+  const localeMessages = translationMessages[locale];
 
   return filteredKeys
     .map(key => {
@@ -140,47 +149,42 @@ export const formatData = ({ data, keys }) => {
         readableKey = `${key.slice(0, 3).toUpperCase()}-${key.slice(3).replace('_', '')}`;
       }
 
-      if (type === 'boolean') {
-        formattedValue = value ? messages.yes : messages.no;
-      } else if (isDate(key, value)) {
-        type = 'date';
-        formattedValue = new Date(value);
-      } else if (isPostCode(value)) {
-        formattedValue = `${value.slice(0, 4)} ${value.slice(-2).toUpperCase()}`;
-      } else if (value === null) {
-        type = 'boolean';
-        formattedValue = messages.unknown;
-      } else if (type === 'string' || type === 'number' || type === 'currency') {
-        formattedValue = value;
-      } else if (isCount(value)) {
-        type = 'number';
-        readableKey = messages.amount_of;
-        formattedValue = value.count;
-      } else {
-        try {
-          if (isObject(value)) {
-            if (value.omschrijving || value.naam) {
-              // Most values of type 'object' contain a value for the field with key 'omschrijving'. We use that as the
-              // formatted value for the current field.
-              formattedValue = value.omschrijving || value.naam;
-            } else {
-              // The vestiging endpoint dataset contains nested objects. A recursive call to `formatData` returns those values
-              return formatData({ data: value });
-            }
+      try {
+        if (type === 'boolean') {
+          formattedValue = value ? localeMessages[messages.yes.id] : localeMessages[messages.no.id];
+        } else if (isDate(key, value)) {
+          formattedValue = new Intl.DateTimeFormat(locale).format(new Date(value));
+        } else if (isPostCode(value)) {
+          formattedValue = `${value.slice(0, 4)} ${value.slice(-2).toUpperCase()}`;
+        } else if (value === null) {
+          type = 'boolean';
+          formattedValue = localeMessages[messages.unknown.id];
+        } else if (type === 'string' || type === 'number' || type === 'currency') {
+          formattedValue = value;
+        } else if (isCount(value)) {
+          type = 'number';
+          readableKey = messages.amount_of;
+          formattedValue = value.count;
+        } else if (isObject(value)) {
+          if (value.omschrijving || value.naam) {
+            // Most values of type 'object' contain a value for the field with key 'omschrijving' or 'naam'. We use that as the
+            // formatted value for the current field.
+            formattedValue = value.omschrijving || value.naam;
+          } else {
+            // The vestiging endpoint result set contains nested objects. A recursive call to `formatData` returns those values
+            return formatData({ data: value });
           }
+        } else if (isArray(value)) {
+          const valueList = value.filter(isValidValue(value)).map(obj => obj.omschrijving);
 
-          if (isArray(value)) {
-            const valueList = value.filter(isValidValue(value)).map(obj => obj.omschrijving);
-
-            if (valueList.length) {
-              formattedValue = valueList.length === 1 ? valueList[0] : valueList;
-            }
+          if (valueList.length) {
+            formattedValue = valueList.length === 1 ? valueList[0] : valueList;
           }
-        } catch (e) {
-          // In theory, we should never reach this point, but to be sure that we don't return an invalid value,
-          // we return nothing at all.
-          return null;
         }
+      } catch (e) {
+        // In theory, we should never reach this point, but to be sure that we don't return an invalid value,
+        // we return nothing at all.
+        return null;
       }
 
       return {

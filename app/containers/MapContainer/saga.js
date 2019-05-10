@@ -1,6 +1,5 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { SEARCH_SELECT } from './constants';
 
 export function* searchSelect(action) {
   const { resultObject, latlng } = action.payload;
@@ -17,5 +16,5 @@ export function* searchSelect(action) {
 }
 
 export default function* watchMapSaga() {
-  yield takeLatest(SEARCH_SELECT, searchSelect);
+  // yield takeLatest(SEARCH_SELECT, searchSelect);
 }

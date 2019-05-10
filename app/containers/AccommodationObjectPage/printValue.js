@@ -1,12 +1,10 @@
 import React from 'react';
-import { FormattedDate, FormattedMessage, FormattedNumber } from 'react-intl';
+import { FormattedDate, FormattedNumber } from 'react-intl';
 
 export default meta => {
   const { type, formattedValue } = meta;
 
   switch (type) {
-    case 'boolean':
-      return <FormattedMessage {...formattedValue} />;
     case 'date':
       return <FormattedDate value={formattedValue} />;
     case 'number':
@@ -22,7 +20,6 @@ export default meta => {
           maximumFractionDigits={0}
         />
       );
-    case 'string':
     default:
       return formattedValue;
   }

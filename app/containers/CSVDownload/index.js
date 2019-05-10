@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { parse } from 'json2csv';
 import { injectIntl, intlShape } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
 
-import { isArray, isObject } from 'utils';
+import { isArray, isArrayOfArrays, isObject } from 'utils';
 import withSelector from 'containers/withSelector';
+import * as selectors from 'containers/withSelector/selectors';
 import DownloadLink from 'components/DownloadLink';
 import messages from 'containers/App/messages';
+import { OBJECTS } from 'containers/App/constants';
 
 const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
   <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} {...rest} />
@@ -17,37 +21,41 @@ IntlDownloadLink.propTypes = {
   intl: intlShape,
 };
 
+export const getData = dataset => {
+  const obj = {};
+
+  dataset.forEach(({ key, formattedValue }) => {
+    obj[key] = formattedValue;
+  });
+
+  return obj;
+};
+
 class CSVDownloadContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    const getData = dataset => {
-      const obj = {};
-      dataset.forEach(({ key, value }) => {
-        obj[key] = value;
-      });
-      return obj;
-    };
+    const data = new Map();
 
-    const sectionCodes = {
-      nummeraanduiding: 'num',
-      verblijfsobject: 'vbo',
-      pand: 'pnd',
-      kadasterObject: 'brko',
-      kadasterSubject: 'brks',
-    };
-    let data = {};
-
-    Object.keys(nextProps)
-      .filter(key => Object.keys(sectionCodes).includes(key))
+    Object.keys(OBJECTS)
+      .filter(key => nextProps[key])
       .forEach(key => {
-        const propOrStateHasData = prevState.data[key] || nextProps[key];
+        const stateData = prevState.data[key];
+        const propsData = nextProps[key];
+        const propOrStateHasData = !!(stateData || propsData);
         const stateHasPropData = Object.keys(prevState.data).includes(key);
+        const propAbbr = OBJECTS[key].ABBR;
 
         if (propOrStateHasData && !stateHasPropData) {
-          data = { ...data, [sectionCodes[key]]: { ...getData(nextProps[key]) } };
+          if (isArrayOfArrays(propsData)) {
+            propsData.forEach((item, index) => {
+              data.set(`${propAbbr}_${index + 1}`, { ...getData(item) });
+            });
+          } else {
+            data.set(propAbbr, getData(propsData));
+          }
         }
       });
 
-    if (!Object.keys(data).length) {
+    if (!data.size) {
       return null;
     }
 
@@ -78,8 +86,18 @@ class CSVDownloadContainer extends Component {
       return acc;
     };
 
-    const data = { timestamp: new Date().getTime(), ...this.state.data, ...this.props.data };
+    const { locale } = this.props.intl;
+    const date = new Intl.DateTimeFormat(locale).format(new Date());
+    const data = { date };
     const unwind = [];
+
+    this.state.data.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    Object.keys(this.props.data).forEach(key => {
+      data[key] = this.props.data[key];
+    });
 
     const getKeys = (obj, parentKey, separator = '.') =>
       Object.keys(obj)
@@ -115,7 +133,7 @@ class CSVDownloadContainer extends Component {
 
     const csv = this.getParsedData();
     // eslint-disable-next-line no-param-reassign
-    event.target.href += csv;
+    event.target.href = `data:text/plain;charset=utf-8,${csv}`;
   }
 
   render() {
@@ -129,8 +147,27 @@ CSVDownloadContainer.defaultProps = {
 
 CSVDownloadContainer.propTypes = {
   data: PropTypes.shape({}),
+  intl: intlShape.isRequired,
 };
 
-const composed = compose(withSelector)(CSVDownloadContainer);
+const mapStateToProps = createStructuredSelector({
+  OPENBARE_RUIMTE: selectors.makeSelectOpenbareRuimteData(),
+  NUMMERAANDUIDING: selectors.makeSelectNummeraanduidingData(),
+  VERBLIJFSOBJECT: selectors.makeSelectVerblijfsobjectData(),
+  PAND: selectors.makeSelectPandData(),
+  KADASTRAAL_OBJECT: selectors.makeSelectKadastraalObjectData(),
+  KADASTRAAL_SUBJECT_NNP: selectors.makeSelectKadastraalSubjectNNPData(),
+  KADASTRAAL_SUBJECT_NP: selectors.makeSelectKadastraalSubjectNPData(),
+  VESTIGING: selectors.makeSelectVestigingData(),
+  GEBIED: selectors.makeSelectGebiedData(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+const composed = compose(
+  withSelector,
+  withConnect,
+  injectIntl,
+)(CSVDownloadContainer);
 
 export default composed;
