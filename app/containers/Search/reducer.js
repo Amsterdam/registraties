@@ -3,8 +3,10 @@ import { SEARCH_SELECT, INPUT_CHANGE, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED } fr
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
   error: false,
+  input: '',
+  loading: false,
+  results: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */

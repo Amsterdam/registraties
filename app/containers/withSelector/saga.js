@@ -6,6 +6,7 @@ import configuration from 'shared/services/configuration/configuration';
 import appSaga from 'containers/App/saga';
 import searchSaga from 'containers/Search/saga';
 import {
+  progress,
   statusSuccess,
   statusFailed,
   statusPending,
@@ -83,8 +84,8 @@ export function* fetchData(action) {
     }
 
     yield call(fetchNummeraanduidingData, nummeraanduidingId);
-
     yield put(statusSuccess());
+    yield put(progress(1));
   } catch (error) {
     if (error.message === 'Failed to fetch') {
       // unable to fetch
@@ -104,6 +105,7 @@ export function* fetchData(action) {
     }
 
     yield put(statusFailed(error));
+    yield put(progress(1));
   }
 }
 
@@ -124,10 +126,16 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
 
     if (count) {
       yield put(loadKadastraalObjectDataSuccess(data));
+      yield put(progress(2 / 9));
 
       yield call(fetchKadastraalSubjectData, true);
+      yield put(progress(3 / 9));
+
       yield call(fetchKadastraalSubjectData, false);
+      yield put(progress(4 / 9));
+
       yield call(fetchVestigingData);
+      yield put(progress(5 / 9));
     } else {
       yield put(loadKadastraalObjectDataNoResults());
     }
@@ -209,6 +217,7 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
     const data = yield call(request, `${API_ROOT}${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
 
     yield put(loadVerblijfsobjectDataSuccess(data));
+    yield put(progress(1 / 9));
   } catch (error) {
     yield put(loadVerblijfsobjectDataFailed(error));
     throw error;
@@ -220,6 +229,7 @@ export function* fetchLigplaatsData(ligplaatsId) {
     const data = yield call(request, `${API_ROOT}${LIGPLAATS_API}${ligplaatsId}/`, requestOptions);
 
     yield put(loadLigplaatsDataSuccess(data));
+    yield put(progress(1 / 3));
   } catch (error) {
     yield put(loadLigplaatsDataFailed(error));
     throw error;
@@ -236,6 +246,7 @@ export function* fetchPandlistData(adresseerbaarObjectId) {
 
     if (data.count) {
       yield put(loadPandlistDataSuccess());
+      yield put(progress(6 / 9));
 
       const { landelijk_id: landelijkId } = data.results[0];
       yield call(fetchPandData, landelijkId);
@@ -253,6 +264,7 @@ export function* fetchPandData(landelijkId) {
     const data = yield call(request, `${API_ROOT}${PAND_API}${landelijkId}/`);
 
     yield put(loadPandDataSuccess(data));
+    yield put(progress(7 / 9));
   } catch (error) {
     yield put(loadPandDataFailed(error));
     throw error;

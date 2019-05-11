@@ -1,25 +1,28 @@
 import produce from 'immer';
 
 import {
-  AUTHORIZE_USER,
-  SHOW_GLOBAL_ERROR,
-  RESET_GLOBAL_ERROR,
   AUTHENTICATE_USER,
-  LOAD_DATA_SUCCESS,
+  AUTHORIZE_USER,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
-  UNAUTHORIZED,
+  LOAD_DATA_SUCCESS,
+  PROGRESS,
+  RESET_GLOBAL_ERROR,
+  SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
+  UNAUTHORIZED,
 } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
+  accessToken: undefined,
   error: false,
+  errorMessage: '',
+  loading: false,
+  progress: 0,
+  status: undefined,
   userName: undefined,
   userScopes: [],
-  accessToken: undefined,
-  status: undefined,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -66,5 +69,8 @@ export default (state = initialState, action) =>
       case UNABLE_TO_FETCH:
         draft.status = UNABLE_TO_FETCH;
         break;
+
+      case PROGRESS:
+        draft.progress = action.payload;
     }
   });

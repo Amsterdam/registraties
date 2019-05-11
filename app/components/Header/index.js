@@ -10,8 +10,6 @@ import logoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
 import { Header as HeaderComponent, Icon } from '@datapunt/asc-ui';
 import messages from './messages';
 
-import './style.scss';
-
 const StyledHeader = styled(HeaderComponent)`
   a {
     line-height: normal;
@@ -28,19 +26,25 @@ const StyledNav = styled.nav`
   right: 0;
   z-index: 101;
 
-  & button {
+  button {
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
     & > * {
       vertical-align: middle;
       margin-right: 5px;
     }
 
-    &:hover > * {
-      color: red;
+    &:hover {
+      color: #ec0000;
+      text-decoration: underline;
     }
   }
 `;
 
-const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick, userName }) => (
+const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper>
     <StyledHeader title="Basisregistratie Wonen" homeLink={CONFIGURATION.ROOT} tall fullWidth={false}>
       <SearchContainer />
@@ -48,22 +52,17 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick, userName }) =
 
     <StyledNav>
       <ul className="links horizontal">
-        {isAuthenticated && (
-          <li>
-            <span>{intl.formatMessage(messages.logged_in_as, { name: userName })}</span>
-          </li>
-        )}
         {!isAuthenticated && (
           <>
             <li>
               <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                <Icon iconUrl={`url('${loginIcon}');`} padding={2} inline />
+                <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
                 {intl.formatMessage(messages.log_in)}
               </button>
             </li>
             <li>
               <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
-                <Icon iconUrl={`url('${loginIcon}');`} padding={2} inline />
+                <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
                 {intl.formatMessage(messages.log_in_adw)}
               </button>
             </li>
@@ -72,7 +71,7 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick, userName }) =
         {isAuthenticated ? (
           <li>
             <button type="button" onClick={onLoginLogoutButtonClick}>
-              <Icon iconUrl={`url('${logoutIcon}');`} padding={2} inline />
+              <Icon iconUrl={`url('${logoutIcon}');`} padding={0} inline />
               {intl.formatMessage(messages.log_out)}
             </button>
           </li>
@@ -84,17 +83,15 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick, userName }) =
   </HeaderWrapper>
 );
 
+Header.defaultProps = {
+  isAuthenticated: false,
+  onLoginLogoutButtonClick: undefined,
+};
+
 Header.propTypes = {
   isAuthenticated: PropTypes.bool,
   intl: intlShape.isRequired,
   onLoginLogoutButtonClick: PropTypes.func,
-  userName: PropTypes.string,
-};
-
-Header.defaultProps = {
-  isAuthenticated: false,
-  onLoginLogoutButtonClick: undefined,
-  userName: '',
 };
 
 export default injectIntl(Header);

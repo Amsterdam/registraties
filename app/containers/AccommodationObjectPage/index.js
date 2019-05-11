@@ -36,13 +36,14 @@ export class AccommodationObjectPageComponent extends Component {
 
     this.state = {
       notitie: '',
+      toc: [],
     };
 
     this.onInput = this.onInput.bind(this);
   }
 
   initiateFetch() {
-    this.toc = [];
+    this.setState({ toc: [] });
     const { vboId, ligId } = this.props.match.params;
 
     this.props.loadBAGData({ vboId, ligId });
@@ -52,12 +53,17 @@ export class AccommodationObjectPageComponent extends Component {
     this.initiateFetch();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.match.params.vboId !== this.props.match.params.vboId ||
       prevProps.match.params.ligId !== this.props.match.params.ligId
     ) {
       this.initiateFetch();
+    }
+
+    if (this.props.status === LOAD_DATA_SUCCESS && prevState.toc !== this.toc) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ toc: this.toc });
     }
   }
 
@@ -72,7 +78,7 @@ export class AccommodationObjectPageComponent extends Component {
 
   render() {
     const { intl, status, coordinates } = this.props;
-    const { notitie } = this.state;
+    const { notitie, toc } = this.state;
     const { formatMessage } = intl;
 
     return (
@@ -145,7 +151,7 @@ export class AccommodationObjectPageComponent extends Component {
         </article>
 
         <aside className="col-4">
-          <TOC sections={this.toc} />
+          <TOC sections={toc} />
 
           {status === LOAD_DATA_SUCCESS && (
             <>

@@ -2,6 +2,8 @@ import { scope } from '../../i18n';
 
 const containerScope = `${scope}/App`;
 
+export const PROGRESS = `${containerScope}/App/PROGRESS`;
+
 export const UNABLE_TO_FETCH = `${containerScope}/App/UNABLE_TO_FETCH`;
 export const UNAUTHORIZED = `${containerScope}/App/UNAUTHORIZED`;
 

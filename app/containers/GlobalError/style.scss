@@ -1,9 +1,7 @@
-@import '~amsterdam-stijl/dist/scss/ams-colorpalette';
 @import '~amsterdam-stijl/dist/scss/ams-mixins';
-@import '~amsterdam-stijl/dist/scss/ams-extends';
 
 .global-error {
-  background-color: $ams-rood;
+  background-color: #ec0000;
   color: white;
   padding: 11px 60px 11px 20px;
   display: flex;
@@ -15,16 +13,15 @@
   }
 
   &__close-button {
-    background: transparent url('~amsterdam-stijl/dist/images/svg/close-icon-white.svg') center no-repeat;
-    height: 20px;
+    height: 25px;
     margin-left: 10px;
-    width: 20px;
+    width: 25px;
     -webkit-appearance: none;
     appearance: none;
     border: 0;
     float: right;
 
-    & > * {
+    .label {
       @include visuallyhidden;
     }
   }

@@ -14,6 +14,7 @@ import Footer from 'components/Footer';
 import HeaderContainer from 'containers/Header';
 import GlobalError from 'containers/GlobalError';
 import { isAuthenticated } from 'shared/services/auth/auth';
+import Progress from 'containers/Progress';
 
 import { ThemeProvider } from '@datapunt/asc-ui';
 
@@ -33,8 +34,8 @@ export const App = ({ showError }) => {
   return (
     <ThemeProvider>
       <div className="container app-container">
+        <Progress />
         <HeaderContainer />
-        {/* <SearchContainer /> */}
         <GlobalError />
         <div className="content container">
           <Switch>
