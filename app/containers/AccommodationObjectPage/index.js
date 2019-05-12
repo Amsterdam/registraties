@@ -35,6 +35,7 @@ export class AccommodationObjectPageComponent extends Component {
     this.toc = [];
 
     this.state = {
+      filledInBy: '',
       notitie: '',
       toc: [],
     };
@@ -70,15 +71,19 @@ export class AccommodationObjectPageComponent extends Component {
   onInput(event) {
     event.persist();
     const {
-      currentTarget: { value },
+      currentTarget: { name, value },
     } = event;
 
-    this.setState({ notitie: value });
+    if (name === 'filled_in_by') {
+      this.setState({ filledInBy: value });
+    } else {
+      this.setState({ notitie: value });
+    }
   }
 
   render() {
     const { intl, status, coordinates } = this.props;
-    const { notitie, toc } = this.state;
+    const { notitie, filledInBy, toc } = this.state;
     const { formatMessage } = intl;
 
     return (
@@ -174,9 +179,10 @@ export class AccommodationObjectPageComponent extends Component {
 
               <section className="invoer">
                 <header>
-                  <Heading small>{intl.formatMessage(messages.note)}</Heading>
+                  <Heading small>{intl.formatMessage(messages.extra_fields)}</Heading>
                 </header>
 
+                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}</label>
                 <Textarea
                   className="input"
                   name="notitie"
@@ -185,6 +191,9 @@ export class AccommodationObjectPageComponent extends Component {
                   placeholder={formatMessage(messages.note_remark)}
                   onChange={this.onInput}
                 />
+
+                <label htmlFor="inputFilledInBy">Ingevuld door:</label>
+                <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
               <section>
@@ -192,7 +201,7 @@ export class AccommodationObjectPageComponent extends Component {
                   <Heading small>{intl.formatMessage(messages.export_cta)}</Heading>
                 </header>
 
-                <CSVDownloadContainer data={{ notitie }} />
+                <CSVDownloadContainer data={{ notitie, filledInBy }} />
               </section>
             </>
           )}

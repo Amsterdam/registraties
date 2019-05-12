@@ -39,5 +39,6 @@
   "basisregistratie-wonen.unauthorized": "Je moet ingelogd zijn om alle gegevens uit de basisregistratie te kunnen raadplegen.",
   "basisregistratie-wonen.unknown": "n.b.",
   "basisregistratie-wonen.yes": "Ja",
-  "basisregistratie-wonen.search_placeholder": "Zoek data op adres, postcode, kadastrale aanduiding, etc."
+  "basisregistratie-wonen.search_placeholder": "Zoek data op adres, postcode, kadastrale aanduiding, etc.",
+  "basisregistratie-wonen.extra_fields": "Extra velden"
 }

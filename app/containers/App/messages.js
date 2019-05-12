@@ -82,4 +82,7 @@ export default defineMessages({
   area: {
     id: `${scope}.area`,
   },
+  extra_fields: {
+    id: `${scope}.extra_fields`,
+  },
 });
