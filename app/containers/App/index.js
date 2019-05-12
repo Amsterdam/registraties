@@ -8,7 +8,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
 import AccommodationObjectPage from 'containers/AccommodationObjectPage/Loadable';
-import Map from 'containers/MapContainer/Loadable';
+import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Footer from 'components/Footer';
 import HeaderContainer from 'containers/Header';
@@ -41,7 +41,7 @@ export const App = ({ showError }) => {
           <Switch>
             <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
             <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
-            <Route exact path="/" component={Map} />
+            <Route path="/" component={HomePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </div>
