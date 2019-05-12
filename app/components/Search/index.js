@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Suggest from 'components/Suggest';
@@ -55,29 +55,32 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Search = ({ onChange, onSelect, results }) => (
+const Search = forwardRef(({ onChange, onSelect, results, placeholder }, ref) => (
   <Form action="">
     <Wrapper>
       <Input
         autoCapitalize="off"
         autoComplete="off"
         autoCorrect="off"
-        placeholder="Zoek data op adres, postcode, kadastrale aanduiding, etc."
+        placeholder={placeholder}
         spellCheck={false}
         type="text"
         defaultValue=""
         onKeyUp={onChange}
+        ref={ref}
       />
       {results.length > 0 && <StyledSuggest items={results} onSelect={onSelect} />}
     </Wrapper>
   </Form>
-);
+));
 
 Search.defaultProps = {
+  placeholder: '',
   results: [],
 };
 
 Search.propTypes = {
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.shape({})),

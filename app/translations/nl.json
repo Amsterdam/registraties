@@ -38,5 +38,6 @@
   "basisregistratie-wonen.unable_to_fetch": "Er kan geen verbinding gemaakt worden met de externe data bronnen. Toegang is alleen mogelijk via het netwerk van de gemeente Amsterdam. Controleer de netwerkverbinding.",
   "basisregistratie-wonen.unauthorized": "Je moet ingelogd zijn om alle gegevens uit de basisregistratie te kunnen raadplegen.",
   "basisregistratie-wonen.unknown": "n.b.",
-  "basisregistratie-wonen.yes": "Ja"
+  "basisregistratie-wonen.yes": "Ja",
+  "basisregistratie-wonen.search_placeholder": "Zoek data op adres, postcode, kadastrale aanduiding, etc."
 }
