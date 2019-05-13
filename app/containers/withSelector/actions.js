@@ -1,8 +1,8 @@
 import * as constants from 'containers/App/constants';
 
-export const loadBAGData = ({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId }) => ({
+export const loadBAGData = ({ vboId, ligId }) => ({
   type: constants.LOAD_BAG_DATA,
-  payload: { adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId },
+  payload: { vboId, ligId },
 });
 
 export const loadKadastraalObjectData = adresseerbaarObjectId => ({
@@ -25,23 +25,43 @@ export const loadKadastraalObjectDataNoResults = payload => ({
   payload,
 });
 
-export const loadKadastraalSubjectData = adresseerbaarObjectId => ({
-  type: constants.LOAD_KADASTRAAL_SUBJECT_DATA,
+export const loadKadastraalSubjectNPData = adresseerbaarObjectId => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA,
   payload: { adresseerbaarObjectId },
 });
 
-export const loadKadastraalSubjectDataSuccess = payload => ({
-  type: constants.LOAD_KADASTRAAL_SUBJECT_DATA_SUCCESS,
+export const loadKadastraalSubjectNPDataSuccess = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_SUCCESS,
   payload,
 });
 
-export const loadKadastraalSubjectDataFailed = payload => ({
-  type: constants.LOAD_KADASTRAAL_SUBJECT_DATA_FAILED,
+export const loadKadastraalSubjectNPDataFailed = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_FAILED,
   payload,
 });
 
-export const loadKadastraalSubjectDataNoResults = payload => ({
-  type: constants.LOAD_KADASTRAAL_SUBJECT_DATA_NO_RESULTS,
+export const loadKadastraalSubjectNPDataNoResults = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_NO_RESULTS,
+  payload,
+});
+
+export const loadKadastraalSubjectNNPData = adresseerbaarObjectId => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA,
+  payload: { adresseerbaarObjectId },
+});
+
+export const loadKadastraalSubjectNNPDataSuccess = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_SUCCESS,
+  payload,
+});
+
+export const loadKadastraalSubjectNNPDataFailed = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_FAILED,
+  payload,
+});
+
+export const loadKadastraalSubjectNNPDataNoResults = payload => ({
+  type: constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_NO_RESULTS,
   payload,
 });
 
@@ -95,21 +115,6 @@ export const loadPandlistDataNoResults = payload => ({
   payload,
 });
 
-export const loadOpenbareRuimteData = openbareRuimteId => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA,
-  payload: { openbareRuimteId },
-});
-
-export const loadOpenbareRuimteDataSuccess = payload => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS,
-  payload,
-});
-
-export const loadOpenbareRuimteDataFailed = payload => ({
-  type: constants.LOAD_OPENBARE_RUIMTE_DATA_FAILED,
-  payload,
-});
-
 export const loadVerblijfsobjectData = adresseerbaarObjectId => ({
   type: constants.LOAD_VERBLIJFSOBJECT_DATA,
   payload: { adresseerbaarObjectId },
@@ -141,5 +146,30 @@ export const loadVestigingDataFailed = payload => ({
 
 export const loadVestigingDataNoResults = payload => ({
   type: constants.LOAD_VESTIGING_DATA_NO_RESULTS,
+  payload,
+});
+
+export const loadOpenbareRuimteDataSuccess = payload => ({
+  type: constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS,
+  payload,
+});
+
+export const loadOpenbareRuimteDataFailed = payload => ({
+  type: constants.LOAD_OPENBARE_RUIMTE_DATA_FAILED,
+  payload,
+});
+
+export const loadLigplaatsData = ligId => ({
+  type: constants.LOAD_LIGPLAATS_DATA,
+  payload: { ligId },
+});
+
+export const loadLigplaatsDataSuccess = payload => ({
+  type: constants.LOAD_LIGPLAATS_DATA_SUCCESS,
+  payload,
+});
+
+export const loadLigplaatsDataFailed = payload => ({
+  type: constants.LOAD_LIGPLAATS_DATA_FAILED,
   payload,
 });

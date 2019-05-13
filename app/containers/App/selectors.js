@@ -53,6 +53,12 @@ const makeSelectIsAuthenticated = () =>
     globalState => !globalState.accessToken === false,
   );
 
+const makeSelectProgress = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.progress,
+  );
+
 export {
   makeSelectAccessToken,
   makeSelectError,
@@ -60,6 +66,7 @@ export {
   makeSelectIsAuthenticated,
   makeSelectLoading,
   makeSelectLocation,
+  makeSelectProgress,
   makeSelectStatus,
   makeSelectUserName,
   selectGlobal,

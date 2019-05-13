@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const MapWrapper = styled.div`
   height: 200px;
@@ -11,7 +11,17 @@ export const MapContainer = styled.div`
 `;
 
 export const Heading = styled.h2`
-  margin-top: 0;
+  ${({ marginCollapse }) =>
+    marginCollapse &&
+    css`
+      margin-top: 0;
+    `}
+
+  ${({ small }) =>
+    small &&
+    css`
+      font-size: 20px;
+    `}
 `;
 
 export const Key = styled.strong`
@@ -29,7 +39,11 @@ export const Textarea = styled.textarea`
 export const Ul = styled.ul`
   padding: 0;
   list-style: none;
-  margin-bottom: 1em;
+  padding-bottom: 30px;
+
+  &:not(:last-child):not(:first-child) {
+    border-bottom: 4px solid #767676;
+  }
 
   li {
     padding-left: 23px;

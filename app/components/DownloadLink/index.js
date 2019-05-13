@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
-import messages from 'containers/App/messages';
+import { Button } from '@datapunt/asc-ui';
 
 import './style.scss';
 
-const DownloadLink = ({ name, label, onClick, disabled, intl, ...rest }) => (
-  <a
-    href="data:text/plain;charset=utf-8,"
-    className="action primary"
+const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
+  <Button
+    as="a"
+    href={null}
+    // className="action secondary"
+    download={name}
     onClick={onClick}
     tabIndex={disabled ? -1 : 0}
     disabled={disabled}
-    download={`${intl.formatMessage(messages.csv_file_name)}.csv`}
+    size="small"
     {...rest}
   >
     {label}
-  </a>
+  </Button>
 );
 
 DownloadLink.defaultProps = {
@@ -27,10 +28,9 @@ DownloadLink.defaultProps = {
 
 DownloadLink.propTypes = {
   disabled: PropTypes.bool,
-  intl: intlShape.isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 
-export default injectIntl(DownloadLink);
+export default DownloadLink;

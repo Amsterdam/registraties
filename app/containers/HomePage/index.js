@@ -10,13 +10,11 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 
 const HomePage = () => (
-  <h1>
-    <FormattedMessage {...messages.header} />
-  </h1>
+  <>
+    <img src="https://www.amsterdam.nl/publish/pages/892334/wonen_en_leefomgeving.jpg" alt="" width="940" />
+  </>
 );
 
 export default HomePage;

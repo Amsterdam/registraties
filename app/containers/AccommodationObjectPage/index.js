@@ -1,258 +1,188 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedDate, FormattedMessage, FormattedNumber, injectIntl, intlShape } from 'react-intl';
-import amaps from 'amsterdam-amaps/dist/amaps';
-import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
-import 'leaflet/dist/leaflet.css';
+import { injectIntl, intlShape } from 'react-intl';
 
-import { isArray, isObject } from 'utils';
-
-import LoadingIndicator from 'components/LoadingIndicator';
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
+import Verblijfsobject from 'components/Verblijfsobject';
+import KadastraalObject from 'components/KadastraalObject';
+import KadastraalSubjectNP from 'components/KadastraalSubjectNP';
+import KadastraalSubjectNNP from 'components/KadastraalSubjectNNP';
+import Nummeraanduiding from 'components/Nummeraanduiding';
+import Pand from 'components/Pand';
+import Vestiging from 'components/Vestiging';
+import OpenbareRuimte from 'components/OpenbareRuimte';
+import Gebied from 'components/Gebied';
+import Adres from 'components/Adres';
+import Summary from 'components/Summary';
+import TOC from 'components/TOC';
+import Map from 'components/Map';
+
 import './style.scss';
-import { MapWrapper, MapContainer, Heading, Key, Textarea, Ul, Tabs } from './styled';
+import { MapWrapper, MapContainer, Heading, Textarea } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.sections = new Set();
+    this.map = null;
+    this.toc = [];
 
     this.state = {
+      filledInBy: '',
       notitie: '',
+      toc: [],
     };
 
     this.onInput = this.onInput.bind(this);
   }
 
+  initiateFetch() {
+    this.setState({ toc: [] });
+    const { vboId, ligId } = this.props.match.params;
+
+    this.props.loadBAGData({ vboId, ligId });
+  }
+
   componentDidMount() {
-    const {
-      adresseerbaarObjectId,
-      nummeraanduidingId,
-      openbareRuimteId,
-      latitude,
-      longitude,
-    } = this.props.match.params;
-
-    this.map = amaps.createMap({
-      center: {
-        latitude,
-        longitude,
-      },
-      target: 'mapdiv',
-      search: false,
-      zoom: 15,
-      marker: true,
-    });
-
-    this.props.loadBAGData({ adresseerbaarObjectId, nummeraanduidingId, openbareRuimteId });
+    this.initiateFetch();
   }
 
-  printValue(meta) {
-    const { type, formattedValue } = meta;
-
-    switch (type) {
-      case 'boolean':
-        return <FormattedMessage {...formattedValue} />;
-      case 'date':
-        return <FormattedDate value={formattedValue} />;
-      case 'number':
-        return <FormattedNumber value={formattedValue} />;
-      case 'string':
-      default:
-        return formattedValue;
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.match.params.vboId !== this.props.match.params.vboId ||
+      prevProps.match.params.ligId !== this.props.match.params.ligId
+    ) {
+      this.initiateFetch();
     }
-  }
 
-  renderTOC() {
-    const sections = Array.from(this.sections);
-
-    return (
-      <ul className="tabs">
-        {sections.map(section => (
-          <li key={section}>
-            <a href={`#${section}`}>
-              <span className="linklabel">{section}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  renderSummary(summary) {
-    const {
-      intl: { locale, formatMessage },
-    } = this.props;
-
-    return (
-      Object.keys(summary).length && (
-        <ul className="list-unstyled">
-          {Object.keys(summary).map(key => (
-            <li key={key}>
-              <Key lang={locale}>{formatMessage(summary[key].label)}</Key>: <small>{summary[key].value}</small>
-            </li>
-          ))}
-        </ul>
-      )
-    );
-  }
-
-  renderSection(cfg, data) {
-    const {
-      intl: { formatMessage, locale },
-    } = this.props;
-    const { NAME, STELSELPEDIA_LINK } = cfg;
-    const sectionData = data.length === 1 && isArray(data[0]) ? data[0] : data;
-    const name = formatMessage(NAME);
-    this.sections.add(name);
-
-    const renderList = listData => (
-      <Ul>
-        {listData.map(listItem => {
-          let readableKey = listItem.formattedKey;
-
-          if (isObject(readableKey) && readableKey.id) {
-            readableKey = formatMessage(readableKey, { entity: listItem.key });
-          }
-
-          return (
-            <li key={listItem.key || Math.random()}>
-              {isArray(listItem) ? (
-                renderList(listItem)
-              ) : (
-                <Fragment>
-                  <Key lang={locale}>{readableKey}</Key>: {this.printValue(listItem)}
-                </Fragment>
-              )}
-            </li>
-          );
-        })}
-      </Ul>
-    );
-
-    return (
-      <Fragment key={name}>
-        {name && (
-          <Fragment>
-            <h3 id={name}>
-              {name}
-              <a
-                className="stelselpediaLink"
-                href={STELSELPEDIA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={formatMessage(messages.to_stelselpedia, { name })}
-              >
-                <span>i</span>
-              </a>
-            </h3>
-          </Fragment>
-        )}
-
-        {renderList(sectionData)}
-      </Fragment>
-    );
+    if (this.props.status === LOAD_DATA_SUCCESS && prevState.toc !== this.toc) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ toc: this.toc });
+    }
   }
 
   onInput(event) {
     event.persist();
     const {
-      currentTarget: { value },
+      currentTarget: { name, value },
     } = event;
 
-    this.setState({ notitie: value });
+    if (name === 'filled_in_by') {
+      this.setState({ filledInBy: value });
+    } else {
+      this.setState({ notitie: value });
+    }
   }
 
   render() {
-    const {
-      adres,
-      intl,
-      kadastraalObject,
-      kadastraalSubjectNNP,
-      kadastraalSubjectNP,
-      nummeraanduiding,
-      pand,
-      status,
-      summary,
-      verblijfsobject,
-      vestiging,
-    } = this.props;
-
-    const { notitie } = this.state;
+    const { intl, status, coordinates } = this.props;
+    const { notitie, filledInBy, toc } = this.state;
     const { formatMessage } = intl;
 
     return (
       <div className="row">
-        <Tabs className="cf">{this.renderTOC()}</Tabs>
-
         <article className="col-8">
           <section>
             <header>
-              <Heading>
-                <FormattedMessage {...messages.bag_objects} />
-              </Heading>
+              <Heading marginCollapse>{intl.formatMessage(messages.bag_objects)}</Heading>
             </header>
 
-            {nummeraanduiding && this.renderSection(OBJECTS.NUMMERAANDUIDING, nummeraanduiding)}
+            <OpenbareRuimte
+              onSuccess={() => {
+                this.toc[0] = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
+              }}
+            />
 
-            {verblijfsobject && this.renderSection(OBJECTS.VERBLIJFSOBJECT, verblijfsobject)}
+            <Nummeraanduiding
+              onSuccess={() => {
+                this.toc[1] = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
+              }}
+            />
 
-            {pand && this.renderSection(OBJECTS.PAND, pand)}
+            <Verblijfsobject
+              onSuccess={() => {
+                this.toc[2] = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
+              }}
+            />
+
+            <Pand
+              onSuccess={() => {
+                this.toc[3] = intl.formatMessage(OBJECTS.PAND.NAME);
+              }}
+            />
           </section>
+          <section>
+            <header>
+              <Heading marginCollapse>{intl.formatMessage(messages.brk_objects)}</Heading>
+            </header>
 
-          {(kadastraalObject || kadastraalSubjectNP || kadastraalSubjectNNP) && (
-            <section>
-              <header>
-                <Heading>
-                  <FormattedMessage {...messages.brk_objects} />
-                </Heading>
-              </header>
+            <KadastraalObject
+              onSuccess={() => {
+                this.toc[4] = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
+              }}
+            />
 
-              {kadastraalObject && this.renderSection(OBJECTS.KADASTRAAL_OBJECT, kadastraalObject)}
+            <KadastraalSubjectNP
+              onSuccess={() => {
+                this.toc[5] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
+              }}
+            />
 
-              {kadastraalSubjectNP && this.renderSection(OBJECTS.KADASTRAAL_SUBJECT_NP, kadastraalSubjectNP)}
+            <KadastraalSubjectNNP
+              onSuccess={() => {
+                this.toc[6] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
+              }}
+            />
 
-              {kadastraalSubjectNNP && this.renderSection(OBJECTS.KADASTRAAL_SUBJECT_NNP, kadastraalSubjectNNP)}
+            <Vestiging
+              onSuccess={() => {
+                this.toc[7] = intl.formatMessage(OBJECTS.VESTIGING.NAME);
+              }}
+            />
 
-              {vestiging && this.renderSection(OBJECTS.VESTIGING, vestiging)}
-            </section>
-          )}
+            <Gebied
+              onSuccess={() => {
+                this.toc[8] = intl.formatMessage(OBJECTS.GEBIED.NAME);
+              }}
+            />
+          </section>
         </article>
 
         <aside className="col-4">
-          <section>
-            <header>
-              <Heading>
-                <FormattedMessage {...messages.overview} />
-              </Heading>
-              {adres && adres.map(item => <p key={item.key}>{this.printValue(item)}</p>)}
-            </header>
+          <TOC sections={toc} />
 
-            {summary && this.renderSummary(summary)}
-
-            <MapWrapper>
-              <MapContainer className="cf" id="mapdiv" />
-            </MapWrapper>
-          </section>
-
-          {status === 'pending' && <LoadingIndicator />}
-          {status === 'success' && (
-            <Fragment>
-              <section className="invoer">
+          {status === LOAD_DATA_SUCCESS && (
+            <>
+              <section>
                 <header>
-                  <h3>
-                    <FormattedMessage {...messages.note} />
-                  </h3>
+                  <Heading small>{intl.formatMessage(messages.overview)}</Heading>
+                  <Adres />
                 </header>
 
+                <Summary />
+
+                {coordinates && (
+                  <MapWrapper>
+                    <MapContainer className="cf">
+                      <Map coords={coordinates} marker search={false} zoom={14} />
+                    </MapContainer>
+                  </MapWrapper>
+                )}
+              </section>
+
+              <section className="invoer">
+                <header>
+                  <Heading small>{intl.formatMessage(messages.extra_fields)}</Heading>
+                </header>
+
+                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}</label>
                 <Textarea
                   className="input"
                   name="notitie"
@@ -261,18 +191,19 @@ export class AccommodationObjectPageComponent extends Component {
                   placeholder={formatMessage(messages.note_remark)}
                   onChange={this.onInput}
                 />
+
+                <label htmlFor="inputFilledInBy">Ingevuld door:</label>
+                <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
               <section>
                 <header>
-                  <h3>
-                    <FormattedMessage {...messages.export_cta} />
-                  </h3>
+                  <Heading small>{intl.formatMessage(messages.export_cta)}</Heading>
                 </header>
 
-                <CSVDownloadContainer data={{ notitie }} />
+                <CSVDownloadContainer data={{ notitie, filledInBy }} />
               </section>
-            </Fragment>
+            </>
           )}
         </aside>
       </div>
@@ -281,38 +212,22 @@ export class AccommodationObjectPageComponent extends Component {
 }
 
 AccommodationObjectPageComponent.defaultProps = {
-  adres: undefined,
-  kadastraalObject: undefined,
-  kadastraalSubjectNNP: undefined,
-  kadastraalSubjectNP: undefined,
-  nummeraanduiding: undefined,
-  pand: undefined,
-  summary: undefined,
+  coordinates: undefined,
   status: undefined,
-  verblijfsobject: undefined,
-  vestiging: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
-  adres: PropTypes.arrayOf(PropTypes.shape({})),
-  kadastraalObject: PropTypes.arrayOf(PropTypes.shape({})),
-  kadastraalSubjectNNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  kadastraalSubjectNP: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
-  nummeraanduiding: PropTypes.arrayOf(PropTypes.shape({})),
-  pand: PropTypes.arrayOf(PropTypes.shape({})),
-  summary: PropTypes.shape({}),
+  coordinates: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }),
   status: PropTypes.string,
-  verblijfsobject: PropTypes.arrayOf(PropTypes.shape({})),
-  vestiging: PropTypes.array,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      adresseerbaarObjectId: PropTypes.string.isRequired,
-      nummeraanduidingId: PropTypes.string.isRequired,
-      openbareRuimteId: PropTypes.string.isRequired,
-      latitude: PropTypes.string.isRequired,
-      longitude: PropTypes.string.isRequired,
+      vboId: PropTypes.string,
+      ligId: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

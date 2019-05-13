@@ -7,6 +7,9 @@ import { defineMessages } from 'react-intl';
 import { scope } from '../../i18n';
 
 export default defineMessages({
+  close: {
+    id: `${scope}.close`,
+  },
   yes: {
     id: `${scope}.yes`,
   },
@@ -40,8 +43,8 @@ export default defineMessages({
   export_cta: {
     id: `${scope}.export_cta`,
   },
-  number_indication_id: {
-    id: `${scope}.number_indication.id`,
+  number_identification_id: {
+    id: `${scope}.number_identification.id`,
   },
   accommodation_object_id: {
     id: `${scope}.accommodation_object.id`,
@@ -52,13 +55,34 @@ export default defineMessages({
   cadastral_object_nr: {
     id: `${scope}.cadastral_object.nr`,
   },
+  cadastral_object_nrs: {
+    id: `${scope}.cadastral_object.nrs`,
+  },
   chamber_of_commerce_nr: {
     id: `${scope}.chamber_of_commerce.nr`,
+  },
+  chamber_of_commerce_nrs: {
+    id: `${scope}.chamber_of_commerce.nrs`,
   },
   rsin: {
     id: `${scope}.rsin`,
   },
+  rsins: {
+    id: `${scope}.rsins`,
+  },
   csv_file_name: {
     id: `${scope}.csv_file_name`,
+  },
+  public_space_id: {
+    id: `${scope}.public_space_id`,
+  },
+  public_space: {
+    id: `${scope}.public_space`,
+  },
+  area: {
+    id: `${scope}.area`,
+  },
+  extra_fields: {
+    id: `${scope}.extra_fields`,
   },
 });

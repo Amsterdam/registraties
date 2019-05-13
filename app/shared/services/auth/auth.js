@@ -150,6 +150,7 @@ function getAccessTokenFromParams(params) {
 function handleCallback() {
   const params = queryStringParser(location.hash);
   const accessToken = getAccessTokenFromParams(params);
+
   if (accessToken) {
     tokenData = accessTokenParser(accessToken);
     sessionStorage.setItem(ACCESS_TOKEN, accessToken);
@@ -159,7 +160,7 @@ function handleCallback() {
 
     // Clean up URL; remove query and hash
     // https://stackoverflow.com/questions/4508574/remove-hash-from-url
-    history.replaceState('', document.title, window.location.pathname);
+    history.replaceState('', document.title, returnPath);
   }
 }
 
@@ -201,7 +202,7 @@ export function login(domain) {
   }
 
   sessionStorage.removeItem(ACCESS_TOKEN);
-  sessionStorage.setItem(RETURN_PATH, location.hash);
+  sessionStorage.setItem(RETURN_PATH, location);
   sessionStorage.setItem(STATE_TOKEN, stateToken);
   sessionStorage.setItem(OAUTH_DOMAIN, domain);
 

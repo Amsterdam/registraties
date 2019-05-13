@@ -1,13 +1,16 @@
 import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
-  SHOW_GLOBAL_ERROR,
-  RESET_GLOBAL_ERROR,
-  LOGIN,
-  LOGOUT,
-  LOAD_DATA_SUCCESS,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
+  LOAD_DATA_SUCCESS,
+  LOGIN,
+  LOGOUT,
+  PROGRESS,
+  RESET_GLOBAL_ERROR,
+  SHOW_GLOBAL_ERROR,
+  UNABLE_TO_FETCH,
+  UNAUTHORIZED,
 } from './constants';
 
 export function authenticateUser(credentials) {
@@ -63,5 +66,20 @@ export const statusSuccess = payload => ({
 
 export const statusFailed = payload => ({
   type: LOAD_DATA_FAILED,
+  payload,
+});
+
+export const statusUnableToFetch = payload => ({
+  type: UNABLE_TO_FETCH,
+  payload,
+});
+
+export const statusUnauthorized = payload => ({
+  type: UNAUTHORIZED,
+  payload,
+});
+
+export const progress = payload => ({
+  type: PROGRESS,
   payload,
 });

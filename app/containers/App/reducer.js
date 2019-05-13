@@ -1,39 +1,46 @@
 import produce from 'immer';
 
 import {
-  AUTHORIZE_USER,
-  SHOW_GLOBAL_ERROR,
-  RESET_GLOBAL_ERROR,
   AUTHENTICATE_USER,
-  LOAD_DATA_SUCCESS,
+  AUTHORIZE_USER,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
+  LOAD_DATA_SUCCESS,
+  PROGRESS,
+  RESET_GLOBAL_ERROR,
+  SHOW_GLOBAL_ERROR,
+  UNABLE_TO_FETCH,
+  UNAUTHORIZED,
 } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
+  accessToken: undefined,
   error: false,
+  errorMessage: '',
+  loading: false,
+  progress: 0,
+  status: undefined,
   userName: undefined,
   userScopes: [],
-  accessToken: undefined,
-  status: undefined,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export default (state = initialState, action) =>
   produce(state, draft => {
+    const { payload } = action;
+
     switch (action.type) {
-      case AUTHENTICATE_USER:
       case AUTHORIZE_USER:
-        draft.userName = action.payload.userName;
-        draft.userScopes = action.payload.userScopes;
-        draft.accessToken = action.payload.accessToken;
+      case AUTHENTICATE_USER:
+        draft.userName = (payload && payload.userName) || '';
+        draft.userScopes = (payload && payload.userScopes) || [];
+        draft.accessToken = (payload && payload.accessToken) || null;
         break;
 
       case SHOW_GLOBAL_ERROR:
-        draft.error = !!action.payload;
-        draft.errorMessage = action.payload;
+        draft.error = !!payload;
+        draft.errorMessage = payload;
         draft.loading = false;
         break;
 
@@ -44,15 +51,26 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA_PENDING:
-        draft.status = 'pending';
+        draft.status = LOAD_DATA_PENDING;
         break;
 
       case LOAD_DATA_SUCCESS:
-        draft.status = 'success';
+        draft.status = LOAD_DATA_SUCCESS;
         break;
 
       case LOAD_DATA_FAILED:
-        draft.status = 'failed';
+        draft.status = LOAD_DATA_FAILED;
         break;
+
+      case UNAUTHORIZED:
+        draft.status = UNAUTHORIZED;
+        break;
+
+      case UNABLE_TO_FETCH:
+        draft.status = UNABLE_TO_FETCH;
+        break;
+
+      case PROGRESS:
+        draft.progress = action.payload;
     }
   });
