@@ -55,35 +55,61 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Search = forwardRef(({ onChange, onSelect, results, placeholder }, ref) => (
-  <Form action="">
+const Search = forwardRef(({ onChange, onSelect, results, placeholder, onSubmit }, ref) => (
+  <Form action="" onSubmit={onSubmit}>
     <Wrapper>
       <Input
         autoCapitalize="off"
-        autoComplete="off"
         autoCorrect="off"
         placeholder={placeholder}
         spellCheck={false}
         type="text"
         defaultValue=""
-        onKeyUp={onChange}
+        onChange={onChange}
         ref={ref}
       />
-      {results.length > 0 && <StyledSuggest items={results} onSelect={onSelect} />}
+      {Object.keys(results).length > 0 && <StyledSuggest items={results} onSelect={onSelect} />}
     </Wrapper>
   </Form>
 ));
 
 Search.defaultProps = {
+  onSubmit: null,
   placeholder: '',
-  results: [],
+  results: {},
 };
 
 Search.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
-  results: PropTypes.arrayOf(PropTypes.shape({})),
+  onSubmit: PropTypes.func,
+  results: PropTypes.shape({
+    Adressen: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        brkId: PropTypes.string,
+        vboId: PropTypes.string,
+        ligId: PropTypes.string,
+      }),
+    ),
+    Monumenten: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        brkId: PropTypes.string,
+        vboId: PropTypes.string,
+        ligId: PropTypes.string,
+      }),
+    ),
+    'Kadastrale objecten': PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        brkId: PropTypes.string,
+        vboId: PropTypes.string,
+        ligId: PropTypes.string,
+      }),
+    ),
+  }),
 };
 
 export default Search;

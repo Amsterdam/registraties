@@ -8,7 +8,6 @@ const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
   <Button
     as="a"
     href={null}
-    // className="action secondary"
     download={name}
     onClick={onClick}
     tabIndex={disabled ? -1 : 0}

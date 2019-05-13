@@ -41,6 +41,7 @@ export const App = ({ showError }) => {
           <Switch>
             <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
             <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
+            <Route exact path="/brk/:brkId/" component={AccommodationObjectPage} />
             <Route path="/" component={HomePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>

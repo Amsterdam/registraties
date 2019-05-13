@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Search from 'components/Search';
 
 import { makeSelectResults } from './selectors';
 import reducer from './reducer';
-import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import messages from './messages';
 
@@ -39,7 +37,7 @@ class SearchContainer extends Component {
     event.persist();
 
     const {
-      target: { dataset, text },
+      currentTarget: { dataset, text },
     } = event;
 
     this.props.onSearchSelect({ ...dataset });
@@ -52,24 +50,27 @@ class SearchContainer extends Component {
     return (
       <Search
         onChange={this.onChange}
-        results={results}
         onSelect={this.onSelect}
-        ref={this.inputRef}
+        onSubmit={event => {
+          event.preventDefault();
+        }}
         placeholder={this.placeholder}
+        ref={this.inputRef}
+        results={results}
       />
     );
   }
 }
 
 SearchContainer.defaultProps = {
-  results: [],
+  results: undefined,
 };
 
 SearchContainer.propTypes = {
   intl: intlShape.isRequired,
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
-  results: PropTypes.arrayOf(PropTypes.shape({})),
+  results: PropTypes.shape({}),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -90,11 +91,9 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 const withReducer = injectReducer({ key: 'search', reducer });
-const withSaga = injectSaga({ key: 'search', saga });
 
 export default compose(
   withReducer,
-  withSaga,
   withConnect,
   injectIntl,
 )(SearchContainer);

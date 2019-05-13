@@ -5,8 +5,8 @@
   "basisregistratie-wonen.area": "Gebied",
   "basisregistratie-wonen.bag_objects": "BAG Objecten",
   "basisregistratie-wonen.brk_objects": "BRK Objecten",
-  "basisregistratie-wonen.cadastral_object.nr": "Kadastraal objectnummer",
-  "basisregistratie-wonen.cadastral_object.nrs": "Kadastraal objectnummers",
+  "basisregistratie-wonen.cadastral_object.indication": "Kadastraal objectaanduiding",
+  "basisregistratie-wonen.cadastral_object.indications": "Kadastraal objectaanduidingen",
   "basisregistratie-wonen.cadastral_object": "Kadastraal object",
   "basisregistratie-wonen.cadastral_subject": "Kadastraal subject",
   "basisregistratie-wonen.chamber_of_commerce.nr": "KvK-nummer",
@@ -40,5 +40,8 @@
   "basisregistratie-wonen.unknown": "n.b.",
   "basisregistratie-wonen.yes": "Ja",
   "basisregistratie-wonen.search_placeholder": "Zoek data op adres, postcode, kadastrale aanduiding, etc.",
-  "basisregistratie-wonen.extra_fields": "Extra velden"
+  "basisregistratie-wonen.extra_fields": "Extra velden",
+  "basisregistratie-wonen.residence": "Woonplaats",
+  "basisregistratie-wonen.address": "Adres",
+  "basisregistratie-wonen.on_this_page": "Op deze pagina"
 }

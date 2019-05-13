@@ -62,6 +62,11 @@ export const LOAD_LIGPLAATS_DATA = `${containerScope}/LOAD_LIGPLAATS_DATA`;
 export const LOAD_LIGPLAATS_DATA_SUCCESS = `${containerScope}/LOAD_LIGPLAATS_DATA_SUCCESS`;
 export const LOAD_LIGPLAATS_DATA_FAILED = `${containerScope}/LOAD_LIGPLAATS_DATA_FAILED`;
 
+export const LOAD_WOONPLAATS_DATA = `${containerScope}/LOAD_WOONPLAATS_DATA`;
+export const LOAD_WOONPLAATS_DATA_SUCCESS = `${containerScope}/LOAD_WOONPLAATS_DATA_SUCCESS`;
+export const LOAD_WOONPLAATS_DATA_FAILED = `${containerScope}/LOAD_WOONPLAATS_DATA_FAILED`;
+export const LOAD_WOONPLAATS_DATA_NO_RESULTS = `${containerScope}/LOAD_WOONPLAATS_DATA_NO_RESULTS`;
+
 export const LOAD_VESTIGING_DATA = `${containerScope}/LOAD_VESTIGING_DATA`;
 export const LOAD_VESTIGING_DATA_SUCCESS = `${containerScope}/LOAD_VESTIGING_DATA_SUCCESS`;
 export const LOAD_VESTIGING_DATA_FAILED = `${containerScope}/LOAD_VESTIGING_DATA_FAILED`;
@@ -111,5 +116,10 @@ export const OBJECTS = {
     ABBR: 'geb',
     NAME: { id: 'basisregistratie-wonen.area' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/gebieden-index/catalogus/',
+  },
+  WOONPLAATS: {
+    ABBR: 'wpl',
+    NAME: { id: 'basisregistratie-wonen.residence' },
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/',
   },
 };

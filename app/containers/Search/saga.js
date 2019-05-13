@@ -17,13 +17,15 @@ const requestOptions = {
 
 export function* inputChange(action) {
   const input = action.payload;
+  // const labels = ['Adressen', 'Kadastrale objecten', 'Monumenten'];
+  const labels = ['Adressen'];
 
   try {
     const data = yield call(request, `${API_ROOT}${TYPEAHEAD_API}${input}`, requestOptions);
-    const addresses = data.find(({ label }) => label === 'Adressen');
+    const results = data.filter(({ label }) => labels.includes(label));
 
-    if (addresses.content) {
-      yield put(typeAheadSuccess(addresses.content));
+    if (results) {
+      yield put(typeAheadSuccess(results));
     }
   } catch (error) {
     yield put(typeAheadFailed(error));
@@ -31,12 +33,14 @@ export function* inputChange(action) {
 }
 
 export function* searchSelect(action) {
-  const { vboId, ligId } = action.payload;
+  const { vboId, ligId, brkId } = action.payload;
 
   if (vboId) {
     yield put(push(`/vbo/${vboId}/`));
   } else if (ligId) {
     yield put(push(`/lig/${ligId}/`));
+  } else if (brkId) {
+    yield put(push(`/brk/${brkId}/`));
   }
 }
 

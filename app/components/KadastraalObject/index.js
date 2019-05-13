@@ -1,25 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import { OBJECTS } from 'containers/App/constants';
-import { makeSelectKadastraalObjectData } from 'containers/withSelector/selectors';
 
 import Section from '../Section';
 
-class KadastraalObject extends Component {
-  render() {
-    const { data, onSuccess } = this.props;
-    return (
-      <Fragment>
-        {data && <span ref={onSuccess} />}
-        <Section cfg={OBJECTS.KADASTRAAL_OBJECT} data={data} />
-      </Fragment>
-    );
-  }
-}
+const KadastraalObject = ({ data, onSuccess }) => (
+  <>
+    {data && <span ref={onSuccess} />}
+    <Section cfg={OBJECTS.KADASTRAAL_OBJECT} data={data} />
+  </>
+);
 
 KadastraalObject.propTypes = {
   data: PropTypes.oneOfType([
@@ -33,10 +24,4 @@ KadastraalObject.defaultProps = {
   data: null,
 };
 
-const mapStateToProps = createStructuredSelector({
-  data: makeSelectKadastraalObjectData(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(withConnect)(KadastraalObject);
+export default KadastraalObject;

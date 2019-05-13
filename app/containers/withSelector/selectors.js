@@ -14,6 +14,7 @@ const selectPand = state => state.pand;
 const selectVerblijfsobject = state => state.verblijfsobject;
 const selectVestiging = state => state.vestiging;
 const selectOpenbareRuimte = state => state.openbareRuimte;
+const selectWoonplaatsData = state => state.woonplaats;
 
 export const makeSelectVerblijfsobjectData = () =>
   createSelector(
@@ -163,7 +164,7 @@ export const makeSelectKadastraalObjectData = () =>
         return undefined;
       }
 
-      const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer'];
+      const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
 
       return results.map(object => formatData({ data: object, keys, locale }));
     },
@@ -180,7 +181,7 @@ export const makeSelectKadastraalSubjectNPData = () =>
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
-        return undefined;
+        return data;
       }
 
       const keys = [
@@ -194,7 +195,15 @@ export const makeSelectKadastraalSubjectNPData = () =>
         'voorvoegsels',
       ];
 
-      return data.map(subject => formatData({ data: subject, keys, locale }));
+      const results = data
+        .filter(({ geboortedatum, naam }) => geboortedatum && naam)
+        .map(subject => formatData({ data: subject, keys, locale }));
+
+      if (!results.length) {
+        return null;
+      }
+
+      return results;
     },
   );
 
@@ -209,12 +218,20 @@ export const makeSelectKadastraalSubjectNNPData = () =>
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
-        return undefined;
+        return data;
       }
 
       const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-      return data.map(subject => formatData({ data: subject, keys, locale }));
+      const results = data
+        .filter(({ kvknummer, rsin }) => kvknummer && rsin)
+        .map(subject => formatData({ data: subject, keys, locale }));
+
+      if (!results.length) {
+        return null;
+      }
+
+      return results;
     },
   );
 
@@ -364,9 +381,39 @@ export const makeSelectCoordinates = () =>
     },
   );
 
+export const makeSelectWoonplaatsId = () =>
+  createSelector(
+    selectNummeraanduiding,
+    ({ data }) => {
+      if (!data || !data.woonplaats || !data.woonplaats.landelijk_id) {
+        return undefined;
+      }
+
+      return data.woonplaats.landelijk_id;
+    },
+  );
+
+export const makeSelectWoonplaatsData = () =>
+  createSelector(
+    selectWoonplaatsData,
+    makeSelectLocale(),
+    (state, locale) => {
+      const { data } = state;
+
+      if (!data) {
+        return undefined;
+      }
+
+      const keys = ['naam', 'woonplaatsidentificatie'];
+
+      return formatData({ data, keys, locale });
+    },
+  );
+
 export const makeSelectSummary = () =>
   createSelector(
     [
+      makeSelectAdres(),
       makeSelectVerblijfsobjectData(),
       makeSelectNummeraanduidingData(),
       makeSelectPandData(),
@@ -374,7 +421,7 @@ export const makeSelectSummary = () =>
       makeSelectKadastraalSubjectNNPData(),
       makeSelectOpenbareRuimteData(),
     ],
-    (vbo = [], num = [], pnd = [], brko = [], nnp = [], opr = []) => {
+    (adr = [], vbo = [], num = [], pnd = [], brko = [], nnp = [], opr = []) => {
       const summary = {};
 
       const getValue = (dataset, id, valueSeparator = ', ') => {
@@ -396,6 +443,16 @@ export const makeSelectSummary = () =>
 
         return valueSeparator ? valuesArray.join(valueSeparator) : valuesArray;
       };
+
+      if (adr && adr.length) {
+        const adres = getValue(adr, 'adres');
+        const postcode = getValue(adr, 'postcode');
+
+        summary.address = {
+          label: messages.address,
+          value: [adres, ' ', postcode],
+        };
+      }
 
       if (opr && opr.length) {
         const oprId = getValue(opr, 'openbare_ruimte_identificatie');
@@ -434,10 +491,11 @@ export const makeSelectSummary = () =>
       }
 
       if (brko && brko.length) {
-        const objectNrs = getValue(brko, 'objectnummer', null);
+        const objectNrs = getValue(brko, 'aanduiding', null);
 
         if (objectNrs.length) {
-          const label = objectNrs.length > 1 ? messages.cadastral_object_nrs : messages.cadastral_object_nr;
+          const label =
+            objectNrs.length > 1 ? messages.cadastral_object_indications : messages.cadastral_object_indication;
 
           summary.cadastral_object_nr = {
             label,

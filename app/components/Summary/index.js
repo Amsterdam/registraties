@@ -1,30 +1,27 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { intlShape } from 'react-intl';
+import styled from 'styled-components';
 
-import { makeSelectSummary } from 'containers/withSelector/selectors';
-import { Key } from 'containers/AccommodationObjectPage/styled';
+const Dt = styled.dt`
+  font-family: Avenir Next LT W01 Demi;
+`;
 
-// eslint-disable-next-line
-class Summary extends Component {
-  render() {
-    const { data, intl } = this.props;
-    const { locale, formatMessage } = intl;
+const Dd = styled.dd`
+  padding-left: 1em;
+`;
 
-    return Object.keys(data).length ? (
-      <ul className="list-unstyled">
-        {Object.keys(data).map(key => (
-          <li key={key}>
-            <Key lang={locale}>{formatMessage(data[key].label)}</Key>: <small>{data[key].value}</small>
-          </li>
-        ))}
-      </ul>
-    ) : null;
-  }
-}
+const Summary = ({ data, intl: { locale, formatMessage } }) =>
+  Object.keys(data).length ? (
+    <dl>
+      {Object.keys(data).map(key => (
+        <Fragment key={key}>
+          <Dt lang={locale}>{formatMessage(data[key].label)}</Dt>
+          <Dd>{data[key].value}</Dd>
+        </Fragment>
+      ))}
+    </dl>
+  ) : null;
 
 Summary.propTypes = {
   data: PropTypes.shape({
@@ -42,13 +39,4 @@ Summary.defaultProps = {
   data: null,
 };
 
-const mapStateToProps = createStructuredSelector({
-  data: makeSelectSummary(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(
-  injectIntl,
-  withConnect,
-)(Summary);
+export default Summary;

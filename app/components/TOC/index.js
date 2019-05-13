@@ -1,46 +1,35 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typography as T, Icon } from '@datapunt/asc-ui';
-import chevronRight from '@datapunt/asc-assets/lib/Icons/Chevron-Right.svg';
+import { intlShape } from 'react-intl';
 
 import { Heading } from 'containers/AccommodationObjectPage/styled';
-
-const StyledT = styled(T)`
-  padding: 0 !important;
-`;
-
-const StyledIcon = styled(Icon)`
-  vertical-align: top;
-  margin-right: 5px;
-`;
+import messages from 'containers/App/messages';
+import Link from 'components/Link';
 
 const Li = styled.li`
   margin: 0 !important;
   line-height: 34px;
 `;
 
-const TOC = ({ sections }) => {
+const TOC = ({ intl, sections }) => {
   const [active, setActive] = useState();
   return (
     <>
       <Heading marginCollapse small>
-        Op deze pagina
+        {intl.formatMessage(messages.on_this_page)}
       </Heading>
       <ul className="links">
         {sections.filter(Boolean).map(section => (
           <Li key={section}>
-            <StyledT
-              element="a"
+            <Link
               href={`#${section}`}
               onClick={() => {
                 setActive(section);
               }}
               className={active === section ? 'has-focus' : null}
-            >
-              <StyledIcon iconUrl={`url('${chevronRight}');`} size={14} padding={0} inline />
-              <span className="linklabel">{section}</span>
-            </StyledT>
+              label={section}
+            />
           </Li>
         ))}
       </ul>
@@ -49,6 +38,7 @@ const TOC = ({ sections }) => {
 };
 
 TOC.propTypes = {
+  intl: intlShape.isRequired,
   sections: PropTypes.arrayOf(PropTypes.string),
 };
 

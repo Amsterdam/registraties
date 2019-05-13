@@ -5,20 +5,20 @@ import { OBJECTS } from 'containers/App/constants';
 
 import Section from '../Section';
 
-const Verblijfsobject = ({ data, onSuccess }) => (
+const Woonplaats = ({ data, onSuccess }) => (
   <>
     {data && <span ref={onSuccess} />}
-    <Section cfg={OBJECTS.VERBLIJFSOBJECT} data={data} />
+    <Section cfg={OBJECTS.WOONPLAATS} data={data} />
   </>
 );
 
-Verblijfsobject.propTypes = {
+Woonplaats.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})),
   onSuccess: PropTypes.func.isRequired,
 };
 
-Verblijfsobject.defaultProps = {
+Woonplaats.defaultProps = {
   data: null,
 };
 
-export default Verblijfsobject;
+export default Woonplaats;

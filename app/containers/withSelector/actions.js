@@ -1,8 +1,8 @@
 import * as constants from 'containers/App/constants';
 
-export const loadBAGData = ({ vboId, ligId }) => ({
+export const loadBAGData = payload => ({
   type: constants.LOAD_BAG_DATA,
-  payload: { vboId, ligId },
+  payload,
 });
 
 export const loadKadastraalObjectData = adresseerbaarObjectId => ({
@@ -171,5 +171,25 @@ export const loadLigplaatsDataSuccess = payload => ({
 
 export const loadLigplaatsDataFailed = payload => ({
   type: constants.LOAD_LIGPLAATS_DATA_FAILED,
+  payload,
+});
+
+export const loadWoonplaatsData = woonplaatsId => ({
+  type: constants.LOAD_WOONPLAATS_DATA,
+  payload: { woonplaatsId },
+});
+
+export const loadWoonplaatsDataSuccess = payload => ({
+  type: constants.LOAD_WOONPLAATS_DATA_SUCCESS,
+  payload,
+});
+
+export const loadWoonplaatsDataFailed = payload => ({
+  type: constants.LOAD_WOONPLAATS_DATA_FAILED,
+  payload,
+});
+
+export const loadWoonplaatsDataNoResults = payload => ({
+  type: constants.LOAD_WOONPLAATS_DATA_NO_RESULTS,
   payload,
 });

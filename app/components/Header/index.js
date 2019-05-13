@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { injectIntl, intlShape } from 'react-intl';
+import { intlShape } from 'react-intl';
 
 import SearchContainer from 'containers/Search';
 import CONFIGURATION from 'shared/services/configuration/configuration';
@@ -94,4 +94,4 @@ Header.propTypes = {
   onLoginLogoutButtonClick: PropTypes.func,
 };
 
-export default injectIntl(Header);
+export default Header;

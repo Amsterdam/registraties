@@ -14,6 +14,7 @@ export const bagReducer = (state = initialState, action) =>
       case constants.LOAD_BAG_DATA:
         draft.vboId = action.payload.vboId;
         draft.ligId = action.payload.ligId;
+        draft.brkId = action.payload.brkId;
         break;
     }
   });
@@ -99,6 +100,10 @@ export const kadastraalSubjectNPReducer = (state = initialState, action) =>
       case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_FAILED:
         draft.error = action.payload;
         break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_NO_RESULTS:
+        draft.data = null;
+        break;
     }
   });
 
@@ -119,6 +124,10 @@ export const kadastraalSubjectNNPReducer = (state = initialState, action) =>
 
       case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_FAILED:
         draft.error = action.payload;
+        break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_NO_RESULTS:
+        draft.data = null;
         break;
     }
   });
@@ -198,6 +207,23 @@ export const openbareRuimteReducer = (state = initialState, action) =>
         break;
 
       case constants.LOAD_OPENBARE_RUIMTE_DATA_FAILED:
+        draft.error = action.payload;
+        break;
+    }
+  });
+
+export const woonplaatsReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_DATA_PENDING:
+        draft.data = undefined;
+        break;
+
+      case constants.LOAD_WOONPLAATS_DATA_SUCCESS:
+        draft.data = action.payload;
+        break;
+
+      case constants.LOAD_WOONPLAATS_DATA_FAILED:
         draft.error = action.payload;
         break;
     }

@@ -1,25 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import { OBJECTS } from 'containers/App/constants';
-import { makeSelectGebiedData } from 'containers/withSelector/selectors';
 
 import Section from '../Section';
 
-class Gebied extends Component {
-  render() {
-    const { data, onSuccess } = this.props;
-    return (
-      <Fragment>
-        {data && <span ref={onSuccess} />}
-        <Section cfg={OBJECTS.GEBIED} data={data} />
-      </Fragment>
-    );
-  }
-}
+const Gebied = ({ data, onSuccess }) => (
+  <>
+    {data && <span ref={onSuccess} />}
+    <Section cfg={OBJECTS.GEBIED} data={data} />
+  </>
+);
 
 Gebied.propTypes = {
   data: PropTypes.oneOfType([
@@ -33,10 +24,4 @@ Gebied.defaultProps = {
   data: null,
 };
 
-const mapStateToProps = createStructuredSelector({
-  data: makeSelectGebiedData(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(withConnect)(Gebied);
+export default Gebied;
