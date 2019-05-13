@@ -8,21 +8,25 @@ export const makeSelectResults = () =>
     state => {
       const { results } = state;
 
-      if (!results) {
+      if (!results || !results.length) {
         return undefined;
       }
 
-      const reId = uri => /\d+/.exec(uri)[0];
+      const reId = uri => /([^/]+)\W$/.exec(uri)[1];
+      const isVBO = uri => /verblijfsobject/.test(uri);
+      const isLIG = uri => /ligplaats/.test(uri);
+      const isBRK = uri => /object/.test(uri);
+      const mappedResults = {};
 
-      return results.map(({ _display, uri }) => {
-        const isVBO = /verblijfsobject/.test(uri);
-        const isLIG = /ligplaats/.test(uri);
-
-        return {
+      results.forEach(({ content, label }) => {
+        mappedResults[label] = content.map(({ uri, _display }) => ({
           name: _display,
-          vboId: isVBO ? reId(uri) : null,
-          ligId: isLIG ? reId(uri) : null,
-        };
+          vboId: isVBO(uri) ? reId(uri) : null,
+          ligId: isLIG(uri) ? reId(uri) : null,
+          brkId: isBRK(uri) ? reId(uri) : null,
+        }));
       });
+
+      return mappedResults;
     },
   );

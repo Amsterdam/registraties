@@ -43,6 +43,9 @@ import {
   loadOpenbareRuimteDataFailed,
   loadLigplaatsDataSuccess,
   loadLigplaatsDataFailed,
+  loadWoonplaatsDataFailed,
+  loadWoonplaatsDataSuccess,
+  loadWoonplaatsDataNoResults,
 } from './actions';
 import {
   makeSelectKadastraalSubjectLinks,
@@ -50,6 +53,7 @@ import {
   makeSelectVBONummeraanduidingId,
   makeSelectLIGNummeraanduidingId,
   makeSelectOpenbareRuimteId,
+  makeSelectWoonplaatsId,
 } from './selectors';
 
 const { API_ROOT } = configuration;
@@ -59,6 +63,7 @@ const LIGPLAATS_API = 'bag/ligplaats/';
 const HR_API = 'handelsregister/';
 const BRK_OBJECT_API = 'brk/object-expand/?verblijfsobjecten__id=';
 const NUMMERAANDUIDING_API = 'bag/nummeraanduiding/';
+const WOONPLAATS_API = 'bag/woonplaats/';
 const PAND_API = 'bag/pand/';
 const requestOptions = {
   headers: getAuthHeaders(),
@@ -77,13 +82,17 @@ export function* fetchData(action) {
       yield call(fetchPandlistData, vboId);
 
       nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId());
-    } else {
+    } else if (ligId) {
+      yield put(loadKadastraalObjectDataNoResults());
+      yield put(loadKadastraalSubjectNPDataNoResults());
+      yield put(loadKadastraalSubjectNNPDataNoResults());
       yield call(fetchLigplaatsData, ligId);
 
       nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
     }
 
     yield call(fetchNummeraanduidingData, nummeraanduidingId);
+    yield call(fetchWoonplaatsData);
     yield put(statusSuccess());
     yield put(progress(1));
   } catch (error) {
@@ -208,6 +217,24 @@ export function* fetchNummeraanduidingData(nummeraanduidingId) {
     yield call(fetchOpenbareRuimteData, oprId);
   } catch (error) {
     yield put(loadNummeraanduidingFailed(error));
+    throw error;
+  }
+}
+
+export function* fetchWoonplaatsData() {
+  const woonplaatsId = yield select(makeSelectWoonplaatsId());
+
+  if (!woonplaatsId) {
+    yield put(loadWoonplaatsDataNoResults());
+    return;
+  }
+
+  try {
+    const data = yield call(request, `${API_ROOT}${WOONPLAATS_API}${woonplaatsId}/`);
+
+    yield put(loadWoonplaatsDataSuccess(data));
+  } catch (error) {
+    yield put(loadWoonplaatsDataFailed(error));
     throw error;
   }
 }

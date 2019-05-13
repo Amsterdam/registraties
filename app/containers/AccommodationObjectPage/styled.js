@@ -29,6 +29,10 @@ export const Key = styled.strong`
   margin-top: 20px;
 `;
 
+export const Aside = styled.aside`
+  padding-top: 50px;
+`;
+
 export const Textarea = styled.textarea`
   width: 100%;
   resize: vertical;

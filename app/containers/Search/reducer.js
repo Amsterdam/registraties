@@ -16,6 +16,7 @@ export default (state = initialState, action) =>
       case SEARCH_SELECT:
         draft.ligId = action.payload.ligId;
         draft.vboId = action.payload.vboId;
+        draft.brkId = action.payload.brkId;
         draft.results = [];
         break;
 

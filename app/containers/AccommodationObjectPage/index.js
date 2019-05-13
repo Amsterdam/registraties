@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
+import equal from 'fast-deep-equal';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
@@ -10,22 +11,23 @@ import { loadBAGData } from 'containers/withSelector/actions';
 import { OBJECTS, LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
-import Verblijfsobject from 'components/Verblijfsobject';
-import KadastraalObject from 'components/KadastraalObject';
-import KadastraalSubjectNP from 'components/KadastraalSubjectNP';
-import KadastraalSubjectNNP from 'components/KadastraalSubjectNNP';
-import Nummeraanduiding from 'components/Nummeraanduiding';
-import Pand from 'components/Pand';
-import Vestiging from 'components/Vestiging';
-import OpenbareRuimte from 'components/OpenbareRuimte';
-import Gebied from 'components/Gebied';
-import Adres from 'components/Adres';
-import Summary from 'components/Summary';
-import TOC from 'components/TOC';
+import Verblijfsobject from 'containers/Verblijfsobject';
+import KadastraalObject from 'containers/KadastraalObject';
+import KadastraalSubjectNP from 'containers/KadastraalSubjectNP';
+import KadastraalSubjectNNP from 'containers/KadastraalSubjectNNP';
+import Nummeraanduiding from 'containers/Nummeraanduiding';
+import Pand from 'containers/Pand';
+import Vestiging from 'containers/Vestiging';
+import OpenbareRuimte from 'containers/OpenbareRuimte';
+import Gebied from 'containers/Gebied';
+import Summary from 'containers/Summary';
+import Woonplaats from 'containers/Woonplaats';
+
+import TOC from 'containers/TOC';
 import Map from 'components/Map';
 
 import './style.scss';
-import { MapWrapper, MapContainer, Heading, Textarea } from './styled';
+import { MapWrapper, MapContainer, Heading, Textarea, Aside } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -45,9 +47,9 @@ export class AccommodationObjectPageComponent extends Component {
 
   initiateFetch() {
     this.setState({ toc: [] });
-    const { vboId, ligId } = this.props.match.params;
+    const { vboId, ligId, brkId } = this.props.match.params;
 
-    this.props.loadBAGData({ vboId, ligId });
+    this.props.loadBAGData({ vboId, ligId, brkId });
   }
 
   componentDidMount() {
@@ -55,10 +57,7 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.match.params.vboId !== this.props.match.params.vboId ||
-      prevProps.match.params.ligId !== this.props.match.params.ligId
-    ) {
+    if (!equal(prevProps.match.params, this.props.match.params)) {
       this.initiateFetch();
     }
 
@@ -87,8 +86,8 @@ export class AccommodationObjectPageComponent extends Component {
     const { formatMessage } = intl;
 
     return (
-      <div className="row">
-        <article className="col-8">
+      <div className="row justify-content-lg-between">
+        <article className="col-7">
           <section>
             <header>
               <Heading marginCollapse>{intl.formatMessage(messages.bag_objects)}</Heading>
@@ -100,21 +99,27 @@ export class AccommodationObjectPageComponent extends Component {
               }}
             />
 
+            <Woonplaats
+              onSuccess={() => {
+                this.toc[1] = intl.formatMessage(OBJECTS.WOONPLAATS.NAME);
+              }}
+            />
+
             <Nummeraanduiding
               onSuccess={() => {
-                this.toc[1] = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
+                this.toc[2] = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
               }}
             />
 
             <Verblijfsobject
               onSuccess={() => {
-                this.toc[2] = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
+                this.toc[3] = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
               }}
             />
 
             <Pand
               onSuccess={() => {
-                this.toc[3] = intl.formatMessage(OBJECTS.PAND.NAME);
+                this.toc[4] = intl.formatMessage(OBJECTS.PAND.NAME);
               }}
             />
           </section>
@@ -125,37 +130,37 @@ export class AccommodationObjectPageComponent extends Component {
 
             <KadastraalObject
               onSuccess={() => {
-                this.toc[4] = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
+                this.toc[5] = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
               }}
             />
 
             <KadastraalSubjectNP
               onSuccess={() => {
-                this.toc[5] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
+                this.toc[6] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
               }}
             />
 
             <KadastraalSubjectNNP
               onSuccess={() => {
-                this.toc[6] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
+                this.toc[7] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
               }}
             />
 
             <Vestiging
               onSuccess={() => {
-                this.toc[7] = intl.formatMessage(OBJECTS.VESTIGING.NAME);
+                this.toc[8] = intl.formatMessage(OBJECTS.VESTIGING.NAME);
               }}
             />
 
             <Gebied
               onSuccess={() => {
-                this.toc[8] = intl.formatMessage(OBJECTS.GEBIED.NAME);
+                this.toc[9] = intl.formatMessage(OBJECTS.GEBIED.NAME);
               }}
             />
           </section>
         </article>
 
-        <aside className="col-4">
+        <Aside className="col-4">
           <TOC sections={toc} />
 
           {status === LOAD_DATA_SUCCESS && (
@@ -163,7 +168,6 @@ export class AccommodationObjectPageComponent extends Component {
               <section>
                 <header>
                   <Heading small>{intl.formatMessage(messages.overview)}</Heading>
-                  <Adres />
                 </header>
 
                 <Summary />
@@ -205,7 +209,7 @@ export class AccommodationObjectPageComponent extends Component {
               </section>
             </>
           )}
-        </aside>
+        </Aside>
       </div>
     );
   }
@@ -228,6 +232,7 @@ AccommodationObjectPageComponent.propTypes = {
     params: PropTypes.shape({
       vboId: PropTypes.string,
       ligId: PropTypes.string,
+      brkId: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

@@ -40,6 +40,7 @@ const withSelectors = WrappedComponent => {
     injectReducer({ key: 'pand', reducer: reducers.pandReducer }),
     injectReducer({ key: 'verblijfsobject', reducer: reducers.verblijfsobjectReducer }),
     injectReducer({ key: 'vestiging', reducer: reducers.vestigingReducer }),
+    injectReducer({ key: 'woonplaats', reducer: reducers.woonplaatsReducer }),
     withSaga,
     withConnect,
   )(SelectorContainer);

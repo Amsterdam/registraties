@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 
@@ -29,9 +29,9 @@ const Section = ({ cfg, data, intl }) => {
             {isArray(listItem) ? (
               renderList(listItem)
             ) : (
-              <Fragment>
+              <>
                 <Key lang={locale}>{readableKey}</Key>: {printValue(listItem)}
-              </Fragment>
+              </>
             )}
           </li>
         );
@@ -55,16 +55,12 @@ const Section = ({ cfg, data, intl }) => {
   );
 
   return (
-    <Fragment key={name}>
-      {name && data !== null && (
-        <Fragment>
-          <Title />
-        </Fragment>
-      )}
+    <>
+      {name && data !== null && <Title />}
 
       {data === undefined && <LoadingIndicator />}
       {data && renderList(sectionData)}
-    </Fragment>
+    </>
   );
 };
 

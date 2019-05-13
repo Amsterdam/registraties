@@ -52,11 +52,11 @@ export default defineMessages({
   house_id: {
     id: `${scope}.house.id`,
   },
-  cadastral_object_nr: {
-    id: `${scope}.cadastral_object.nr`,
+  cadastral_object_indication: {
+    id: `${scope}.cadastral_object.indication`,
   },
-  cadastral_object_nrs: {
-    id: `${scope}.cadastral_object.nrs`,
+  cadastral_object_indications: {
+    id: `${scope}.cadastral_object.indications`,
   },
   chamber_of_commerce_nr: {
     id: `${scope}.chamber_of_commerce.nr`,
@@ -84,5 +84,11 @@ export default defineMessages({
   },
   extra_fields: {
     id: `${scope}.extra_fields`,
+  },
+  address: {
+    id: `${scope}.address`,
+  },
+  on_this_page: {
+    id: `${scope}.on_this_page`,
   },
 });

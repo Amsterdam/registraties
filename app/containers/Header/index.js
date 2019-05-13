@@ -14,6 +14,9 @@ import Header from 'components/Header';
 
 import { doLogin, doLogout } from 'containers/App/actions';
 import { isAuthenticated } from 'shared/services/auth/auth';
+import { injectIntl } from 'react-intl';
+
+const IntlHeader = injectIntl(Header);
 
 export class HeaderContainer extends React.Component {
   constructor(props) {
@@ -34,7 +37,7 @@ export class HeaderContainer extends React.Component {
 
   render() {
     return (
-      <Header
+      <IntlHeader
         isAuthenticated={isAuthenticated()}
         onLoginLogoutButtonClick={this.onLoginLogoutButtonClick}
         userName={this.props.userName}
