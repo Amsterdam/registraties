@@ -197,3 +197,7 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
     })
     .filter(Boolean);
 };
+
+export const isValidSubjectNP = ({ geboortedatum, naam }) => !!geboortedatum && !!naam;
+
+export const isValidSubjectNNP = ({ kvknummer, rsin }) => !!kvknummer && !!rsin;

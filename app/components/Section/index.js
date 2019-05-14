@@ -10,7 +10,7 @@ import { isArray, isObject } from 'utils';
 import { Ul, Key, StelselpediaLink, SectionHeading } from 'containers/AccommodationObjectPage/styled';
 import printValue from 'containers/AccommodationObjectPage/printValue';
 
-const SectionWrapper = styled.div`
+const SectionWrapper = styled.section`
   position: relative;
 `;
 
