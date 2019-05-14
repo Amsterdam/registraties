@@ -10,6 +10,7 @@ import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 import { LOAD_BAG_DATA } from 'containers/App/constants';
 
 import { storeItem, fetchItem } from 'utils/cache';
+import { isValidSubjectNP, isValidSubjectNNP } from 'utils';
 
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -169,9 +170,21 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
       }
 
       if (isNatuurlijkPersoon) {
-        yield put(actions.loadKadastraalSubjectNPDataSuccess(data));
+        const validEntities = data.filter(isValidSubjectNP);
+
+        if (validEntities && validEntities.length) {
+          yield put(actions.loadKadastraalSubjectNPDataSuccess(data));
+        } else {
+          yield put(actions.loadKadastraalSubjectNPDataNoResults());
+        }
       } else {
-        yield put(actions.loadKadastraalSubjectNNPDataSuccess(data));
+        const validEntities = data.filter(isValidSubjectNNP);
+
+        if (validEntities && validEntities.length) {
+          yield put(actions.loadKadastraalSubjectNNPDataSuccess(data));
+        } else {
+          yield put(actions.loadKadastraalSubjectNNPDataNoResults());
+        }
       }
     } else {
       // eslint-disable-next-line no-lonely-if
@@ -214,11 +227,11 @@ export function* fetchVestigingData() {
         ]);
       }
 
-      if (!data.length) {
+      if (!data.length || data[0].count === 0) {
         yield put(actions.loadVestigingDataNoResults());
+      } else {
+        yield put(actions.loadVestigingDataSuccess(data));
       }
-
-      yield put(actions.loadVestigingDataSuccess(data));
     }
   } catch (error) {
     yield put(actions.loadVestigingDataFailed());
