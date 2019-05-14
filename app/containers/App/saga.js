@@ -3,10 +3,10 @@ import { push } from 'connected-react-router';
 
 import { authCall } from 'shared/services/api/api';
 import CONFIGURATION from 'shared/services/configuration/configuration';
+import { login, logout, getOauthDomain } from 'shared/services/auth/auth';
 
 import { LOGOUT, LOGIN } from './constants';
 import { showGlobalError, authorizeUser } from './actions';
-import { login, logout, getOauthDomain } from '../../shared/services/auth/auth';
 
 export const baseUrl = `${CONFIGURATION.API_ROOT}signals/auth/me`;
 

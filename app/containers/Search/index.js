@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
+import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Search from 'components/Search';
 
 import { makeSelectResults } from './selectors';
 import reducer from './reducer';
+import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import messages from './messages';
 
@@ -91,9 +93,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 const withReducer = injectReducer({ key: 'search', reducer });
+const withSaga = injectSaga({ key: 'search', saga });
 
 export default compose(
   withReducer,
+  withSaga,
   withConnect,
   injectIntl,
 )(SearchContainer);

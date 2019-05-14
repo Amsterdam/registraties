@@ -4,28 +4,26 @@ import { Switch, Route } from 'react-router-dom';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-
 import AccommodationObjectPage from 'containers/AccommodationObjectPage/Loadable';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Footer from 'components/Footer';
-import HeaderContainer from 'containers/Header';
+import Header from 'containers/Header/Loadable';
 import GlobalError from 'containers/GlobalError';
-import { isAuthenticated } from 'shared/services/auth/auth';
+import { authenticate, isAuthenticated } from 'shared/services/auth/auth';
 import Progress from 'containers/Progress';
 
 import { ThemeProvider } from '@datapunt/asc-ui';
 
-import { showGlobalError } from './actions';
-import reducer from './reducer';
-import saga from './saga';
+import { showGlobalError, authenticateUser } from './actions';
 
 import GlobalStyles from '../../global-styles';
 
-export const App = ({ showError }) => {
+export const App = ({ onAuthenticateUser, showError }) => {
   useEffect(() => {
+    const credentials = authenticate();
+    onAuthenticateUser(credentials);
+
     if (!isAuthenticated()) {
       showError('unauthorized');
     }
@@ -35,7 +33,7 @@ export const App = ({ showError }) => {
     <ThemeProvider>
       <div className="container app-container">
         <Progress />
-        <HeaderContainer />
+        <Header />
         <GlobalError />
         <div className="content container">
           <Switch>
@@ -56,6 +54,7 @@ export const App = ({ showError }) => {
 };
 
 App.propTypes = {
+  onAuthenticateUser: PropTypes.func.isRequired,
   showError: PropTypes.func.isRequired,
 };
 
@@ -63,6 +62,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       showError: showGlobalError,
+      onAuthenticateUser: authenticateUser,
     },
     dispatch,
   );
@@ -72,11 +72,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'global', reducer });
-const withSaga = injectSaga({ key: 'global', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(App);
+export default compose(withConnect)(App);
