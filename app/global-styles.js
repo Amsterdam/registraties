@@ -43,7 +43,6 @@ const GlobalStyle = createGlobalStyle`
   #app {
     min-height: 100%;
     min-width: 100%;
-    background-color: $ams-background-sidebars;
 
     .content.container, .content.container-fluid {
       padding-bottom: 20px;
