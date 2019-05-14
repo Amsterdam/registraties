@@ -32,6 +32,16 @@ const getBrkId = str => {
   return brkId;
 };
 
+const getNotInCache = (cacheData, sourceData) =>
+  sourceData
+    .map((entry, index) => {
+      if (!entry) {
+        return cacheData[index];
+      }
+      return null;
+    })
+    .filter(Boolean);
+
 export function* fetchData(action) {
   yield put(appActions.statusPending());
 
@@ -140,14 +150,7 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
 
     if (rechten) {
       let data = yield all([...rechten.map(link => call(fetchItem, `${cacheId}_${getBrkId(link)}`))]);
-      const rechtenNotInCache = data
-        .map((entry, index) => {
-          if (!entry) {
-            return rechten[index];
-          }
-          return null;
-        })
-        .filter(Boolean);
+      const rechtenNotInCache = getNotInCache(rechten, data);
 
       if (rechtenNotInCache.length) {
         data = yield all([...rechtenNotInCache.map(link => call(request, link, requestOptions))]);
@@ -187,14 +190,7 @@ export function* fetchVestigingData() {
   try {
     if (brkObjectIds && brkObjectIds.length) {
       let data = yield all([...brkObjectIds.map(brkObjectId => call(fetchItem, `${cacheId}_${brkObjectId}`))]);
-      const brkObjectIdsNotInCache = data
-        .map((entry, index) => {
-          if (!entry) {
-            return brkObjectIds[index];
-          }
-          return null;
-        })
-        .filter(Boolean);
+      const brkObjectIdsNotInCache = getNotInCache(brkObjectIds, data);
 
       if (brkObjectIdsNotInCache.length) {
         data = yield all([
