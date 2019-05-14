@@ -84,25 +84,15 @@ export class AccommodationObjectPageComponent extends Component {
               <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
             </header>
 
-            <section>
-              <OpenbareRuimte />
-            </section>
+            <OpenbareRuimte />
 
-            <section>
-              <Woonplaats />
-            </section>
+            <Woonplaats />
 
-            <section>
-              <Nummeraanduiding />
-            </section>
+            <Nummeraanduiding />
 
-            <section>
-              <Verblijfsobject />
-            </section>
+            <Verblijfsobject />
 
-            <section>
-              <Pand />
-            </section>
+            <Pand />
           </article>
 
           <article>
@@ -110,38 +100,24 @@ export class AccommodationObjectPageComponent extends Component {
               <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
             </header>
 
-            <section>
-              <KadastraalObject />
-            </section>
+            <KadastraalObject />
 
-            <section>
-              <KadastraalSubjectNP />
-            </section>
+            <KadastraalSubjectNP />
 
-            <section>
-              <KadastraalSubjectNNP />
-            </section>
+            <KadastraalSubjectNNP />
 
-            <section>
-              <Vestiging />
-            </section>
+            <Vestiging />
 
-            <section>
-              <Gebied />
-            </section>
+            <Gebied />
           </article>
         </main>
 
         <Aside className="col-4">
           {status === LOAD_DATA_SUCCESS && (
             <>
-              <section>
-                <TOC />
-              </section>
+              <TOC />
 
-              <section>
-                <Summary />
-              </section>
+              <Summary />
 
               {coordinates && (
                 <section>

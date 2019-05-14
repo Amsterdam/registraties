@@ -132,7 +132,7 @@ export const kadastraalSubjectNPReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case constants.LOAD_DATA_PENDING:
-        draft.data = undefined;
+        draft.data = null;
         break;
 
       case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA:
@@ -157,7 +157,7 @@ export const kadastraalSubjectNNPReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case constants.LOAD_DATA_PENDING:
-        draft.data = undefined;
+        draft.data = null;
         break;
 
       case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA:

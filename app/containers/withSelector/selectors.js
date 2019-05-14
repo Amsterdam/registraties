@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray, isObject } from 'utils';
+import { formatData, isArray, isObject, isValidSubjectNP, isValidSubjectNNP } from 'utils';
 import messages from 'containers/App/messages';
 
 export const selectBAG = state => state.bag;
@@ -196,9 +196,7 @@ export const makeSelectKadastraalSubjectNPData = () =>
         'voorvoegsels',
       ];
 
-      const results = data
-        .filter(({ geboortedatum, naam }) => geboortedatum && naam)
-        .map(subject => formatData({ data: subject, keys, locale }));
+      const results = data.filter(isValidSubjectNP).map(subject => formatData({ data: subject, keys, locale }));
 
       if (!results.length) {
         return null;
@@ -224,9 +222,7 @@ export const makeSelectKadastraalSubjectNNPData = () =>
 
       const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-      const results = data
-        .filter(({ kvknummer, rsin }) => kvknummer && rsin)
-        .map(subject => formatData({ data: subject, keys, locale }));
+      const results = data.filter(isValidSubjectNNP).map(subject => formatData({ data: subject, keys, locale }));
 
       if (!results.length) {
         return null;
