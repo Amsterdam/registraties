@@ -8,7 +8,7 @@ import equal from 'fast-deep-equal';
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
 import { loadBAGData } from 'containers/withSelector/actions';
-import { OBJECTS, LOAD_DATA_SUCCESS } from 'containers/App/constants';
+import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
 
 import Verblijfsobject from 'containers/Verblijfsobject';
@@ -26,27 +26,23 @@ import Woonplaats from 'containers/Woonplaats';
 import TOC from 'containers/TOC';
 import Map from 'components/Map';
 
-import './style.scss';
-import { MapWrapper, MapContainer, Heading, Textarea, Aside } from './styled';
+import { MapWrapper, MapContainer, ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
     super(props);
 
     this.map = null;
-    this.toc = [];
 
     this.state = {
       filledInBy: '',
       notitie: '',
-      toc: [],
     };
 
     this.onInput = this.onInput.bind(this);
   }
 
   initiateFetch() {
-    this.setState({ toc: [] });
     const { vboId, ligId, brkId } = this.props.match.params;
 
     this.props.loadBAGData({ vboId, ligId, brkId });
@@ -56,14 +52,9 @@ export class AccommodationObjectPageComponent extends Component {
     this.initiateFetch();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (!equal(prevProps.match.params, this.props.match.params)) {
       this.initiateFetch();
-    }
-
-    if (this.props.status === LOAD_DATA_SUCCESS && prevState.toc !== this.toc) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ toc: this.toc });
     }
   }
 
@@ -82,107 +73,89 @@ export class AccommodationObjectPageComponent extends Component {
 
   render() {
     const { intl, status, coordinates } = this.props;
-    const { notitie, filledInBy, toc } = this.state;
+    const { notitie, filledInBy } = this.state;
     const { formatMessage } = intl;
 
     return (
       <div className="row justify-content-lg-between">
-        <article className="col-7">
-          <section>
+        <main className="col-7">
+          <article>
             <header>
-              <Heading marginCollapse>{intl.formatMessage(messages.bag_objects)}</Heading>
+              <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
             </header>
 
-            <OpenbareRuimte
-              onSuccess={() => {
-                this.toc[0] = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
-              }}
-            />
+            <section>
+              <OpenbareRuimte />
+            </section>
 
-            <Woonplaats
-              onSuccess={() => {
-                this.toc[1] = intl.formatMessage(OBJECTS.WOONPLAATS.NAME);
-              }}
-            />
+            <section>
+              <Woonplaats />
+            </section>
 
-            <Nummeraanduiding
-              onSuccess={() => {
-                this.toc[2] = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
-              }}
-            />
+            <section>
+              <Nummeraanduiding />
+            </section>
 
-            <Verblijfsobject
-              onSuccess={() => {
-                this.toc[3] = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
-              }}
-            />
+            <section>
+              <Verblijfsobject />
+            </section>
 
-            <Pand
-              onSuccess={() => {
-                this.toc[4] = intl.formatMessage(OBJECTS.PAND.NAME);
-              }}
-            />
-          </section>
-          <section>
+            <section>
+              <Pand />
+            </section>
+          </article>
+
+          <article>
             <header>
-              <Heading marginCollapse>{intl.formatMessage(messages.brk_objects)}</Heading>
+              <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
             </header>
 
-            <KadastraalObject
-              onSuccess={() => {
-                this.toc[5] = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
-              }}
-            />
+            <section>
+              <KadastraalObject />
+            </section>
 
-            <KadastraalSubjectNP
-              onSuccess={() => {
-                this.toc[6] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
-              }}
-            />
+            <section>
+              <KadastraalSubjectNP />
+            </section>
 
-            <KadastraalSubjectNNP
-              onSuccess={() => {
-                this.toc[7] = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
-              }}
-            />
+            <section>
+              <KadastraalSubjectNNP />
+            </section>
 
-            <Vestiging
-              onSuccess={() => {
-                this.toc[8] = intl.formatMessage(OBJECTS.VESTIGING.NAME);
-              }}
-            />
+            <section>
+              <Vestiging />
+            </section>
 
-            <Gebied
-              onSuccess={() => {
-                this.toc[9] = intl.formatMessage(OBJECTS.GEBIED.NAME);
-              }}
-            />
-          </section>
-        </article>
+            <section>
+              <Gebied />
+            </section>
+          </article>
+        </main>
 
         <Aside className="col-4">
           {status === LOAD_DATA_SUCCESS && (
             <>
-              <TOC sections={toc} />
               <section>
-                <header>
-                  <Heading small>{intl.formatMessage(messages.overview)}</Heading>
-                </header>
+                <TOC />
+              </section>
 
+              <section>
                 <Summary />
+              </section>
 
-                {coordinates && (
+              {coordinates && (
+                <section>
                   <MapWrapper>
                     <MapContainer className="cf">
                       <Map coords={coordinates} marker search={false} zoom={14} />
                     </MapContainer>
                   </MapWrapper>
-                )}
-              </section>
+                </section>
+              )}
 
-              <section className="invoer">
+              <section className="invoer no-print">
                 <header>
-                  <Heading small>{intl.formatMessage(messages.extra_fields)}</Heading>
+                  <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
                 </header>
 
                 <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}</label>
@@ -199,9 +172,9 @@ export class AccommodationObjectPageComponent extends Component {
                 <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
-              <section>
+              <section className="no-print">
                 <header>
-                  <Heading small>{intl.formatMessage(messages.export_cta)}</Heading>
+                  <SectionHeading>{intl.formatMessage(messages.export_cta)}</SectionHeading>
                 </header>
 
                 <CSVDownloadContainer data={{ notitie, filledInBy }} />

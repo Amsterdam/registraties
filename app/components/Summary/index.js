@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { intlShape } from 'react-intl';
 import styled from 'styled-components';
 
+import { SectionHeading } from 'containers/AccommodationObjectPage/styled';
+import messages from 'containers/App/messages';
+
 const Dt = styled.dt`
   font-family: Avenir Next LT W01 Demi;
 `;
@@ -11,17 +14,21 @@ const Dd = styled.dd`
   padding-left: 1em;
 `;
 
-const Summary = ({ data, intl: { locale, formatMessage } }) =>
-  Object.keys(data).length ? (
-    <dl>
-      {Object.keys(data).map(key => (
-        <Fragment key={key}>
-          <Dt lang={locale}>{formatMessage(data[key].label)}</Dt>
-          <Dd>{data[key].value}</Dd>
-        </Fragment>
-      ))}
-    </dl>
-  ) : null;
+const Summary = ({ data, intl: { locale, formatMessage } }) => (
+  <>
+    <SectionHeading>{formatMessage(messages.overview)}</SectionHeading>
+    {Object.keys(data).length ? (
+      <dl>
+        {Object.keys(data).map(key => (
+          <Fragment key={key}>
+            <Dt lang={locale}>{formatMessage(data[key].label)}</Dt>
+            <Dd>{data[key].value}</Dd>
+          </Fragment>
+        ))}
+      </dl>
+    ) : null}
+  </>
+);
 
 Summary.propTypes = {
   data: PropTypes.shape({

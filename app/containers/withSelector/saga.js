@@ -84,6 +84,12 @@ export function* fetchData(action) {
       }
 
       yield put(appActions.statusUnauthorized());
+    } else if (error.response && error.response.status === 500) {
+      yield put(appActions.showGlobalError('server_error'));
+    } else if (error.response && error.response.status === 503) {
+      yield put(appActions.showGlobalError('service_unavailable'));
+    } else {
+      yield put(appActions.showGlobalError('unknown_error'));
     }
 
     yield put(appActions.statusFailed(error));
@@ -135,6 +141,8 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
       yield put(appActions.progress(5 / 9));
     } else {
       yield put(actions.loadKadastraalObjectDataNoResults());
+      yield put(actions.loadKadastraalSubjectNPDataNoResults());
+      yield put(actions.loadKadastraalSubjectNNPDataNoResults());
     }
   } catch (error) {
     yield put(actions.loadKadastraalObjectDataFailed(error));

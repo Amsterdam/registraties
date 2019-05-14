@@ -40,6 +40,24 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  @supports (display: flow-root) {
+    .cf {
+      display: flow-root;
+    }
+  }
+
+  @supports not (display: flow-root) {
+    .cf:before,
+    .cf:after {
+      content: " ";
+      display: table;
+    }
+
+    .cf:after {
+      clear: both;
+    }
+  }
+
   #app {
     min-height: 100%;
     min-width: 100%;

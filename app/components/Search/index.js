@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 `;
 
 const Search = forwardRef(({ onChange, onSelect, results, placeholder, onSubmit }, ref) => (
-  <Form action="" onSubmit={onSubmit}>
+  <Form action="" onSubmit={onSubmit} className="no-print">
     <Wrapper>
       <Input
         autoCapitalize="off"

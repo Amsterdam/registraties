@@ -11,4 +11,13 @@ export default defineMessages({
   session_expired: {
     id: `${scope}.session_expired`,
   },
+  unknown_error: {
+    id: `${scope}.unknown_error`,
+  },
+  server_error: {
+    id: `${scope}.server_error`,
+  },
+  service_unavailable: {
+    id: `${scope}.service_unavailable`,
+  },
 });
