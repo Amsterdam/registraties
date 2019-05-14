@@ -161,10 +161,9 @@ export class AccommodationObjectPageComponent extends Component {
         </article>
 
         <Aside className="col-4">
-          <TOC sections={toc} />
-
           {status === LOAD_DATA_SUCCESS && (
             <>
+              <TOC sections={toc} />
               <section>
                 <header>
                   <Heading small>{intl.formatMessage(messages.overview)}</Heading>

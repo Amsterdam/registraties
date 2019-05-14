@@ -9,6 +9,8 @@ import * as appActions from 'containers/App/actions';
 import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 import { LOAD_BAG_DATA } from 'containers/App/constants';
 
+import { storeItem, fetchItem } from 'utils/cache';
+
 import * as actions from './actions';
 import * as selectors from './selectors';
 
@@ -23,6 +25,11 @@ const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
 const PAND_API = `${API_ROOT}bag/pand/`;
 const requestOptions = {
   headers: getAuthHeaders(),
+};
+
+const getBrkId = str => {
+  const [brkId] = str.match(/NL\.KAD\.[a-z]+\.\d+/i);
+  return brkId;
 };
 
 export function* fetchData(action) {
@@ -75,8 +82,15 @@ export function* fetchData(action) {
 }
 
 export function* fetchOpenbareRuimteData(openbareRuimteId) {
+  const cacheId = `opr_${openbareRuimteId}`;
+
   try {
-    const data = yield call(request, `${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, requestOptions);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const openbareRuimteData = yield call(request, `${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, requestOptions);
+      data = yield call(storeItem, cacheId, openbareRuimteData);
+    }
 
     yield put(actions.loadOpenbareRuimteDataSuccess(data));
   } catch (error) {
@@ -85,8 +99,16 @@ export function* fetchOpenbareRuimteData(openbareRuimteId) {
 }
 
 export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
+  const cacheId = `brk_${adresseerbaarObjectId}`;
+
   try {
-    const data = yield call(request, `${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const kadastraalObjectData = yield call(request, `${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
+      data = yield call(storeItem, cacheId, kadastraalObjectData);
+    }
+
     const { count } = data;
 
     if (count) {
@@ -111,11 +133,29 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
 }
 
 export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
+  const cacheId = 'brk';
+
   try {
     const rechten = yield select(selectors.makeSelectKadastraalSubjectLinks(isNatuurlijkPersoon));
 
     if (rechten) {
-      const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
+      let data = yield all([...rechten.map(link => call(fetchItem, `${cacheId}_${getBrkId(link)}`))]);
+      const rechtenNotInCache = data
+        .map((entry, index) => {
+          if (!entry) {
+            return rechten[index];
+          }
+          return null;
+        })
+        .filter(Boolean);
+
+      if (rechtenNotInCache.length) {
+        data = yield all([...rechtenNotInCache.map(link => call(request, link, requestOptions))]);
+        data = yield all([
+          // eslint-disable-next-line no-underscore-dangle
+          ...data.map(subjectData => call(storeItem, `${cacheId}_${subjectData.id}`, subjectData)),
+        ]);
+      }
 
       if (isNatuurlijkPersoon) {
         yield put(actions.loadKadastraalSubjectNPDataSuccess(data));
@@ -141,15 +181,34 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
 }
 
 export function* fetchVestigingData() {
+  const cacheId = 'ves_';
   const brkObjectIds = yield select(selectors.makeSelectFromObject('id'));
 
   try {
     if (brkObjectIds && brkObjectIds.length) {
-      const data = yield all([
-        ...brkObjectIds.map(brkObjectId =>
-          call(request, `${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
-        ),
-      ]);
+      let data = yield all([...brkObjectIds.map(brkObjectId => call(fetchItem, `${cacheId}_${brkObjectId}`))]);
+      const brkObjectIdsNotInCache = data
+        .map((entry, index) => {
+          if (!entry) {
+            return brkObjectIds[index];
+          }
+          return null;
+        })
+        .filter(Boolean);
+
+      if (brkObjectIdsNotInCache.length) {
+        data = yield all([
+          ...brkObjectIds.map(brkObjectId =>
+            call(request, `${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
+          ),
+        ]);
+        data = yield all([
+          ...data.map(brkObjectData =>
+            // eslint-disable-next-line no-underscore-dangle
+            call(storeItem, `${cacheId}_${getBrkId(brkObjectData._links.self.href)}`, brkObjectData),
+          ),
+        ]);
+      }
 
       if (!data.length) {
         yield put(actions.loadVestigingDataNoResults());
@@ -164,8 +223,15 @@ export function* fetchVestigingData() {
 }
 
 export function* fetchNummeraanduidingData(nummeraanduidingId) {
+  const cacheId = `num_${nummeraanduidingId}`;
+
   try {
-    const data = yield call(request, `${NUMMERAANDUIDING_API}${nummeraanduidingId}/`);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const nummeraanduidingData = yield call(request, `${NUMMERAANDUIDING_API}${nummeraanduidingId}/`);
+      data = yield call(storeItem, cacheId, nummeraanduidingData);
+    }
 
     yield put(actions.loadNummeraanduidingSuccess(data));
 
@@ -179,6 +245,7 @@ export function* fetchNummeraanduidingData(nummeraanduidingId) {
 
 export function* fetchWoonplaatsData() {
   const woonplaatsId = yield select(selectors.makeSelectWoonplaatsId());
+  const cacheId = `wpl_${woonplaatsId}`;
 
   if (!woonplaatsId) {
     yield put(actions.loadWoonplaatsDataNoResults());
@@ -186,7 +253,12 @@ export function* fetchWoonplaatsData() {
   }
 
   try {
-    const data = yield call(request, `${WOONPLAATS_API}${woonplaatsId}/`);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const woonplaatsData = yield call(request, `${WOONPLAATS_API}${woonplaatsId}/`);
+      data = yield call(storeItem, cacheId, woonplaatsData);
+    }
 
     yield put(actions.loadWoonplaatsDataSuccess(data));
   } catch (error) {
@@ -196,8 +268,15 @@ export function* fetchWoonplaatsData() {
 }
 
 export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
+  const cacheId = `vbo_${adresseerbaarObjectId}`;
+
   try {
-    const data = yield call(request, `${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const vboData = yield call(request, `${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
+      data = yield call(storeItem, cacheId, vboData);
+    }
 
     yield put(actions.loadVerblijfsobjectDataSuccess(data));
     yield put(appActions.progress(1 / 9));
@@ -208,8 +287,15 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
 }
 
 export function* fetchLigplaatsData(ligplaatsId) {
+  const cacheId = `lig_${ligplaatsId}`;
+
   try {
-    const data = yield call(request, `${LIGPLAATS_API}${ligplaatsId}/`, requestOptions);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const ligData = yield call(request, `${LIGPLAATS_API}${ligplaatsId}/`, requestOptions);
+      data = yield call(storeItem, cacheId, ligData);
+    }
 
     yield put(actions.loadLigplaatsDataSuccess(data));
     yield put(appActions.progress(1 / 3));
@@ -220,8 +306,19 @@ export function* fetchLigplaatsData(ligplaatsId) {
 }
 
 export function* fetchPandlistData(adresseerbaarObjectId) {
+  const cacheId = `pandlist_${adresseerbaarObjectId}`;
+
   try {
-    const data = yield call(request, `${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`, requestOptions);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const pandlistData = yield call(
+        request,
+        `${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`,
+        requestOptions,
+      );
+      data = yield call(storeItem, cacheId, pandlistData);
+    }
 
     if (data.count) {
       yield put(actions.loadPandlistDataSuccess());
@@ -239,8 +336,15 @@ export function* fetchPandlistData(adresseerbaarObjectId) {
 }
 
 export function* fetchPandData(landelijkId) {
+  const cacheId = `pand_${landelijkId}`;
+
   try {
-    const data = yield call(request, `${PAND_API}${landelijkId}/`);
+    let data = yield call(fetchItem, cacheId);
+
+    if (!data) {
+      const pandData = yield call(request, `${PAND_API}${landelijkId}/`);
+      data = yield call(storeItem, cacheId, pandData);
+    }
 
     yield put(actions.loadPandDataSuccess(data));
     yield put(appActions.progress(7 / 9));
