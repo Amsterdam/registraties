@@ -14,7 +14,7 @@ const Suggest = ({ className, items, onSelect }) => (
         <Strong>{key}</Strong>
         <ul className="links">
           {items[key].map(item => (
-            <li key={item.name}>
+            <li key={`${item.name}_${item.vboId || item.ligId || item.brkId}`}>
               <Link
                 href="/"
                 data-vbo-id={item.vboId}

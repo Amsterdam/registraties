@@ -8,6 +8,52 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
+export const tocReducer = (state = { toc: [] }, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case constants.LOAD_BAG_DATA:
+        draft.toc = [];
+        break;
+
+      case constants.LOAD_PAND_DATA_SUCCESS:
+        draft.toc[4] = constants.OBJECTS.PAND.NAME;
+        break;
+
+      case constants.LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
+        draft.toc[2] = constants.OBJECTS.NUMMERAANDUIDING.NAME;
+        draft.toc[9] = constants.OBJECTS.GEBIED.NAME;
+        break;
+
+      case constants.LOAD_KADASTRAAL_OBJECT_DATA_SUCCESS:
+        draft.toc[5] = constants.OBJECTS.KADASTRAAL_OBJECT.NAME;
+        break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NP_DATA_SUCCESS:
+        draft.toc[6] = constants.OBJECTS.KADASTRAAL_SUBJECT_NP.NAME;
+        break;
+
+      case constants.LOAD_KADASTRAAL_SUBJECT_NNP_DATA_SUCCESS:
+        draft.toc[7] = constants.OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME;
+        break;
+
+      case constants.LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
+        draft.toc[3] = constants.OBJECTS.VERBLIJFSOBJECT.NAME;
+        break;
+
+      case constants.LOAD_VESTIGING_DATA_SUCCESS:
+        draft.toc[8] = constants.OBJECTS.VESTIGING.NAME;
+        break;
+
+      case constants.LOAD_OPENBARE_RUIMTE_DATA_SUCCESS:
+        draft.toc[0] = constants.OBJECTS.OPENBARE_RUIMTE.NAME;
+        break;
+
+      case constants.LOAD_WOONPLAATS_DATA_SUCCESS:
+        draft.toc[1] = constants.OBJECTS.WOONPLAATS.NAME;
+        break;
+    }
+  });
+
 export const bagReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {

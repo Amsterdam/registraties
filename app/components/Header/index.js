@@ -60,7 +60,7 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
     <StyledHeader title="Basisregistratie Wonen" homeLink={CONFIGURATION.ROOT} tall fullWidth>
       <SearchContainer />
 
-      <StyledNav>
+      <StyledNav className="no-print">
         <ul className="links horizontal">
           {!isAuthenticated && (
             <>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { intlShape } from 'react-intl';
 
-import { Heading } from 'containers/AccommodationObjectPage/styled';
+import { SectionHeading } from 'containers/AccommodationObjectPage/styled';
 import messages from 'containers/App/messages';
 import Link from 'components/Link';
 
@@ -14,24 +14,30 @@ const Li = styled.li`
 
 const TOC = ({ intl, sections }) => {
   const [active, setActive] = useState();
+
   return (
     <>
-      <Heading marginCollapse small>
+      <SectionHeading marginCollapse className="no-print">
         {intl.formatMessage(messages.on_this_page)}
-      </Heading>
-      <ul className="links">
-        {sections.filter(Boolean).map(section => (
-          <Li key={section}>
-            <Link
-              href={`#${section}`}
-              onClick={() => {
-                setActive(section);
-              }}
-              className={active === section ? 'has-focus' : null}
-              label={section}
-            />
-          </Li>
-        ))}
+      </SectionHeading>
+
+      <ul className="links no-print">
+        {sections.filter(Boolean).map(section => {
+          const title = intl.formatMessage(section);
+
+          return (
+            <Li key={title}>
+              <Link
+                href={`#${title}`}
+                onClick={() => {
+                  setActive(title);
+                }}
+                className={active === title ? 'has-focus' : null}
+                label={title}
+              />
+            </Li>
+          );
+        })}
       </ul>
     </>
   );
@@ -39,7 +45,7 @@ const TOC = ({ intl, sections }) => {
 
 TOC.propTypes = {
   intl: intlShape.isRequired,
-  sections: PropTypes.arrayOf(PropTypes.string),
+  sections: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 export default TOC;

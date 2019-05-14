@@ -15,6 +15,7 @@ const selectVerblijfsobject = state => state.verblijfsobject;
 const selectVestiging = state => state.vestiging;
 const selectOpenbareRuimte = state => state.openbareRuimte;
 const selectWoonplaatsData = state => state.woonplaats;
+const selectTOC = state => state.toc;
 
 export const makeSelectVerblijfsobjectData = () =>
   createSelector(
@@ -408,6 +409,12 @@ export const makeSelectWoonplaatsData = () =>
 
       return formatData({ data, keys, locale });
     },
+  );
+
+export const makeSelectTOC = () =>
+  createSelector(
+    selectTOC,
+    ({ toc }) => toc,
   );
 
 export const makeSelectSummary = () =>

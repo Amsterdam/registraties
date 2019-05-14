@@ -30,6 +30,7 @@ const withSelectors = WrappedComponent => {
   const withSaga = injectSaga({ key: 'global', saga });
 
   const ComposedSelectorContainer = compose(
+    injectReducer({ key: 'toc', reducer: reducers.tocReducer }),
     injectReducer({ key: 'bag', reducer: reducers.bagReducer }),
     injectReducer({ key: 'kadastraalObject', reducer: reducers.kadastraalObjectReducer }),
     injectReducer({ key: 'kadastraalSubjectNNP', reducer: reducers.kadastraalSubjectNNPReducer }),

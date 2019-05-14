@@ -10,7 +10,7 @@ export const MapContainer = styled.div`
   height: 100%;
 `;
 
-export const Heading = styled.h2`
+export const ArticleHeading = styled.h2`
   ${({ marginCollapse }) =>
     marginCollapse &&
     css`
@@ -21,6 +21,15 @@ export const Heading = styled.h2`
     small &&
     css`
       font-size: 20px;
+    `}
+`;
+
+export const SectionHeading = styled.h3`
+  margin-top: 30px;
+  ${({ marginCollapse }) =>
+    marginCollapse &&
+    css`
+      margin-top: 0;
     `}
 `;
 
@@ -45,8 +54,16 @@ export const Ul = styled.ul`
   list-style: none;
   padding-bottom: 30px;
 
-  &:not(:last-child):not(:first-child) {
+  &:not(:first-child) {
     border-bottom: 4px solid #767676;
+  }
+
+  & li:last-of-type ul {
+    padding-bottom: 0;
+  }
+
+  *:last-of-type > *:last-of-type ul:last-of-type {
+    border: 0;
   }
 
   li {
@@ -78,4 +95,33 @@ export const Tabs = styled.nav.attrs({
 })`
   flex-basis: 100;
   width: 100%;
+`;
+
+export const StelselpediaLink = styled.a`
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+
+  &:hover {
+    background-color: #009dec;
+    color: white;
+  }
+
+  @media print {
+    display: none;
+  }
+`;
+
+export const Small = styled.small`
+  font-size: initial;
 `;
