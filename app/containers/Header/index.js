@@ -1,50 +1,35 @@
-/**
- *
- * HeaderContainer
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectUserName } from 'containers/App/selectors';
-import Header from 'components/Header';
-
-import { doLogin, doLogout } from 'containers/App/actions';
-import { isAuthenticated } from 'shared/services/auth/auth';
 import { injectIntl } from 'react-intl';
+
+import { isAuthenticated } from 'shared/services/auth/auth';
+
+import { makeSelectUserName } from 'containers/App/selectors';
+import { doLogin, doLogout } from 'containers/App/actions';
+import Header from 'components/Header';
 
 const IntlHeader = injectIntl(Header);
 
-export class HeaderContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onLoginLogoutButtonClick = this.onLoginLogoutButtonClick.bind(this);
-  }
-
-  onLoginLogoutButtonClick(event, domain) {
-    event.persist();
-    event.preventDefault();
-    event.stopPropagation();
+const HeaderContainer = ({ onLogin, onLogout, userName }) => {
+  const onLoginLogoutButtonClick = (event, domain) => {
     if (!isAuthenticated()) {
-      this.props.onLogin(domain);
+      onLogin(domain);
     } else {
-      this.props.onLogout();
+      onLogout();
     }
-  }
+  };
 
-  render() {
-    return (
-      <IntlHeader
-        isAuthenticated={isAuthenticated()}
-        onLoginLogoutButtonClick={this.onLoginLogoutButtonClick}
-        userName={this.props.userName}
-      />
-    );
-  }
-}
+  return (
+    <IntlHeader
+      isAuthenticated={isAuthenticated()}
+      onLoginLogoutButtonClick={onLoginLogoutButtonClick}
+      userName={userName}
+    />
+  );
+};
 
 HeaderContainer.propTypes = {
   userName: PropTypes.string,

@@ -1,7 +1,7 @@
 import { call, select } from 'redux-saga/effects';
-import request from 'utils/request';
 
-import { makeSelectAccessToken } from '../../../containers/App/selectors';
+import request from 'utils/request';
+import { makeSelectAccessToken } from 'containers/App/selectors';
 
 export const generateParams = data =>
   Object.entries(data)

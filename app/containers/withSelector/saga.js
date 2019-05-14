@@ -1,76 +1,32 @@
-import { all, call, put, select, takeLatest, spawn } from 'redux-saga/effects';
+import { all, call, put, select, spawn, takeLatest } from 'redux-saga/effects';
 
 import request from 'utils/request';
 import { getAuthHeaders } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import appSaga from 'containers/App/saga';
-import searchSaga from 'containers/Search/saga';
-import {
-  progress,
-  statusSuccess,
-  statusFailed,
-  statusPending,
-  statusUnableToFetch,
-  statusUnauthorized,
-  showGlobalError,
-} from 'containers/App/actions';
+
+import * as appActions from 'containers/App/actions';
 import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 import { LOAD_BAG_DATA } from 'containers/App/constants';
 
-import {
-  loadKadastraalObjectDataFailed,
-  loadKadastraalObjectDataNoResults,
-  loadKadastraalObjectDataSuccess,
-  loadKadastraalSubjectNPDataFailed,
-  loadKadastraalSubjectNPDataNoResults,
-  loadKadastraalSubjectNPDataSuccess,
-  loadKadastraalSubjectNNPDataFailed,
-  loadKadastraalSubjectNNPDataNoResults,
-  loadKadastraalSubjectNNPDataSuccess,
-  loadNummeraanduidingFailed,
-  loadNummeraanduidingSuccess,
-  loadPandDataFailed,
-  loadPandDataSuccess,
-  loadPandlistDataFailed,
-  loadPandlistDataNoResults,
-  loadPandlistDataSuccess,
-  loadVerblijfsobjectDataFailed,
-  loadVerblijfsobjectDataSuccess,
-  loadVestigingDataFailed,
-  loadVestigingDataNoResults,
-  loadVestigingDataSuccess,
-  loadOpenbareRuimteDataSuccess,
-  loadOpenbareRuimteDataFailed,
-  loadLigplaatsDataSuccess,
-  loadLigplaatsDataFailed,
-  loadWoonplaatsDataFailed,
-  loadWoonplaatsDataSuccess,
-  loadWoonplaatsDataNoResults,
-} from './actions';
-import {
-  makeSelectKadastraalSubjectLinks,
-  makeSelectFromObject,
-  makeSelectVBONummeraanduidingId,
-  makeSelectLIGNummeraanduidingId,
-  makeSelectOpenbareRuimteId,
-  makeSelectWoonplaatsId,
-} from './selectors';
+import * as actions from './actions';
+import * as selectors from './selectors';
 
 const { API_ROOT } = configuration;
-const OPENBARE_RUIMTE_API = 'bag/openbareruimte/';
-const VERBLIJFSOBJECT_API = 'bag/verblijfsobject/';
-const LIGPLAATS_API = 'bag/ligplaats/';
-const HR_API = 'handelsregister/';
-const BRK_OBJECT_API = 'brk/object-expand/?verblijfsobjecten__id=';
-const NUMMERAANDUIDING_API = 'bag/nummeraanduiding/';
-const WOONPLAATS_API = 'bag/woonplaats/';
-const PAND_API = 'bag/pand/';
+const OPENBARE_RUIMTE_API = `${API_ROOT}bag/openbareruimte/`;
+const VERBLIJFSOBJECT_API = `${API_ROOT}bag/verblijfsobject/`;
+const LIGPLAATS_API = `${API_ROOT}bag/ligplaats/`;
+const HR_API = `${API_ROOT}handelsregister/`;
+const BRK_OBJECT_API = `${API_ROOT}brk/object-expand/?verblijfsobjecten__id=`;
+const NUMMERAANDUIDING_API = `${API_ROOT}bag/nummeraanduiding/`;
+const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
+const PAND_API = `${API_ROOT}bag/pand/`;
 const requestOptions = {
   headers: getAuthHeaders(),
 };
 
 export function* fetchData(action) {
-  yield put(statusPending());
+  yield put(appActions.statusPending());
 
   const { vboId, ligId } = action.payload;
 
@@ -81,225 +37,220 @@ export function* fetchData(action) {
       yield call(fetchKadastraalObjectData, vboId);
       yield call(fetchPandlistData, vboId);
 
-      nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId());
+      nummeraanduidingId = yield select(selectors.makeSelectVBONummeraanduidingId());
     } else if (ligId) {
-      yield put(loadKadastraalObjectDataNoResults());
-      yield put(loadKadastraalSubjectNPDataNoResults());
-      yield put(loadKadastraalSubjectNNPDataNoResults());
+      yield put(actions.loadKadastraalObjectDataNoResults());
+      yield put(actions.loadKadastraalSubjectNPDataNoResults());
+      yield put(actions.loadKadastraalSubjectNNPDataNoResults());
       yield call(fetchLigplaatsData, ligId);
 
-      nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
+      nummeraanduidingId = yield select(selectors.makeSelectLIGNummeraanduidingId());
     }
 
     yield call(fetchNummeraanduidingData, nummeraanduidingId);
     yield call(fetchWoonplaatsData);
-    yield put(statusSuccess());
-    yield put(progress(1));
+    yield put(appActions.statusSuccess());
+    yield put(appActions.progress(1));
   } catch (error) {
     if (error.message === 'Failed to fetch') {
       // unable to fetch
-      yield put(showGlobalError('unable_to_fetch'));
-      yield put(statusUnableToFetch());
+      yield put(appActions.showGlobalError('unable_to_fetch'));
+      yield put(appActions.statusUnableToFetch());
     } else if (error.response && error.response.status === 401) {
       // unauthorized
       const isAuthorized = yield select(makeSelectIsAuthenticated());
 
       if (isAuthorized) {
-        yield put(showGlobalError('session_expired'));
+        yield put(appActions.showGlobalError('session_expired'));
       } else {
-        yield put(showGlobalError('unauthorized'));
+        yield put(appActions.showGlobalError('unauthorized'));
       }
 
-      yield put(statusUnauthorized());
+      yield put(appActions.statusUnauthorized());
     }
 
-    yield put(statusFailed(error));
-    yield put(progress(1));
+    yield put(appActions.statusFailed(error));
+    yield put(appActions.progress(1));
   }
 }
 
 export function* fetchOpenbareRuimteData(openbareRuimteId) {
   try {
-    const data = yield call(request, `${API_ROOT}${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, requestOptions);
+    const data = yield call(request, `${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, requestOptions);
 
-    yield put(loadOpenbareRuimteDataSuccess(data));
+    yield put(actions.loadOpenbareRuimteDataSuccess(data));
   } catch (error) {
-    yield put(loadOpenbareRuimteDataFailed(error));
+    yield put(actions.loadOpenbareRuimteDataFailed(error));
   }
 }
 
 export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
   try {
-    const data = yield call(request, `${API_ROOT}${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
+    const data = yield call(request, `${BRK_OBJECT_API}${adresseerbaarObjectId}`, requestOptions);
     const { count } = data;
 
     if (count) {
-      yield put(loadKadastraalObjectDataSuccess(data));
-      yield put(progress(2 / 9));
+      yield put(actions.loadKadastraalObjectDataSuccess(data));
+      yield put(appActions.progress(2 / 9));
 
       yield call(fetchKadastraalSubjectData, true);
-      yield put(progress(3 / 9));
+      yield put(appActions.progress(3 / 9));
 
       yield call(fetchKadastraalSubjectData, false);
-      yield put(progress(4 / 9));
+      yield put(appActions.progress(4 / 9));
 
       yield call(fetchVestigingData);
-      yield put(progress(5 / 9));
+      yield put(appActions.progress(5 / 9));
     } else {
-      yield put(loadKadastraalObjectDataNoResults());
+      yield put(actions.loadKadastraalObjectDataNoResults());
     }
   } catch (error) {
-    yield put(loadKadastraalObjectDataFailed(error));
+    yield put(actions.loadKadastraalObjectDataFailed(error));
     throw error;
   }
 }
 
 export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
   try {
-    const rechten = yield select(makeSelectKadastraalSubjectLinks(isNatuurlijkPersoon));
+    const rechten = yield select(selectors.makeSelectKadastraalSubjectLinks(isNatuurlijkPersoon));
 
     if (rechten) {
       const data = yield all([...rechten.map(link => call(request, link, requestOptions))]);
 
       if (isNatuurlijkPersoon) {
-        yield put(loadKadastraalSubjectNPDataSuccess(data));
+        yield put(actions.loadKadastraalSubjectNPDataSuccess(data));
       } else {
-        yield put(loadKadastraalSubjectNNPDataSuccess(data));
+        yield put(actions.loadKadastraalSubjectNNPDataSuccess(data));
       }
     } else {
       // eslint-disable-next-line no-lonely-if
       if (isNatuurlijkPersoon) {
-        yield put(loadKadastraalSubjectNPDataNoResults());
+        yield put(actions.loadKadastraalSubjectNPDataNoResults());
       } else {
-        yield put(loadKadastraalSubjectNNPDataNoResults());
+        yield put(actions.loadKadastraalSubjectNNPDataNoResults());
       }
     }
   } catch (error) {
     if (isNatuurlijkPersoon) {
-      yield put(loadKadastraalSubjectNPDataFailed());
+      yield put(actions.loadKadastraalSubjectNPDataFailed());
     } else {
-      yield put(loadKadastraalSubjectNNPDataFailed());
+      yield put(actions.loadKadastraalSubjectNNPDataFailed());
     }
     throw error;
   }
 }
 
 export function* fetchVestigingData() {
-  const brkObjectIds = yield select(makeSelectFromObject('id'));
+  const brkObjectIds = yield select(selectors.makeSelectFromObject('id'));
 
   try {
     if (brkObjectIds && brkObjectIds.length) {
       const data = yield all([
         ...brkObjectIds.map(brkObjectId =>
-          call(request, `${API_ROOT}${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
+          call(request, `${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
         ),
       ]);
 
       if (!data.length) {
-        yield put(loadVestigingDataNoResults());
+        yield put(actions.loadVestigingDataNoResults());
       }
 
-      yield put(loadVestigingDataSuccess(data));
+      yield put(actions.loadVestigingDataSuccess(data));
     }
   } catch (error) {
-    yield put(loadVestigingDataFailed());
+    yield put(actions.loadVestigingDataFailed());
     throw error;
   }
 }
 
 export function* fetchNummeraanduidingData(nummeraanduidingId) {
   try {
-    const data = yield call(request, `${API_ROOT}${NUMMERAANDUIDING_API}${nummeraanduidingId}/`);
+    const data = yield call(request, `${NUMMERAANDUIDING_API}${nummeraanduidingId}/`);
 
-    yield put(loadNummeraanduidingSuccess(data));
+    yield put(actions.loadNummeraanduidingSuccess(data));
 
-    const oprId = yield select(makeSelectOpenbareRuimteId());
+    const oprId = yield select(selectors.makeSelectOpenbareRuimteId());
     yield call(fetchOpenbareRuimteData, oprId);
   } catch (error) {
-    yield put(loadNummeraanduidingFailed(error));
+    yield put(actions.loadNummeraanduidingFailed(error));
     throw error;
   }
 }
 
 export function* fetchWoonplaatsData() {
-  const woonplaatsId = yield select(makeSelectWoonplaatsId());
+  const woonplaatsId = yield select(selectors.makeSelectWoonplaatsId());
 
   if (!woonplaatsId) {
-    yield put(loadWoonplaatsDataNoResults());
+    yield put(actions.loadWoonplaatsDataNoResults());
     return;
   }
 
   try {
-    const data = yield call(request, `${API_ROOT}${WOONPLAATS_API}${woonplaatsId}/`);
+    const data = yield call(request, `${WOONPLAATS_API}${woonplaatsId}/`);
 
-    yield put(loadWoonplaatsDataSuccess(data));
+    yield put(actions.loadWoonplaatsDataSuccess(data));
   } catch (error) {
-    yield put(loadWoonplaatsDataFailed(error));
+    yield put(actions.loadWoonplaatsDataFailed(error));
     throw error;
   }
 }
 
 export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
   try {
-    const data = yield call(request, `${API_ROOT}${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
+    const data = yield call(request, `${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, requestOptions);
 
-    yield put(loadVerblijfsobjectDataSuccess(data));
-    yield put(progress(1 / 9));
+    yield put(actions.loadVerblijfsobjectDataSuccess(data));
+    yield put(appActions.progress(1 / 9));
   } catch (error) {
-    yield put(loadVerblijfsobjectDataFailed(error));
+    yield put(actions.loadVerblijfsobjectDataFailed(error));
     throw error;
   }
 }
 
 export function* fetchLigplaatsData(ligplaatsId) {
   try {
-    const data = yield call(request, `${API_ROOT}${LIGPLAATS_API}${ligplaatsId}/`, requestOptions);
+    const data = yield call(request, `${LIGPLAATS_API}${ligplaatsId}/`, requestOptions);
 
-    yield put(loadLigplaatsDataSuccess(data));
-    yield put(progress(1 / 3));
+    yield put(actions.loadLigplaatsDataSuccess(data));
+    yield put(appActions.progress(1 / 3));
   } catch (error) {
-    yield put(loadLigplaatsDataFailed(error));
+    yield put(actions.loadLigplaatsDataFailed(error));
     throw error;
   }
 }
 
 export function* fetchPandlistData(adresseerbaarObjectId) {
   try {
-    const data = yield call(
-      request,
-      `${API_ROOT}${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`,
-      requestOptions,
-    );
+    const data = yield call(request, `${PAND_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`, requestOptions);
 
     if (data.count) {
-      yield put(loadPandlistDataSuccess());
-      yield put(progress(6 / 9));
+      yield put(actions.loadPandlistDataSuccess());
+      yield put(appActions.progress(6 / 9));
 
       const { landelijk_id: landelijkId } = data.results[0];
       yield call(fetchPandData, landelijkId);
     } else {
-      yield put(loadPandlistDataNoResults());
+      yield put(actions.loadPandlistDataNoResults());
     }
   } catch (error) {
-    yield put(loadPandlistDataFailed(error));
+    yield put(actions.loadPandlistDataFailed(error));
     throw error;
   }
 }
 
 export function* fetchPandData(landelijkId) {
   try {
-    const data = yield call(request, `${API_ROOT}${PAND_API}${landelijkId}/`);
+    const data = yield call(request, `${PAND_API}${landelijkId}/`);
 
-    yield put(loadPandDataSuccess(data));
-    yield put(progress(7 / 9));
+    yield put(actions.loadPandDataSuccess(data));
+    yield put(appActions.progress(7 / 9));
   } catch (error) {
-    yield put(loadPandDataFailed(error));
+    yield put(actions.loadPandDataFailed(error));
     throw error;
   }
 }
 
 export default function* watchAccommodationObjectPageSaga() {
   yield spawn(appSaga);
-  yield spawn(searchSaga);
   yield takeLatest(LOAD_BAG_DATA, fetchData);
 }
