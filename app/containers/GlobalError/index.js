@@ -14,22 +14,65 @@ import appMessages from 'containers/App/messages';
 import { resetGlobalError } from '../App/actions';
 
 import errorMessages from './messages';
-import './style.scss';
 
 const StyledIcon = styled(Icon)`
   filter: invert(1);
 `;
 
+const ErrorWrapper = styled.div`
+  background-color: #ec0000;
+  color: white;
+`;
+
+const ErrorContainer = styled.div`
+  max-width: 1024px;
+  padding: 11px 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const P = styled.p`
+  margin: 0;
+  float: left;
+  max-width: calc(100% - 30px);
+`;
+
+const Button = styled.button`
+  height: 25px;
+  margin-left: 10px;
+  width: 25px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  float: right;
+  background: transparent;
+  cursor: pointer;
+`;
+
+const Label = styled.span`
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+`;
+
 export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
-      <div className="global-error cf">
-        <p>{intl.formatMessage(errorMessages[errorMessage])}</p>
-        <button type="button" className="global-error__close-button" onClick={onClose}>
-          <StyledIcon iconUrl={`url('${close}');`} size={14} padding={0} inline />
-          <span className="label">{intl.formatMessage(appMessages.close)}</span>
-        </button>
-      </div>
+      <ErrorWrapper>
+        <ErrorContainer className="cf">
+          <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
+          <Button type="button" onClick={onClose}>
+            <StyledIcon iconUrl={`url('${close}');`} size={14} padding={0} inline />
+            <Label>{intl.formatMessage(appMessages.close)}</Label>
+          </Button>
+        </ErrorContainer>
+      </ErrorWrapper>
     ) : (
       ''
     )}
