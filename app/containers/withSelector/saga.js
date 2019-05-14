@@ -192,7 +192,7 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
 }
 
 export function* fetchVestigingData() {
-  const cacheId = 'ves_';
+  const cacheId = 'ves';
   const brkObjectIds = yield select(selectors.makeSelectFromObject('id'));
 
   try {
