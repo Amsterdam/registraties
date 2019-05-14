@@ -26,7 +26,7 @@ const ErrorWrapper = styled.div`
 
 const ErrorContainer = styled.div`
   max-width: 1024px;
-  padding: 11px 20px;
+  padding: 11px 16px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -64,8 +64,8 @@ const Label = styled.span`
 export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
-      <ErrorWrapper>
-        <ErrorContainer className="cf">
+      <ErrorWrapper className="cf">
+        <ErrorContainer>
           <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
           <Button type="button" onClick={onClose}>
             <StyledIcon iconUrl={`url('${close}');`} size={14} padding={0} inline />

@@ -6,6 +6,10 @@ import chevronRight from '@datapunt/asc-assets/lib/Icons/Chevron-Right.svg';
 
 const StyledT = styled(T)`
   padding: 0 !important;
+
+  &:focus {
+    outline: 4px solid #ffc90e !important;
+  }
 `;
 
 const StyledIcon = styled(Icon)`
@@ -15,7 +19,7 @@ const StyledIcon = styled(Icon)`
 
 const Link = ({ href, onClick, className, label, ...rest }) => (
   <StyledT element="a" href={href} onClick={onClick} className={className} {...rest}>
-    <StyledIcon iconUrl={`url('${chevronRight}');`} size={14} padding={0} inline />
+    <StyledIcon iconUrl={`url('${chevronRight}');`} size={14} padding={0} inline color="primary" />
     <span className="linklabel">{label}</span>
   </StyledT>
 );

@@ -43,5 +43,8 @@
   "basisregistratie-wonen.extra_fields": "Extra velden",
   "basisregistratie-wonen.residence": "Woonplaats",
   "basisregistratie-wonen.address": "Adres",
-  "basisregistratie-wonen.on_this_page": "Op deze pagina"
+  "basisregistratie-wonen.on_this_page": "Op deze pagina",
+  "basisregistratie-wonen.unknown_error": "Er is een onbekende fout opgetreden. Het kan zijn dat een van de databronnen niet beschikbaar is. Probeer het over een paar minuten nogmaals.",
+  "basisregistratie-wonen.server_error": "Er is een fout opgetreden op de server. Niet alle gegevens uit de databronnen kunnen opgehaald worden. Probeer het over een paar minuten nogmaals.",
+  "basisregistratie-wonen.service_unavailable": "Een van de databronnen is niet beschikbaar. Probeer het over een paar minuten nogmaals."
 }
