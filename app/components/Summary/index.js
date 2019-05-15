@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { SectionHeading } from 'containers/AccommodationObjectPage/styled';
 import messages from 'containers/App/messages';
+import LoadingIndicator from 'components/LoadingIndicator';
 
 const Dt = styled.dt`
   font-family: Avenir Next LT W01 Demi;
@@ -26,7 +27,9 @@ const Summary = ({ data, intl: { locale, formatMessage } }) => (
           </Fragment>
         ))}
       </dl>
-    ) : null}
+    ) : (
+      <LoadingIndicator />
+    )}
   </>
 );
 
