@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray, isObject, isValidSubjectNP, isValidSubjectNNP } from 'utils';
+import { formatData, isArray, isObject, isValidSubjectNP, isValidSubjectNNP, isAppartment } from 'utils';
 import messages from 'containers/App/messages';
 
 export const selectBAG = state => state.bag;
@@ -229,6 +229,23 @@ export const makeSelectKadastraalSubjectNNPData = () =>
       }
 
       return results;
+    },
+  );
+
+export const makeSelectFromObjectAppartment = key =>
+  createSelector(
+    selectKadastraalObject,
+    state => {
+      const { data: { results } = {} } = state;
+
+      if (!results || !isArray(results) || !results.length) {
+        return undefined;
+      }
+
+      return results
+        .filter(isAppartment)
+        .map(item => item[key])
+        .filter(Boolean);
     },
   );
 
