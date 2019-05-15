@@ -1,15 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export const MapWrapper = styled.div`
-  height: 200px;
-  width: 100%;
-`;
-
-export const MapContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 export const ArticleHeading = styled.h2`
   ${({ marginCollapse }) =>
     marginCollapse &&

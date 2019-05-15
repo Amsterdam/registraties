@@ -24,9 +24,9 @@ import Summary from 'containers/Summary';
 import Woonplaats from 'containers/Woonplaats';
 
 import TOC from 'containers/TOC';
-import Map from 'components/Map';
+import Map from 'containers/Map';
 
-import { MapWrapper, MapContainer, ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
+import { ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const { intl, status, coordinates } = this.props;
+    const { intl, status } = this.props;
     const { notitie, filledInBy } = this.state;
     const { formatMessage } = intl;
 
@@ -113,28 +113,20 @@ export class AccommodationObjectPageComponent extends Component {
         </main>
 
         <Aside className="col-4">
+          <TOC />
+
+          <Summary />
+
+          <Map marker search={false} zoom={14} />
+
           {status === LOAD_DATA_SUCCESS && (
             <>
-              <TOC />
-
-              <Summary />
-
-              {coordinates && (
-                <section>
-                  <MapWrapper>
-                    <MapContainer className="cf">
-                      <Map coords={coordinates} marker search={false} zoom={14} />
-                    </MapContainer>
-                  </MapWrapper>
-                </section>
-              )}
-
               <section className="invoer no-print">
                 <header>
                   <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
                 </header>
 
-                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}</label>
+                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</label>
                 <Textarea
                   className="input"
                   name="notitie"
@@ -144,7 +136,7 @@ export class AccommodationObjectPageComponent extends Component {
                   onChange={this.onInput}
                 />
 
-                <label htmlFor="inputFilledInBy">Ingevuld door:</label>
+                <label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</label>
                 <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
@@ -164,15 +156,10 @@ export class AccommodationObjectPageComponent extends Component {
 }
 
 AccommodationObjectPageComponent.defaultProps = {
-  coordinates: undefined,
   status: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
-  coordinates: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-  }),
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
