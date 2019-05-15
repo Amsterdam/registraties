@@ -201,3 +201,10 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
 export const isValidSubjectNP = ({ geboortedatum, naam }) => !!geboortedatum && !!naam;
 
 export const isValidSubjectNNP = ({ kvknummer, rsin }) => !!kvknummer && !!rsin;
+
+const reKadastraalObjectNr = /[A-Z]{3}\d{2}\s?[A-Z]\s?\d{4,5}\s?(A|G)\s?\d{1,4}/;
+
+export const isAppartment = ({ aanduiding }) => {
+  const [, indexLetter] = aanduiding.match(reKadastraalObjectNr);
+  return indexLetter.toLowerCase() === 'a';
+};

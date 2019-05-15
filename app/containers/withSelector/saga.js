@@ -163,7 +163,7 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
 }
 
 export function* fetchVestigingData() {
-  const brkObjectIds = yield select(selectors.makeSelectFromObject('id'));
+  const brkObjectIds = yield select(selectors.makeSelectFromObjectAppartment('id'));
 
   try {
     if (brkObjectIds && brkObjectIds.length) {
