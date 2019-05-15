@@ -91,4 +91,7 @@ export default defineMessages({
   on_this_page: {
     id: `${scope}.on_this_page`,
   },
+  filled_in_by: {
+    id: `${scope}.filled_in_by`,
+  },
 });
