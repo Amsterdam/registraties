@@ -7,7 +7,6 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import { makeSelectStatus } from 'containers/App/selectors';
-import { makeSelectCoordinates } from './selectors';
 
 import * as reducers from './reducer';
 import saga from './saga';
@@ -22,7 +21,6 @@ const withSelectors = WrappedComponent => {
   }
 
   const mapStateToProps = createStructuredSelector({
-    coordinates: makeSelectCoordinates(),
     status: makeSelectStatus(),
   });
 
