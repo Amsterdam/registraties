@@ -46,7 +46,7 @@ const Hint = styled.div`
 
 const Wrapper = styled.div`
   min-width: 70px;
-  max-width: 620px;
+  max-width: 1024px;
   width: 100%;
   z-index: 1;
   position: relative;
@@ -70,6 +70,8 @@ const StyledToggle = styled(Toggle)`
 const FoldOut = styled.div`
   display: ${({ active }) => (active ? 'block' : 'none')};
   padding-bottom: 30px;
+  max-width: 620px;
+  margin: 0 auto;
 `;
 
 const Search = forwardRef(
