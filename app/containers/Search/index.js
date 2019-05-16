@@ -107,7 +107,6 @@ class SearchContainer extends Component {
 
     return (
       <Search
-        intl={intl}
         onChange={this.onChange}
         onFocus={this.onFocus}
         onSelect={this.onSelect}
