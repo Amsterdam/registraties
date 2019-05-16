@@ -20,4 +20,7 @@ export default defineMessages({
   service_unavailable: {
     id: `${scope}.service_unavailable`,
   },
+  resource_not_found: {
+    id: `${scope}.resource_not_found`,
+  },
 });

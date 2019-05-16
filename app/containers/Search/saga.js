@@ -17,8 +17,7 @@ const requestOptions = {
 
 export function* inputChange(action) {
   const input = action.payload;
-  // const labels = ['Adressen', 'Kadastrale objecten', 'Monumenten'];
-  const labels = ['Adressen'];
+  const labels = ['Adressen', 'Kadastrale objecten'];
 
   try {
     const data = yield call(request, `${API_ROOT}${TYPEAHEAD_API}${input}`, requestOptions);

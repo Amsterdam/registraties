@@ -19,7 +19,6 @@ class SearchContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.placeholder = this.props.intl.formatMessage(messages.search_placeholder);
     this.inputRef = createRef();
     this.suggestRef = createRef();
 
@@ -102,7 +101,7 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, intl } = this.props;
     const { showSuggest } = this.state;
     const visibleResults = showSuggest ? results : {};
 
@@ -118,6 +117,10 @@ class SearchContainer extends Component {
         ref={this.inputRef}
         suggestRef={this.suggestRef}
         results={visibleResults}
+        formLegendLabel={intl.formatMessage(messages.search_form_legend)}
+        searchTermLabel={intl.formatMessage(messages.search_term)}
+        searchHintLabel={intl.formatMessage(messages.search_hint)}
+        searchLabel={intl.formatMessage(messages.search)}
         as="form"
       />
     );
