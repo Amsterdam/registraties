@@ -28,7 +28,7 @@ const StyledIcon = styled.button`
 
 const SearchToggle = ({ active, onClick, className, label }) => (
   <StyledIcon size={20} padding={0} className={className} onClick={onClick}>
-    {active ? <CloseIcon /> : <SearchIcon />}
+    {active ? <CloseIcon width={20} /> : <SearchIcon width={20} />}
     <span className="visuallyhidden">{label}</span>
   </StyledIcon>
 );
