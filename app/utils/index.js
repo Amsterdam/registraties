@@ -8,12 +8,12 @@ const currencyFields = ['koopsom'];
 /**
  * Kadastraal object nummer regular expression
  */
-export const reKadastraalObjectNr = /([A-Z]{3}\d{2})\s?([A-Z]{1,2})\s?(\d{4,5})\s?(A|G)\s?(\d{1,4})/;
+export const reKadastraalObjectNr = /([A-Z]{3}\d{2})\s?([A-Z]{1,2})\s?(\d{4,5})\s?(A|G)\s?(\d{,4})/;
 
 /**
  * Kadastraal object nummer regular expression with groups
  */
-export const reKadastraalObjectNrGroups = /(?<gemeente>[A-Z]{3}\d{2})\s?(?<sectie>[A-Z]{1,2})\s?(?<objectNummer>\d{4,5})\s?(?<indexLetter>A|G)\s?(?<indexNummer>\d{1,4})/;
+export const reKadastraalObjectNrGroups = /(?<gemeente>[A-Z]{3}\d{2})\s?(?<sectie>[A-Z]{1,2})\s?(?<objectNummer>\d{4,5})\s?(?<indexLetter>A|G)\s?(?<indexNummer>\d{,4})/;
 
 /**
  * Object detector

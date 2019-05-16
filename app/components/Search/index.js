@@ -38,24 +38,13 @@ const Input = styled.input`
   }
 `;
 
-const StyledSuggest = styled(Suggest)`
-  background: white;
-  position: absolute;
-  border: #767676 solid 1px;
-  min-width: 70px;
-  max-width: 620px;
-  width: 100%;
-  top: calc(100% - 4px);
-  padding-top: 8px !important;
-`;
-
 const Wrapper = styled.div`
   min-width: 70px;
   max-width: 620px;
   width: 100%;
 `;
 
-const Search = forwardRef(({ onChange, onSelect, results, placeholder, onSubmit }, ref) => (
+const Search = forwardRef(({ onChange, onFocus, onSelect, results, placeholder, onSubmit, suggestRef }, ref) => (
   <Form action="" onSubmit={onSubmit} className="no-print">
     <Wrapper>
       <Input
@@ -66,22 +55,26 @@ const Search = forwardRef(({ onChange, onSelect, results, placeholder, onSubmit 
         type="text"
         defaultValue=""
         onChange={onChange}
+        onFocus={onFocus}
         ref={ref}
       />
-      {Object.keys(results).length > 0 && <StyledSuggest items={results} onSelect={onSelect} />}
+      <Suggest items={results} onSelect={onSelect} ref={suggestRef} as="ul" />
     </Wrapper>
   </Form>
 ));
 
 Search.defaultProps = {
+  onFocus: null,
   onSubmit: null,
   placeholder: '',
   results: {},
+  suggestRef: undefined,
 };
 
 Search.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
   results: PropTypes.shape({
@@ -110,6 +103,7 @@ Search.propTypes = {
       }),
     ),
   }),
+  suggestRef: PropTypes.shape({}),
 };
 
 export default Search;
