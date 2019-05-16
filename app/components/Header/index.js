@@ -5,9 +5,9 @@ import { intlShape } from 'react-intl';
 
 import SearchContainer from 'containers/Search';
 import CONFIGURATION from 'shared/services/configuration/configuration';
-import loginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
-import logoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
-import { Header as HeaderComponent, Icon } from '@datapunt/asc-ui';
+import LoginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
+import LogoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
+import { Header as HeaderComponent } from '@datapunt/asc-ui';
 import messages from './messages';
 
 const StyledHeader = styled(HeaderComponent)`
@@ -48,9 +48,14 @@ const StyledNav = styled.nav`
       margin-right: 5px;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: #ec0000;
       text-decoration: underline;
+
+      svg {
+        fill: #ec0000;
+      }
     }
   }
 `;
@@ -66,13 +71,13 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
             <>
               <li>
                 <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                  <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
+                  <LoginIcon width={20} />
                   {intl.formatMessage(messages.log_in)}
                 </button>
               </li>
               <li>
                 <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
-                  <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
+                  <LoginIcon width={20} />
                   {intl.formatMessage(messages.log_in_adw)}
                 </button>
               </li>
@@ -81,7 +86,7 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
           {isAuthenticated ? (
             <li>
               <button type="button" onClick={onLoginLogoutButtonClick}>
-                <Icon iconUrl={`url('${logoutIcon}');`} padding={0} inline />
+                <LogoutIcon width={20} />
                 {intl.formatMessage(messages.log_out)}
               </button>
             </li>

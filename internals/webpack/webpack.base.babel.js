@@ -27,7 +27,8 @@ module.exports = options => ({
     rules: [
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack', 'url-loader'],
+        exclude: /asc-ui/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /.scss$/,
@@ -60,19 +61,20 @@ module.exports = options => ({
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: 'file-loader',
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: [
-      //     {
-      //       loader: 'svg-url-loader',
-      //       options: {
-      //         // Inline files smaller than 10 kB
-      //         limit: 10 * 1024,
-      //         noquotes: true,
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.svg$/,
+        include: /asc-ui/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              // Inline files smaller than 10 kB
+              limit: 10 * 1024,
+              noquotes: true,
+            },
+          },
+        ],
+      },
       {
         test: /\.(jpg|png|gif)$/,
         use: [
