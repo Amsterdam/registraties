@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { intlShape } from 'react-intl';
 
-import SearchContainer from 'containers/Search';
 import CONFIGURATION from 'shared/services/configuration/configuration';
 import loginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
 import logoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
@@ -29,6 +28,7 @@ const StyledHeader = styled(HeaderComponent)`
 
 const HeaderWrapper = styled.div`
   position: relative;
+  z-index: 0;
 `;
 
 const StyledNav = styled.nav`
@@ -58,8 +58,6 @@ const StyledNav = styled.nav`
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper>
     <StyledHeader title="Basisregistratie Wonen" homeLink={CONFIGURATION.ROOT} tall fullWidth>
-      <SearchContainer />
-
       <StyledNav className="no-print">
         <ul className="links horizontal">
           {!isAuthenticated && (

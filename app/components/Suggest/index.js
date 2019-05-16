@@ -13,19 +13,17 @@ const StyledLink = styled(Link)`
 
 const Ul = styled.ul`
   background: white;
-  position: absolute;
-  border-top: #767676 solid 1px;
+  border-top: none;
   ${({ numItems }) =>
     numItems > 0 &&
     css`
       border: #767676 solid 1px;
     `}
-  min-width: 70px;
-  max-width: 620px;
   width: 100%;
-  top: calc(100% - 4px);
-  padding-top: 8px !important;
-  z-index: -1;
+
+  li:first-of-type {
+    margin-top: 8px !important;
+  }
 `;
 
 /* eslint-disable indent,react/jsx-indent */

@@ -39,13 +39,17 @@
   "basisregistratie-wonen.unauthorized": "Je moet ingelogd zijn om alle gegevens uit de basisregistratie te kunnen raadplegen.",
   "basisregistratie-wonen.unknown": "n.b.",
   "basisregistratie-wonen.yes": "Ja",
-  "basisregistratie-wonen.search_placeholder": "Zoek data op adres, postcode, nummeraanduiding-ID of verblijfsobject-ID.",
+  "basisregistratie-wonen.search_hint": "Doorzoek de basisregistratie op adres, postcode, nummeraanduiding-ID, verblijfsobject-ID of kadastraal objectaanduiding",
+  "basisregistratie-wonen.search": "Zoeken",
+  "basisregistratie-wonen.search_term": "Zoekterm",
+  "basisregistratie-wonen.search_form_legend": "Doorzoeken basisregistratie",
   "basisregistratie-wonen.extra_fields": "Extra velden",
   "basisregistratie-wonen.residence": "Woonplaats",
   "basisregistratie-wonen.address": "Adres",
   "basisregistratie-wonen.on_this_page": "Op deze pagina",
-  "basisregistratie-wonen.unknown_error": "Er is een onbekende fout opgetreden. Het kan zijn dat een van de databronnen niet beschikbaar is. Probeer het over een paar minuten nogmaals.",
+  "basisregistratie-wonen.unknown_error": "Er is een onbekende fout opgetreden. Het kan zijn dat een van de databronnen niet beschikbaar is. Probeer het over enkele minuten nogmaals.",
   "basisregistratie-wonen.server_error": "Er is een fout opgetreden op de server. Niet alle gegevens uit de databronnen kunnen opgehaald worden. Probeer het over een paar minuten nogmaals.",
   "basisregistratie-wonen.service_unavailable": "Een van de databronnen is niet beschikbaar. Probeer het over een paar minuten nogmaals.",
-  "basisregistratie-wonen.filled_in_by": "Ingevuld door"
+  "basisregistratie-wonen.filled_in_by": "Ingevuld door",
+  "basisregistratie-wonen.resource_not_found": "Een of meerdere databronnen zijn niet beschikbaar of rerourneerden geen gegevens. Controleer het URL of probeer het over enkele minuten nogmaals."
 }
