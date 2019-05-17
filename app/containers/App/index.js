@@ -37,7 +37,7 @@ export const App = ({ onAuthenticateUser, showError }) => {
         <Header />
         <Search />
         <GlobalError />
-        <div className="content container">
+        <main className="content container">
           <Switch>
             <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
             <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
@@ -45,7 +45,7 @@ export const App = ({ onAuthenticateUser, showError }) => {
             <Route path="/" component={HomePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
-        </div>
+        </main>
         <div className="container-fluid">
           <Footer />
         </div>

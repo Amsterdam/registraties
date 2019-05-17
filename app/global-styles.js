@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
       min-height: 60vh;
       margin-top: 20px;
 
-      @media screen and (max-width:576px) {
+      @media screen and (max-width: 576px) {
         margin-top: 0;
       }
     }
