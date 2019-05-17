@@ -10,6 +10,10 @@ const Form = styled.form`
   justify-content: center;
   width: 100%;
   background-color: #f5f5f5;
+
+  @media (max-width: 1200px) {
+    padding-top: 100px;
+  }
 `;
 
 const Label = styled.label`
@@ -45,11 +49,20 @@ const Hint = styled.div`
 `;
 
 const Wrapper = styled.div`
-  min-width: 70px;
   max-width: 1024px;
   width: 100%;
   z-index: 1;
   position: relative;
+`;
+
+const Container = styled.div`
+  min-width: 70px;
+  max-width: 620px;
+  margin: 0 auto;
+
+  @media (max-width: 650px) {
+    max-width: calc(100vw - 30px);
+  }
 `;
 
 const SuggestWrapper = styled.div`
@@ -59,6 +72,11 @@ const SuggestWrapper = styled.div`
   width: 100%;
   bottom: -71px;
   z-index: -1;
+  // left: calc(50% - 620px / 2);
+
+  @media (max-width: 650px) {
+    max-width: calc(100vw - 30px);
+  }
 `;
 
 const StyledToggle = styled(Toggle)`
@@ -99,25 +117,27 @@ const Search = forwardRef(
         <Wrapper>
           <StyledToggle onClick={() => setActive(!active)} active={active} label={searchLabel} />
 
-          <FoldOut active={active}>
-            <Label htmlFor="searchInput">{searchTermLabel}</Label>
-            <Hint>{searchHintLabel}</Hint>
-            <Input
-              autoCapitalize="off"
-              autoCorrect="off"
-              defaultValue=""
-              id="searchInput"
-              onChange={onChange}
-              onFocus={onFocus}
-              ref={ref}
-              spellCheck={false}
-              type="text"
-            />
-          </FoldOut>
+          <Container>
+            <FoldOut active={active}>
+              <Label htmlFor="searchInput">{searchTermLabel}</Label>
+              <Hint>{searchHintLabel}</Hint>
+              <Input
+                autoCapitalize="off"
+                autoCorrect="off"
+                defaultValue=""
+                id="searchInput"
+                onChange={onChange}
+                onFocus={onFocus}
+                ref={ref}
+                spellCheck={false}
+                type="text"
+              />
+            </FoldOut>
 
-          <SuggestWrapper>
-            <Suggest items={results} onSelect={onSelect} ref={suggestRef} as="ul" />
-          </SuggestWrapper>
+            <SuggestWrapper>
+              <Suggest items={results} onSelect={onSelect} ref={suggestRef} as="ul" />
+            </SuggestWrapper>
+          </Container>
         </Wrapper>
       </Form>
     );

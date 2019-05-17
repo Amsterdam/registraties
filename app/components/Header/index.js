@@ -28,7 +28,7 @@ const StyledHeader = styled(HeaderComponent)`
 
 const HeaderWrapper = styled.div`
   position: relative;
-  z-index: 0;
+  z-index: 2;
 `;
 
 const StyledNav = styled.nav`
@@ -58,6 +58,15 @@ const StyledNav = styled.nav`
       }
     }
   }
+
+  @media (max-width: 720px) {
+    right: 0;
+
+    .login-adw,
+    span {
+      display: none;
+    }
+  }
 `;
 
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
@@ -68,15 +77,15 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
           {!isAuthenticated && (
             <>
               <li>
-                <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
+                <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
                   <LoginIcon width={20} />
-                  {intl.formatMessage(messages.log_in)}
+                  <span>{intl.formatMessage(messages.log_in)}</span>
                 </button>
               </li>
               <li>
-                <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
+                <button className="login-adw" type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
                   <LoginIcon width={20} />
-                  {intl.formatMessage(messages.log_in_adw)}
+                  <span>{intl.formatMessage(messages.log_in_adw)}</span>
                 </button>
               </li>
             </>
@@ -85,7 +94,7 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
             <li>
               <button type="button" onClick={onLoginLogoutButtonClick}>
                 <LogoutIcon width={20} />
-                {intl.formatMessage(messages.log_out)}
+                <span>{intl.formatMessage(messages.log_out)}</span>
               </button>
             </li>
           ) : (

@@ -4,6 +4,7 @@ import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import equal from 'fast-deep-equal';
+import styled from 'styled-components';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
@@ -27,6 +28,26 @@ import TOC from 'containers/TOC';
 import Map from 'containers/Map';
 
 import { ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
+
+const Wrapper = styled.div`
+  @media (max-width: 920px) {
+    flex-direction: column;
+
+    & > * {
+      padding-top: 1em;
+      max-width: 100vw !important;
+
+      &:first-child {
+        border-top: 2px solid gray;
+        margin-top: 30px;
+      }
+    }
+
+    & > :first-child {
+      order: 2;
+    }
+  }
+`;
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -77,9 +98,9 @@ export class AccommodationObjectPageComponent extends Component {
     const { formatMessage } = intl;
 
     return (
-      <div className="row justify-content-lg-between">
-        <main className="col-7">
-          <article>
+      <Wrapper className="row justify-content-lg-between content-md-between">
+        <article className="col-7">
+          <section>
             <header>
               <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
             </header>
@@ -93,9 +114,9 @@ export class AccommodationObjectPageComponent extends Component {
             <Verblijfsobject />
 
             <Pand />
-          </article>
+          </section>
 
-          <article>
+          <section>
             <header>
               <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
             </header>
@@ -109,8 +130,8 @@ export class AccommodationObjectPageComponent extends Component {
             <Vestiging />
 
             <Gebied />
-          </article>
-        </main>
+          </section>
+        </article>
 
         <Aside className="col-4">
           <TOC />
@@ -150,7 +171,7 @@ export class AccommodationObjectPageComponent extends Component {
             </>
           )}
         </Aside>
-      </div>
+      </Wrapper>
     );
   }
 }

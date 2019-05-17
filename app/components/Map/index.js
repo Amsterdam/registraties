@@ -11,6 +11,8 @@ import { rdToWgs84 } from 'shared/services/crs-converter/crs-converter';
 export const MapWrapper = styled.div`
   height: 200px;
   width: 100%;
+  position: relative;
+  z-index: 0;
 `;
 
 const Map = ({ center, coordinates, marker, search, zoom }) => {
