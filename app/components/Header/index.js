@@ -29,6 +29,10 @@ const StyledHeader = styled(HeaderComponent)`
 const HeaderWrapper = styled.div`
   position: relative;
   z-index: 2;
+
+  @media (min-width: 1200px) {
+    z-index: 0;
+  }
 `;
 
 const StyledNav = styled.nav`
