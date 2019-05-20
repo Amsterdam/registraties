@@ -3,9 +3,7 @@ import { css } from 'styled-components';
 /* eslint-disable prettier/prettier */
 
 const progressWidth = 60;
-// const progressHalfWidth = '30px';
 const progressBorderWidth = 6;
-// const progressPiePartWidth = '60px';
 const wrapperPadding = 20;
 
 const wrapper = css`
@@ -93,7 +91,7 @@ export const undetermined = {
     text-indent: -99999em;
     transform: translate3D(0, 0, 0);
     vertical-align: middle;
-    margin: ${({ inline }) => (inline ? 0 : '20px 20px 5px')};
+    margin: ${({ inline, scaleFactor }) => (inline ? 0 : `${wrapperPadding * scaleFactor}px ${wrapperPadding * scaleFactor}px ${(wrapperPadding * scaleFactor) / 4}px`)};
 
     @keyframes rotate {
       0% {
