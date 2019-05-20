@@ -12,6 +12,7 @@ import Header from 'containers/Header/Loadable';
 import GlobalError from 'containers/GlobalError';
 import { authenticate, isAuthenticated } from 'shared/services/auth/auth';
 import Progress from 'containers/Progress';
+import Search from 'containers/Search';
 
 import { ThemeProvider } from '@datapunt/asc-ui';
 
@@ -34,8 +35,9 @@ export const App = ({ onAuthenticateUser, showError }) => {
       <div className="container app-container">
         <Progress />
         <Header />
+        <Search />
         <GlobalError />
-        <div className="content container">
+        <main className="content container">
           <Switch>
             <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
             <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
@@ -43,7 +45,7 @@ export const App = ({ onAuthenticateUser, showError }) => {
             <Route path="/" component={HomePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
-        </div>
+        </main>
         <div className="container-fluid">
           <Footer />
         </div>

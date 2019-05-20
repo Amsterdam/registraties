@@ -42,21 +42,42 @@ const getNotInCache = (cacheData, sourceData) =>
       return null;
     })
     .filter(Boolean);
+// current application request progress
+let progress = 0;
+// maximum number of requests expected
+let progressMaxCount = 10;
+
+export function* incrementProgress() {
+  progress += 1;
+  yield put(appActions.progress(progress / progressMaxCount));
+}
 
 export function* fetchData(action) {
+  progress = 0;
   yield put(appActions.statusPending());
 
-  const { vboId, ligId } = action.payload;
+  const { vboId, ligId, brkId } = action.payload;
 
   try {
     let nummeraanduidingId;
-    if (vboId) {
-      yield call(fetchVerblijfsobjectData, vboId);
-      yield call(fetchKadastraalObjectData, vboId);
-      yield call(fetchPandlistData, vboId);
+    let landelijkVboId;
+
+    if (brkId) {
+      progressMaxCount = 11;
+      // fetch vboId from VERBLIJFSOBJECT_API with brkId param
+      landelijkVboId = yield call(fetchVerblijfsobjectId, brkId);
+    }
+
+    const vboIdentifier = vboId || landelijkVboId;
+
+    if (vboIdentifier) {
+      yield call(fetchVerblijfsobjectData, vboIdentifier);
+      yield call(fetchKadastraalObjectData, vboIdentifier);
+      yield call(fetchPandlistData, vboIdentifier);
 
       nummeraanduidingId = yield select(selectors.makeSelectVBONummeraanduidingId());
     } else if (ligId) {
+      progressMaxCount = 4;
       yield put(actions.loadKadastraalObjectDataNoResults());
       yield put(actions.loadKadastraalSubjectNPDataNoResults());
       yield put(actions.loadKadastraalSubjectNNPDataNoResults());
@@ -85,6 +106,8 @@ export function* fetchData(action) {
       }
 
       yield put(appActions.statusUnauthorized());
+    } else if (error.response && error.response.status === 404) {
+      yield put(appActions.showGlobalError('resource_not_found'));
     } else if (error.response && error.response.status === 500) {
       yield put(appActions.showGlobalError('server_error'));
     } else if (error.response && error.response.status === 503) {
@@ -110,6 +133,7 @@ export function* fetchOpenbareRuimteData(openbareRuimteId) {
     }
 
     yield put(actions.loadOpenbareRuimteDataSuccess(data));
+    yield call(incrementProgress);
   } catch (error) {
     yield put(actions.loadOpenbareRuimteDataFailed(error));
   }
@@ -130,16 +154,16 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
 
     if (count) {
       yield put(actions.loadKadastraalObjectDataSuccess(data));
-      yield put(appActions.progress(2 / 9));
+      yield call(incrementProgress);
 
       yield call(fetchKadastraalSubjectData, true);
-      yield put(appActions.progress(3 / 9));
+      yield call(incrementProgress);
 
       yield call(fetchKadastraalSubjectData, false);
-      yield put(appActions.progress(4 / 9));
+      yield call(incrementProgress);
 
       yield call(fetchVestigingData);
-      yield put(appActions.progress(5 / 9));
+      yield call(incrementProgress);
     } else {
       yield put(actions.loadKadastraalObjectDataNoResults());
       yield put(actions.loadKadastraalSubjectNPDataNoResults());
@@ -206,7 +230,7 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
 
 export function* fetchVestigingData() {
   const cacheId = 'ves';
-  const brkObjectIds = yield select(selectors.makeSelectFromObject('id'));
+  const brkObjectIds = yield select(selectors.makeSelectFromObjectAppartment('id'));
 
   try {
     if (brkObjectIds && brkObjectIds.length) {
@@ -251,6 +275,7 @@ export function* fetchNummeraanduidingData(nummeraanduidingId) {
     }
 
     yield put(actions.loadNummeraanduidingSuccess(data));
+    yield call(incrementProgress);
 
     const oprId = yield select(selectors.makeSelectOpenbareRuimteId());
     yield call(fetchOpenbareRuimteData, oprId);
@@ -278,8 +303,33 @@ export function* fetchWoonplaatsData() {
     }
 
     yield put(actions.loadWoonplaatsDataSuccess(data));
+    yield call(incrementProgress);
   } catch (error) {
     yield put(actions.loadWoonplaatsDataFailed(error));
+    throw error;
+  }
+}
+
+// eslint-disable-next-line consistent-return
+export function* fetchVerblijfsobjectId(adresseerbaarObjectId) {
+  try {
+    const data = yield call(
+      request,
+      `${VERBLIJFSOBJECT_API}?kadastrale_objecten__id=${encodeURIComponent(adresseerbaarObjectId)}`,
+      requestOptions,
+    );
+
+    yield call(incrementProgress);
+
+    if (!data.count) {
+      yield put(actions.loadVerblijfsobjectIdNoResults());
+    } else {
+      const { results } = data;
+      yield put(actions.loadVerblijfsobjectIdSuccess(data));
+      return results[0].landelijk_id;
+    }
+  } catch (error) {
+    yield put(actions.loadVerblijfsobjectIdFailed(error));
     throw error;
   }
 }
@@ -296,7 +346,8 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
     }
 
     yield put(actions.loadVerblijfsobjectDataSuccess(data));
-    yield put(appActions.progress(1 / 9));
+    // yield put(appActions.progress(1 / 9));
+    yield call(incrementProgress);
   } catch (error) {
     yield put(actions.loadVerblijfsobjectDataFailed(error));
     throw error;
@@ -315,7 +366,8 @@ export function* fetchLigplaatsData(ligplaatsId) {
     }
 
     yield put(actions.loadLigplaatsDataSuccess(data));
-    yield put(appActions.progress(1 / 3));
+    // yield put(appActions.progress(1 / 3));
+    yield call(incrementProgress);
   } catch (error) {
     yield put(actions.loadLigplaatsDataFailed(error));
     throw error;
@@ -339,7 +391,7 @@ export function* fetchPandlistData(adresseerbaarObjectId) {
 
     if (data.count) {
       yield put(actions.loadPandlistDataSuccess());
-      yield put(appActions.progress(6 / 9));
+      yield call(incrementProgress);
 
       const { landelijk_id: landelijkId } = data.results[0];
       yield call(fetchPandData, landelijkId);
@@ -364,7 +416,7 @@ export function* fetchPandData(landelijkId) {
     }
 
     yield put(actions.loadPandDataSuccess(data));
-    yield put(appActions.progress(7 / 9));
+    yield call(incrementProgress);
   } catch (error) {
     yield put(actions.loadPandDataFailed(error));
     throw error;

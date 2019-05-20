@@ -1,23 +1,26 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import Toggle from 'components/SearchToggle';
 import Suggest from 'components/Suggest';
 
 const Form = styled.form`
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: #f5f5f5;
 
-  legend {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  @media (max-width: 1200px) {
+    padding-top: 100px;
   }
+`;
+
+const Label = styled.label`
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 25px;
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -25,6 +28,7 @@ const Input = styled.input`
   height: 44px;
   padding: 9px 9px 11px;
   width: 100%;
+  margin: 10px 0;
 
   &,
   &::placeholder {
@@ -38,62 +42,122 @@ const Input = styled.input`
   }
 `;
 
-const StyledSuggest = styled(Suggest)`
-  background: white;
-  position: absolute;
-  border: #767676 solid 1px;
-  min-width: 70px;
-  max-width: 620px;
-  width: 100%;
-  top: calc(100% - 4px);
-  padding-top: 8px !important;
+const Hint = styled.div`
+  font-size: 16px;
+  line-height: 22px;
+  color: #767676;
 `;
 
 const Wrapper = styled.div`
+  max-width: 1024px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+`;
+
+const Container = styled.div`
+  min-width: 70px;
+  max-width: 620px;
+  margin: 0 auto;
+
+  @media (max-width: 650px) {
+    max-width: calc(100vw - 30px);
+  }
+`;
+
+const SuggestWrapper = styled.div`
+  position: absolute;
   min-width: 70px;
   max-width: 620px;
   width: 100%;
+  bottom: -71px;
+  z-index: -1;
+  // left: calc(50% - 620px / 2);
+
+  @media (max-width: 650px) {
+    max-width: calc(100vw - 30px);
+  }
 `;
 
-const Search = forwardRef(({ onChange, onSelect, results, placeholder, onSubmit }, ref) => (
-  <Form action="" onSubmit={onSubmit} className="no-print">
-    <Wrapper>
-      <Input
-        autoCapitalize="off"
-        autoCorrect="off"
-        placeholder={placeholder}
-        spellCheck={false}
-        type="text"
-        defaultValue=""
-        onChange={onChange}
-        ref={ref}
-      />
-      {Object.keys(results).length > 0 && <StyledSuggest items={results} onSelect={onSelect} />}
-    </Wrapper>
-  </Form>
-));
+const StyledToggle = styled(Toggle)`
+  position: absolute;
+  right: 0;
+  top: -50px;
+`;
+
+const FoldOut = styled.div`
+  display: ${({ active }) => (active ? 'block' : 'none')};
+  padding-bottom: 30px;
+  max-width: 620px;
+  margin: 0 auto;
+`;
+
+const Search = forwardRef(
+  (
+    {
+      onChange,
+      onFocus,
+      onSelect,
+      results,
+      onSubmit,
+      suggestRef,
+      searchLabel,
+      searchTermLabel,
+      searchHintLabel,
+      formLegendLabel,
+    },
+    ref,
+  ) => {
+    const [active, setActive] = useState(false);
+
+    return (
+      <Form action="" onSubmit={onSubmit} className="no-print">
+        <legend className="visuallyhidden">{formLegendLabel}</legend>
+
+        <Wrapper>
+          <StyledToggle onClick={() => setActive(!active)} active={active} label={searchLabel} />
+
+          <Container>
+            <FoldOut active={active}>
+              <Label htmlFor="searchInput">{searchTermLabel}</Label>
+              <Hint>{searchHintLabel}</Hint>
+              <Input
+                autoCapitalize="off"
+                autoCorrect="off"
+                defaultValue=""
+                id="searchInput"
+                onChange={onChange}
+                onFocus={onFocus}
+                ref={ref}
+                spellCheck={false}
+                type="text"
+              />
+            </FoldOut>
+
+            <SuggestWrapper>
+              <Suggest items={results} onSelect={onSelect} ref={suggestRef} as="ul" />
+            </SuggestWrapper>
+          </Container>
+        </Wrapper>
+      </Form>
+    );
+  },
+);
 
 Search.defaultProps = {
+  onFocus: null,
   onSubmit: null,
-  placeholder: '',
   results: {},
+  suggestRef: undefined,
 };
 
 Search.propTypes = {
-  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
   results: PropTypes.shape({
     Adressen: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        brkId: PropTypes.string,
-        vboId: PropTypes.string,
-        ligId: PropTypes.string,
-      }),
-    ),
-    Monumenten: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         brkId: PropTypes.string,
@@ -110,6 +174,11 @@ Search.propTypes = {
       }),
     ),
   }),
+  suggestRef: PropTypes.shape({}),
+  formLegendLabel: PropTypes.string.isRequired,
+  searchLabel: PropTypes.string.isRequired,
+  searchTermLabel: PropTypes.string.isRequired,
+  searchHintLabel: PropTypes.string.isRequired,
 };
 
 export default Search;

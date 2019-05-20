@@ -19,11 +19,47 @@ class SearchContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.placeholder = this.props.intl.formatMessage(messages.search_placeholder);
     this.inputRef = createRef();
+    this.suggestRef = createRef();
 
+    this.state = {
+      showSuggest: true,
+    };
+
+    this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onFocus = this.onFocus.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.inputRef.current.addEventListener('blur', this.onBlur, true);
+    this.suggestRef.current.addEventListener('blur', this.onBlur, true);
+    document.addEventListener('click', this.onClick, true);
+  }
+
+  componentWillUnmount() {
+    this.inputRef.current.removeEventListener('blur', this.onBlur);
+    this.suggestRef.current.removeEventListener('blur', this.onBlur);
+    document.removeEventListener('click', this.onClick);
+  }
+
+  onBlur(event) {
+    const { relatedTarget } = event;
+    const { current: input } = this.inputRef;
+    const { current: suggest } = this.suggestRef;
+
+    const blurFromInput = !input || (input !== null && !input.contains(relatedTarget));
+    const blurFromSuggest = !suggest || (suggest !== null && !suggest.contains(relatedTarget));
+
+    if (blurFromInput && blurFromSuggest) {
+      this.setState({ showSuggest: false });
+    }
+  }
+
+  onFocus() {
+    this.setState({ showSuggest: true });
   }
 
   onChange(event) {
@@ -46,19 +82,46 @@ class SearchContainer extends Component {
     this.inputRef.current.value = text;
   }
 
+  eventOutside(event, eventType) {
+    const { type, target } = event;
+    const { current: input } = this.inputRef;
+    const { current: suggest } = this.suggestRef;
+
+    const eventOutsideInput = !input || (input !== null && target !== input && !input.contains(target));
+    const eventOutsideSuggest = !suggest || (suggest !== null && target !== suggest && !suggest.contains(target));
+    return type === eventType && eventOutsideInput && eventOutsideSuggest;
+  }
+
+  onClick(event) {
+    const isClickOutside = this.eventOutside(event, 'click');
+
+    if (isClickOutside && this.state.showSuggest !== isClickOutside) {
+      this.setState({ showSuggest: !isClickOutside });
+    }
+  }
+
   render() {
-    const { results } = this.props;
+    const { results, intl } = this.props;
+    const { showSuggest } = this.state;
+    const visibleResults = showSuggest ? results : {};
 
     return (
       <Search
         onChange={this.onChange}
+        onFocus={this.onFocus}
         onSelect={this.onSelect}
         onSubmit={event => {
           event.preventDefault();
         }}
         placeholder={this.placeholder}
         ref={this.inputRef}
-        results={results}
+        suggestRef={this.suggestRef}
+        results={visibleResults}
+        formLegendLabel={intl.formatMessage(messages.search_form_legend)}
+        searchTermLabel={intl.formatMessage(messages.search_term)}
+        searchHintLabel={intl.formatMessage(messages.search_hint)}
+        searchLabel={intl.formatMessage(messages.search)}
+        as="form"
       />
     );
   }

@@ -4,6 +4,7 @@ import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import equal from 'fast-deep-equal';
+import styled from 'styled-components';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
 import withSelector from 'containers/withSelector';
@@ -24,9 +25,29 @@ import Summary from 'containers/Summary';
 import Woonplaats from 'containers/Woonplaats';
 
 import TOC from 'containers/TOC';
-import Map from 'components/Map';
+import Map from 'containers/Map';
 
-import { MapWrapper, MapContainer, ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
+import { ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
+
+const Wrapper = styled.div`
+  @media (max-width: 920px) {
+    flex-direction: column;
+
+    & > * {
+      padding-top: 1em;
+      max-width: 100vw !important;
+
+      &:first-child {
+        border-top: 2px solid gray;
+        margin-top: 30px;
+      }
+    }
+
+    & > :first-child {
+      order: 2;
+    }
+  }
+`;
 
 export class AccommodationObjectPageComponent extends Component {
   constructor(props) {
@@ -72,14 +93,14 @@ export class AccommodationObjectPageComponent extends Component {
   }
 
   render() {
-    const { intl, status, coordinates } = this.props;
+    const { intl, status } = this.props;
     const { notitie, filledInBy } = this.state;
     const { formatMessage } = intl;
 
     return (
-      <div className="row justify-content-lg-between">
-        <main className="col-7">
-          <article>
+      <Wrapper className="row justify-content-lg-between content-md-between">
+        <article className="col-7">
+          <section>
             <header>
               <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
             </header>
@@ -93,9 +114,9 @@ export class AccommodationObjectPageComponent extends Component {
             <Verblijfsobject />
 
             <Pand />
-          </article>
+          </section>
 
-          <article>
+          <section>
             <header>
               <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
             </header>
@@ -109,32 +130,24 @@ export class AccommodationObjectPageComponent extends Component {
             <Vestiging />
 
             <Gebied />
-          </article>
-        </main>
+          </section>
+        </article>
 
         <Aside className="col-4">
+          <TOC />
+
+          <Summary />
+
+          <Map marker search={false} zoom={14} />
+
           {status === LOAD_DATA_SUCCESS && (
             <>
-              <TOC />
-
-              <Summary />
-
-              {coordinates && (
-                <section>
-                  <MapWrapper>
-                    <MapContainer className="cf">
-                      <Map coords={coordinates} marker search={false} zoom={14} />
-                    </MapContainer>
-                  </MapWrapper>
-                </section>
-              )}
-
               <section className="invoer no-print">
                 <header>
                   <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
                 </header>
 
-                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}</label>
+                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</label>
                 <Textarea
                   className="input"
                   name="notitie"
@@ -144,7 +157,7 @@ export class AccommodationObjectPageComponent extends Component {
                   onChange={this.onInput}
                 />
 
-                <label htmlFor="inputFilledInBy">Ingevuld door:</label>
+                <label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</label>
                 <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
@@ -158,21 +171,16 @@ export class AccommodationObjectPageComponent extends Component {
             </>
           )}
         </Aside>
-      </div>
+      </Wrapper>
     );
   }
 }
 
 AccommodationObjectPageComponent.defaultProps = {
-  coordinates: undefined,
   status: undefined,
 };
 
 AccommodationObjectPageComponent.propTypes = {
-  coordinates: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-  }),
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,

@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { intlShape } from 'react-intl';
 
-import SearchContainer from 'containers/Search';
 import CONFIGURATION from 'shared/services/configuration/configuration';
-import loginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
-import logoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
-import { Header as HeaderComponent, Icon } from '@datapunt/asc-ui';
+import LoginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
+import LogoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
+import { Header as HeaderComponent } from '@datapunt/asc-ui';
 import messages from './messages';
 
 const StyledHeader = styled(HeaderComponent)`
@@ -29,6 +28,11 @@ const StyledHeader = styled(HeaderComponent)`
 
 const HeaderWrapper = styled.div`
   position: relative;
+  z-index: 2;
+
+  @media (min-width: 1200px) {
+    z-index: 0;
+  }
 `;
 
 const StyledNav = styled.nav`
@@ -48,9 +52,23 @@ const StyledNav = styled.nav`
       margin-right: 5px;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: #ec0000;
       text-decoration: underline;
+
+      svg {
+        fill: #ec0000;
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    right: 0;
+
+    .login-adw,
+    span {
+      display: none;
     }
   }
 `;
@@ -58,22 +76,20 @@ const StyledNav = styled.nav`
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper>
     <StyledHeader title="Basisregistratie Wonen" homeLink={CONFIGURATION.ROOT} tall fullWidth>
-      <SearchContainer />
-
       <StyledNav className="no-print">
         <ul className="links horizontal">
           {!isAuthenticated && (
             <>
               <li>
-                <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                  <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
-                  {intl.formatMessage(messages.log_in)}
+                <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
+                  <LoginIcon width={20} />
+                  <span>{intl.formatMessage(messages.log_in)}</span>
                 </button>
               </li>
               <li>
-                <button type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
-                  <Icon iconUrl={`url('${loginIcon}');`} padding={0} inline />
-                  {intl.formatMessage(messages.log_in_adw)}
+                <button className="login-adw" type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
+                  <LoginIcon width={20} />
+                  <span>{intl.formatMessage(messages.log_in_adw)}</span>
                 </button>
               </li>
             </>
@@ -81,8 +97,8 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
           {isAuthenticated ? (
             <li>
               <button type="button" onClick={onLoginLogoutButtonClick}>
-                <Icon iconUrl={`url('${logoutIcon}');`} padding={0} inline />
-                {intl.formatMessage(messages.log_out)}
+                <LogoutIcon width={20} />
+                <span>{intl.formatMessage(messages.log_out)}</span>
               </button>
             </li>
           ) : (

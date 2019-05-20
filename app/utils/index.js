@@ -6,6 +6,16 @@ const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 
 const currencyFields = ['koopsom'];
 
 /**
+ * Kadastraal object nummer regular expression
+ */
+export const reKadastraalObjectNr = /([A-Z]{3}\d{2})\s?([A-Z]{1,2})\s?(\d{4,5})\s?(A|G)\s?(\d{,4})/;
+
+/**
+ * Kadastraal object nummer regular expression with groups
+ */
+export const reKadastraalObjectNrGroups = /(?<gemeente>[A-Z]{3}\d{2})\s?(?<sectie>[A-Z]{1,2})\s?(?<objectNummer>\d{4,5})\s?(?<indexLetter>A|G)\s?(?<indexNummer>\d{,4})/;
+
+/**
  * Object detector
  *
  * @param {Any} value
@@ -201,3 +211,5 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
 export const isValidSubjectNP = ({ geboortedatum, naam }) => !!geboortedatum && !!naam;
 
 export const isValidSubjectNNP = ({ kvknummer, rsin }) => !!kvknummer && !!rsin;
+
+export const isAppartment = ({ indexletter }) => indexletter.toLowerCase() === 'a';

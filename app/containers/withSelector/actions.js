@@ -130,6 +130,26 @@ export const loadVerblijfsobjectDataFailed = payload => ({
   payload,
 });
 
+export const loadVerblijfsobjectId = adresseerbaarObjectId => ({
+  type: constants.LOAD_VERBLIJFSOBJECT_ID,
+  payload: { adresseerbaarObjectId },
+});
+
+export const loadVerblijfsobjectIdSuccess = payload => ({
+  type: constants.LOAD_VERBLIJFSOBJECT_ID_SUCCESS,
+  payload,
+});
+
+export const loadVerblijfsobjectIdFailed = payload => ({
+  type: constants.LOAD_VERBLIJFSOBJECT_ID_FAILED,
+  payload,
+});
+
+export const loadVerblijfsobjectIdNoResults = payload => ({
+  type: constants.LOAD_VERBLIJFSOBJECT_ID_NO_RESULTS,
+  payload,
+});
+
 export const loadVestigingData = () => ({
   type: constants.LOAD_VESTIGING_DATA,
 });
