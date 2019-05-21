@@ -6,18 +6,13 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 import styled from 'styled-components';
 
-import { Icon } from '@datapunt/asc-ui';
-import close from '@datapunt/asc-assets/lib/Icons/Close.svg';
+import CloseIcon from '@datapunt/asc-assets/lib/Icons/Close.svg';
 
 import { makeSelectError, makeSelectErrorMessage } from 'containers/App/selectors';
 import appMessages from 'containers/App/messages';
-import { resetGlobalError } from '../App/actions';
+import { resetGlobalError } from 'containers/App/actions';
 
 import errorMessages from './messages';
-
-const StyledIcon = styled(Icon)`
-  filter: invert(1);
-`;
 
 const ErrorWrapper = styled.div`
   background-color: #ec0000;
@@ -64,11 +59,11 @@ const Label = styled.span`
 export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
-      <ErrorWrapper className="cf">
+      <ErrorWrapper className="no-print cf">
         <ErrorContainer>
           <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
           <Button type="button" onClick={onClose}>
-            <StyledIcon iconUrl={`url('${close}');`} size={14} padding={0} inline />
+            <CloseIcon width={14} fill="#fff" />
             <Label>{intl.formatMessage(appMessages.close)}</Label>
           </Button>
         </ErrorContainer>
