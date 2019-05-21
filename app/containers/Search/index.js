@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,62 +15,55 @@ import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import messages from './messages';
 
-class SearchContainer extends Component {
-  constructor(props) {
-    super(props);
+const SearchContainer = props => {
+  const inputRef = useRef();
+  const suggestRef = useRef();
+  const [showSuggest, setShowSuggest] = useState(true);
 
-    this.inputRef = createRef();
-    this.suggestRef = createRef();
+  const setup = () => {
+    inputRef.current.addEventListener('blur', onBlur, true);
+    suggestRef.current.addEventListener('blur', onBlur, true);
+    document.addEventListener('click', onClick, true);
+  };
 
-    this.state = {
-      showSuggest: true,
-    };
+  const teardown = () => {
+    if (inputRef.current) inputRef.current.removeEventListener('blur', onBlur);
+    if (suggestRef.current) suggestRef.current.removeEventListener('blur', onBlur);
+    document.removeEventListener('click', onClick);
+  };
 
-    this.onBlur = this.onBlur.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+  useEffect(() => {
+    setup();
 
-  componentDidMount() {
-    this.inputRef.current.addEventListener('blur', this.onBlur, true);
-    this.suggestRef.current.addEventListener('blur', this.onBlur, true);
-    document.addEventListener('click', this.onClick, true);
-  }
+    return teardown;
+  }, [inputRef, suggestRef]);
 
-  componentWillUnmount() {
-    this.inputRef.current.removeEventListener('blur', this.onBlur);
-    this.suggestRef.current.removeEventListener('blur', this.onBlur);
-    document.removeEventListener('click', this.onClick);
-  }
-
-  onBlur(event) {
+  const onBlur = event => {
     const { relatedTarget } = event;
-    const { current: input } = this.inputRef;
-    const { current: suggest } = this.suggestRef;
+    const { current: input } = inputRef;
+    const { current: suggest } = suggestRef;
 
     const blurFromInput = !input || (input !== null && !input.contains(relatedTarget));
     const blurFromSuggest = !suggest || (suggest !== null && !suggest.contains(relatedTarget));
 
     if (blurFromInput && blurFromSuggest) {
-      this.setState({ showSuggest: false });
+      setShowSuggest(false);
     }
-  }
+  };
 
-  onFocus() {
-    this.setState({ showSuggest: true });
-  }
+  const onFocus = () => {
+    setShowSuggest(true);
+  };
 
-  onChange(event) {
+  const onChange = event => {
     event.persist();
 
     const { target } = event;
 
-    this.props.onChange(target.value);
-  }
+    props.onChange(target.value);
+  };
 
-  onSelect(event) {
+  const onSelect = event => {
     event.preventDefault();
     event.persist();
 
@@ -78,54 +71,52 @@ class SearchContainer extends Component {
       currentTarget: { dataset, text },
     } = event;
 
-    this.props.onSearchSelect({ ...dataset });
-    this.inputRef.current.value = text;
-  }
+    props.onSearchSelect({ ...dataset });
+    inputRef.current.value = text;
+  };
 
-  eventOutside(event, eventType) {
+  const onSubmit = event => {
+    event.preventDefault();
+  };
+
+  const eventOutside = (event, eventType) => {
     const { type, target } = event;
-    const { current: input } = this.inputRef;
-    const { current: suggest } = this.suggestRef;
+    const { current: input } = inputRef;
+    const { current: suggest } = suggestRef;
 
     const eventOutsideInput = !input || (input !== null && target !== input && !input.contains(target));
     const eventOutsideSuggest = !suggest || (suggest !== null && target !== suggest && !suggest.contains(target));
     return type === eventType && eventOutsideInput && eventOutsideSuggest;
-  }
+  };
 
-  onClick(event) {
-    const isClickOutside = this.eventOutside(event, 'click');
+  const onClick = event => {
+    const isClickOutside = eventOutside(event, 'click');
 
-    if (isClickOutside && this.state.showSuggest !== isClickOutside) {
-      this.setState({ showSuggest: !isClickOutside });
+    if (isClickOutside && showSuggest !== isClickOutside) {
+      setShowSuggest(!isClickOutside);
     }
-  }
+  };
 
-  render() {
-    const { results, intl } = this.props;
-    const { showSuggest } = this.state;
-    const visibleResults = showSuggest ? results : {};
+  const { intl, results } = props;
+  const visibleResults = showSuggest ? results : {};
 
-    return (
-      <Search
-        onChange={this.onChange}
-        onFocus={this.onFocus}
-        onSelect={this.onSelect}
-        onSubmit={event => {
-          event.preventDefault();
-        }}
-        placeholder={this.placeholder}
-        ref={this.inputRef}
-        suggestRef={this.suggestRef}
-        results={visibleResults}
-        formLegendLabel={intl.formatMessage(messages.search_form_legend)}
-        searchTermLabel={intl.formatMessage(messages.search_term)}
-        searchHintLabel={intl.formatMessage(messages.search_hint)}
-        searchLabel={intl.formatMessage(messages.search)}
-        as="form"
-      />
-    );
-  }
-}
+  return (
+    <Search
+      onChange={onChange}
+      onFocus={onFocus}
+      onSelect={onSelect}
+      onSubmit={onSubmit}
+      ref={inputRef}
+      suggestRef={suggestRef}
+      results={visibleResults}
+      formLegendLabel={intl.formatMessage(messages.search_form_legend)}
+      searchTermLabel={intl.formatMessage(messages.search_term)}
+      searchHintLabel={intl.formatMessage(messages.search_hint)}
+      searchLabel={intl.formatMessage(messages.search)}
+      as="form"
+    />
+  );
+};
 
 SearchContainer.defaultProps = {
   results: undefined,
