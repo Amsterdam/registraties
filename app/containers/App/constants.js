@@ -80,52 +80,52 @@ export const LOAD_VESTIGING_DATA_NO_RESULTS = `${containerScope}/LOAD_VESTIGING_
 export const OBJECTS = {
   OPENBARE_RUIMTE: {
     ABBR: 'opr',
-    NAME: { id: 'basisregistratie-wonen.public_space' },
+    NAME: { id: 'registraties.public_space' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/',
   },
   NUMMERAANDUIDING: {
     ABBR: 'num',
-    NAME: { id: 'basisregistratie-wonen.number_identification' },
+    NAME: { id: 'registraties.number_identification' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/',
   },
   VERBLIJFSOBJECT: {
     ABBR: 'vbo',
-    NAME: { id: 'basisregistratie-wonen.accommodation_object' },
+    NAME: { id: 'registraties.accommodation_object' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-0/',
   },
   PAND: {
     ABBR: 'pnd',
-    NAME: { id: 'basisregistratie-wonen.house' },
+    NAME: { id: 'registraties.house' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-pand/',
   },
   KADASTRAAL_OBJECT: {
     ABBR: 'brko',
-    NAME: { id: 'basisregistratie-wonen.cadastral_object' },
+    NAME: { id: 'registraties.cadastral_object' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/',
   },
   KADASTRAAL_SUBJECT_NP: {
     ABBR: 'brks_np',
-    NAME: { id: 'basisregistratie-wonen.natural_person' },
+    NAME: { id: 'registraties.natural_person' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/persoon/natuurlijk-persoon/',
   },
   KADASTRAAL_SUBJECT_NNP: {
     ABBR: 'brks_nnp',
-    NAME: { id: 'basisregistratie-wonen.non_natural_person' },
+    NAME: { id: 'registraties.non_natural_person' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/persoon/niet-natuurlijk-pers/',
   },
   VESTIGING: {
     ABBR: 'ves',
-    NAME: { id: 'basisregistratie-wonen.establishment' },
+    NAME: { id: 'registraties.establishment' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/hr-index/catalogus/vestiging/',
   },
   GEBIED: {
     ABBR: 'geb',
-    NAME: { id: 'basisregistratie-wonen.area' },
+    NAME: { id: 'registraties.area' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/gebieden-index/catalogus/',
   },
   WOONPLAATS: {
     ABBR: 'wpl',
-    NAME: { id: 'basisregistratie-wonen.residence' },
+    NAME: { id: 'registraties.residence' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/',
   },
 };

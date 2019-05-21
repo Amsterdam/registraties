@@ -41,7 +41,7 @@ const translationMessages = {
   nl: formatTranslationMessages('nl', nlTranslationMessages),
 };
 
-const scope = 'basisregistratie-wonen';
+const scope = 'registraties';
 
 exports.appLocales = appLocales;
 exports.formatTranslationMessages = formatTranslationMessages;

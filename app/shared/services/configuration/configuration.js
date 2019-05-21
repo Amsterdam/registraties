@@ -1,6 +1,6 @@
 import globalConfig from 'globalConfig'; // eslint-disable-line import/extensions, import/no-unresolved
 
-const domainName = 'wonen.amsterdam.nl';
+const domainName = 'registraties.amsterdam.nl';
 const apiDomainName = 'api.data.amsterdam.nl';
 
 const { HOST } = process.env;
