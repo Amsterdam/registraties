@@ -16,7 +16,7 @@ class ProgressContainer extends Component {
   render() {
     const { progress } = this.props;
 
-    return <Progress now={progress} />;
+    return <Progress now={progress} labelPosition="bottom" />;
   }
 }
 
