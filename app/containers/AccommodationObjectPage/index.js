@@ -23,6 +23,7 @@ import OpenbareRuimte from 'containers/OpenbareRuimte';
 import Gebied from 'containers/Gebied';
 import Summary from 'containers/Summary';
 import Woonplaats from 'containers/Woonplaats';
+import Progress from 'containers/Progress';
 
 import TOC from 'containers/TOC';
 import Map from 'containers/Map';
@@ -30,7 +31,7 @@ import Map from 'containers/Map';
 import { ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
 
 const Wrapper = styled.div`
-  @media (max-width: 920px) {
+  @media screen and (max-width: 920px) {
     flex-direction: column;
 
     & > * {
@@ -99,6 +100,7 @@ export class AccommodationObjectPageComponent extends Component {
 
     return (
       <Wrapper className="row justify-content-lg-between content-md-between">
+        <Progress />
         <article className="col-7">
           <section>
             <header>

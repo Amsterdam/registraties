@@ -23,11 +23,16 @@ const wrapper = css`
           box-sizing: content-box;
           transition: transform 0.35s ease-out;
           transform: translate3D(0, ${({ now }) => (now >= 1 ? -120 : 0)}px, 0);
+          top: 0;
 
           &.finished {
             transition-delay: 0.7s;
           }
         `}
+
+  &.hidden {
+    display: none;
+  }
 `;
 
 export const determined = {
