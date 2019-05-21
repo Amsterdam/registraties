@@ -59,7 +59,7 @@ const Label = styled.span`
 export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
   <Fragment>
     {error ? (
-      <ErrorWrapper className="cf">
+      <ErrorWrapper className="no-print cf">
         <ErrorContainer>
           <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
           <Button type="button" onClick={onClose}>

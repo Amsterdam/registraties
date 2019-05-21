@@ -28,7 +28,7 @@ import Progress from 'containers/Progress';
 import TOC from 'containers/TOC';
 import Map from 'containers/Map';
 
-import { ArticleHeading, SectionHeading, Textarea, Aside } from './styled';
+import { ArticleHeading, SectionHeading, Textarea, Aside, Input, Label } from './styled';
 
 const Wrapper = styled.div`
   @media screen and (max-width: 920px) {
@@ -144,12 +144,12 @@ export class AccommodationObjectPageComponent extends Component {
 
           {status === LOAD_DATA_SUCCESS && (
             <>
-              <section className="invoer no-print">
-                <header>
+              <section className="invoer">
+                <header className="no-print">
                   <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
                 </header>
 
-                <label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</label>
+                <Label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</Label>
                 <Textarea
                   className="input"
                   name="notitie"
@@ -159,8 +159,8 @@ export class AccommodationObjectPageComponent extends Component {
                   onChange={this.onInput}
                 />
 
-                <label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</label>
-                <input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
+                <Label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</Label>
+                <Input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
               </section>
 
               <section className="no-print">
