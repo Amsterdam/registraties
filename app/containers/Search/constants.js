@@ -1,4 +1,4 @@
-const scope = 'basisregistratie-wonen/Search';
+const scope = 'registraties/Search';
 
 export const SEARCH_SELECT = `${scope}/SEARCH_SELECT`;
 export const INPUT_CHANGE = `${scope}/INPUT_CHANGE`;

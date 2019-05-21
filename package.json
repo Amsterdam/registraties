@@ -1,5 +1,5 @@
 {
-  "name": "basisregistratie-wonen",
+  "name": "registraties",
   "version": "0.0.1",
   "description": "Disclosure of data related to accomodation objects. Only available to logged in users.",
   "repository": {

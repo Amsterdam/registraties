@@ -1,4 +1,4 @@
 /**
  * LanguageProvider constants
  */
-export const CHANGE_LOCALE = 'basisregistratie-wonen/App/LanguageToggle/CHANGE_LOCALE';
+export const CHANGE_LOCALE = 'registraties/App/LanguageToggle/CHANGE_LOCALE';
