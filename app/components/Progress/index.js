@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { determined, undetermined, label as labelStyles } from './styles';
@@ -21,9 +21,32 @@ const Label = styled.div`
  */
 const Progress = ({ className, label, labelPosition, showLabel, variant, ...props }) => {
   const scaleFactor = variant === 'small' ? 0.333 : 1;
+  const progressRef = createRef();
+
+  useEffect(() => {
+    const { current } = progressRef;
+
+    const removeNode = ({ currentTarget }) => {
+      if (currentTarget.classList.contains('finished')) {
+        currentTarget.classList.add('hidden');
+      }
+    };
+
+    current.addEventListener('transitionend', removeNode, true);
+
+    return () => {
+      current.removeEventListener('transitionend', removeNode);
+    };
+  });
 
   return (
-    <Wrapper className={`${className}${props.now >= 1 ? ' finished' : ''}`} scaleFactor={scaleFactor} {...props}>
+    <Wrapper
+      ref={progressRef}
+      className={`no-print ${className}${props.now >= 1 ? ' finished' : ''}`}
+      scaleFactor={scaleFactor}
+      as="div"
+      {...props}
+    >
       <Pie key={Math.random()} {...props} scaleFactor={scaleFactor} />
       {showLabel && (
         <Label vPos={labelPosition}>{label !== undefined ? label : `${Math.round(props.now * 100)} %`}</Label>
