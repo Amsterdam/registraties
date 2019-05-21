@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-import equal from 'fast-deep-equal';
 import styled from 'styled-components';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
@@ -50,133 +49,114 @@ const Wrapper = styled.div`
   }
 `;
 
-export class AccommodationObjectPageComponent extends Component {
-  constructor(props) {
-    super(props);
+const AccommodationObjectPageComponent = props => {
+  const [filledInBy, setFilledInBy] = useState('');
+  const [notitie, setNotitie] = useState('');
 
-    this.map = null;
+  const initiateFetch = () => {
+    const { vboId, ligId, brkId } = props.match.params;
 
-    this.state = {
-      filledInBy: '',
-      notitie: '',
-    };
+    props.loadBAGData({ vboId, ligId, brkId });
+  };
 
-    this.onInput = this.onInput.bind(this);
-  }
-
-  initiateFetch() {
-    const { vboId, ligId, brkId } = this.props.match.params;
-
-    this.props.loadBAGData({ vboId, ligId, brkId });
-  }
-
-  componentDidMount() {
-    this.initiateFetch();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!equal(prevProps.match.params, this.props.match.params)) {
-      this.initiateFetch();
-    }
-  }
-
-  onInput(event) {
+  const onInput = event => {
     event.persist();
     const {
       currentTarget: { name, value },
     } = event;
 
     if (name === 'filled_in_by') {
-      this.setState({ filledInBy: value });
+      setFilledInBy(value);
     } else {
-      this.setState({ notitie: value });
+      setNotitie(value);
     }
-  }
+  };
 
-  render() {
-    const { intl, status } = this.props;
-    const { notitie, filledInBy } = this.state;
-    const { formatMessage } = intl;
+  useEffect(() => {
+    initiateFetch();
+  }, [props.match.params]);
 
-    return (
-      <Wrapper className="row justify-content-lg-between content-md-between">
-        <Progress />
-        <article className="col-7">
-          <section>
-            <header>
-              <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
-            </header>
+  const { intl, status } = props;
+  const { formatMessage } = intl;
 
-            <OpenbareRuimte />
+  return (
+    <Wrapper className="row justify-content-lg-between content-md-between">
+      <Progress />
+      <article className="col-7">
+        <section>
+          <header>
+            <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
+          </header>
 
-            <Woonplaats />
+          <OpenbareRuimte />
 
-            <Nummeraanduiding />
+          <Woonplaats />
 
-            <Verblijfsobject />
+          <Nummeraanduiding />
 
-            <Pand />
-          </section>
+          <Verblijfsobject />
 
-          <section>
-            <header>
-              <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
-            </header>
+          <Pand />
+        </section>
 
-            <KadastraalObject />
+        <section>
+          <header>
+            <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
+          </header>
 
-            <KadastraalSubjectNP />
+          <KadastraalObject />
 
-            <KadastraalSubjectNNP />
+          <KadastraalSubjectNP />
 
-            <Vestiging />
+          <KadastraalSubjectNNP />
 
-            <Gebied />
-          </section>
-        </article>
+          <Vestiging />
 
-        <Aside className="col-4">
-          <TOC />
+          <Gebied />
+        </section>
+      </article>
 
-          <Summary />
+      <Aside className="col-4">
+        <TOC />
 
-          <Map marker search={false} zoom={14} />
+        <Summary />
 
-          {status === LOAD_DATA_SUCCESS && (
-            <>
-              <section className="invoer">
-                <header className="no-print">
-                  <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
-                </header>
+        <Map marker search={false} zoom={14} />
 
-                <Label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</Label>
-                <Textarea
-                  className="input"
-                  name="notitie"
-                  id="areaNotitie"
-                  row="5"
-                  placeholder={formatMessage(messages.note_remark)}
-                  onChange={this.onInput}
-                />
+        {status === LOAD_DATA_SUCCESS && (
+          <>
+            <section className="invoer">
+              <header className="no-print">
+                <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
+              </header>
 
-                <Label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</Label>
-                <Input className="input" id="inputFilledInBy" name="filled_in_by" onChange={this.onInput} />
-              </section>
+              <Label htmlFor="areaNotitie">{intl.formatMessage(messages.note)}:</Label>
+              <Textarea
+                className="input"
+                name="notitie"
+                id="areaNotitie"
+                row="5"
+                placeholder={formatMessage(messages.note_remark)}
+                onChange={onInput}
+              />
 
-              <section className="no-print">
-                <header>
-                  <SectionHeading>{intl.formatMessage(messages.export_cta)}</SectionHeading>
-                </header>
+              <Label htmlFor="inputFilledInBy">{formatMessage(messages.filled_in_by)}:</Label>
+              <Input className="input" id="inputFilledInBy" name="filled_in_by" onChange={onInput} />
+            </section>
 
-                <CSVDownloadContainer data={{ notitie, filledInBy }} />
-              </section>
-            </>
-          )}
-        </Aside>
-      </Wrapper>
-    );
-  }
-}
+            <section className="no-print">
+              <header>
+                <SectionHeading>{intl.formatMessage(messages.export_cta)}</SectionHeading>
+              </header>
+
+              <CSVDownloadContainer data={{ notitie, filledInBy }} />
+            </section>
+          </>
+        )}
+      </Aside>
+    </Wrapper>
+  );
+};
 
 AccommodationObjectPageComponent.defaultProps = {
   status: undefined,

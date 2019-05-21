@@ -42,7 +42,7 @@ const Map = ({ center, coordinates, marker, search, zoom }) => {
         mapDiv.removeChild(mapDiv.firstChild);
       }
     };
-  });
+  }, []);
 
   return (
     <section>
