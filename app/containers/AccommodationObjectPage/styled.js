@@ -21,6 +21,10 @@ export const SectionHeading = styled.h3`
     css`
       margin-top: 0;
     `}
+
+  @media print {
+    margin-top: 0;
+  }
 `;
 
 export const Key = styled.strong`
@@ -37,6 +41,40 @@ export const Textarea = styled.textarea`
   resize: vertical;
   min-height: 79px; // three lines of text + top and bottom padding
   max-height: 212px; // ten lines of text
+
+  @media print {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    height: -webkit-fill-available;
+    max-height: initial;
+    max-height: 10cm;
+    break-inside: avoid;
+
+    &::placeholder {
+      opacity: 0;
+    }
+  }
+`;
+
+export const Input = styled.input`
+  @media print {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    height: 1cm;
+
+    &::placeholder {
+      opacity: 0;
+    }
+  }
+`;
+
+export const Label = styled.label`
+  @media print {
+    display: block;
+    margin-top: 1cm;
+  }
 `;
 
 export const Ul = styled.ul`
