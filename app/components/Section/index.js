@@ -14,11 +14,11 @@ const SectionWrapper = styled.section`
   position: relative;
 `;
 
-const Section = ({ cfg, data, intl }) => {
+const Section = ({ name, href, data, intl }) => {
   const { formatMessage, locale } = intl;
-  const { NAME, STELSELPEDIA_LINK } = cfg;
+  // const { NAME, STELSELPEDIA_LINK } = cfg;
   const sectionData = data && data.length === 1 && isArray(data[0]) ? data[0] : data;
-  const name = formatMessage(NAME);
+  // const name = formatMessage(NAME);
 
   const renderList = listData => (
     <Ul>
@@ -48,7 +48,7 @@ const Section = ({ cfg, data, intl }) => {
     <SectionHeading marginCollapse id={name}>
       {name}
       <StelselpediaLink
-        href={STELSELPEDIA_LINK}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         title={formatMessage(messages.to_stelselpedia, { name })}
@@ -68,14 +68,19 @@ const Section = ({ cfg, data, intl }) => {
   );
 };
 
+Section.defaultProps = {
+  href: '',
+};
+
 Section.propTypes = {
-  cfg: PropTypes.shape({
-    ABBR: PropTypes.string.isRequired,
-    NAME: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-    STELSELPEDIA_LINK: PropTypes.string.isRequired,
-  }).isRequired,
+  // cfg: PropTypes.shape({
+  //   NAME: PropTypes.shape({
+  //     id: PropTypes.string.isRequired,
+  //   }),
+  //   STELSELPEDIA_LINK: PropTypes.string.isRequired,
+  // }).isRequired,
+  name: PropTypes.string.isRequired,
+  href: PropTypes.string,
   data: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({})),
     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
