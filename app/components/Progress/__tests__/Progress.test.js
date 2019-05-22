@@ -85,5 +85,7 @@ describe('Progress', () => {
     rerender(<Progress now={15} />);
 
     expect(global.console.error).toHaveBeenCalledWith(expect.stringContaining('should be between 0 and 1'));
+
+    global.console.error.mockRestore();
   });
 });
