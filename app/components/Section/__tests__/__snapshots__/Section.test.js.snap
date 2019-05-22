@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section matches the snapshot 1`] = `
+.c2 {
+  position: relative;
+}
+
+.c2.hidden {
+  display: none;
+}
+
+.c3 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c3::before,
+.c3::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c3::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c3::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+.c1 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c0 {
+  position: relative;
+}
+
+@media print {
+  .c1 {
+    margin-top: 0;
+  }
+}
+
+<section
+  class="c0"
+>
+  <h3
+    class="c1"
+    id="Qux baz"
+  >
+    Qux baz
+    
+  </h3>
+  <div
+    class="no-print  c2"
+    data-testid="progress-wrapper"
+    type="undetermined"
+  >
+    <div
+      class="c3"
+    />
+  </div>
+</section>
+`;
+
+exports[`Section should render section contents 1`] = `
+.c1 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c4 {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.c3 {
+  padding: 0;
+  list-style: none;
+  padding-bottom: 30px;
+}
+
+.c3:not(:first-child) {
+  border-bottom: 4px solid #767676;
+}
+
+.c3 li:last-of-type ul {
+  padding-bottom: 0;
+}
+
+.c3 *:last-of-type > *:last-of-type ul:last-of-type {
+  border: 0;
+}
+
+.c3 li {
+  padding-left: 23px;
+  position: relative;
+}
+
+.c3 li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  background-color: #767676;
+}
+
+.c3 .c2 li {
+  padding-left: 0;
+}
+
+.c3 .c2 li:before {
+  content: unset;
+}
+
+.c0 {
+  position: relative;
+}
+
+@media print {
+  .c1 {
+    margin-top: 0;
+  }
+}
+
+<section
+  class="c0"
+>
+  <h3
+    class="c1"
+    id="Foo bar baz"
+  >
+    Foo bar baz
+    
+  </h3>
+  <ul
+    class="c2 c3"
+  >
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Pandidentificatie
+      </strong>
+      : 
+      0363100012096240
+    </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Status
+      </strong>
+      : 
+      Pand in gebruik
+    </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Oorspronkelijk bouwjaar
+      </strong>
+      : 
+      1921
+    </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Hoogste bouwlaag
+      </strong>
+      : 
+      n.b.
+    </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Laagste bouwlaag
+      </strong>
+      : 
+      n.b.
+    </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Aantal verblijfsobjecten
+      </strong>
+      : 
+      <span>
+        2
+      </span>
+    </li>
+  </ul>
+</section>
+`;
