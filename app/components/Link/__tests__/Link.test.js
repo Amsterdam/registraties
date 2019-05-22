@@ -14,7 +14,7 @@ describe('Link', () => {
       </ThemeProvider>,
     );
 
-    expect(container).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
     expect(container.firstChild.getAttribute('href')).toBe('//some-url.com');
   });
 
