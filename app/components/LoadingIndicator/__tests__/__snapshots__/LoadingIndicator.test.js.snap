@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator matches the snapshot 1`] = `
+<div>
+  <div
+    class="no-print  Progress__Wrapper-yfxggj-0 KuApb"
+    type="undetermined"
+  >
+    <div
+      class="Progress__Pie-yfxggj-1 fJhYlZ"
+    />
+  </div>
+</div>
+`;
