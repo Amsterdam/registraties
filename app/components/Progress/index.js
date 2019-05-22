@@ -15,12 +15,14 @@ const Label = styled.div`
   ${labelStyles}
 `;
 
+export const smallFactor = 0.333;
+
 /**
  * Fixed positioned component that indicates (loading) progress
  * Can be used to show page loading progress and will take a value for its `now` prop (between 0 and 1) to update the loader bar.
  */
 const Progress = ({ className, label, labelPosition, showLabel, variant, ...props }) => {
-  const scaleFactor = variant === 'small' ? 0.333 : 1;
+  const scaleFactor = variant === 'small' ? smallFactor : 1;
   const progressRef = createRef();
 
   useEffect(() => {
@@ -45,11 +47,14 @@ const Progress = ({ className, label, labelPosition, showLabel, variant, ...prop
       className={`no-print ${className}${props.now >= 1 ? ' finished' : ''}`}
       scaleFactor={scaleFactor}
       as="div"
+      data-testid="progress-wrapper"
       {...props}
     >
-      <Pie key={Math.random()} {...props} scaleFactor={scaleFactor} />
+      <Pie key={Math.random()} scaleFactor={scaleFactor} {...props} />
       {showLabel && (
-        <Label vPos={labelPosition}>{label !== undefined ? label : `${Math.round(props.now * 100)} %`}</Label>
+        <Label data-testid="progress-label" vPos={labelPosition}>
+          {label !== undefined ? label : `${Math.round(props.now * 100)} %`}
+        </Label>
       )}
     </Wrapper>
   );
@@ -79,7 +84,15 @@ Progress.propTypes = {
   /** Vertical position of the text label */
   labelPosition: PropTypes.oneOf(['top', 'middle', 'bottom']),
   /** Relative progress. Should be a number between 0 and 1 */
-  now: PropTypes.number,
+  now: (props, propName) => {
+    const value = props[propName];
+
+    if (value < 0 || value > 1) {
+      return new Error(`The value of 'now' should be between 0 and 1. Got ${value}.`);
+    }
+
+    return null;
+  },
   /** Whether or not to show the (default) label */
   showLabel: PropTypes.bool,
   /** When type is set to 'undetermined', the component shows an infinite spinner. 'determined' Should be used in conjunction with `now`. */

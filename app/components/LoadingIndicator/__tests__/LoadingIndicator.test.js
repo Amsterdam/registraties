@@ -8,6 +8,6 @@ describe('LoadingIndicator', () => {
   it('matches the snapshot', () => {
     const { container } = render(<LoadingIndicator />);
 
-    expect(container).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
