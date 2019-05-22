@@ -42,7 +42,7 @@ const Map = ({ center, coordinates, marker, search, zoom }) => {
         mapDiv.removeChild(mapDiv.firstChild);
       }
     };
-  }, []);
+  }, [coordinates, center]);
 
   return (
     <section>
@@ -62,16 +62,24 @@ Map.defaultProps = {
 };
 
 Map.propTypes = {
+  /**
+   * Coordinates in RD-format (https://nl.wikipedia.org/wiki/Rijksdriehoeksco%C3%B6rdinaten)
+   * @see {@link https://nl.wikipedia.org/wiki/Rijksdriehoeksco%C3%B6rdinaten}
+   */
   coordinates: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }),
+  /** Latitude/longitude coordinates. When used in conjunction with `coordinates`, `coordinates` will take precedence. */
   center: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
   }),
+  /** When false, no search input field will be shown */
   search: PropTypes.bool,
+  /** Zoom level that is applied to the visible area of the map. Maximum zoom level: 22, minimum zoom level: 11. */
   zoom: PropTypes.number,
+  /** When true, a marker will be shown at the position that is indicated by either `center` or `coordinates` */
   marker: PropTypes.bool,
 };
 

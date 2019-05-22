@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map matches the snapshot 1`] = `
+<section>
+  <div
+    class="cf Map__MapWrapper-sc-1v5i1wm-0 dwptan"
+  >
+    <div
+      id="mapDiv"
+      style="height: 100%;"
+    />
+  </div>
+</section>
+`;
