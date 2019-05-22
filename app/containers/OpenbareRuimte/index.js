@@ -9,7 +9,7 @@ import { makeSelectOpenbareRuimteData } from 'containers/withSelector/selectors'
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const OpenbareRuimteContainer = ({ data, intl }) => {
+export const OpenbareRuimteContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
   const href = OBJECTS.OPENBARE_RUIMTE.STELSELPEDIA_LINK;
 

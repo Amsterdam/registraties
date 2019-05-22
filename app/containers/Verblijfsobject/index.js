@@ -9,7 +9,7 @@ import { makeSelectVerblijfsobjectData } from 'containers/withSelector/selectors
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const VerblijfsObjectContainer = ({ data, intl }) => {
+export const VerblijfsObjectContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
   const href = OBJECTS.VERBLIJFSOBJECT.STELSELPEDIA_LINK;
 
@@ -17,7 +17,7 @@ const VerblijfsObjectContainer = ({ data, intl }) => {
 };
 
 VerblijfsObjectContainer.defaultProps = {
-  data: undefined,
+  data: null,
 };
 
 VerblijfsObjectContainer.propTypes = {

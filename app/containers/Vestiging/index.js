@@ -17,7 +17,7 @@ const VestigingContainer = ({ data, intl }) => {
 };
 
 VestigingContainer.defaultProps = {
-  data: undefined,
+  data: null,
 };
 
 VestigingContainer.propTypes = {

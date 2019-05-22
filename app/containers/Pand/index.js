@@ -9,7 +9,7 @@ import { makeSelectPandData } from 'containers/withSelector/selectors';
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const PandContainer = ({ data, intl }) => {
+export const PandContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.PAND.NAME);
   const href = OBJECTS.PAND.STELSELPEDIA_LINK;
 
@@ -17,7 +17,7 @@ const PandContainer = ({ data, intl }) => {
 };
 
 PandContainer.defaultProps = {
-  data: undefined,
+  data: null,
 };
 
 PandContainer.propTypes = {

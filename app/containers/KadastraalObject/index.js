@@ -9,7 +9,7 @@ import { makeSelectKadastraalObjectData } from 'containers/withSelector/selector
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const KadastraalObjectContainer = ({ data, intl }) => {
+export const KadastraalObjectContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
   const href = OBJECTS.KADASTRAAL_OBJECT.STELSELPEDIA_LINK;
 

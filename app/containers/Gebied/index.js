@@ -9,7 +9,7 @@ import { makeSelectGebiedData } from 'containers/withSelector/selectors';
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const GebiedContainer = ({ data, intl }) => {
+export const GebiedContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.GEBIED.NAME);
   const href = OBJECTS.GEBIED.STELSELPEDIA_LINK;
 

@@ -9,7 +9,7 @@ import { makeSelectNummeraanduidingData } from 'containers/withSelector/selector
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const NummeraanduidingContainer = ({ data, intl }) => {
+export const NummeraanduidingContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
   const href = OBJECTS.NUMMERAANDUIDING.STELSELPEDIA_LINK;
 

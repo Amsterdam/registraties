@@ -9,7 +9,7 @@ import { makeSelectKadastraalSubjectNPData } from 'containers/withSelector/selec
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const KadastraalSubjectNPContainer = ({ data, intl }) => {
+export const KadastraalSubjectNPContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
   const href = OBJECTS.KADASTRAAL_SUBJECT_NP.STELSELPEDIA_LINK;
 
@@ -17,7 +17,7 @@ const KadastraalSubjectNPContainer = ({ data, intl }) => {
 };
 
 KadastraalSubjectNPContainer.defaultProps = {
-  data: undefined,
+  data: null,
 };
 
 KadastraalSubjectNPContainer.propTypes = {
