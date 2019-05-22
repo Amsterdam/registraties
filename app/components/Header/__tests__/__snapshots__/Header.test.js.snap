@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header matches the snapshot 1`] = `
+<div>
+  <div
+    class="Header__HeaderWrapper-sc-15eqjjx-1 eSRqiv"
+  >
+    <div
+      class="sc-eNQAEJ gJJdWk"
+    >
+      <header
+        class="sc-bxivhb Header__StyledHeader-sc-15eqjjx-0 egtpxo sc-chPdSV bHlKv"
+      >
+        <h1
+          class="sc-jKJlTe eUAGBL"
+        >
+          <a
+            class="sc-ckVGcZ dbIcbn"
+            href="http://undefined:undefined/"
+          >
+            <span
+              class="sc-dxgOiQ kyqLhc"
+            />
+          </a>
+          <a
+            class="sc-kgoBCf sc-kGXeez ciQiUp"
+            href="http://undefined:undefined/"
+          >
+            Registraties
+          </a>
+        </h1>
+        <div
+          class="sc-kpOJdX eKiqBq"
+        >
+          <nav
+            class="no-print Header__StyledNav-sc-15eqjjx-2 ifCxKR"
+          >
+            <ul
+              class="links horizontal"
+            >
+              <li>
+                <button
+                  class="login"
+                  type="button"
+                >
+                  <img
+                    width="20"
+                  />
+                  <span>
+                    Inloggen
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="login-adw"
+                  type="button"
+                >
+                  <img
+                    width="20"
+                  />
+                  <span>
+                    Inloggen ADW
+                  </span>
+                </button>
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header matches the snapshot 2`] = `
+<div>
+  <div
+    class="Header__HeaderWrapper-sc-15eqjjx-1 eSRqiv"
+  >
+    <div
+      class="sc-eNQAEJ gJJdWk"
+    >
+      <header
+        class="sc-bxivhb Header__StyledHeader-sc-15eqjjx-0 egtpxo sc-chPdSV bHlKv"
+      >
+        <h1
+          class="sc-jKJlTe eUAGBL"
+        >
+          <a
+            class="sc-ckVGcZ dbIcbn"
+            href="http://undefined:undefined/"
+          >
+            <span
+              class="sc-dxgOiQ kyqLhc"
+            />
+          </a>
+          <a
+            class="sc-kgoBCf sc-kGXeez ciQiUp"
+            href="http://undefined:undefined/"
+          >
+            Registraties
+          </a>
+        </h1>
+        <div
+          class="sc-kpOJdX eKiqBq"
+        >
+          <nav
+            class="no-print Header__StyledNav-sc-15eqjjx-2 ifCxKR"
+          >
+            <ul
+              class="links horizontal"
+            >
+              <li>
+                <button
+                  type="button"
+                >
+                  <img
+                    width="20"
+                  />
+                  <span>
+                    Uitloggen
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>
+`;
