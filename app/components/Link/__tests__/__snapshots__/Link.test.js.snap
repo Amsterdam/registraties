@@ -52,20 +52,18 @@ exports[`Link matches the snapshot 1`] = `
   color: #ec0000;
 }
 
-<div>
-  <a
-    class="c0 c1"
-    href="//some-url.com"
+<a
+  class="c0 c1"
+  href="//some-url.com"
+>
+  <img
+    class="c2"
+    width="14"
+  />
+  <span
+    class="linklabel"
   >
-    <img
-      class="c2"
-      width="14"
-    />
-    <span
-      class="linklabel"
-    >
-      Foo bar
-    </span>
-  </a>
-</div>
+    Foo bar
+  </span>
+</a>
 `;

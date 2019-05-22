@@ -23,16 +23,6 @@ exports[`Search matches the snapshot 1`] = `
   outline: 4px solid #fec813;
 }
 
-.c10 {
-  background: white;
-  border-top: none;
-  width: 100%;
-}
-
-.c10 li:first-of-type {
-  margin-top: 8px !important;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -164,10 +154,12 @@ exports[`Search matches the snapshot 1`] = `
       size="20"
     >
       <img
+        data-testid="searchToggle-search-icon"
         width="20"
       />
       <span
         class="visuallyhidden"
+        data-testid="searchToggle-label"
       >
         Toggle text
       </span>
@@ -202,11 +194,7 @@ exports[`Search matches the snapshot 1`] = `
       </div>
       <div
         class="c9"
-      >
-        <ul
-          class=" links c10"
-        />
-      </div>
+      />
     </div>
   </div>
 </form>
@@ -468,10 +456,12 @@ exports[`Search should render results 1`] = `
       size="20"
     >
       <img
+        data-testid="searchToggle-search-icon"
         width="20"
       />
       <span
         class="visuallyhidden"
+        data-testid="searchToggle-label"
       >
         Toggle text
       </span>
