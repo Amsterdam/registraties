@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { compose } from 'redux';
-import withSelector from 'containers/withSelector';
 
 const Img = styled.img`
   width: 100%;
@@ -29,4 +27,4 @@ const HomePage = () => (
   </picture>
 );
 
-export default compose(withSelector)(HomePage);
+export default HomePage;

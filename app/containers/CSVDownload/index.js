@@ -7,7 +7,6 @@ import { injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 import { isArray, isArrayOfArrays, isObject } from 'utils';
-import withSelector from 'containers/withSelector';
 import * as selectors from 'containers/withSelector/selectors';
 import DownloadLink from 'components/DownloadLink';
 import messages from 'containers/App/messages';
@@ -165,7 +164,6 @@ const mapStateToProps = createStructuredSelector({
 const withConnect = connect(mapStateToProps);
 
 const composed = compose(
-  withSelector,
   withConnect,
   injectIntl,
 )(CSVDownloadContainer);
