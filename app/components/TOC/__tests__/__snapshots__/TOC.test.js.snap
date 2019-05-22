@@ -1,0 +1,450 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TOC matches the snapshot 1`] = `
+.c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c2 {
+  padding: 0 !important;
+}
+
+.c2:focus {
+  outline: 4px solid #ffc90e !important;
+}
+
+.c2:hover,
+.c2:focus {
+  color: #ec0000;
+  fill: #ec0000;
+}
+
+.c4 {
+  vertical-align: baseline;
+  margin-right: 5px;
+}
+
+.c1 {
+  margin: 0 !important;
+  line-height: 34px;
+}
+
+.c3 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c3:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c3:hover {
+  color: #ec0000;
+}
+
+.c5 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c5:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c5:hover {
+  color: #ec0000;
+}
+
+.c6 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c6:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c6:hover {
+  color: #ec0000;
+}
+
+.c7 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c7:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c7:hover {
+  color: #ec0000;
+}
+
+.c8 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c8:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c8:hover {
+  color: #ec0000;
+}
+
+.c9 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c9:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c9:hover {
+  color: #ec0000;
+}
+
+.c10 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c10:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c10:hover {
+  color: #ec0000;
+}
+
+.c11 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c11:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c11:hover {
+  color: #ec0000;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+<div>
+  <h3
+    class="no-print c0"
+  >
+    Op deze pagina
+  </h3>
+  <ul
+    class="links no-print"
+  >
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c3"
+        href="#Openbare ruimte"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Openbare ruimte
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c5"
+        href="#Woonplaats"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Woonplaats
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c6"
+        href="#Nummeraanduiding"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Nummeraanduiding
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c7"
+        href="#Verblijfsobject"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Verblijfsobject
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c8"
+        href="#Pand"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Pand
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c9"
+        href="#Kadastraal object"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Kadastraal object
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c10"
+        href="#Kadastraal subject NNP"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Kadastraal subject NNP
+        </span>
+      </a>
+    </li>
+    <li
+      class="c1"
+    >
+      <a
+        class="c2 c11"
+        href="#Gebied"
+      >
+        <img
+          class="c4"
+          width="14"
+        />
+        <span
+          class="linklabel"
+        >
+          Gebied
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
+`;
