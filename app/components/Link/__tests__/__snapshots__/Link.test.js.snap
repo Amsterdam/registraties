@@ -1,13 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link matches the snapshot 1`] = `
+.c0 {
+  padding: 0 !important;
+}
+
+.c0:focus {
+  outline: 4px solid #ffc90e !important;
+}
+
+.c0:hover,
+.c0:focus {
+  color: #ec0000;
+  fill: #ec0000;
+}
+
+.c2 {
+  vertical-align: baseline;
+  margin-right: 5px;
+}
+
+.c1 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c1:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c1:hover {
+  color: #ec0000;
+}
+
 <div>
   <a
-    class="Link__StyledT-sc-1lozw0d-0 gkytJ sc-hSdWYo CECZO"
+    class="c0 c1"
     href="//some-url.com"
   >
     <img
-      class="Link__StyledIcon-sc-1lozw0d-1 djTqTh"
+      class="c2"
       width="14"
     />
     <span

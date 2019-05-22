@@ -2,6 +2,7 @@ import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@datapunt/asc-ui';
+import 'jest-styled-components';
 import Header from '..';
 import messages from '../../../translations/nl.json';
 

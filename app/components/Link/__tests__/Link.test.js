@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
 import { ThemeProvider } from '@datapunt/asc-ui';
+import 'jest-styled-components';
 import Link from '..';
 
 describe('Link', () => {

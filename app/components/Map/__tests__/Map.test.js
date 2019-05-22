@@ -2,6 +2,7 @@ import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import amaps from 'amsterdam-amaps/dist/amaps';
 import { rdToWgs84 } from 'shared/services/crs-converter/crs-converter';
+import 'jest-styled-components';
 import Map from '..';
 
 jest.mock('amsterdam-amaps/dist/amaps', () => {
