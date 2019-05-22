@@ -4,11 +4,30 @@ import 'jest-styled-components';
 import { ThemeProvider } from '@datapunt/asc-ui';
 import Suggest from '..';
 
-const items = JSON.parse(
-  '{"Adressen":[{"name":"Meeuwenlaan 221A","vboId":"0363010000740956","ligId":null,"brkId":"0363010000740956"},{"name":"Meeuwenlaan 221B","vboId":"0363010000740957","ligId":null,"brkId":"0363010000740957"},{"name":"Meeuwenlaan 223A","vboId":"0363010000740958","ligId":null,"brkId":"0363010000740958"}]}',
-);
+const items = {
+  Adressen: [
+    {
+      name: 'FakeStreet 999X',
+      vboId: '0363010000740956',
+      ligId: null,
+      brkId: '0363010000740956',
+    },
+    {
+      name: 'FakeStreet 999Y',
+      vboId: '0363010000740957',
+      ligId: null,
+      brkId: '0363010000740957',
+    },
+    {
+      name: 'FakeStreet 999Z',
+      vboId: '0363010000740958',
+      ligId: null,
+      brkId: '0363010000740958',
+    },
+  ],
+};
 
-describe('Section', () => {
+describe('Suggest', () => {
   afterEach(cleanup);
 
   it('matches the snapshot', () => {
@@ -42,12 +61,11 @@ describe('Section', () => {
   it('should render category names', () => {
     const { queryByText } = render(
       <ThemeProvider>
-        <Suggest onSelect={() => {}} items={{ Adressen: [], Monumenten: [], 'Kadastrale Objecten': [] }} />
+        <Suggest onSelect={() => {}} items={{ Adressen: [], 'Kadastrale Objecten': [] }} />
       </ThemeProvider>,
     );
 
     expect(queryByText('Adressen')).toBeInstanceOf(HTMLElement);
-    expect(queryByText('Monumenten')).toBeInstanceOf(HTMLElement);
     expect(queryByText('Kadastrale Objecten')).toBeInstanceOf(HTMLElement);
   });
 
@@ -77,7 +95,7 @@ describe('Section', () => {
     );
 
     fireEvent(
-      getByText('Meeuwenlaan 221B'),
+      getByText('FakeStreet 999Y'),
       new MouseEvent('click', {
         bubbles: true,
       }),

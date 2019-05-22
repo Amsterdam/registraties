@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Section matches the snapshot 1`] = `
+exports[`Suggest matches the snapshot 1`] = `
 .c3 {
   padding: 0 !important;
 }
@@ -161,7 +161,7 @@ exports[`Section matches the snapshot 1`] = `
           <span
             class="linklabel"
           >
-            Meeuwenlaan 221A
+            FakeStreet 999X
           </span>
         </a>
       </li>
@@ -179,7 +179,7 @@ exports[`Section matches the snapshot 1`] = `
           <span
             class="linklabel"
           >
-            Meeuwenlaan 221B
+            FakeStreet 999Y
           </span>
         </a>
       </li>
@@ -197,7 +197,7 @@ exports[`Section matches the snapshot 1`] = `
           <span
             class="linklabel"
           >
-            Meeuwenlaan 223A
+            FakeStreet 999Z
           </span>
         </a>
       </li>
