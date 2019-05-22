@@ -9,7 +9,7 @@ import { makeSelectVestigingData } from 'containers/withSelector/selectors';
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
 
-const VestigingContainer = ({ data, intl }) => {
+export const VestigingContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.VESTIGING.NAME);
   const href = OBJECTS.VESTIGING.STELSELPEDIA_LINK;
 
