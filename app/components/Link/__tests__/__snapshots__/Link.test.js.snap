@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link matches the snapshot 1`] = `
+<div>
+  <a
+    class="Link__StyledT-sc-1lozw0d-0 gkytJ sc-hSdWYo CECZO"
+    href="//some-url.com"
+  >
+    <img
+      class="Link__StyledIcon-sc-1lozw0d-1 djTqTh"
+      width="14"
+    />
+    <span
+      class="linklabel"
+    >
+      Foo bar
+    </span>
+  </a>
+</div>
+`;
