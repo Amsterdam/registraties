@@ -15,10 +15,16 @@ const Dd = styled.dd`
   padding-left: 1em;
 `;
 
-const Summary = ({ data, intl: { locale, formatMessage } }) => (
-  <>
-    <SectionHeading>{formatMessage(messages.overview)}</SectionHeading>
-    {Object.keys(data).length ? (
+const Summary = ({ data, intl: { locale, formatMessage } }) => {
+  if (!data) return null;
+
+  const numItems = Object.keys(data).length;
+
+  if (!numItems) return <LoadingIndicator />;
+
+  return (
+    <>
+      <SectionHeading>{formatMessage(messages.overview)}</SectionHeading>
       <dl>
         {Object.keys(data).map(key => (
           <Fragment key={key}>
@@ -27,20 +33,25 @@ const Summary = ({ data, intl: { locale, formatMessage } }) => (
           </Fragment>
         ))}
       </dl>
-    ) : (
-      <LoadingIndicator />
-    )}
-  </>
-);
+    </>
+  );
+};
+
+const dataShape = {
+  label: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }),
+  value: PropTypes.string.isRequired,
+};
 
 Summary.propTypes = {
   data: PropTypes.shape({
-    RSIN: PropTypes.shape({}),
-    accommodation_object_id: PropTypes.shape({}),
-    cadastral_object_nr: PropTypes.shape({}),
-    chamber_of_commerce_nr: PropTypes.shape({}),
-    house_id: PropTypes.shape({}),
-    number_indication_id: PropTypes.shape({}),
+    RSIN: PropTypes.shape(dataShape),
+    accommodation_object_id: PropTypes.shape(dataShape),
+    cadastral_object_nr: PropTypes.shape(dataShape),
+    chamber_of_commerce_nr: PropTypes.shape(dataShape),
+    house_id: PropTypes.shape(dataShape),
+    number_indication_id: PropTypes.shape(dataShape),
   }),
   intl: intlShape.isRequired,
 };
