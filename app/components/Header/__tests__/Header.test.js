@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@datapunt/asc-ui';
 import 'jest-styled-components';
@@ -49,5 +49,33 @@ describe('Header', () => {
     );
 
     expect(getByText('Uitloggen')).not.toBeUndefined();
+  });
+
+  it('should call the onLoginLogoutButtonClick handler', () => {
+    const onLoginLogoutButtonClick = jest.fn();
+
+    const { getByText } = render(
+      <ThemeProvider>
+        <Header intl={intl} onLoginLogoutButtonClick={onLoginLogoutButtonClick} />
+      </ThemeProvider>,
+    );
+
+    fireEvent(
+      getByText('Inloggen'),
+      new MouseEvent('click', {
+        bubbles: true,
+      }),
+    );
+
+    expect(onLoginLogoutButtonClick).toHaveBeenCalledWith(expect.anything(), 'datapunt');
+
+    fireEvent(
+      getByText('Inloggen ADW'),
+      new MouseEvent('click', {
+        bubbles: true,
+      }),
+    );
+
+    expect(onLoginLogoutButtonClick).toHaveBeenCalledWith(expect.anything(), 'grip');
   });
 });
