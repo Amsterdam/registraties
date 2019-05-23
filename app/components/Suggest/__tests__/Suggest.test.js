@@ -8,21 +8,21 @@ const items = {
   Adressen: [
     {
       name: 'FakeStreet 999X',
-      vboId: '0363010000740956',
+      vboId: null,
       ligId: null,
       brkId: '0363010000740956',
     },
     {
       name: 'FakeStreet 999Y',
-      vboId: '0363010000740957',
-      ligId: null,
-      brkId: '0363010000740957',
+      vboId: null,
+      ligId: '0363010000740956',
+      brkId: null,
     },
     {
       name: 'FakeStreet 999Z',
       vboId: '0363010000740958',
       ligId: null,
-      brkId: '0363010000740958',
+      brkId: null,
     },
   ],
 };

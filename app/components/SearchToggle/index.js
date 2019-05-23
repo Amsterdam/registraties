@@ -42,7 +42,7 @@ const SearchToggle = ({ active, onClick, className, label, ...rest }) => (
 SearchToggle.defaultProps = {
   active: false,
   className: '',
-  onClick: () => {},
+  onClick: null,
 };
 
 SearchToggle.propTypes = {
