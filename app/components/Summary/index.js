@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { intlShape } from 'react-intl';
 import styled from 'styled-components';
 
-import { SectionHeading } from 'containers/AccommodationObjectPage/styled';
+import SectionHeading from 'components/SectionHeading';
 import messages from 'containers/App/messages';
 import LoadingIndicator from 'components/LoadingIndicator';
 

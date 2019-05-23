@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SectionHeading should match the snapshot 1`] = `
+.c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+<h3
+  class="c0"
+>
+  Here be the section heading content
+</h3>
+`;
