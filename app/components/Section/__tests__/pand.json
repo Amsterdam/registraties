@@ -1,0 +1,48 @@
+[
+  {
+    "type": "string",
+    "key": "pandidentificatie",
+    "formattedKey": "Pandidentificatie",
+    "value": "0363100012096240",
+    "formattedValue": "0363100012096240"
+  },
+  {
+    "type": "object",
+    "key": "status",
+    "formattedKey": "Status",
+    "value": { "code": "31", "omschrijving": "Pand in gebruik" },
+    "formattedValue": "Pand in gebruik"
+  },
+  {
+    "type": "string",
+    "key": "oorspronkelijk_bouwjaar",
+    "formattedKey": "Oorspronkelijk bouwjaar",
+    "value": "1921",
+    "formattedValue": "1921"
+  },
+  {
+    "type": "boolean",
+    "key": "hoogste_bouwlaag",
+    "formattedKey": "Hoogste bouwlaag",
+    "value": null,
+    "formattedValue": "n.b."
+  },
+  {
+    "type": "boolean",
+    "key": "laagste_bouwlaag",
+    "formattedKey": "Laagste bouwlaag",
+    "value": null,
+    "formattedValue": "n.b."
+  },
+  {
+    "type": "number",
+    "key": "verblijfsobjecten",
+    "formattedKey": { "id": "registraties.amount_of" },
+    "value": {
+      "count": 2,
+      "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012096240"
+    },
+    "formattedValue": 2
+  },
+  { "type": "currency", "key": "koopsom", "formattedKey": "Koopsom", "value": 375000, "formattedValue": 375000 }
+]

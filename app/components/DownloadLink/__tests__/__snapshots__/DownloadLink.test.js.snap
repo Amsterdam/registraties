@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadLink matches the snapshot 1`] = `
+<a
+  class="sc-bdVaJa sc-dnqmqq kPPkLl"
+  download="filename.csv"
+  tabindex="0"
+>
+  CSV
+</a>
+`;
+
+exports[`DownloadLink matches the snapshot 2`] = `
+<a
+  class="sc-bdVaJa sc-dnqmqq kPPkLl"
+  disabled=""
+  download="filename.csv"
+  tabindex="-1"
+>
+  CSV
+</a>
+`;

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Link from 'components/Link';
 
 const Strong = styled.strong`
@@ -14,11 +14,7 @@ const StyledLink = styled(Link)`
 const Ul = styled.ul`
   background: white;
   border-top: none;
-  ${({ numItems }) =>
-    numItems > 0 &&
-    css`
-      border: #767676 solid 1px;
-    `}
+  border: #767676 solid 1px;
   width: 100%;
 
   li:first-of-type {
@@ -28,50 +24,47 @@ const Ul = styled.ul`
 
 /* eslint-disable indent,react/jsx-indent */
 const Suggest = forwardRef(({ className, items, onSelect }, ref) => {
+  if (!items) return null;
+
   const numItems = Object.keys(items).length;
+
+  if (!numItems) return null;
+
   return (
     <Ul className={`${className} links`} ref={ref} numItems={numItems}>
-      {numItems > 0
-        ? Object.keys(items).map(key => (
-            <li key={key}>
-              <Strong>{key}</Strong>
-              <ul className="links">
-                {items[key].map(item => (
-                  <li key={`${item.name}_${item.vboId || item.ligId || item.brkId}`}>
-                    <StyledLink
-                      href="/"
-                      data-vbo-id={item.vboId}
-                      data-lig-id={item.ligId}
-                      data-brk-id={item.brkId}
-                      onClick={onSelect}
-                      label={item.name}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))
-        : null}
+      {Object.keys(items).map(key => (
+        <li key={key}>
+          <Strong>{key}</Strong>
+
+          <ul className="links">
+            {items[key].map(item => (
+              <li key={`${item.name}_${item.vboId || item.ligId || item.brkId}`}>
+                <StyledLink
+                  href="/"
+                  data-vbo-id={item.vboId}
+                  data-lig-id={item.ligId}
+                  data-brk-id={item.brkId}
+                  onClick={onSelect}
+                  label={item.name}
+                />
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
     </Ul>
   );
 });
 
 Suggest.defaultProps = {
   className: ``,
+  items: null,
 };
 
 Suggest.propTypes = {
   className: PropTypes.string,
   items: PropTypes.shape({
     Adressen: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        brkId: PropTypes.string,
-        vboId: PropTypes.string,
-        ligId: PropTypes.string,
-      }),
-    ),
-    Monumenten: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         brkId: PropTypes.string,

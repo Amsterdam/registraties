@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer matches the snapshot 1`] = `
+<div
+  class="footer-wrapper no-print"
+>
+  <div
+    class="row bg-darkgrey footer"
+  >
+    <footer
+      class="container footer-component"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="col-12"
+        >
+          <h3
+            class="c-footer__heading"
+          >
+            Contact
+          </h3>
+          <p
+            class="u-mb--1"
+          >
+            Heeft u een vraag over de informatie die u aantreft op Mijn Amsterdam?
+            <br />
+            Neem dan contact op met de gemeente.
+          </p>
+          <p
+            class="u-mb--1"
+          >
+            Gemeentelijk informatienummer:
+             
+            <a
+              class="c-link c-link--inherit"
+              href="tel:14020"
+            >
+              14 020
+            </a>
+            <br />
+            op werkdagen van 08:00 tot 18:00 uur.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <div
+    class="container grid-below-footer"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col-12"
+      >
+        <nav>
+          <ul
+            class="links horizontal left"
+          >
+            <li>
+              <a
+                href="https://www.amsterdam.nl/privacy/"
+              >
+                <span
+                  class="linklabel"
+                >
+                  Privacy
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -20,7 +20,7 @@ const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
 );
 
 DownloadLink.defaultProps = {
-  disabled: false,
+  disabled: null,
   label: 'CSV',
   onClick: null,
 };

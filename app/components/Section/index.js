@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape, FormattedNumber } from 'react-intl';
 import styled from 'styled-components';
 
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -8,17 +8,36 @@ import messages from 'containers/App/messages';
 import { isArray, isObject } from 'utils';
 
 import { Ul, Key, StelselpediaLink, SectionHeading } from 'containers/AccommodationObjectPage/styled';
-import printValue from 'containers/AccommodationObjectPage/printValue';
 
 const SectionWrapper = styled.section`
   position: relative;
 `;
 
-const Section = ({ cfg, data, intl }) => {
+const printValue = meta => {
+  const { type, formattedValue } = meta;
+
+  switch (type) {
+    case 'number':
+      return <FormattedNumber value={formattedValue} />;
+    case 'currency':
+      return (
+        <FormattedNumber
+          value={formattedValue}
+          style="currency" // eslint-disable-line
+          currency="EUR"
+          currencyDisplay="symbol"
+          minimumFractionDigits={0}
+          maximumFractionDigits={0}
+        />
+      );
+    default:
+      return formattedValue;
+  }
+};
+
+export const SectionComponent = ({ name, href, data, intl }) => {
   const { formatMessage, locale } = intl;
-  const { NAME, STELSELPEDIA_LINK } = cfg;
   const sectionData = data && data.length === 1 && isArray(data[0]) ? data[0] : data;
-  const name = formatMessage(NAME);
 
   const renderList = listData => (
     <Ul>
@@ -47,14 +66,16 @@ const Section = ({ cfg, data, intl }) => {
   const Title = () => (
     <SectionHeading marginCollapse id={name}>
       {name}
-      <StelselpediaLink
-        href={STELSELPEDIA_LINK}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={formatMessage(messages.to_stelselpedia, { name })}
-      >
-        <span>i</span>
-      </StelselpediaLink>
+      {href && (
+        <StelselpediaLink
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={formatMessage(messages.to_stelselpedia, { name })}
+        >
+          <span>i</span>
+        </StelselpediaLink>
+      )}
     </SectionHeading>
   );
 
@@ -68,19 +89,46 @@ const Section = ({ cfg, data, intl }) => {
   );
 };
 
-Section.propTypes = {
-  cfg: PropTypes.shape({
-    ABBR: PropTypes.string.isRequired,
-    NAME: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-    STELSELPEDIA_LINK: PropTypes.string.isRequired,
-  }).isRequired,
+SectionComponent.defaultProps = {
+  href: '',
+};
+
+SectionComponent.propTypes = {
+  name: PropTypes.string.isRequired,
+  href: PropTypes.string,
   data: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({})),
-    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        formattedKey: PropTypes.oneOfType([
+          PropTypes.shape({
+            id: PropTypes.string.isRequired,
+          }),
+          PropTypes.string,
+        ]).isRequired,
+        formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        key: PropTypes.string.isRequired,
+        value: PropTypes.any,
+      }),
+    ),
+    PropTypes.arrayOf(
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string.isRequired,
+          formattedKey: PropTypes.oneOfType([
+            PropTypes.shape({
+              id: PropTypes.string.isRequired,
+            }),
+            PropTypes.string,
+          ]).isRequired,
+          formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+          key: PropTypes.string.isRequired,
+          value: PropTypes.any,
+        }),
+      ),
+    ),
   ]),
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(Section);
+export default injectIntl(SectionComponent);

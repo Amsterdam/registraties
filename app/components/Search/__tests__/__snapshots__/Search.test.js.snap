@@ -1,0 +1,553 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search matches the snapshot 1`] = `
+.c3 {
+  padding: 10px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: none;
+}
+
+.c3:hover {
+  background-color: #ec0000;
+  cursor: pointer;
+}
+
+.c3:hover svg {
+  fill: white;
+}
+
+.c3:focus {
+  outline: 4px solid #fec813;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.c6 {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+.c8 {
+  border: #767676 solid 1px;
+  height: 44px;
+  padding: 9px 9px 11px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.c8,
+.c8::-webkit-input-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8::-moz-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8:-ms-input-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8::placeholder {
+  font-size: 1em;
+}
+
+.c8:focus {
+  outline: #fec813 solid 4px;
+  outline-offset: 0;
+  border: black solid 1px;
+}
+
+.c7 {
+  font-size: 16px;
+  line-height: 22px;
+  color: #767676;
+}
+
+.c1 {
+  max-width: 1024px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+.c4 {
+  min-width: 70px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.c9 {
+  position: absolute;
+  min-width: 70px;
+  max-width: 620px;
+  width: 100%;
+  bottom: -71px;
+  z-index: -1;
+}
+
+.c2 {
+  position: absolute;
+  right: 0;
+  top: -50px;
+}
+
+.c5 {
+  display: none;
+  padding-bottom: 30px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+@media (max-width:1200px) {
+  .c0 {
+    padding-top: 100px;
+  }
+}
+
+@media (max-width:650px) {
+  .c4 {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+@media (max-width:650px) {
+  .c9 {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+<form
+  action=""
+  class="no-print c0"
+>
+  <legend
+    class="visuallyhidden"
+  >
+    Legend text
+  </legend>
+  <div
+    class="c1"
+  >
+    <button
+      class="c2 c3"
+      data-testid="search-toggle"
+      size="20"
+    >
+      <img
+        data-testid="searchToggle-search-icon"
+        width="20"
+      />
+      <span
+        class="visuallyhidden"
+        data-testid="searchToggle-label"
+      >
+        Toggle text
+      </span>
+    </button>
+    <div
+      class="c4"
+    >
+      <div
+        class="c5"
+        data-testid="search-foldout"
+      >
+        <label
+          class="c6"
+          for="searchInput"
+        >
+          Term text
+        </label>
+        <div
+          class="c7"
+        >
+          Hint text
+        </div>
+        <input
+          autocapitalize="off"
+          autocorrect="off"
+          class="c8"
+          id="searchInput"
+          spellcheck="false"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="c9"
+      />
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Search should render results 1`] = `
+.c3 {
+  padding: 10px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: none;
+}
+
+.c3:hover {
+  background-color: #ec0000;
+  cursor: pointer;
+}
+
+.c3:hover svg {
+  fill: white;
+}
+
+.c3:focus {
+  outline: 4px solid #fec813;
+}
+
+.c13 {
+  padding: 0 !important;
+}
+
+.c13:focus {
+  outline: 4px solid #ffc90e !important;
+}
+
+.c13:hover,
+.c13:focus {
+  color: #ec0000;
+  fill: #ec0000;
+}
+
+.c15 {
+  vertical-align: baseline;
+  margin-right: 5px;
+}
+
+.c11 {
+  padding-left: 4px;
+}
+
+.c12 {
+  margin-left: 4px !important;
+}
+
+.c10 {
+  background: white;
+  border-top: none;
+  border: #767676 solid 1px;
+  width: 100%;
+}
+
+.c10 li:first-of-type {
+  margin-top: 8px !important;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.c6 {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+.c8 {
+  border: #767676 solid 1px;
+  height: 44px;
+  padding: 9px 9px 11px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.c8,
+.c8::-webkit-input-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8::-moz-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8:-ms-input-placeholder {
+  font-size: 1em;
+}
+
+.c8,
+.c8::placeholder {
+  font-size: 1em;
+}
+
+.c8:focus {
+  outline: #fec813 solid 4px;
+  outline-offset: 0;
+  border: black solid 1px;
+}
+
+.c7 {
+  font-size: 16px;
+  line-height: 22px;
+  color: #767676;
+}
+
+.c1 {
+  max-width: 1024px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+.c4 {
+  min-width: 70px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.c9 {
+  position: absolute;
+  min-width: 70px;
+  max-width: 620px;
+  width: 100%;
+  bottom: -71px;
+  z-index: -1;
+}
+
+.c2 {
+  position: absolute;
+  right: 0;
+  top: -50px;
+}
+
+.c5 {
+  display: none;
+  padding-bottom: 30px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.c14 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c14:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c14:hover {
+  color: #ec0000;
+}
+
+.c16 {
+  color: #004699;
+  display: inline-block;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1rem;
+  -webkit-letter-spacing: -0.01562em;
+  -moz-letter-spacing: -0.01562em;
+  -ms-letter-spacing: -0.01562em;
+  letter-spacing: -0.01562em;
+  line-height: 1;
+  font-style: normal;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c16:focus {
+  outline: none;
+  background-color: #FEC813;
+}
+
+.c16:hover {
+  color: #ec0000;
+}
+
+@media (max-width:1200px) {
+  .c0 {
+    padding-top: 100px;
+  }
+}
+
+@media (max-width:650px) {
+  .c4 {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+@media (max-width:650px) {
+  .c9 {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+<form
+  action=""
+  class="no-print c0"
+>
+  <legend
+    class="visuallyhidden"
+  >
+    Legend text
+  </legend>
+  <div
+    class="c1"
+  >
+    <button
+      class="c2 c3"
+      data-testid="search-toggle"
+      size="20"
+    >
+      <img
+        data-testid="searchToggle-search-icon"
+        width="20"
+      />
+      <span
+        class="visuallyhidden"
+        data-testid="searchToggle-label"
+      >
+        Toggle text
+      </span>
+    </button>
+    <div
+      class="c4"
+    >
+      <div
+        class="c5"
+        data-testid="search-foldout"
+      >
+        <label
+          class="c6"
+          for="searchInput"
+        >
+          Term text
+        </label>
+        <div
+          class="c7"
+        >
+          Hint text
+        </div>
+        <input
+          autocapitalize="off"
+          autocorrect="off"
+          class="c8"
+          id="searchInput"
+          spellcheck="false"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="c9"
+      >
+        <ul
+          class=" links c10"
+        >
+          <li>
+            <strong
+              class="c11"
+            >
+              Adressen
+            </strong>
+            <ul
+              class="links"
+            >
+              <li>
+                <a
+                  class="c12 c13 c14"
+                  data-vbo-id="0363010000740956"
+                  href="/"
+                >
+                  <img
+                    class="c15"
+                    width="14"
+                  />
+                  <span
+                    class="linklabel"
+                  >
+                    Foo bar
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c12 c13 c16"
+                  data-vbo-id="0363010000740957"
+                  href="/"
+                >
+                  <img
+                    class="c15"
+                    width="14"
+                  />
+                  <span
+                    class="linklabel"
+                  >
+                    Bar baz
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</form>
+`;

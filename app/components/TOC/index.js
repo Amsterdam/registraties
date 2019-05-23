@@ -15,7 +15,12 @@ const Li = styled.li`
 
 const TOC = ({ intl, sections }) => {
   const [active, setActive] = useState();
+
+  if (!sections) return null;
+
   const titles = sections.filter(Boolean);
+
+  if (!titles.length) return <LoadingIndicator />;
 
   return (
     <>
@@ -23,28 +28,24 @@ const TOC = ({ intl, sections }) => {
         {intl.formatMessage(messages.on_this_page)}
       </SectionHeading>
 
-      {titles.length ? (
-        <ul className="links no-print">
-          {titles.map(section => {
-            const title = intl.formatMessage(section);
+      <ul className="links no-print">
+        {titles.map(section => {
+          const title = intl.formatMessage(section);
 
-            return (
-              <Li key={title}>
-                <Link
-                  href={`#${title}`}
-                  onClick={() => {
-                    setActive(title);
-                  }}
-                  className={active === title ? 'has-focus' : null}
-                  label={title}
-                />
-              </Li>
-            );
-          })}
-        </ul>
-      ) : (
-        <LoadingIndicator />
-      )}
+          return (
+            <Li key={title}>
+              <Link
+                href={`#${title}`}
+                onClick={() => {
+                  setActive(title);
+                }}
+                className={active === title ? 'has-focus' : null}
+                label={title}
+              />
+            </Li>
+          );
+        })}
+      </ul>
     </>
   );
 };

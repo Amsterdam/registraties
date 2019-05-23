@@ -72,7 +72,6 @@ const SuggestWrapper = styled.div`
   width: 100%;
   bottom: -71px;
   z-index: -1;
-  // left: calc(50% - 620px / 2);
 
   @media (max-width: 650px) {
     max-width: calc(100vw - 30px);
@@ -115,10 +114,15 @@ const Search = forwardRef(
         <legend className="visuallyhidden">{formLegendLabel}</legend>
 
         <Wrapper>
-          <StyledToggle onClick={() => setActive(!active)} active={active} label={searchLabel} />
+          <StyledToggle
+            data-testid="search-toggle"
+            onClick={() => setActive(!active)}
+            active={active}
+            label={searchLabel}
+          />
 
           <Container>
-            <FoldOut active={active}>
+            <FoldOut active={active} data-testid="search-foldout">
               <Label htmlFor="searchInput">{searchTermLabel}</Label>
               <Hint>{searchHintLabel}</Hint>
               <Input

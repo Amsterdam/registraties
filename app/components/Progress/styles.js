@@ -2,15 +2,14 @@ import { css } from 'styled-components';
 
 /* eslint-disable prettier/prettier */
 
-const progressWidth = 60;
-const progressBorderWidth = 6;
-const wrapperPadding = 20;
+export const progressWidth = 60;
+export const progressBorderWidth = 6;
+export const wrapperPadding = 20;
 
 const wrapper = css`
   ${({ inline }) =>
     inline
       ? css`
-          display: inline-block;
           position: relative;
         `
       : css`

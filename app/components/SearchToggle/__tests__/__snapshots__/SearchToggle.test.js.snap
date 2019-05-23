@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchToggle matches the snapshot 1`] = `
+.c0 {
+  padding: 10px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: none;
+}
+
+.c0:hover {
+  background-color: #ec0000;
+  cursor: pointer;
+}
+
+.c0:hover svg {
+  fill: white;
+}
+
+.c0:focus {
+  outline: 4px solid #fec813;
+}
+
+<button
+  class="c0"
+  size="20"
+>
+  <img
+    data-testid="searchToggle-search-icon"
+    width="20"
+  />
+  <span
+    class="visuallyhidden"
+    data-testid="searchToggle-label"
+  >
+    Foo bar
+  </span>
+</button>
+`;
+
+exports[`SearchToggle matches the snapshot 2`] = `
+<button
+  class="SearchToggle__StyledIcon-qg6jkp-0 bcSxwk"
+  size="20"
+>
+  <img
+    data-testid="searchToggle-close-icon"
+    width="20"
+  />
+  <span
+    class="visuallyhidden"
+    data-testid="searchToggle-label"
+  >
+    Foo bar
+  </span>
+</button>
+`;

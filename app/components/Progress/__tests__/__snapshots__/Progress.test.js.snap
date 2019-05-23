@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress matches the snapshot 1`] = `
+.c0 {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-top: 0;
+  position: fixed;
+  left: calc(50% - 50px);
+  z-index: 500;
+  box-sizing: content-box;
+  -webkit-transition: -webkit-transform 0.35s ease-out;
+  -webkit-transition: transform 0.35s ease-out;
+  transition: transform 0.35s ease-out;
+  -webkit-transform: translate3D(0,0px,0);
+  -ms-transform: translate3D(0,0px,0);
+  transform: translate3D(0,0px,0);
+  top: 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100px;
+  will-change: transform;
+}
+
+.c0.finished {
+  -webkit-transition-delay: 0.7s;
+  transition-delay: 0.7s;
+}
+
+.c0.hidden {
+  display: none;
+}
+
+.c1 {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  -webkit-clip: rect(0,60px,60px,30px);
+  clip: rect(0,60px,60px,30px);
+  will-change: clip;
+}
+
+.c1::before,
+.c1::after {
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #ec0000;
+  -webkit-clip: rect(0,30px,60px,0);
+  clip: rect(0,30px,60px,0);
+  content: '';
+  position: absolute;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  -webkit-transition: -webkit-transform 0.1s ease-in;
+  -webkit-transition: transform 0.1s ease-in;
+  transition: transform 0.1s ease-in;
+  height: 48px;
+  width: 48px;
+  will-change: transform;
+}
+
+.c1::before {
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c1::after {
+  display: none;
+}
+
+.c2 {
+  text-align: center;
+  font-size: 14px;
+  height: 18px;
+  line-height: 18px;
+  color: initial;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+<div
+  class="no-print  c0"
+  data-testid="progress-wrapper"
+  type="determined"
+>
+  <div
+    class="c1"
+  />
+  <div
+    class="c2"
+    data-testid="progress-label"
+  >
+    0 %
+  </div>
+</div>
+`;

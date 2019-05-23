@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary matches the snapshot 1`] = `
+.c0 {
+  margin-top: 30px;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+<h3
+  class="c0"
+>
+  Overzicht
+</h3>
+`;
