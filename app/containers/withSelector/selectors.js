@@ -12,7 +12,6 @@ const selectLigplaats = state => state.ligplaats;
 const selectNummeraanduiding = state => state.nummeraanduiding;
 const selectPand = state => state.pand;
 const selectVerblijfsobject = state => state.verblijfsobject;
-const selectVestiging = state => state.vestiging;
 const selectOpenbareRuimte = state => state.openbareRuimte;
 const selectWoonplaatsData = state => state.woonplaats;
 const selectTOC = state => state.toc;
@@ -288,49 +287,6 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
 
       // eslint-disable-next-line no-underscore-dangle
       return foundSubjects.rechten.map(data => data.kadastraal_subject._links.self.href);
-    },
-  );
-
-export const makeSelectVestigingData = () =>
-  createSelector(
-    selectVestiging,
-    makeSelectLocale(),
-    (state, locale) => {
-      const { data } = state;
-
-      if (!data) {
-        return undefined;
-      }
-
-      const filtered = data
-        .map(({ count, results }) => count > 0 && results)
-        .filter(Boolean)
-        .reduce((acc, val) => {
-          acc.push(...val);
-          return acc;
-        }, []);
-      const keys = ['naam', 'locatie'];
-
-      const formatted = filtered
-        .map(vestiging => formatData({ data: vestiging, keys, locale }))
-        .map(item =>
-          item.reduce((acc, vestiging) => {
-            if (isArray(vestiging)) {
-              vestiging.forEach(prop => {
-                acc.push(prop);
-              });
-            } else {
-              acc.push(vestiging);
-            }
-            return acc;
-          }, []),
-        );
-
-      if (!formatted.length) {
-        return null;
-      }
-
-      return formatted.length === 1 ? formatted[0] : formatted;
     },
   );
 

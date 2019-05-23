@@ -39,7 +39,9 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
+const Intl = injectIntl(VerblijfsObjectContainer);
+
 export default compose(
   injectIntl,
   withConnect,
-)(memo(VerblijfsObjectContainer));
+)(memo(Intl));

@@ -11,6 +11,7 @@ import * as selectors from 'containers/withSelector/selectors';
 import DownloadLink from 'components/DownloadLink';
 import messages from 'containers/App/messages';
 import { OBJECTS } from 'containers/App/constants';
+import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
 
 const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
   <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} {...rest} />
@@ -157,7 +158,7 @@ const mapStateToProps = createStructuredSelector({
   KADASTRAAL_OBJECT: selectors.makeSelectKadastraalObjectData(),
   KADASTRAAL_SUBJECT_NNP: selectors.makeSelectKadastraalSubjectNNPData(),
   KADASTRAAL_SUBJECT_NP: selectors.makeSelectKadastraalSubjectNPData(),
-  VESTIGING: selectors.makeSelectVestigingData(),
+  VESTIGING: makeSelectVestigingData(),
   GEBIED: selectors.makeSelectGebiedData(),
 });
 

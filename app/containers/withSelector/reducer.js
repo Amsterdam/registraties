@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { LOAD_VESTIGING_DATA_SUCCESS } from 'containers/Vestiging/constants';
 import * as constants from 'containers/App/constants';
 
 // The initial state of the App
@@ -40,7 +41,7 @@ export const tocReducer = (state = { toc: [] }, action) =>
         draft.toc[3] = constants.OBJECTS.VERBLIJFSOBJECT.NAME;
         break;
 
-      case constants.LOAD_VESTIGING_DATA_SUCCESS:
+      case LOAD_VESTIGING_DATA_SUCCESS:
         draft.toc[8] = constants.OBJECTS.VESTIGING.NAME;
         break;
 
@@ -220,26 +221,26 @@ export const ligplaatsReducer = (state = initialState, action) =>
     }
   });
 
-export const vestigingReducer = (state = initialState, action) =>
-  produce(state, draft => {
-    switch (action.type) {
-      case constants.LOAD_DATA_PENDING:
-        draft.data = undefined;
-        break;
+// export const vestigingReducer = (state = initialState, action) =>
+//   produce(state, draft => {
+//     switch (action.type) {
+//       case constants.LOAD_DATA_PENDING:
+//         draft.data = undefined;
+//         break;
 
-      case constants.LOAD_VESTIGING_DATA_SUCCESS:
-        draft.data = action.payload;
-        break;
+//       case constants.LOAD_VESTIGING_DATA_SUCCESS:
+//         draft.data = action.payload;
+//         break;
 
-      case constants.LOAD_VESTIGING_DATA_FAILED:
-        draft.error = action.payload;
-        break;
+//       case constants.LOAD_VESTIGING_DATA_FAILED:
+//         draft.error = action.payload;
+//         break;
 
-      case constants.LOAD_VESTIGING_DATA_NO_RESULTS:
-        draft.data = undefined;
-        break;
-    }
-  });
+//       case constants.LOAD_VESTIGING_DATA_NO_RESULTS:
+//         draft.data = undefined;
+//         break;
+//     }
+//   });
 
 export const openbareRuimteReducer = (state = initialState, action) =>
   produce(state, draft => {

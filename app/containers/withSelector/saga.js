@@ -11,6 +11,8 @@ import { LOAD_BAG_DATA } from 'containers/App/constants';
 
 import { isValidSubjectNP, isValidSubjectNNP } from 'utils';
 
+import { loadVestigingData } from 'containers/Vestiging/actions';
+
 import * as actions from './actions';
 import * as selectors from './selectors';
 
@@ -18,7 +20,6 @@ const { API_ROOT } = configuration;
 const OPENBARE_RUIMTE_API = `${API_ROOT}bag/openbareruimte/`;
 const VERBLIJFSOBJECT_API = `${API_ROOT}bag/verblijfsobject/`;
 const LIGPLAATS_API = `${API_ROOT}bag/ligplaats/`;
-const HR_API = `${API_ROOT}handelsregister/`;
 const BRK_OBJECT_API = `${API_ROOT}brk/object-expand/?verblijfsobjecten__id=`;
 const NUMMERAANDUIDING_API = `${API_ROOT}bag/nummeraanduiding/`;
 const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
@@ -132,8 +133,9 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
       yield call(fetchKadastraalSubjectData, false);
       yield call(incrementProgress);
 
-      yield call(fetchVestigingData);
-      yield call(incrementProgress);
+      yield put(loadVestigingData());
+      // yield call(fetchVestigingData);
+      // yield call(incrementProgress);
     } else {
       yield put(actions.loadKadastraalObjectDataNoResults());
       yield put(actions.loadKadastraalSubjectNPDataNoResults());
@@ -183,29 +185,6 @@ export function* fetchKadastraalSubjectData(isNatuurlijkPersoon) {
     } else {
       yield put(actions.loadKadastraalSubjectNNPDataFailed());
     }
-    throw error;
-  }
-}
-
-export function* fetchVestigingData() {
-  const brkObjectIds = yield select(selectors.makeSelectFromObjectAppartment('id'));
-
-  try {
-    if (brkObjectIds && brkObjectIds.length) {
-      const data = yield all([
-        ...brkObjectIds.map(brkObjectId =>
-          call(request, `${HR_API}vestiging/?kadastraal_object=${brkObjectId}`, requestOptions),
-        ),
-      ]);
-
-      if (!data.length || data[0].count === 0) {
-        yield put(actions.loadVestigingDataNoResults());
-      } else {
-        yield put(actions.loadVestigingDataSuccess(data));
-      }
-    }
-  } catch (error) {
-    yield put(actions.loadVestigingDataFailed());
     throw error;
   }
 }

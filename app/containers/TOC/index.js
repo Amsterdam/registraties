@@ -6,13 +6,12 @@ import { injectIntl } from 'react-intl';
 import { makeSelectTOC } from 'containers/withSelector/selectors';
 import TOC from 'components/TOC';
 
+const Intl = injectIntl(TOC);
+
 const mapStateToProps = createStructuredSelector({
   sections: makeSelectTOC(),
 });
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(TOC);
+export default compose(withConnect)(Intl);
