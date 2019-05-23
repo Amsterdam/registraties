@@ -20,7 +20,7 @@ node {
     stage("Checkout") {
         checkout scm
     }
-
+/*
     stage("Unit and Integration") {
       String  PROJECT = "registraties"
 
@@ -33,6 +33,7 @@ node {
         }
       }
     }
+*/
 }
 
 node {
