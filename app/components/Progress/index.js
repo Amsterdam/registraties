@@ -11,11 +11,17 @@ const Pie = styled(({ className }) => <div className={className} />)`
   ${({ type }) => (type === 'determined' ? determined.Pie : undetermined.Pie)};
 `;
 
-const Label = styled.div`
+export const Label = styled.div`
   ${labelStyles}
 `;
 
 export const smallFactor = 0.333;
+
+export const removeNode = ({ currentTarget }) => {
+  if (currentTarget.classList.contains('finished')) {
+    currentTarget.classList.add('hidden');
+  }
+};
 
 /**
  * Fixed positioned component that indicates (loading) progress
@@ -27,12 +33,6 @@ const Progress = ({ className, label, labelPosition, showLabel, variant, ...prop
 
   useEffect(() => {
     const { current } = progressRef;
-
-    const removeNode = ({ currentTarget }) => {
-      if (currentTarget.classList.contains('finished')) {
-        currentTarget.classList.add('hidden');
-      }
-    };
 
     current.addEventListener('transitionend', removeNode, true);
 

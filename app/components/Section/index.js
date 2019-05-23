@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedDate, FormattedNumber } from 'react-intl';
+import { injectIntl, intlShape, FormattedNumber } from 'react-intl';
 import styled from 'styled-components';
 
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -13,12 +13,10 @@ const SectionWrapper = styled.section`
   position: relative;
 `;
 
-export const printValue = meta => {
+const printValue = meta => {
   const { type, formattedValue } = meta;
 
   switch (type) {
-    case 'date':
-      return <FormattedDate value={formattedValue} />;
     case 'number':
       return <FormattedNumber value={formattedValue} />;
     case 'currency':

@@ -232,6 +232,18 @@ exports[`Section should render section contents 1`] = `
         2
       </span>
     </li>
+    <li>
+      <strong
+        class="c4"
+        lang="nl"
+      >
+        Koopsom
+      </strong>
+      : 
+      <span>
+        € 375,000
+      </span>
+    </li>
   </ul>
 </section>
 `;

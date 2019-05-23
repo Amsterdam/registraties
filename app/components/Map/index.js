@@ -15,9 +15,9 @@ export const MapWrapper = styled.div`
   z-index: 0;
 `;
 
-const Map = ({ center, coordinates, marker, search, zoom }) => {
-  const target = 'mapDiv';
+export const target = 'mapDiv';
 
+const Map = ({ center, coordinates, marker, search, zoom }) => {
   useEffect(() => {
     let points = center;
 

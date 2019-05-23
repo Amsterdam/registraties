@@ -2,12 +2,24 @@ import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import 'jest-styled-components';
 import { IntlProvider } from 'react-intl';
+import { isArray } from 'utils';
 
 import { SectionComponent as Section } from '..';
 import messages from '../../../translations/nl.json';
+import pand from './pand.json';
+import subjectNP from './subjectNP.json';
 
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();
+
+jest.mock('utils', () => {
+  const actual = require.requireActual('utils');
+
+  return {
+    ...actual,
+    isArray: jest.fn(),
+  };
+});
 
 describe('Section', () => {
   afterEach(cleanup);
@@ -53,59 +65,49 @@ describe('Section', () => {
     expect(queryByText('Foo bar baz')).toBeNull();
   });
 
+  it('should verify if data items are arrays', () => {
+    const data = [pand[0], pand[1]];
+    const { rerender } = render(
+      <IntlProvider locale="nl" messages={messages}>
+        <Section name="Foo bar baz" intl={intl} data={data} />
+      </IntlProvider>,
+    );
+
+    expect(isArray).toHaveBeenCalledTimes(2);
+    expect(isArray).toHaveBeenCalledWith(data[0]);
+    expect(isArray).toHaveBeenLastCalledWith(data[1]);
+    expect(document.getElementsByTagName('li')).toHaveLength(2);
+
+    isArray.mockReset();
+
+    const data2 = [[pand[2]]];
+
+    rerender(
+      <IntlProvider locale="nl" messages={messages}>
+        <Section name="Foo bar baz" intl={intl} data={data2} />
+      </IntlProvider>,
+    );
+
+    expect(isArray).toHaveBeenCalledTimes(2);
+    expect(isArray).toHaveBeenCalledWith(data2[0]);
+    expect(document.getElementsByTagName('li')).toHaveLength(1);
+
+    isArray.mockReset();
+
+    const data3 = subjectNP;
+
+    render(
+      <IntlProvider locale="nl" messages={messages}>
+        <Section name="Foo bar baz" intl={intl} data={data3} />
+      </IntlProvider>,
+    );
+
+    expect(isArray).toHaveBeenCalledTimes(2);
+    expect(document.getElementsByTagName('ul')).toHaveLength(2);
+  });
+
   it('should render section contents', () => {
-    const data = [
-      {
-        type: 'string',
-        key: 'pandidentificatie',
-        formattedKey: 'Pandidentificatie',
-        value: '0363100012096240',
-        formattedValue: '0363100012096240',
-      },
-      {
-        type: 'object',
-        key: 'status',
-        formattedKey: 'Status',
-        value: {
-          code: '31',
-          omschrijving: 'Pand in gebruik',
-        },
-        formattedValue: 'Pand in gebruik',
-      },
-      {
-        type: 'string',
-        key: 'oorspronkelijk_bouwjaar',
-        formattedKey: 'Oorspronkelijk bouwjaar',
-        value: '1921',
-        formattedValue: '1921',
-      },
-      {
-        type: 'boolean',
-        key: 'hoogste_bouwlaag',
-        formattedKey: 'Hoogste bouwlaag',
-        value: null,
-        formattedValue: 'n.b.',
-      },
-      {
-        type: 'boolean',
-        key: 'laagste_bouwlaag',
-        formattedKey: 'Laagste bouwlaag',
-        value: null,
-        formattedValue: 'n.b.',
-      },
-      {
-        type: 'number',
-        key: 'verblijfsobjecten',
-        formattedKey: {
-          id: 'registraties.amount_of',
-        },
-        value: {
-          count: 2,
-          href: 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012096240',
-        },
-        formattedValue: 2,
-      },
-    ];
+    const data = pand;
     const numValues = data.length;
 
     const { container } = render(

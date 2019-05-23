@@ -1,0 +1,72 @@
+[
+  [
+    {
+      "type": "string",
+      "key": "voornamen",
+      "formattedKey": "Voornamen",
+      "value": "Catelyn",
+      "formattedValue": "Catelyn"
+    },
+    { "type": "string", "key": "naam", "formattedKey": "Naam", "value": "Stark", "formattedValue": "Stark" },
+    {
+      "type": "object",
+      "key": "geslacht",
+      "formattedKey": "Geslacht",
+      "value": { "code": "V", "omschrijving": "Vrouw" },
+      "formattedValue": "Vrouw"
+    },
+    {
+      "type": "string",
+      "key": "geboortedatum",
+      "formattedKey": "Geboortedatum",
+      "value": "1965-07-01",
+      "formattedValue": "11965-07-01"
+    },
+    {
+      "type": "string",
+      "key": "geboorteplaats",
+      "formattedKey": "Geboorteplaats",
+      "value": "Coleraine",
+      "formattedValue": "Coleraine"
+    },
+    {
+      "type": "boolean",
+      "key": "geboorteland",
+      "formattedKey": "Geboorteland",
+      "value": "Noord-Ierland",
+      "formattedValue": "Noord-Ierland"
+    }
+  ],
+  [
+    { "type": "string", "key": "voornamen", "formattedKey": "Voornamen", "value": "Ned", "formattedValue": "Ned" },
+    { "type": "string", "key": "naam", "formattedKey": "Naam", "value": "Stark", "formattedValue": "Stark" },
+    {
+      "type": "object",
+      "key": "geslacht",
+      "formattedKey": "Geslacht",
+      "value": { "code": "M", "omschrijving": "Man" },
+      "formattedValue": "Man"
+    },
+    {
+      "type": "string",
+      "key": "geboortedatum",
+      "formattedKey": "Geboortedatum",
+      "value": "1959-04-17",
+      "formattedValue": "1959-04-17"
+    },
+    {
+      "type": "string",
+      "key": "geboorteplaats",
+      "formattedKey": "Geboorteplaats",
+      "value": "Handsworth",
+      "formattedValue": "Handsworth"
+    },
+    {
+      "type": "boolean",
+      "key": "geboorteland",
+      "formattedKey": "Geboorteland",
+      "value": "England",
+      "formattedValue": "England"
+    }
+  ]
+]

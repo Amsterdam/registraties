@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library';
 import amaps from 'amsterdam-amaps/dist/amaps';
 import { rdToWgs84 } from 'shared/services/crs-converter/crs-converter';
 import 'jest-styled-components';
-import Map from '..';
+import Map, { target } from '..';
 
 jest.mock('amsterdam-amaps/dist/amaps', () => {
   const actual = require.requireActual('amsterdam-amaps/dist/amaps');
@@ -46,6 +46,10 @@ describe('Map', () => {
   });
 
   it('renders a map', () => {
+    render(<Map marker={false} search={false} zoom={20} />);
+
+    expect(amaps.createMap).not.toHaveBeenCalled();
+
     render(<Map coordinates={coordinates} marker={false} search={false} zoom={20} />);
 
     expect(amaps.createMap).toHaveBeenCalledWith(
@@ -65,5 +69,23 @@ describe('Map', () => {
     rerender(<Map coordinates={coordinates} />);
 
     expect(rdToWgs84).toHaveBeenCalledWith(coordinates);
+  });
+
+  it('removes the map instance on unmount', () => {
+    const { unmount } = render(<Map center={center} />);
+
+    const mapDiv = document.getElementById(target);
+    const div = document.createElement('div');
+    mapDiv.appendChild(div);
+    const children = mapDiv.childNodes;
+    const numChildren = children.length;
+    const removeChildSpy = jest.spyOn(mapDiv, 'removeChild');
+
+    expect(children).not.toHaveLength(0);
+
+    unmount();
+
+    expect(removeChildSpy).toHaveBeenCalledTimes(numChildren);
+    expect(children).toHaveLength(0);
   });
 });

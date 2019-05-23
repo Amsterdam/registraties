@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import 'jest-styled-components';
-import Progress, { smallFactor } from '..';
+import Progress, { Label, smallFactor, removeNode } from '..';
 import { progressWidth } from '../styles';
 
 describe('Progress', () => {
@@ -87,5 +87,46 @@ describe('Progress', () => {
     expect(global.console.error).toHaveBeenCalledWith(expect.stringContaining('should be between 0 and 1'));
 
     global.console.error.mockRestore();
+  });
+
+  describe('removeNode', () => {
+    it('should add a classname', () => {
+      const currentTarget = document.createElement('div');
+      currentTarget.classList.add('some-class');
+
+      const event = {
+        currentTarget,
+      };
+
+      removeNode(event);
+
+      expect(currentTarget.classList).not.toContain('hidden');
+
+      currentTarget.classList.add('finished');
+
+      removeNode(event);
+
+      expect(currentTarget.classList).toContain('hidden');
+    });
+  });
+
+  describe('label', () => {
+    it('should position the label text vertically', () => {
+      const { container, rerender } = render(<Label />);
+
+      expect(container.firstChild).toHaveStyleRule('align-self', 'center');
+
+      rerender(<Label vPos="center" />);
+
+      expect(container.firstChild).toHaveStyleRule('align-self', 'center');
+
+      rerender(<Label vPos="top" />);
+
+      expect(container.firstChild).toHaveStyleRule('align-self', 'flex-start');
+
+      rerender(<Label vPos="bottom" />);
+
+      expect(container.firstChild).toHaveStyleRule('align-self', 'flex-end');
+    });
   });
 });
