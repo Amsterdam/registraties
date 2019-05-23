@@ -2,7 +2,6 @@ import messages from 'containers/App/messages';
 import { translationMessages } from '../i18n';
 
 const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 'toestandsdatum', 'geboortedatum'];
-
 const currencyFields = ['koopsom'];
 
 /**
@@ -21,7 +20,7 @@ export const reKadastraalObjectNrGroups = /(?<gemeente>[A-Z]{3}\d{2})\s?(?<secti
  * @param {Any} value
  * @returns {Boolean}
  */
-export const isObject = value => value && value.constructor && value.constructor.name === 'Object';
+export const isObject = value => !!value && value.constructor && value.constructor.name === 'Object';
 
 /**
  * Array detector
@@ -29,15 +28,20 @@ export const isObject = value => value && value.constructor && value.constructor
  * @param {Any} value
  * @returns {Boolean}
  */
-export const isArray = value =>
-  value && value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
+export const isArray = value => {
+  const returnValue =
+    !!value && value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
+  console.log(returnValue);
+  return returnValue;
+};
 
 /**
  * Array of arrays detector
  *
  * @param {Any} value
  */
-export const isArrayOfArrays = value => value && isArray(value) && value.every(item => isArray(item));
+export const isArrayOfArrays = value =>
+  !!value && isArray(value) && value.filter(Boolean).length > 0 && value.every(item => isArray(item));
 
 /**
  * Date detector
@@ -46,7 +50,8 @@ export const isArrayOfArrays = value => value && isArray(value) && value.every(i
  * @param {Any} value
  * @returns {Boolean}
  */
-const isDate = (key, value) => value && dateFields.includes(key) && !Number.isNaN(Date.parse(value));
+export const isDate = (key, value) =>
+  !!value && dateFields.includes(key) && !isArray(value) && !Number.isNaN(Date.parse(value));
 
 /**
  * Valid key detector (curried function)
@@ -152,6 +157,7 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
     .map(key => {
       const value = data[key];
       let formattedValue;
+
       let type = isCurrency(key, value) ? 'currency' : typeof value;
       let readableKey = formatKey(key);
 
