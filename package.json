@@ -64,6 +64,9 @@
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
     "@datapunt/asc-assets": "^0.6.3",
