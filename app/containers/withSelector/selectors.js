@@ -22,6 +22,10 @@ export const makeSelectVerblijfsobjectData = () =>
     selectVerblijfsobject,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -52,6 +56,10 @@ export const makeSelectNummeraanduidingData = () =>
     selectNummeraanduiding,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -80,6 +88,10 @@ export const makeSelectVBONummeraanduidingId = () =>
   createSelector(
     selectVerblijfsobject,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -94,6 +106,10 @@ export const makeSelectLIGNummeraanduidingId = () =>
   createSelector(
     selectLigplaats,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -108,6 +124,10 @@ export const makeSelectOpenbareRuimteId = () =>
   createSelector(
     selectNummeraanduiding,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -135,6 +155,10 @@ export const makeSelectPandData = () =>
     selectPand,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -159,6 +183,10 @@ export const makeSelectKadastraalObjectData = () =>
     selectKadastraalObject,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
@@ -179,6 +207,10 @@ export const makeSelectKadastraalSubjectNPData = () =>
     selectKadastraalSubjectNP,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
@@ -214,6 +246,10 @@ export const makeSelectKadastraalSubjectNNPData = () =>
     selectKadastraalSubjectNNP,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data || !isArray(data) || !data.length) {
@@ -236,6 +272,10 @@ export const makeSelectFromObjectAppartment = key =>
   createSelector(
     selectKadastraalObject,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
@@ -253,6 +293,10 @@ export const makeSelectFromObject = key =>
   createSelector(
     selectKadastraalObject,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
@@ -267,6 +311,10 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
   createSelector(
     selectKadastraalObject,
     state => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
@@ -296,6 +344,10 @@ export const makeSelectVestigingData = () =>
     selectVestiging,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -339,6 +391,10 @@ export const makeSelectOpenbareRuimteData = () =>
     selectOpenbareRuimte,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -356,6 +412,10 @@ export const makeSelectGebiedData = () =>
     selectNummeraanduiding,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -375,6 +435,10 @@ export const makeSelectCoordinates = () =>
     selectVerblijfsobject,
     selectLigplaats,
     (vbo, lig) => {
+      if (!vbo && !lig) {
+        return undefined;
+      }
+
       const data = vbo.data || lig.data;
 
       if (!data || (!data.bbox && !data.geometrie)) {
@@ -412,6 +476,10 @@ export const makeSelectWoonplaatsData = () =>
     selectWoonplaatsData,
     makeSelectLocale(),
     (state, locale) => {
+      if (!state) {
+        return undefined;
+      }
+
       const { data } = state;
 
       if (!data) {
@@ -427,7 +495,13 @@ export const makeSelectWoonplaatsData = () =>
 export const makeSelectTOC = () =>
   createSelector(
     selectTOC,
-    ({ toc }) => toc,
+    state => {
+      if (!state) {
+        return undefined;
+      }
+
+      return state.toc;
+    },
   );
 
 export const makeSelectSummary = () =>
