@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectGebiedData } from 'containers/withSelector/selectors';
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
+import { makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
 
 export const GebiedContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.GEBIED.NAME);

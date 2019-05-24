@@ -6,10 +6,13 @@ import { createStructuredSelector } from 'reselect';
 import Progress from 'components/Progress';
 import { makeSelectProgress } from 'containers/App/selectors';
 
-const ProgressContainer = ({ progress }) => <Progress now={progress} labelPosition="bottom" />;
+const ProgressContainer = ({ progress: { current, max } }) => <Progress now={current / max} labelPosition="bottom" />;
 
 ProgressContainer.propTypes = {
-  progress: PropTypes.number.isRequired,
+  progress: PropTypes.shape({
+    current: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

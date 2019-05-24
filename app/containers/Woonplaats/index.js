@@ -5,9 +5,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectWoonplaatsData } from 'containers/withSelector/selectors';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
 import { OBJECTS } from 'containers/App/constants';
+
+import { makeSelectWoonplaatsData } from './selectors';
+import saga from './saga';
+import reducer from './reducer';
 
 export const WoonplaatsContainer = ({ data, intl }) => {
   const name = intl.formatMessage(OBJECTS.WOONPLAATS.NAME);
@@ -42,4 +47,6 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
+  injectSaga({ key: 'woonplaats', saga }),
+  injectReducer({ key: 'woonplaats', reducer }),
 )(memo(WoonplaatsContainer));
