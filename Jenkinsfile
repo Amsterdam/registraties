@@ -25,7 +25,7 @@ node {
 
     stage("Lint") {
       tryStep "lint start", {
-        sh "docker-compose -p ${PROJECT} up --no-build --exit-code-from test-lint test-lint"
+        sh "docker-compose -p ${PROJECT} up --exit-code-from test-lint test-lint"
       }
       always {
         tryStep "lint stop", {
@@ -36,7 +36,7 @@ node {
 
     stage("Test") {
       tryStep "test start", {
-        sh "docker-compose -p ${PROJECT} up --no-build --exit-code-from test-unit-integration test-unit-integration"
+        sh "docker-compose -p ${PROJECT} up --exit-code-from test-unit-integration test-unit-integration"
       }
       always {
         tryStep "test stop", {
