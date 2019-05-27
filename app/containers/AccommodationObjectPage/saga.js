@@ -1,4 +1,4 @@
-import { put, select, spawn, takeLatest } from 'redux-saga/effects';
+import { call, put, select, spawn, takeLatest } from 'redux-saga/effects';
 
 import appSaga from 'containers/App/saga';
 import {
@@ -55,18 +55,18 @@ export function* fetchData(action) {
     const vboIdentifier = vboId || landelijkVboId;
 
     if (vboIdentifier) {
-      yield* fetchVerblijfsobjectData(vboIdentifier);
-      yield* fetchKadastraalObjectData(vboIdentifier);
-      yield* fetchKadastraalSubjectNNPData();
-      yield* fetchKadastraalSubjectNPData();
-      yield* fetchVestigingData();
-      yield* fetchPandlistData(vboIdentifier);
+      yield call(fetchKadastraalObjectData, vboIdentifier);
+      yield call(fetchVerblijfsobjectData, vboIdentifier);
+      yield call(fetchKadastraalSubjectNNPData);
+      yield call(fetchKadastraalSubjectNPData);
+      yield call(fetchVestigingData);
+      yield call(fetchPandlistData, vboIdentifier);
 
       nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId());
     } else if (ligId) {
       yield put(maxProgressCount(4));
 
-      yield* fetchLigplaatsData(ligId);
+      yield call(fetchLigplaatsData, ligId);
 
       yield put(loadKadastraalObjectDataNoResults());
       yield put(loadKadastraalSubjectNPDataNoResults());
@@ -75,11 +75,11 @@ export function* fetchData(action) {
       nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
     }
 
-    yield* fetchNummeraanduidingData(nummeraanduidingId);
-    yield* fetchWoonplaatsData();
+    yield call(fetchNummeraanduidingData, nummeraanduidingId);
+    yield call(fetchWoonplaatsData);
 
     const oprId = yield select(makeSelectOpenbareRuimteId());
-    yield* fetchOpenbareRuimteData(oprId);
+    yield call(fetchOpenbareRuimteData, oprId);
 
     yield put(statusSuccess());
   } catch (error) {
@@ -89,9 +89,9 @@ export function* fetchData(action) {
       yield put(statusUnableToFetch());
     } else if (error.response && error.response.status === 401) {
       // unauthorized
-      const isAuthorized = yield select(makeSelectIsAuthenticated());
+      const isAuthenticated = yield select(makeSelectIsAuthenticated());
 
-      if (isAuthorized) {
+      if (isAuthenticated) {
         yield put(showGlobalError('session_expired'));
       } else {
         yield put(showGlobalError('unauthorized'));

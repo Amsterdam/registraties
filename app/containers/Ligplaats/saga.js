@@ -16,10 +16,11 @@ export function* fetchLigplaatsData(ligplaatsId) {
     const data = yield call(request, `${LIGPLAATS_API}${ligplaatsId}/`, getRequestOptions());
 
     yield put(loadDataSuccess(data));
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

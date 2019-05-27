@@ -27,11 +27,11 @@ export function* fetchVerblijfsobjectId(adresseerbaarObjectId) {
       yield put(loadIdSuccess(data));
       return results[0].landelijk_id;
     }
-
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadIdFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 
@@ -40,10 +40,11 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
     const data = yield call(request, `${VERBLIJFSOBJECT_API}${adresseerbaarObjectId}/`, getRequestOptions());
 
     yield put(loadDataSuccess(data));
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

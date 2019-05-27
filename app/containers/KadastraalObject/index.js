@@ -8,21 +8,19 @@ import { injectIntl, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 
 import { makeSelectKadastraalObjectData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const KadastraalObjectContainer = ({ data, intl }) => {
+export const KadastraalObjectContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
   const href = OBJECTS.KADASTRAAL_OBJECT.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
-};
-
-KadastraalObjectContainer.defaultProps = {
-  data: undefined,
+  return render;
 };
 
 KadastraalObjectContainer.propTypes = {
@@ -38,10 +36,12 @@ KadastraalObjectContainer.propTypes = {
     ),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectKadastraalObjectData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);

@@ -21,11 +21,11 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
     } else {
       yield put(loadDataNoResults());
     }
-
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

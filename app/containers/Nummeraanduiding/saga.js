@@ -15,10 +15,11 @@ export function* fetchNummeraanduidingData(nummeraanduidingId) {
     const data = yield call(request, `${NUMMERAANDUIDING_API}${nummeraanduidingId}/`);
 
     yield put(loadDataSuccess(data));
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

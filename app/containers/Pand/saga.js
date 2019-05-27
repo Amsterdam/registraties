@@ -39,10 +39,11 @@ export function* fetchPandData(landelijkId) {
     const data = yield call(request, `${PAND_API}${landelijkId}/`);
 
     yield put(loadDataSuccess(data));
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

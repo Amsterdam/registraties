@@ -16,9 +16,10 @@ export function* fetchOpenbareRuimteData(openbareRuimteId) {
     const data = yield call(request, `${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, getAuthHeaders());
 
     yield put(loadDataSuccess(data));
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed(error));
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

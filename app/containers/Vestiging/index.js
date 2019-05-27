@@ -8,17 +8,19 @@ import { injectIntl, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 
 import { makeSelectVestigingData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const VestigingContainer = ({ data, intl }) => {
+export const VestigingContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.VESTIGING.NAME);
   const href = OBJECTS.VESTIGING.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 VestigingContainer.defaultProps = {
@@ -36,10 +38,12 @@ VestigingContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectVestigingData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);

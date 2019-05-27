@@ -28,11 +28,11 @@ export function* fetchKadastraalSubjectNPData() {
     } else {
       yield put(loadDataNoResults());
     }
-
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed());
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

@@ -29,11 +29,11 @@ export function* fetchVestigingData() {
         yield put(loadDataSuccess(data));
       }
     }
-
-    yield put(incrementProgress());
   } catch (error) {
     yield put(loadDataFailed());
     throw error;
+  } finally {
+    yield put(incrementProgress());
   }
 }
 

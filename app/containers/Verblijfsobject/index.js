@@ -8,7 +8,8 @@ import { injectIntl, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 import ligplaatsSaga from 'containers/Ligplaats/saga';
 import ligplaatsReducer from 'containers/Ligplaats/reducer';
 
@@ -16,11 +17,11 @@ import { makeSelectVerblijfsobjectData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const VerblijfsObjectContainer = ({ data, intl }) => {
+export const VerblijfsObjectContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.VERBLIJFSOBJECT.NAME);
   const href = OBJECTS.VERBLIJFSOBJECT.STELSELPEDIA_LINK;
-
-  return <Section data={data} name={name} href={href} />;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  return render;
 };
 
 VerblijfsObjectContainer.defaultProps = {
@@ -38,10 +39,12 @@ VerblijfsObjectContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectVerblijfsobjectData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);
