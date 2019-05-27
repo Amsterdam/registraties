@@ -69,6 +69,12 @@ const GlobalStyle = createGlobalStyle`
     width: 1px;
   }
 
+  .no-screen {
+    @media screen {
+      display: none;
+    }
+  }
+
   #app {
     min-height: 100%;
     min-width: 100%;

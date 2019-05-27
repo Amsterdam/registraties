@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List should match the snapshot 1`] = `
+.c1 {
+  padding: 0;
+  list-style: none;
+  padding-bottom: 30px;
+}
+
+.c1:not(:first-child) {
+  border-bottom: 4px solid #767676;
+}
+
+.c1 li:last-of-type ul {
+  padding-bottom: 0;
+}
+
+.c1 *:last-of-type > *:last-of-type ul:last-of-type {
+  border: 0;
+}
+
+.c1 li {
+  padding-left: 23px;
+  position: relative;
+}
+
+.c1 li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  background-color: #767676;
+}
+
+.c1 .c0 li {
+  padding-left: 0;
+}
+
+.c1 .c0 li:before {
+  content: unset;
+}
+
+<ul
+  class="c0 c1"
+>
+  <li>
+    Item #1
+  </li>
+  <li>
+    Item #2
+  </li>
+  <li>
+    Item #3
+  </li>
+</ul>
+`;

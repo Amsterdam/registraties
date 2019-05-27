@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape, FormattedNumber } from 'react-intl';
 import styled from 'styled-components';
 
+import List from 'components/List';
+import SectionHeading from 'components/SectionHeading';
 import LoadingIndicator from 'components/LoadingIndicator';
 import messages from 'containers/App/messages';
 import { isArray, isObject } from 'utils';
 
-import { Ul, Key, StelselpediaLink, SectionHeading } from 'containers/AccommodationObjectPage/styled';
+import { Key, StelselpediaLink } from 'components/AccommodationObject/styled';
 
 const SectionWrapper = styled.section`
   position: relative;
@@ -40,7 +42,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
   const sectionData = data && data.length === 1 && isArray(data[0]) ? data[0] : data;
 
   const renderList = listData => (
-    <Ul>
+    <List>
       {listData.map(listItem => {
         let readableKey = listItem.formattedKey;
 
@@ -60,7 +62,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
           </li>
         );
       })}
-    </Ul>
+    </List>
   );
 
   const Title = () => (

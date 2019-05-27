@@ -1,0 +1,1431 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccommodationObject should render without problems 1`] = `
+.c6 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c1 {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-top: 0;
+  position: fixed;
+  left: calc(50% - 50px);
+  z-index: 500;
+  box-sizing: content-box;
+  -webkit-transition: -webkit-transform 0.35s ease-out;
+  -webkit-transition: transform 0.35s ease-out;
+  transition: transform 0.35s ease-out;
+  -webkit-transform: translate3D(0,0px,0);
+  -ms-transform: translate3D(0,0px,0);
+  transform: translate3D(0,0px,0);
+  top: 0;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100px;
+  will-change: transform;
+}
+
+.c1.finished {
+  -webkit-transition-delay: 0.7s;
+  transition-delay: 0.7s;
+}
+
+.c1.hidden {
+  display: none;
+}
+
+.c8 {
+  position: relative;
+}
+
+.c8.hidden {
+  display: none;
+}
+
+.c2 {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  -webkit-clip: rect(0,60px,60px,30px);
+  clip: rect(0,60px,60px,30px);
+  will-change: clip;
+}
+
+.c2::before,
+.c2::after {
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #ec0000;
+  -webkit-clip: rect(0,30px,60px,0);
+  clip: rect(0,30px,60px,0);
+  content: '';
+  position: absolute;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  -webkit-transition: -webkit-transform 0.1s ease-in;
+  -webkit-transition: transform 0.1s ease-in;
+  transition: transform 0.1s ease-in;
+  height: 48px;
+  width: 48px;
+  will-change: transform;
+}
+
+.c2::before {
+  -webkit-transform: rotate(NaNdeg);
+  -ms-transform: rotate(NaNdeg);
+  transform: rotate(NaNdeg);
+}
+
+.c2::after {
+  display: none;
+}
+
+.c9 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c9::before,
+.c9::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c9::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c9::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+.c3 {
+  text-align: center;
+  font-size: 14px;
+  height: 18px;
+  line-height: 18px;
+  color: initial;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c10 {
+  padding-top: 50px;
+}
+
+.c7 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c7:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+.c5 {
+  position: relative;
+}
+
+.c11 {
+  height: 200px;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+.c4 {
+  margin-top: 0;
+}
+
+@media print {
+  .c6 {
+    margin-top: 0;
+  }
+}
+
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c2 {
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+  }
+}
+
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c0 {
+    max-width: 1023px;
+    margin: 0 auto !important;
+  }
+}
+
+@media screen and (max-width:920px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c0 > * {
+    padding-top: 1em;
+    max-width: 100vw !important;
+  }
+
+  .c0 > *:not(.no-print):first-child {
+    border-top: 2px solid gray;
+    margin-top: 30px;
+  }
+
+  .c0 >:not(.no-print):not(:last-child) {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+}
+
+@media screen and (min-width:500px) and (max-width:920px) {
+  .c0 aside {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .c0 aside > section {
+    -webkit-flex: 0 1 48%;
+    -ms-flex: 0 1 48%;
+    flex: 0 1 48%;
+    margin-bottom: 30px;
+  }
+
+  .c0 aside > section h3 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c7 {
+    display: none;
+  }
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="no-print  c1"
+    data-testid="progress-wrapper"
+    type="determined"
+  >
+    <div
+      class="c2"
+    />
+    <div
+      class="c3"
+      data-testid="progress-label"
+    >
+      NaN %
+    </div>
+  </div>
+  <article
+    class="col-7"
+  >
+    <section>
+      <header>
+        <h2
+          class="c4"
+        >
+          BAG Objecten
+        </h2>
+      </header>
+      <section
+        class="c5"
+      >
+        <h3
+          class="c6"
+          id="Openbare ruimte"
+        >
+          Openbare ruimte
+          <a
+            class="c7"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Openbare ruimte op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  c8"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          <div
+            class="c9"
+          />
+        </div>
+      </section>
+      <section
+        class="c5"
+      >
+        <h3
+          class="c6"
+          id="Woonplaats"
+        >
+          Woonplaats
+          <a
+            class="c7"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Woonplaats op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  c8"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          <div
+            class="c9"
+          />
+        </div>
+      </section>
+      <section
+        class="c5"
+      >
+        <h3
+          class="c6"
+          id="Nummeraanduiding"
+        >
+          Nummeraanduiding
+          <a
+            class="c7"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Nummeraanduiding op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  c8"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          <div
+            class="c9"
+          />
+        </div>
+      </section>
+      <section
+        class="c5"
+      />
+      <section
+        class="c5"
+      />
+    </section>
+    <section>
+      <header>
+        <h2
+          class=""
+        >
+          BRK Objecten
+        </h2>
+      </header>
+      <section
+        class="c5"
+      />
+      <section
+        class="c5"
+      />
+      <section
+        class="c5"
+      />
+      <section
+        class="c5"
+      />
+      <section
+        class="c5"
+      >
+        <h3
+          class="c6"
+          id="Gebied"
+        >
+          Gebied
+          <a
+            class="c7"
+            href="//www.amsterdam.nl/stelselpedia/gebieden-index/catalogus/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Gebied op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  c8"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          <div
+            class="c9"
+          />
+        </div>
+      </section>
+    </section>
+  </article>
+  <aside
+    class="col-4 c10"
+  >
+    <section>
+      <div
+        class="no-print  c8"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        <div
+          class="c9"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        class="no-print  c8"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        <div
+          class="c9"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        class="cf c11"
+      >
+        <div
+          id="mapDiv"
+          style="height: 100%;"
+        />
+      </div>
+    </section>
+  </aside>
+</div>
+`;
+
+exports[`AccommodationObject should render without problems 2`] = `
+<div
+  class="styled__Wrapper-sc-1knhnhj-0 ghwqLQ"
+>
+  <div
+    class="no-print  Progress__Wrapper-yfxggj-0 gwLcqF"
+    data-testid="progress-wrapper"
+    type="determined"
+  >
+    .c0 {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  -webkit-clip: rect(0,60px,60px,30px);
+  clip: rect(0,60px,60px,30px);
+  will-change: clip;
+}
+
+.c0::before,
+.c0::after {
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #ec0000;
+  -webkit-clip: rect(0,30px,60px,0);
+  clip: rect(0,30px,60px,0);
+  content: '';
+  position: absolute;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  -webkit-transition: -webkit-transform 0.1s ease-in;
+  -webkit-transition: transform 0.1s ease-in;
+  transition: transform 0.1s ease-in;
+  height: 48px;
+  width: 48px;
+  will-change: transform;
+}
+
+.c0::before {
+  -webkit-transform: rotate(NaNdeg);
+  -ms-transform: rotate(NaNdeg);
+  transform: rotate(NaNdeg);
+}
+
+.c0::after {
+  display: none;
+}
+
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c0 {
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+  }
+}
+
+<div
+      class="c0"
+    />
+    <div
+      class="Progress__Label-yfxggj-2 fWvHLa"
+      data-testid="progress-label"
+    >
+      NaN %
+    </div>
+  </div>
+  <article
+    class="col-7"
+  >
+    <section>
+      <header>
+        <h2
+          class="ArticleHeading__H2-sc-1i8jimd-0 iXCxRu"
+        >
+          BAG Objecten
+        </h2>
+      </header>
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      >
+        .c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c1 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c1:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c1 {
+    display: none;
+  }
+}
+
+<h3
+          class="c0"
+          id="Openbare ruimte"
+        >
+          Openbare ruimte
+          <a
+            class="c1"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Openbare ruimte op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+            class="c0"
+          />
+        </div>
+      </section>
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      >
+        .c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c1 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c1:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c1 {
+    display: none;
+  }
+}
+
+<h3
+          class="c0"
+          id="Woonplaats"
+        >
+          Woonplaats
+          <a
+            class="c1"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Woonplaats op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+            class="c0"
+          />
+        </div>
+      </section>
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      >
+        .c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c1 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c1:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c1 {
+    display: none;
+  }
+}
+
+<h3
+          class="c0"
+          id="Nummeraanduiding"
+        >
+          Nummeraanduiding
+          <a
+            class="c1"
+            href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Nummeraanduiding op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+            class="c0"
+          />
+        </div>
+      </section>
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+    </section>
+    <section>
+      <header>
+        <h2
+          class="ArticleHeading__H2-sc-1i8jimd-0 gjGWIG"
+        >
+          BRK Objecten
+        </h2>
+      </header>
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      />
+      <section
+        class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
+      >
+        .c0 {
+  margin-top: 30px;
+  margin-top: 0;
+}
+
+.c1 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c1:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c1 {
+    display: none;
+  }
+}
+
+<h3
+          class="c0"
+          id="Gebied"
+        >
+          Gebied
+          <a
+            class="c1"
+            href="//www.amsterdam.nl/stelselpedia/gebieden-index/catalogus/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Naar definitie van Gebied op Stelselpedia (opent in een nieuw venster)."
+          >
+            <span>
+              i
+            </span>
+          </a>
+        </h3>
+        <div
+          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          data-testid="progress-wrapper"
+          type="undetermined"
+        >
+          .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+            class="c0"
+          />
+        </div>
+      </section>
+    </section>
+  </article>
+  <aside
+    class="col-4 styled__Aside-sc-1knhnhj-2 kgWEpv"
+  >
+    <section>
+      <div
+        class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+          class="c0"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+          class="c0"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        class="cf Map__MapWrapper-sc-1v5i1wm-0 dwptan"
+      >
+        <div
+          id="mapDiv"
+          style="height: 100%;"
+        />
+      </div>
+    </section>
+    .c0 {
+  margin-top: 30px;
+}
+
+.c2 {
+  width: 100%;
+  resize: vertical;
+  min-height: 79px;
+  max-height: 212px;
+}
+
+.c1 {
+  font-weight: bold;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+@media print {
+  .c1 {
+    display: block;
+    margin-top: 1cm;
+  }
+}
+
+<section
+      class="invoer"
+    >
+      <header
+        class="no-print"
+      >
+        <h3
+          class="c0"
+        >
+          Extra velden
+        </h3>
+      </header>
+      <label
+        class="no-print c1"
+        for="areaNotitie"
+      >
+        Notitie
+        :
+      </label>
+      <textarea
+        class="input no-print c2"
+        id="areaNotitie"
+        name="notitie"
+        placeholder="Je notitie wordt niet bewaard, maar is wel te zien in de export."
+      />
+      <div
+        class="no-screenno-print"
+        data-testid="accommodation-object-notitie"
+      />
+      <label
+        class="no-print c1"
+        for="inputFilledInBy"
+      >
+        Ingevuld door
+        :
+      </label>
+      <input
+        class="input no-print"
+        id="inputFilledInBy"
+        name="filled_in_by"
+      />
+      <div
+        class="no-screenno-print"
+        data-testid="accommodation-object-filled-in-by"
+      />
+    </section>
+    .c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 0 10px 0 10px;
+  -webkit-transition: color 0.1s ease-in-out,background-color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out,background-color 0.1s ease-in-out;
+  background: #ffffff;
+  padding: 0 10px 0 10px;
+  min-height: 38px;
+  line-height: 1em;
+  color: #004699;
+  border: 1px solid #004699;
+}
+
+.c1:focus {
+  outline-color: #FEC813;
+  outline-style: solid;
+  outline-width: 3px;
+}
+
+.c1:hover {
+  background: #E6E6E6;
+}
+
+.c1:after {
+  content: '';
+  display: block;
+  min-height: inherit;
+  font-size: 0;
+}
+
+.c1:hover {
+  outline: 1px solid #004699;
+}
+
+.c1 svg {
+  width: 30px;
+  height: 30px;
+}
+
+.c1 svg rect,
+.c1 svg polygon,
+.c1 svg path {
+  fill: #ffffff;
+}
+
+.c0 {
+  margin-top: 30px;
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
+  }
+}
+
+<section
+      class="no-print"
+    >
+      <header>
+        <h3
+          class="c0"
+        >
+          Exporteren
+        </h3>
+      </header>
+      <a
+        class="c1"
+        download="registraties_export.csv"
+        tabindex="0"
+      >
+        CSV
+      </a>
+    </section>
+  </aside>
+</div>
+`;
+
+exports[`styled components should match the snapshot 1`] = `
+.c0 {
+  font-weight: bold;
+}
+
+@media print {
+  .c0 {
+    display: block;
+    margin-top: 1cm;
+  }
+}
+
+<label
+  class="c0"
+/>
+`;
+
+exports[`styled components should match the snapshot 2`] = `
+.c0 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #b4b4b4;
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.c0:hover {
+  background-color: #009dec;
+  color: white;
+}
+
+@media print {
+  .c0 {
+    display: none;
+  }
+}
+
+<a
+  class="c0"
+/>
+`;
