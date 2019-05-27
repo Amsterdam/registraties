@@ -292,6 +292,12 @@ exports[`TOC matches the snapshot 1`] = `
   }
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c1 a {
+    height: 22px;
+  }
+}
+
 <div>
   <h3
     class="no-print c0"
