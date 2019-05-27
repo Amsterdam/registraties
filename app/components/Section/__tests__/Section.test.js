@@ -120,7 +120,7 @@ describe('Section', () => {
     const data = pand;
     const numValues = data.length;
 
-    const { container } = render(
+    render(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
           <Section name="Foo bar baz" intl={intl} data={data} />
@@ -128,7 +128,6 @@ describe('Section', () => {
       </Provider>,
     );
 
-    expect(container.firstChild).toMatchSnapshot();
     expect(document.getElementsByTagName('li')).toHaveLength(numValues);
   });
 });
