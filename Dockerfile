@@ -11,7 +11,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       netcat \
       libglu1 \
-      icu-libs \
       git && \
     rm -rf /var/lib/apt/lists/*
 
