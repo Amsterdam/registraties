@@ -22,7 +22,7 @@ module.exports = {
       '<rootDir>/internals/mocks/image.js',
   },
   setupFilesAfterEnv: ['<rootDir>/internals/testing/test-bundler.js', 'react-testing-library/cleanup-after-each'],
-  setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js', '<rootDir>/internals/testing/intl.js'],
+  setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
   testRegex: ['tests/.*\\.test\\.js$', '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$'],
   snapshotSerializers: [],
 };

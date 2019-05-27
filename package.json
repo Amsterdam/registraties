@@ -92,7 +92,6 @@
     "hoist-non-react-statics": "3.3.0",
     "immer": "3.0.0",
     "intl": "1.2.5",
-    "intl-locales-supported": "^1.0.2",
     "invariant": "2.2.4",
     "ip": "1.1.5",
     "json2csv": "^4.5.0",
