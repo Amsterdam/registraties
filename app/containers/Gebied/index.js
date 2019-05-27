@@ -5,15 +5,17 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectGebiedData } from 'containers/withSelector/selectors';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
+import { makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
 
-export const GebiedContainer = ({ data, intl }) => {
+export const GebiedContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.GEBIED.NAME);
   const href = OBJECTS.GEBIED.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 GebiedContainer.defaultProps = {
@@ -30,10 +32,12 @@ GebiedContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectGebiedData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);

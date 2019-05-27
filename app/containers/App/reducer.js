@@ -3,11 +3,16 @@ import produce from 'immer';
 import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
+  COMPLETE_PROGRESS,
+  INCREMENT_PROGRESS,
+  LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
   LOAD_DATA_SUCCESS,
+  MAX_PROGRESS_COUNT,
   PROGRESS,
   RESET_GLOBAL_ERROR,
+  RESET_PROGRESS,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -19,6 +24,7 @@ export const initialState = {
   error: false,
   errorMessage: '',
   loading: false,
+  maxProgressCount: 0,
   progress: 0,
   status: undefined,
   userName: undefined,
@@ -71,6 +77,29 @@ export default (state = initialState, action) =>
         break;
 
       case PROGRESS:
-        draft.progress = action.payload;
+        draft.progress = payload;
+        break;
+
+      case RESET_PROGRESS:
+        draft.progress = 0;
+        break;
+
+      case COMPLETE_PROGRESS:
+        draft.progress = state.maxProgressCount;
+        break;
+
+      case INCREMENT_PROGRESS:
+        draft.progress += 1;
+        break;
+
+      case MAX_PROGRESS_COUNT:
+        draft.maxProgressCount = payload;
+        break;
+
+      case LOAD_BAG_DATA:
+        draft.vboId = payload.vboId;
+        draft.ligId = payload.ligId;
+        draft.brkId = payload.brkId;
+        break;
     }
   });

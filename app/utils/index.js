@@ -28,12 +28,8 @@ export const isObject = value => !!value && value.constructor && value.construct
  * @param {Any} value
  * @returns {Boolean}
  */
-export const isArray = value => {
-  const returnValue =
-    !!value && value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
-  console.log(returnValue);
-  return returnValue;
-};
+export const isArray = value =>
+  !!value && value.constructor && value.constructor.name === 'Array' && typeof value[Symbol.iterator] === 'function';
 
 /**
  * Array of arrays detector

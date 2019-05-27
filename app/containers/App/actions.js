@@ -1,13 +1,18 @@
 import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
+  COMPLETE_PROGRESS,
+  INCREMENT_PROGRESS,
+  LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
   LOAD_DATA_PENDING,
   LOAD_DATA_SUCCESS,
   LOGIN,
   LOGOUT,
+  MAX_PROGRESS_COUNT,
   PROGRESS,
   RESET_GLOBAL_ERROR,
+  RESET_PROGRESS,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -81,5 +86,28 @@ export const statusUnauthorized = payload => ({
 
 export const progress = payload => ({
   type: PROGRESS,
+  payload,
+});
+
+export const resetProgress = () => ({
+  type: RESET_PROGRESS,
+  payload: 0,
+});
+
+export const completeProgress = () => ({
+  type: COMPLETE_PROGRESS,
+});
+
+export const incrementProgress = () => ({
+  type: INCREMENT_PROGRESS,
+});
+
+export const maxProgressCount = payload => ({
+  type: MAX_PROGRESS_COUNT,
+  payload,
+});
+
+export const loadBAGData = payload => ({
+  type: LOAD_BAG_DATA,
   payload,
 });

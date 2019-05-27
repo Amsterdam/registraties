@@ -4,12 +4,14 @@ import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
 
+import injectSaga from 'utils/injectSaga';
 import CSVDownloadContainer from 'containers/CSVDownload';
-import withSelector from 'containers/withSelector';
-import { loadBAGData } from 'containers/withSelector/actions';
+import { loadBAGData } from 'containers/App/actions';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import messages from 'containers/App/messages';
+import { makeSelectStatus } from 'containers/App/selectors';
 
 import Verblijfsobject from 'containers/Verblijfsobject';
 import KadastraalObject from 'containers/KadastraalObject';
@@ -23,9 +25,10 @@ import Gebied from 'containers/Gebied';
 import Summary from 'containers/Summary';
 import Woonplaats from 'containers/Woonplaats';
 import Progress from 'containers/Progress';
-
 import TOC from 'containers/TOC';
 import Map from 'containers/Map';
+
+import saga from './saga';
 
 import { ArticleHeading, SectionHeading, Textarea, Aside, Input, Label } from './styled';
 
@@ -175,6 +178,10 @@ AccommodationObjectPageComponent.propTypes = {
   }).isRequired,
 };
 
+const mapStateToProps = createStructuredSelector({
+  status: makeSelectStatus(),
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -184,12 +191,12 @@ const mapDispatchToProps = dispatch =>
   );
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
 export default compose(
+  injectSaga({ key: 'global', saga }),
   withConnect,
-  withSelector,
   injectIntl,
 )(AccommodationObjectPageComponent);

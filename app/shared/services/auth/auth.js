@@ -268,6 +268,12 @@ export function getAuthHeaders() {
   return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {};
 }
 
+export function getRequestOptions() {
+  return {
+    headers: getAuthHeaders(),
+  };
+}
+
 export function authenticate() {
   try {
     initAuth();
