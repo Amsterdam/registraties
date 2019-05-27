@@ -85,9 +85,9 @@ exports[`AccommodationObject should render without problems 1`] = `
 }
 
 .c2::before {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
+  -webkit-transform: rotate(NaNdeg);
+  -ms-transform: rotate(NaNdeg);
+  transform: rotate(NaNdeg);
 }
 
 .c2::after {
@@ -217,6 +217,20 @@ exports[`AccommodationObject should render without problems 1`] = `
   }
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c2 {
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+  }
+}
+
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c0 {
+    max-width: 1023px;
+    margin: 0 auto !important;
+  }
+}
+
 @media screen and (max-width:920px) {
   .c0 {
     -webkit-flex-direction: column;
@@ -289,7 +303,7 @@ exports[`AccommodationObject should render without problems 1`] = `
       class="c3"
       data-testid="progress-label"
     >
-      0 %
+      NaN %
     </div>
   </div>
   <article
@@ -410,34 +424,7 @@ exports[`AccommodationObject should render without problems 1`] = `
       </header>
       <section
         class="c5"
-      >
-        <h3
-          class="c6"
-          id="Kadastraal object"
-        >
-          Kadastraal object
-          <a
-            class="c7"
-            href="//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/"
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Naar definitie van Kadastraal object op Stelselpedia (opent in een nieuw venster)."
-          >
-            <span>
-              i
-            </span>
-          </a>
-        </h3>
-        <div
-          class="no-print  c8"
-          data-testid="progress-wrapper"
-          type="undetermined"
-        >
-          <div
-            class="c9"
-          />
-        </div>
-      </section>
+      />
       <section
         class="c5"
       />
@@ -482,7 +469,17 @@ exports[`AccommodationObject should render without problems 1`] = `
   <aside
     class="col-4 c10"
   >
-    <section />
+    <section>
+      <div
+        class="no-print  c8"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        <div
+          class="c9"
+        />
+      </div>
+    </section>
     <section>
       <div
         class="no-print  c8"
@@ -510,7 +507,7 @@ exports[`AccommodationObject should render without problems 1`] = `
 
 exports[`AccommodationObject should render without problems 2`] = `
 <div
-  class="styled__Wrapper-sc-1knhnhj-0 TRtrM"
+  class="styled__Wrapper-sc-1knhnhj-0 ghwqLQ"
 >
   <div
     class="no-print  Progress__Wrapper-yfxggj-0 gwLcqF"
@@ -547,13 +544,20 @@ exports[`AccommodationObject should render without problems 2`] = `
 }
 
 .c0::before {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
+  -webkit-transform: rotate(NaNdeg);
+  -ms-transform: rotate(NaNdeg);
+  transform: rotate(NaNdeg);
 }
 
 .c0::after {
   display: none;
+}
+
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c0 {
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+  }
 }
 
 <div
@@ -563,7 +567,7 @@ exports[`AccommodationObject should render without problems 2`] = `
       class="Progress__Label-yfxggj-2 fWvHLa"
       data-testid="progress-label"
     >
-      0 %
+      NaN %
     </div>
   </div>
   <article
@@ -948,122 +952,7 @@ exports[`AccommodationObject should render without problems 2`] = `
       </header>
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
-      >
-        .c0 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
-.c1 {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  background-color: #b4b4b4;
-  color: white;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.c1:hover {
-  background-color: #009dec;
-  color: white;
-}
-
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
-}
-
-@media print {
-  .c1 {
-    display: none;
-  }
-}
-
-<h3
-          class="c0"
-          id="Kadastraal object"
-        >
-          Kadastraal object
-          <a
-            class="c1"
-            href="//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/"
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Naar definitie van Kadastraal object op Stelselpedia (opent in een nieuw venster)."
-          >
-            <span>
-              i
-            </span>
-          </a>
-        </h3>
-        <div
-          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
-          data-testid="progress-wrapper"
-          type="undetermined"
-        >
-          .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-            class="c0"
-          />
-        </div>
-      </section>
+      />
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
       />
@@ -1196,7 +1085,66 @@ exports[`AccommodationObject should render without problems 2`] = `
   <aside
     class="col-4 styled__Aside-sc-1knhnhj-2 kgWEpv"
   >
-    <section />
+    <section>
+      <div
+        class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+        data-testid="progress-wrapper"
+        type="undetermined"
+      >
+        .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+          class="c0"
+        />
+      </div>
+    </section>
     <section>
       <div
         class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"

@@ -7,6 +7,11 @@ export const Wrapper = styled.div`
   margin-left: -15px;
   justify-content: space-between;
 
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    max-width: 1023px;
+    margin: 0 auto !important;
+  }
+
   @media screen and (max-width: 920px) {
     flex-direction: column;
 
