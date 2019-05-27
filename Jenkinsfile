@@ -21,18 +21,18 @@ node {
         checkout scm
     }
 
-    stage("Unit and Integration") {
-      String  PROJECT = "registraties"
+    // stage("Unit and Integration") {
+    //   String  PROJECT = "registraties"
 
-      tryStep "unittests start", {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
-      }
-      always {
-        tryStep "unittests stop", {
-          sh "docker-compose -p ${PROJECT} down -v || true"
-        }
-      }
-    }
+    //   tryStep "unittests start", {
+    //     sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
+    //   }
+    //   always {
+    //     tryStep "unittests stop", {
+    //       sh "docker-compose -p ${PROJECT} down -v || true"
+    //     }
+    //   }
+    // }
 }
 
 node {
