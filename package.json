@@ -6,6 +6,15 @@
     "type": "git",
     "url": "git@github.com:Amsterdam/registraties.git"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 3% in NL",
+    "maintained node versions",
+    "not dead",
+    "Chrome 42",
+    "Firefox 62",
+    "Explorer 11"
+  ],
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
@@ -83,6 +92,7 @@
     "hoist-non-react-statics": "3.3.0",
     "immer": "3.0.0",
     "intl": "1.2.5",
+    "intl-locales-supported": "^1.0.2",
     "invariant": "2.2.4",
     "ip": "1.1.5",
     "json2csv": "^4.5.0",

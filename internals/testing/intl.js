@@ -1,0 +1,1 @@
+global.Intl = require('intl');
