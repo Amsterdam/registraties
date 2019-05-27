@@ -8,13 +8,10 @@ WORKDIR /deploy
 
 # Run updates and cleanup
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       netcat \
+      libglu1 \
       git && \
-      libjpeg-dev && \
-      libpng-dev && \
-      libtiff-dev && \
-      libgif-dev && \
     rm -rf /var/lib/apt/lists/*
 
 #  Changing git URL because network is blocking git protocol...
