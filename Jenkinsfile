@@ -24,7 +24,7 @@ node {
     String  PROJECT = "registraties"
 
     stage("Lint") {
-      trystep "lint start", {
+      tryStep "lint start", {
         sh "docker-compose -p ${PROJECT} up --build --exit-code-from lint lint"
       }
       always {
@@ -35,8 +35,7 @@ node {
     }
 
     stage("Test") {
-
-      trystep "test start", {
+      tryStep "test start", {
         sh "docker-compose -p ${PROJECT} up --build --exit-code-from test test"
       }
       always {
