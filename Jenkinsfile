@@ -24,8 +24,6 @@ node {
     String  PROJECT = "registraties"
 
     stage("Lint") {
-      String  PROJECT = "registraties"
-
       trystep "lint start", {
         sh "docker-compose -p ${PROJECT} up --build --exit-code-from lint lint"
       }
