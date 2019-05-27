@@ -21,18 +21,30 @@ node {
         checkout scm
     }
 
-    // stage("Unit and Integration") {
-    //   String  PROJECT = "registraties"
+    String  PROJECT = "registraties"
 
-    //   tryStep "unittests start", {
-    //     sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
-    //   }
-    //   always {
-    //     tryStep "unittests stop", {
-    //       sh "docker-compose -p ${PROJECT} down -v || true"
-    //     }
-    //   }
-    // }
+    stage("Lint") {
+      trystep "lint start", {
+        sh "docker-compose -p ${PROJECT} up --build --exit-code-from lint lint"
+      }
+      always {
+        tryStep "lint stop", {
+          sh "docker-compose -p ${PROJECT} down -v || true"
+        }
+      }
+    }
+
+    stage("Test") {
+
+      trystep "test start", {
+        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test test"
+      }
+      always {
+        tryStep "test stop", {
+          sh "docker-compose -p ${PROJECT} down -v || true"
+        }
+      }
+    }
 }
 
 node {
