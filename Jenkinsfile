@@ -23,26 +23,24 @@ node {
 
     String  PROJECT = "registraties"
 
-    parallel {
-        stage('Lint') {
-            steps {
-                sh "docker-compose -p ${PROJECT} up --exit-code-from test-lint test-lint"
-            }
-            post {
-                always {
-                    sh "docker-compose -p ${PROJECT} down -v || true"
-                }
+    stage("Lint") {
+        tryStep "lint start", {
+            sh "docker-compose -p ${PROJECT} up --exit-code-from test-lint test-lint"
+        }
+        always {
+            tryStep "lint stop", {
+                sh "docker-compose -p ${PROJECT} down -v || true"
             }
         }
+    }
 
-        stage('Test') {
-            steps {
-                sh "docker-compose -p ${PROJECT} up --exit-code-from test-unit-integration test-unit-integration"
-            }
-            post {
-                always {
-                    sh "docker-compose -p ${PROJECT} down -v || true"
-                }
+    stage("Test") {
+        tryStep "test start", {
+            sh "docker-compose -p ${PROJECT} up --exit-code-from test-unit-integration test-unit-integration"
+        }
+        always {
+            tryStep "lint stop", {
+                sh "docker-compose -p ${PROJECT} down -v || true"
             }
         }
     }
