@@ -25,6 +25,7 @@ COPY internals /deploy/internals/
 RUN npm --production=false \
         --unsafe-perm \
         --verbose \
+        --no-progress \
         ci && \
     npm cache clean --force
 

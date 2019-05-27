@@ -5,7 +5,7 @@ services:
     ports:
       - '3001:80'
 
-  lint:
+  test-lint:
     build:
       context: .
       target: builder
@@ -14,11 +14,11 @@ services:
       - TZ=Europe/Amsterdam
     command: npm run lint
 
-  test:
+  test-unit-integration:
     build:
       context: .
       target: builder
     environment:
       - NODE_ENV=development
       - TZ=Europe/Amsterdam
-    command: npx jest
+    command: npm run test
