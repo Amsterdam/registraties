@@ -11,6 +11,10 @@ RUN apt-get update && \
     apt-get install -y \
       netcat \
       git && \
+      libjpeg-dev && \
+      libpng-dev && \
+      libtiff-dev && \
+      libgif-dev && \
     rm -rf /var/lib/apt/lists/*
 
 #  Changing git URL because network is blocking git protocol...
