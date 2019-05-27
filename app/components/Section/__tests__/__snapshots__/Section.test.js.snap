@@ -241,7 +241,7 @@ exports[`Section should render section contents 1`] = `
       </strong>
       : 
       <span>
-        € 375,000
+        € 375.000
       </span>
     </li>
   </ul>

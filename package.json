@@ -6,6 +6,15 @@
     "type": "git",
     "url": "git@github.com:Amsterdam/registraties.git"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 3% in NL",
+    "maintained node versions",
+    "not dead",
+    "Chrome 42",
+    "Firefox 62",
+    "Explorer 11"
+  ],
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
