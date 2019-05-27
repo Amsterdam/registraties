@@ -47,6 +47,10 @@ const StyledNav = styled.nav`
     border: 0;
     cursor: pointer;
 
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      height: 30px;
+    }
+
     & > * {
       vertical-align: middle;
       margin-right: 5px;

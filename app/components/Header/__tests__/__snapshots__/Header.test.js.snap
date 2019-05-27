@@ -303,6 +303,12 @@ exports[`Header matches the snapshot 1`] = `
   }
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c16 button {
+    height: 30px;
+  }
+}
+
 @media (max-width:720px) {
   .c16 {
     right: 0;
@@ -420,7 +426,7 @@ exports[`Header matches the snapshot 2`] = `
           class="sc-kpOJdX eKiqBq"
         >
           <nav
-            class="no-print Header__StyledNav-sc-15eqjjx-2 ifCxKR"
+            class="no-print Header__StyledNav-sc-15eqjjx-2 jTrQPp"
           >
             <ul
               class="links horizontal"

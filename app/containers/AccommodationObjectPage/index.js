@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 
 import injectSaga from 'utils/injectSaga';
@@ -30,27 +29,7 @@ import Map from 'containers/Map';
 
 import saga from './saga';
 
-import { ArticleHeading, SectionHeading, Textarea, Aside, Input, Label } from './styled';
-
-const Wrapper = styled.div`
-  @media screen and (max-width: 920px) {
-    flex-direction: column;
-
-    & > * {
-      padding-top: 1em;
-      max-width: 100vw !important;
-
-      &:first-child {
-        border-top: 2px solid gray;
-        margin-top: 30px;
-      }
-    }
-
-    & > :first-child {
-      order: 2;
-    }
-  }
-`;
+import { ArticleHeading, SectionHeading, Textarea, Aside, Input, Label, Wrapper } from './styled';
 
 const AccommodationObjectPageComponent = props => {
   const [filledInBy, setFilledInBy] = useState('');

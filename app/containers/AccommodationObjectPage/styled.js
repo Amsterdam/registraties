@@ -153,3 +153,28 @@ export const StelselpediaLink = styled.a`
 export const Small = styled.small`
   font-size: initial;
 `;
+
+export const Wrapper = styled.div`
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    max-width: 1023px;
+    margin: 0 auto !important;
+  }
+
+  @media screen and (max-width: 920px) {
+    flex-direction: column;
+
+    & > * {
+      padding-top: 1em;
+      max-width: 100vw !important;
+
+      &:first-child {
+        border-top: 2px solid gray;
+        margin-top: 30px;
+      }
+    }
+
+    & > :first-child {
+      order: 2;
+    }
+  }
+`;

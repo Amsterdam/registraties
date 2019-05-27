@@ -11,6 +11,12 @@ import LoadingIndicator from 'components/LoadingIndicator';
 const Li = styled.li`
   margin: 0 !important;
   line-height: 34px;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    a {
+      height: 22px;
+    }
+  }
 `;
 
 const TOC = ({ intl, sections }) => {
