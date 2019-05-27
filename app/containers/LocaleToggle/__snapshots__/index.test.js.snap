@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<LocaleToggle /> should render the default language messages 1`] = `ShallowWrapper {}`;
-
-exports[`<LocaleToggle /> should render the language messages 1`] = `ShallowWrapper {}`;

@@ -82,7 +82,6 @@ describe('Suggest', () => {
 
     expect(anchors).toHaveLength(numItems);
     expect(anchors[0].dataset.brkId).not.toBeUndefined();
-    expect(anchors[0].dataset.vboId).not.toBeUndefined();
   });
 
   it('should call onSelect handler', () => {

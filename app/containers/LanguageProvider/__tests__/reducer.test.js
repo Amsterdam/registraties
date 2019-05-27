@@ -1,5 +1,5 @@
-import languageProviderReducer, { initialState } from './reducer';
-import { CHANGE_LOCALE } from './constants';
+import languageProviderReducer, { initialState } from '../reducer';
+import { CHANGE_LOCALE } from '../constants';
 
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {

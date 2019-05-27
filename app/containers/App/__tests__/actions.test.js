@@ -1,8 +1,8 @@
-import { testActionCreator } from '../../../internals/testing/test-utils';
+import { testActionCreator } from '../../../../internals/testing/test-utils';
 
-import { AUTHENTICATE_USER, AUTHORIZE_USER, SHOW_GLOBAL_ERROR, RESET_GLOBAL_ERROR, LOGIN, LOGOUT } from './constants';
+import { AUTHENTICATE_USER, AUTHORIZE_USER, SHOW_GLOBAL_ERROR, RESET_GLOBAL_ERROR, LOGIN, LOGOUT } from '../constants';
 
-import { authenticateUser, authorizeUser, showGlobalError, resetGlobalError, doLogin, doLogout } from './actions';
+import { authenticateUser, authorizeUser, showGlobalError, resetGlobalError, doLogin, doLogout } from '../actions';
 
 describe('App actions', () => {
   it('should dispatch authenticate user action', () => {
