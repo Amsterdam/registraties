@@ -8,8 +8,9 @@ WORKDIR /deploy
 
 # Run updates and cleanup
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       netcat \
+      libglu1 \
       git && \
     rm -rf /var/lib/apt/lists/*
 
@@ -20,10 +21,11 @@ RUN git config --global url."https://github.com/".insteadOf git@github.com:
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
-RUN npm config set registry https://repo.datapunt.amsterdam.nl/repository/npm-group/ && \
-    npm --production=false \
+# RUN npm config set registry https://repo.data.amsterdam.nl/repository/npm-group/ && \
+RUN npm --production=false \
         --unsafe-perm \
         --verbose \
+        --no-progress \
         ci && \
     npm cache clean --force
 

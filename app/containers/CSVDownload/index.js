@@ -7,10 +7,17 @@ import { injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 import { isArray, isArrayOfArrays, isObject } from 'utils';
-import * as selectors from 'containers/withSelector/selectors';
 import DownloadLink from 'components/DownloadLink';
 import messages from 'containers/App/messages';
 import { OBJECTS } from 'containers/App/constants';
+import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
+import { makeSelectOpenbareRuimteData } from 'containers/OpenbareRuimte/selectors';
+import { makeSelectPandData } from 'containers/Pand/selectors';
+import { makeSelectVerblijfsobjectData } from 'containers/Verblijfsobject/selectors';
+import { makeSelectNummeraanduidingData, makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
+import { makeSelectKadastraalObjectData } from 'containers/KadastraalObject/selectors';
+import { makeSelectKadastraalSubjectNNPData } from 'containers/KadastraalSubjectNNP/selectors';
+import { makeSelectKadastraalSubjectNPData } from 'containers/KadastraalSubjectNP/selectors';
 
 const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
   <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} {...rest} />
@@ -150,15 +157,15 @@ CSVDownloadContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  OPENBARE_RUIMTE: selectors.makeSelectOpenbareRuimteData(),
-  NUMMERAANDUIDING: selectors.makeSelectNummeraanduidingData(),
-  VERBLIJFSOBJECT: selectors.makeSelectVerblijfsobjectData(),
-  PAND: selectors.makeSelectPandData(),
-  KADASTRAAL_OBJECT: selectors.makeSelectKadastraalObjectData(),
-  KADASTRAAL_SUBJECT_NNP: selectors.makeSelectKadastraalSubjectNNPData(),
-  KADASTRAAL_SUBJECT_NP: selectors.makeSelectKadastraalSubjectNPData(),
-  VESTIGING: selectors.makeSelectVestigingData(),
-  GEBIED: selectors.makeSelectGebiedData(),
+  OPENBARE_RUIMTE: makeSelectOpenbareRuimteData(),
+  NUMMERAANDUIDING: makeSelectNummeraanduidingData(),
+  VERBLIJFSOBJECT: makeSelectVerblijfsobjectData(),
+  PAND: makeSelectPandData(),
+  KADASTRAAL_OBJECT: makeSelectKadastraalObjectData(),
+  KADASTRAAL_SUBJECT_NNP: makeSelectKadastraalSubjectNNPData(),
+  KADASTRAAL_SUBJECT_NP: makeSelectKadastraalSubjectNPData(),
+  VESTIGING: makeSelectVestigingData(),
+  GEBIED: makeSelectGebiedData(),
 });
 
 const withConnect = connect(mapStateToProps);

@@ -3,12 +3,16 @@ import { render, cleanup } from 'react-testing-library';
 import 'jest-styled-components';
 import { IntlProvider } from 'react-intl';
 import { isArray } from 'utils';
+import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router-dom';
 
+import configureStore from '../../../configureStore';
 import { SectionComponent as Section } from '..';
 import messages from '../../../translations/nl.json';
 import pand from './pand.json';
 import subjectNP from './subjectNP.json';
 
+const store = configureStore({}, browserHistory);
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();
 
@@ -68,9 +72,11 @@ describe('Section', () => {
   it('should verify if data items are arrays', () => {
     const data = [pand[0], pand[1]];
     const { rerender } = render(
-      <IntlProvider locale="nl" messages={messages}>
-        <Section name="Foo bar baz" intl={intl} data={data} />
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <Section name="Foo bar baz" intl={intl} data={data} />
+        </IntlProvider>
+      </Provider>,
     );
 
     expect(isArray).toHaveBeenCalledTimes(2);
@@ -83,9 +89,11 @@ describe('Section', () => {
     const data2 = [[pand[2]]];
 
     rerender(
-      <IntlProvider locale="nl" messages={messages}>
-        <Section name="Foo bar baz" intl={intl} data={data2} />
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <Section name="Foo bar baz" intl={intl} data={data2} />
+        </IntlProvider>
+      </Provider>,
     );
 
     expect(isArray).toHaveBeenCalledTimes(2);
@@ -97,9 +105,11 @@ describe('Section', () => {
     const data3 = subjectNP;
 
     render(
-      <IntlProvider locale="nl" messages={messages}>
-        <Section name="Foo bar baz" intl={intl} data={data3} />
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <Section name="Foo bar baz" intl={intl} data={data3} />
+        </IntlProvider>
+      </Provider>,
     );
 
     expect(isArray).toHaveBeenCalledTimes(2);
@@ -110,13 +120,14 @@ describe('Section', () => {
     const data = pand;
     const numValues = data.length;
 
-    const { container } = render(
-      <IntlProvider locale="nl" messages={messages}>
-        <Section name="Foo bar baz" intl={intl} data={data} />
-      </IntlProvider>,
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <Section name="Foo bar baz" intl={intl} data={data} />
+        </IntlProvider>
+      </Provider>,
     );
 
-    expect(container.firstChild).toMatchSnapshot();
     expect(document.getElementsByTagName('li')).toHaveLength(numValues);
   });
 });

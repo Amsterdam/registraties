@@ -5,15 +5,22 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectKadastraalSubjectNPData } from 'containers/withSelector/selectors';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 
-export const KadastraalSubjectNPContainer = ({ data, intl }) => {
+import { makeSelectKadastraalSubjectNPData } from './selectors';
+import saga from './saga';
+import reducer from './reducer';
+
+export const KadastraalSubjectNPContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NP.NAME);
   const href = OBJECTS.KADASTRAAL_SUBJECT_NP.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 KadastraalSubjectNPContainer.defaultProps = {
@@ -33,10 +40,12 @@ KadastraalSubjectNPContainer.propTypes = {
     ),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectKadastraalSubjectNPData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);
@@ -44,4 +53,6 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
+  injectSaga({ key: 'kadastraalSubjectNP', saga }),
+  injectReducer({ key: 'kadastraalSubjectNP', reducer }),
 )(memo(KadastraalSubjectNPContainer));

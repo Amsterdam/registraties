@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import { makeSelectTOC } from 'containers/withSelector/selectors';
+import injectReducer from 'utils/injectReducer';
 import TOC from 'components/TOC';
+
+import { makeSelectTOC } from './selectors';
+import reducer from './reducer';
+
+const Intl = injectIntl(TOC);
 
 const mapStateToProps = createStructuredSelector({
   sections: makeSelectTOC(),
@@ -14,5 +19,5 @@ const withConnect = connect(mapStateToProps);
 
 export default compose(
   withConnect,
-  injectIntl,
-)(TOC);
+  injectReducer({ key: 'toc', reducer }),
+)(Intl);

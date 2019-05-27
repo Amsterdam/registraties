@@ -5,15 +5,22 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectOpenbareRuimteData } from 'containers/withSelector/selectors';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 
-export const OpenbareRuimteContainer = ({ data, intl }) => {
+import { makeSelectOpenbareRuimteData } from './selectors';
+import saga from './saga';
+import reducer from './reducer';
+
+export const OpenbareRuimteContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
   const href = OBJECTS.OPENBARE_RUIMTE.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 OpenbareRuimteContainer.defaultProps = {
@@ -31,10 +38,12 @@ OpenbareRuimteContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectOpenbareRuimteData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);
@@ -42,4 +51,6 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
+  injectSaga({ key: 'openbareRuimte', saga }),
+  injectReducer({ key: 'openbareRuimte', reducer }),
 )(memo(OpenbareRuimteContainer));

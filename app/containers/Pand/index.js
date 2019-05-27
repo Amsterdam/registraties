@@ -5,15 +5,22 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectPandData } from 'containers/withSelector/selectors';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
 
-export const PandContainer = ({ data, intl }) => {
+import { makeSelectPandData } from './selectors';
+import saga from './saga';
+import reducer from './reducer';
+
+export const PandContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.PAND.NAME);
   const href = OBJECTS.PAND.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 PandContainer.defaultProps = {
@@ -36,10 +43,12 @@ PandContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectPandData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);
@@ -47,4 +56,6 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
+  injectSaga({ key: 'pand', saga }),
+  injectReducer({ key: 'pand', reducer }),
 )(memo(PandContainer));

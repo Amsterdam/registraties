@@ -21,18 +21,29 @@ node {
         checkout scm
     }
 
-    stage("Unit and Integration") {
-      String  PROJECT = "registraties"
+    String  PROJECT = "registraties"
 
-      tryStep "unittests start", {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
-      }
-      always {
-        tryStep "unittests stop", {
-          sh "docker-compose -p ${PROJECT} down -v || true"
+    stage("Lint") {
+        tryStep "lint start", {
+            sh "docker-compose -p ${PROJECT} up --exit-code-from test-lint test-lint"
         }
-      }
+        always {
+            tryStep "lint stop", {
+                sh "docker-compose -p ${PROJECT} down -v || true"
+            }
+        }
     }
+
+    // stage("Test") {
+    //     tryStep "test start", {
+    //         sh "docker-compose -p ${PROJECT} up --exit-code-from test-unit-integration test-unit-integration"
+    //     }
+    //     always {
+    //         tryStep "lint stop", {
+    //             sh "docker-compose -p ${PROJECT} down -v || true"
+    //         }
+    //     }
+    // }
 }
 
 node {
@@ -69,7 +80,7 @@ if (BRANCH == "master") {
                 build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                     [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'registraties.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-registraties.yml'],
                 ]
             }
         }
@@ -101,7 +112,7 @@ if (BRANCH == "master") {
                 build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                     [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'wonregistratiesen.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-registraties.yml'],
                 ]
             }
         }

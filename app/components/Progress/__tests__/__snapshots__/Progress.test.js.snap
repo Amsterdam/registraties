@@ -92,6 +92,13 @@ exports[`Progress matches the snapshot 1`] = `
   align-self: center;
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c1 {
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+  }
+}
+
 <div
   class="no-print  c0"
   data-testid="progress-wrapper"

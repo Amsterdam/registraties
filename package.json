@@ -6,6 +6,15 @@
     "type": "git",
     "url": "git@github.com:Amsterdam/registraties.git"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 3% in NL",
+    "maintained node versions",
+    "not dead",
+    "Chrome 42",
+    "Firefox 62",
+    "Explorer 11"
+  ],
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
@@ -37,9 +46,9 @@
     "lint:eslint:fix": "eslint --ignore-path .gitignore --ignore-pattern internals --ignore-pattern server --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "pretest": "npm run test:clean && npm run lint",
+    "pretest": "npm run test:clean",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",

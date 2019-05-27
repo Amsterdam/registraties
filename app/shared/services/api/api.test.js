@@ -65,7 +65,6 @@ describe('api service', () => {
     });
 
     it('should generate the right call when params are not defined', () => {
-      const fullUrl = `${url}/`;
       const options = {
         method: 'GET',
         headers: {
@@ -75,7 +74,7 @@ describe('api service', () => {
       };
       const gen = authCall(url, undefined);
       expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
-      expect(gen.next(token).value).toEqual(call(request, fullUrl, options)); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next(token).value).toEqual(call(request, url, options)); // eslint-disable-line redux-saga/yield-effects
     });
 
     it('should generate the right call with a custom token', () => {

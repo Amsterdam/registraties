@@ -5,15 +5,24 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { makeSelectNummeraanduidingData } from 'containers/withSelector/selectors';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
-import { OBJECTS } from 'containers/App/constants';
+import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
+import { makeSelectStatus } from 'containers/App/selectors';
+import ligplaatsSaga from 'containers/Ligplaats/saga';
+import ligplaatsReducer from 'containers/Ligplaats/reducer';
 
-export const NummeraanduidingContainer = ({ data, intl }) => {
+import { makeSelectNummeraanduidingData } from './selectors';
+import saga from './saga';
+import reducer from './reducer';
+
+export const NummeraanduidingContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.NUMMERAANDUIDING.NAME);
   const href = OBJECTS.NUMMERAANDUIDING.STELSELPEDIA_LINK;
+  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
-  return <Section data={data} name={name} href={href} />;
+  return render;
 };
 
 NummeraanduidingContainer.defaultProps = {
@@ -31,10 +40,12 @@ NummeraanduidingContainer.propTypes = {
     }),
   ),
   intl: intlShape.isRequired,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectNummeraanduidingData(),
+  status: makeSelectStatus(),
 });
 
 const withConnect = connect(mapStateToProps);
@@ -42,4 +53,8 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
+  injectSaga({ key: 'nummeraanduiding', saga }),
+  injectReducer({ key: 'nummeraanduiding', reducer }),
+  injectSaga({ key: 'ligplaats', saga: ligplaatsSaga }),
+  injectReducer({ key: 'ligplaats', reducer: ligplaatsReducer }),
 )(memo(NummeraanduidingContainer));

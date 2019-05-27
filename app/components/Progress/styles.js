@@ -53,6 +53,11 @@ export const determined = {
     ${({ now, scaleFactor }) => (now > 0.5 ? css`clip: rect(auto, auto, auto, auto)` : css`clip: rect(0, ${progressWidth * scaleFactor}px, ${progressWidth * scaleFactor}px, ${(progressWidth / 2) * scaleFactor}px)`)};
     will-change: clip;
 
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      top: calc(50% - ${({ scaleFactor }) => (progressWidth * scaleFactor) / 2}px);
+      left: calc(50% - ${({ scaleFactor }) => (progressWidth * scaleFactor) / 2}px);
+    }
+
     &::before,
     &::after {
       border-radius: 50%;
