@@ -1,4 +1,4 @@
-import appReducer, { initialState } from './reducer';
+import appReducer, { initialState } from '../reducer';
 
 describe('appReducer', () => {
   beforeEach(() => {});
