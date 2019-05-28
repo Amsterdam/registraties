@@ -12,10 +12,12 @@ import Header from 'containers/Header/Loadable';
 import GlobalError from 'containers/GlobalError';
 import { authenticate, isAuthenticated } from 'shared/services/auth/auth';
 import Search from 'containers/Search';
+import injectSaga from 'utils/injectSaga';
 
 import { ThemeProvider } from '@datapunt/asc-ui';
 
 import { showGlobalError, authenticateUser } from './actions';
+import saga from './saga';
 
 import GlobalStyles from '../../global-styles';
 
@@ -72,4 +74,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(App);
+export default compose(
+  withConnect,
+  injectSaga({ key: 'global', saga }),
+)(App);
