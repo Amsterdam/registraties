@@ -27,7 +27,7 @@ const StyledIcon = styled.button`
 `;
 
 const SearchToggle = ({ active, onClick, className, label, ...rest }) => (
-  <StyledIcon size={20} padding={0} className={className} onClick={onClick} {...rest}>
+  <StyledIcon size={20} padding={0} className={className} onClick={onClick} type="button" {...rest}>
     {active ? (
       <CloseIcon data-testid="searchToggle-close-icon" width={20} />
     ) : (
