@@ -70,7 +70,7 @@ const SuggestWrapper = styled.div`
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 
   @media (max-width: 650px) {
@@ -86,7 +86,6 @@ const StyledToggle = styled(Toggle)`
 
 const FoldOut = styled.div`
   display: ${({ active }) => (active ? 'block' : 'none')};
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 `;
@@ -129,6 +128,7 @@ const Search = forwardRef(
                 autoCapitalize="off"
                 autoCorrect="off"
                 defaultValue=""
+                autoComplete="off"
                 id="searchInput"
                 onChange={onChange}
                 onFocus={onFocus}
