@@ -27,9 +27,9 @@ export const makeSelectVestigingData = () =>
         'kvk_nummer',
         'postadres',
         'bezoekadres',
-        'activiteitsomschrijving',
-        'sbi_code',
-        'sbi_omschrijving',
+        'activiteiten.activiteitsomschrijving',
+        'activiteiten.sbi_code',
+        'activiteiten.sbi_omschrijving',
       ];
 
       const data = vestiging.data.map((obj, index) => {
