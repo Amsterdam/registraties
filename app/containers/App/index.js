@@ -61,7 +61,6 @@ export const App = ({ onAuthenticateUser, showError }) => {
 App.propTypes = {
   onAuthenticateUser: PropTypes.func.isRequired,
   showError: PropTypes.func.isRequired,
-  match: PropTypes.shape({}).isRequired,
 };
 
 const mapDispatchToProps = dispatch =>

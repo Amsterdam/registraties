@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { intlShape } from 'react-intl';
+import equal from 'fast-deep-equal';
 
 import Verblijfsobject from 'containers/Verblijfsobject';
 import KadastraalObject from 'containers/KadastraalObject';
@@ -25,131 +26,149 @@ import ArticleHeading from 'components/ArticleHeading';
 
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
-export const AccommodationObjectComponent = props => {
-  const [filledInBy, setFilledInBy] = useState('');
-  const [notitie, setNotitie] = useState('');
+class AccommodationObjectComponent extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const initiateFetch = () => {
-    const { vboId, ligId, brkId } = props.match.params;
+    this.state = {
+      filledInBy: '',
+      notitie: '',
+    };
 
-    props.loadBAGData({ vboId, ligId, brkId });
-  };
+    this.onInput = this.onInput.bind(this);
+  }
 
-  const onInput = event => {
+  initiateFetch() {
+    const { vboId, ligId, brkId } = this.props.match.params;
+
+    this.props.loadBAGData({ vboId, ligId, brkId });
+  }
+
+  componentDidMount() {
+    this.initiateFetch();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!equal(prevProps.match.params, this.props.match.params)) {
+      this.initiateFetch();
+    }
+  }
+
+  onInput(event) {
     event.persist();
     const {
       currentTarget: { name, value },
     } = event;
 
     if (name === 'filled_in_by') {
-      setFilledInBy(value);
+      this.setState({ filledInBy: value });
     } else {
-      setNotitie(value);
+      this.setState({ notitie: value });
     }
-  };
+  }
 
-  useEffect(() => {
-    initiateFetch();
-  }, [props.match.params]);
+  render() {
+    const { onInput } = this;
+    const { filledInBy, notitie } = this.state;
+    const { intl, status } = this.props;
+    const { formatMessage } = intl;
 
-  const { intl, status } = props;
-  const { formatMessage } = intl;
+    return (
+      <Wrapper>
+        <Progress />
+        <article className="col-7">
+          <section>
+            <header>
+              <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
+            </header>
 
-  return (
-    <Wrapper>
-      <Progress />
-      <article className="col-7">
-        <section>
-          <header>
-            <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
-          </header>
+            <OpenbareRuimte />
 
-          <OpenbareRuimte />
+            <Woonplaats />
 
-          <Woonplaats />
+            <Nummeraanduiding />
 
-          <Nummeraanduiding />
+            <Verblijfsobject />
 
-          <Verblijfsobject />
+            <Pand />
+          </section>
 
-          <Pand />
-        </section>
+          <section>
+            <header>
+              <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
+            </header>
 
-        <section>
-          <header>
-            <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
-          </header>
+            <KadastraalObject />
 
-          <KadastraalObject />
+            <KadastraalSubjectNP />
 
-          <KadastraalSubjectNP />
+            <KadastraalSubjectNNP />
 
-          <KadastraalSubjectNNP />
+            <Vestiging />
 
-          <Vestiging />
+            <Gebied />
+          </section>
+        </article>
 
-          <Gebied />
-        </section>
-      </article>
+        <Aside className="col-4">
+          <section>
+            <TOC />
+          </section>
 
-      <Aside className="col-4">
-        <section>
-          <TOC />
-        </section>
+          <section>
+            <Summary />
+          </section>
 
-        <section>
-          <Summary />
-        </section>
+          <Map marker search={false} zoom={14} />
 
-        <Map marker search={false} zoom={14} />
+          {status === LOAD_DATA_SUCCESS && (
+            <>
+              <section className="invoer">
+                <header className="no-print">
+                  <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
+                </header>
 
-        {status === LOAD_DATA_SUCCESS && (
-          <>
-            <section className="invoer">
-              <header className="no-print">
-                <SectionHeading>{intl.formatMessage(messages.extra_fields)}</SectionHeading>
-              </header>
+                <Label className={!notitie ? 'no-print' : null} htmlFor="areaNotitie">
+                  {intl.formatMessage(messages.note)}:
+                </Label>
+                <Textarea
+                  className="input no-print"
+                  name="notitie"
+                  id="areaNotitie"
+                  row="5"
+                  placeholder={formatMessage(messages.note_remark)}
+                  onChange={onInput}
+                />
+                <div data-testid="accommodation-object-notitie" className={`no-screen${!notitie ? 'no-print' : ''}`}>
+                  {notitie}
+                </div>
 
-              <Label className={!notitie ? 'no-print' : null} htmlFor="areaNotitie">
-                {intl.formatMessage(messages.note)}:
-              </Label>
-              <Textarea
-                className="input no-print"
-                name="notitie"
-                id="areaNotitie"
-                row="5"
-                placeholder={formatMessage(messages.note_remark)}
-                onChange={onInput}
-              />
-              <div data-testid="accommodation-object-notitie" className={`no-screen${!notitie ? 'no-print' : ''}`}>
-                {notitie}
-              </div>
+                <Label className={!filledInBy ? 'no-print' : null} htmlFor="inputFilledInBy">
+                  {formatMessage(messages.filled_in_by)}:
+                </Label>
+                <input className="input no-print" id="inputFilledInBy" name="filled_in_by" onChange={onInput} />
+                <div
+                  data-testid="accommodation-object-filled-in-by"
+                  className={`no-screen${!filledInBy ? 'no-print' : ''}`}
+                >
+                  {filledInBy}
+                </div>
+              </section>
 
-              <Label className={!filledInBy ? 'no-print' : null} htmlFor="inputFilledInBy">
-                {formatMessage(messages.filled_in_by)}:
-              </Label>
-              <input className="input no-print" id="inputFilledInBy" name="filled_in_by" onChange={onInput} />
-              <div
-                data-testid="accommodation-object-filled-in-by"
-                className={`no-screen${!filledInBy ? 'no-print' : ''}`}
-              >
-                {filledInBy}
-              </div>
-            </section>
+              <section className="no-print">
+                <header>
+                  <SectionHeading>{intl.formatMessage(messages.export_cta)}</SectionHeading>
+                </header>
 
-            <section className="no-print">
-              <header>
-                <SectionHeading>{intl.formatMessage(messages.export_cta)}</SectionHeading>
-              </header>
-
-              <CSVDownloadContainer data={{ notitie, filledInBy }} />
-            </section>
-          </>
-        )}
-      </Aside>
-    </Wrapper>
-  );
-};
+                <CSVDownloadContainer data={{ notitie, filledInBy }} />
+              </section>
+            </>
+          )}
+        </Aside>
+      </Wrapper>
+    );
+  }
+}
 
 AccommodationObjectComponent.defaultProps = {
   status: undefined,
