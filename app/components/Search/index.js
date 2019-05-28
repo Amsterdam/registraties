@@ -93,20 +93,21 @@ const FoldOut = styled.div`
 const Search = forwardRef(
   (
     {
+      formLegendLabel,
       onChange,
       onFocus,
       onSelect,
-      results,
       onSubmit,
-      suggestRef,
+      results,
+      searchHintLabel,
       searchLabel,
       searchTermLabel,
-      searchHintLabel,
-      formLegendLabel,
+      startFoldedOut,
+      suggestRef,
     },
     ref,
   ) => {
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(startFoldedOut);
 
     return (
       <Form action="" onSubmit={onSubmit} className="no-print">
@@ -153,6 +154,7 @@ Search.defaultProps = {
   onSubmit: null,
   results: {},
   suggestRef: undefined,
+  startFoldedOut: false,
 };
 
 Search.propTypes = {
@@ -183,6 +185,7 @@ Search.propTypes = {
   searchLabel: PropTypes.string.isRequired,
   searchTermLabel: PropTypes.string.isRequired,
   searchHintLabel: PropTypes.string.isRequired,
+  startFoldedOut: PropTypes.bool,
 };
 
 export default Search;
