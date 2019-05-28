@@ -15,12 +15,16 @@ export function* fetchMaatschappelijkeActiviteitData() {
   const maIds = yield select(makeSelectMaatschappelijkeActiviteitIds());
 
   try {
-    const data = yield all([...maIds.map(maId => call(request, `${MA_API}${maId}/`, getRequestOptions()))]);
+    if (maIds) {
+      const data = yield all([...maIds.map(maId => call(request, `${MA_API}${maId}/`, getRequestOptions()))]);
 
-    if (!data || !data.length) {
-      yield put(loadDataNoResults());
+      if (!data || !data.length) {
+        yield put(loadDataNoResults());
+      } else {
+        yield put(loadDataSuccess(data));
+      }
     } else {
-      yield put(loadDataSuccess(data));
+      yield put(loadDataNoResults());
     }
   } catch (error) {
     yield put(loadDataFailed(error));

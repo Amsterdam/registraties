@@ -38,6 +38,8 @@ export function* fetchVestigingIdData() {
 
         yield all([...data.map(({ results }) => call(fetchVestigingData, results))]);
       }
+    } else {
+      yield put(loadIdsNoResults());
     }
   } catch (error) {
     yield put(loadIdsFailed(error));
