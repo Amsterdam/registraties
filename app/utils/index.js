@@ -1,7 +1,14 @@
 import messages from 'containers/App/messages';
 import { translationMessages } from '../i18n';
 
-const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 'toestandsdatum', 'geboortedatum'];
+const dateFields = [
+  'begin_geldigheid',
+  'document_mutatie',
+  'einde_geldigheid',
+  'toestandsdatum',
+  'geboortedatum',
+  'datum_aanvang',
+];
 const currencyFields = ['koopsom'];
 
 /**
@@ -146,7 +153,20 @@ const formatKey = key =>
  */
 export const formatData = ({ data, keys, locale = 'default' }) => {
   const objKeys = Object.keys(data);
-  const filteredKeys = keys ? objKeys.filter(isValidKey(keys)).filter(isValidValue(data)) : objKeys;
+  const parentKeys = keys.map(key => key.split('.')[0]);
+  const childKeys = {};
+
+  if (keys) {
+    keys.forEach(key => {
+      const [parent, child] = key.split('.');
+      if (!childKeys[parent]) {
+        childKeys[parent] = [];
+      }
+      childKeys[parent].push(child);
+    });
+  }
+
+  const filteredKeys = keys ? objKeys.filter(isValidKey(parentKeys)).filter(isValidValue(data)) : objKeys;
   const localeMessages = translationMessages[locale];
 
   return filteredKeys

@@ -33,7 +33,7 @@ export const makeSelectVerblijfsobjectData = () =>
         'status',
         'toegang',
         'verblijfsobjectidentificatie',
-        'verhuurbare-eenheden',
+        'verhuurbare_eenheden',
       ];
 
       return formatData({ data, keys, locale });

@@ -10,6 +10,8 @@ import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
+import maReducer from 'containers/MaatschappelijkeActiviteit/reducer';
+import maSaga from 'containers/MaatschappelijkeActiviteit/saga';
 
 import { makeSelectVestigingData } from './selectors';
 import saga from './saga';
@@ -32,7 +34,7 @@ VestigingContainer.propTypes = {
     PropTypes.shape({
       type: PropTypes.string.isRequired,
       formattedKey: PropTypes.string.isRequired,
-      formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      formattedValue: PropTypes.any.isRequired,
       key: PropTypes.string.isRequired,
       value: PropTypes.any,
     }),
@@ -53,4 +55,6 @@ export default compose(
   withConnect,
   injectSaga({ key: 'vestiging', saga }),
   injectReducer({ key: 'vestiging', reducer }),
+  injectSaga({ key: 'maatschappelijkeActiviteit', saga: maSaga }),
+  injectReducer({ key: 'maatschappelijkeActiviteit', reducer: maReducer }),
 )(memo(VestigingContainer));

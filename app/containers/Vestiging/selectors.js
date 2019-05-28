@@ -1,14 +1,56 @@
 import { createSelector } from 'reselect';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray } from 'utils';
+import { formatData } from 'utils';
 
 const selectVestiging = state => state.vestiging;
+const selectMaatschappelijkeActiviteit = state => state.maatschappelijkeActiviteit;
 
 export const makeSelectVestigingData = () =>
   createSelector(
     selectVestiging,
+    selectMaatschappelijkeActiviteit,
     makeSelectLocale(),
-    (state, locale) => {
+    (vestiging, maatschappelijkeActiviteit, locale) => {
+      if (!vestiging || !maatschappelijkeActiviteit) {
+        return undefined;
+      }
+
+      if (!vestiging.data || !maatschappelijkeActiviteit.data) {
+        return undefined;
+      }
+
+      const keys = [
+        'activiteiten',
+        'vestigingsnummer',
+        'naam',
+        'datum_aanvang',
+        'kvk_nummer',
+        'postadres',
+        'bezoekadres',
+        'activiteitsomschrijving',
+        'sbi_code',
+        'sbi_omschrijving',
+      ];
+
+      const data = vestiging.data.map((obj, index) => {
+        const vestigingObj = { ...obj };
+        const maatschappelijkeActiviteitObj = maatschappelijkeActiviteit.data[index];
+
+        vestigingObj.kvk_nummer = maatschappelijkeActiviteitObj.kvk_nummer;
+        vestigingObj.postadres = vestigingObj.postadres.volledig_adres;
+        vestigingObj.bezoekadres = vestigingObj.bezoekadres.volledig_adres;
+
+        return vestigingObj;
+      });
+
+      return data.map(dataObj => formatData({ data: dataObj, keys, locale }));
+    },
+  );
+
+export const makeSelectMaatschappelijkeActiviteitIds = () =>
+  createSelector(
+    selectVestiging,
+    state => {
       if (!state) {
         return undefined;
       }
@@ -19,34 +61,6 @@ export const makeSelectVestigingData = () =>
         return undefined;
       }
 
-      const filtered = data
-        .map(({ count, results }) => count > 0 && results)
-        .filter(Boolean)
-        .reduce((acc, val) => {
-          acc.push(...val);
-          return acc;
-        }, []);
-      const keys = ['naam', 'locatie'];
-
-      const formatted = filtered
-        .map(vestiging => formatData({ data: vestiging, keys, locale }))
-        .map(item =>
-          item.reduce((acc, vestiging) => {
-            if (isArray(vestiging)) {
-              vestiging.forEach(prop => {
-                acc.push(prop);
-              });
-            } else {
-              acc.push(vestiging);
-            }
-            return acc;
-          }, []),
-        );
-
-      if (!formatted.length) {
-        return null;
-      }
-
-      return formatted.length === 1 ? formatted[0] : formatted;
+      return data.map(({ maatschappelijke_activiteit: ma }) => ma.replace(/(?:[^\d]+)(\d+)(?:[^\d]*)/, '$1'));
     },
   );

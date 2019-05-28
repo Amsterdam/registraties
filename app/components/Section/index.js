@@ -21,6 +21,7 @@ const printValue = meta => {
   switch (type) {
     case 'number':
       return <FormattedNumber value={formattedValue} />;
+
     case 'currency':
       return (
         <FormattedNumber
@@ -32,6 +33,8 @@ const printValue = meta => {
           maximumFractionDigits={0}
         />
       );
+
+    case 'object':
     default:
       return formattedValue;
   }

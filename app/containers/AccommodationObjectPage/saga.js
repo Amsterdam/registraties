@@ -27,8 +27,9 @@ import { fetchNummeraanduidingData } from 'containers/Nummeraanduiding/saga';
 import { fetchOpenbareRuimteData } from 'containers/OpenbareRuimte/saga';
 import { fetchPandlistData } from 'containers/Pand/saga';
 import { fetchVerblijfsobjectData, fetchVerblijfsobjectId } from 'containers/Verblijfsobject/saga';
-import { fetchVestigingData } from 'containers/Vestiging/saga';
+import { fetchVestigingIdData } from 'containers/Vestiging/saga';
 import { fetchWoonplaatsData } from 'containers/Woonplaats/saga';
+import { fetchMaatschappelijkeActiviteitData } from 'containers/MaatschappelijkeActiviteit/saga';
 
 import { makeSelectVBONummeraanduidingId } from 'containers/Verblijfsobject/selectors';
 import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors';
@@ -44,12 +45,12 @@ export function* fetchData(action) {
     let landelijkVboId;
 
     if (brkId) {
-      yield put(maxProgressCount(10));
+      yield put(maxProgressCount(12));
 
       // fetch vboId from VERBLIJFSOBJECT_API with brkId param
       landelijkVboId = yield* fetchVerblijfsobjectId(brkId);
     } else {
-      yield put(maxProgressCount(9));
+      yield put(maxProgressCount(11));
     }
 
     const vboIdentifier = vboId || landelijkVboId;
@@ -59,7 +60,8 @@ export function* fetchData(action) {
       yield call(fetchVerblijfsobjectData, vboIdentifier);
       yield call(fetchKadastraalSubjectNNPData);
       yield call(fetchKadastraalSubjectNPData);
-      yield call(fetchVestigingData);
+      yield call(fetchVestigingIdData);
+      yield call(fetchMaatschappelijkeActiviteitData);
       yield call(fetchPandlistData, vboIdentifier);
 
       nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId());
