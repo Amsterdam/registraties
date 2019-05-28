@@ -45,7 +45,7 @@ const scopes = [
   // Handelsregister
   'HR/R', // Leesrechten
 ];
-const clientId = 'citydata';
+const clientId = 'registraties';
 
 const domainList = ['datapunt', 'grip'];
 
