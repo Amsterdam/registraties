@@ -124,6 +124,7 @@ module.exports = options => ({
       },
     ],
   },
+  plugins: options.plugins.concat([new webpack.EnvironmentPlugin()]),
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
