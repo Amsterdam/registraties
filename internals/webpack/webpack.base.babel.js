@@ -124,17 +124,6 @@ module.exports = options => ({
       },
     ],
   },
-  plugins: options.plugins.concat([
-    // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
-    // inside your code for any environment checks; Terser will automatically
-    // drop any unreachable code.
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
-      HOST: 'localhost',
-      PORT: 8080,
-      HTTPS: false,
-    }),
-  ]),
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
