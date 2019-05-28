@@ -55,4 +55,11 @@ module.exports = require('./webpack.base.babel')({
   performance: {
     hints: false,
   },
+
+  externals: {
+    globalConfig: JSON.stringify(
+      // eslint-disable-next-line global-require
+      require(path.resolve(process.cwd(), 'environment.conf.json')),
+    ),
+  },
 });
