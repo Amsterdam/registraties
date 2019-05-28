@@ -95,8 +95,8 @@ module.exports = require('./webpack.base.babel')({
     new WebpackPwaManifest({
       name: 'Registraties Amsterdam',
       short_name: 'Registraties Amsterdam',
-      background_color: '#fafafa',
-      theme_color: '#b1624d',
+      background_color: '#ffffff',
+      theme_color: '#ec0000',
       inject: true,
       ios: true,
       icons: [
@@ -126,7 +126,7 @@ module.exports = require('./webpack.base.babel')({
   externals: {
     globalConfig: JSON.stringify(
       // eslint-disable-next-line global-require
-      require(path.resolve(process.cwd(), 'environment.conf.prod.json')),
+      require(path.resolve(process.cwd(), 'environment.conf.acc.json')),
     ),
   },
 });
