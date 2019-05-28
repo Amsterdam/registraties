@@ -26,6 +26,7 @@ exports[`SearchToggle matches the snapshot 1`] = `
 <button
   class="c0"
   size="20"
+  type="button"
 >
   <img
     data-testid="searchToggle-search-icon"
@@ -44,6 +45,7 @@ exports[`SearchToggle matches the snapshot 2`] = `
 <button
   class="SearchToggle__StyledIcon-qg6jkp-0 bcSxwk"
   size="20"
+  type="button"
 >
   <img
     data-testid="searchToggle-close-icon"

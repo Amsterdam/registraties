@@ -59,6 +59,14 @@ describe('Search', () => {
     expect(getByText('Bar baz')).not.toBeUndefined();
   });
 
+  it('should show the search form', () => {
+    const foldoutProps = { ...testProps, startFoldedOut: true };
+    const { getByTestId } = render(renderSearch(foldoutProps));
+    const foldOut = getByTestId('search-foldout');
+
+    expect(foldOut).toHaveStyleRule('display', 'block');
+  });
+
   it('should toggle the display of the form', () => {
     const { getByTestId } = render(renderSearch(testProps));
 

@@ -70,7 +70,7 @@ const SuggestWrapper = styled.div`
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 
   @media (max-width: 650px) {
@@ -86,7 +86,6 @@ const StyledToggle = styled(Toggle)`
 
 const FoldOut = styled.div`
   display: ${({ active }) => (active ? 'block' : 'none')};
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 `;
@@ -94,20 +93,21 @@ const FoldOut = styled.div`
 const Search = forwardRef(
   (
     {
+      formLegendLabel,
       onChange,
       onFocus,
       onSelect,
-      results,
       onSubmit,
-      suggestRef,
+      results,
+      searchHintLabel,
       searchLabel,
       searchTermLabel,
-      searchHintLabel,
-      formLegendLabel,
+      startFoldedOut,
+      suggestRef,
     },
     ref,
   ) => {
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(startFoldedOut);
 
     return (
       <Form action="" onSubmit={onSubmit} className="no-print">
@@ -129,6 +129,7 @@ const Search = forwardRef(
                 autoCapitalize="off"
                 autoCorrect="off"
                 defaultValue=""
+                autoComplete="off"
                 id="searchInput"
                 onChange={onChange}
                 onFocus={onFocus}
@@ -153,6 +154,7 @@ Search.defaultProps = {
   onSubmit: null,
   results: {},
   suggestRef: undefined,
+  startFoldedOut: false,
 };
 
 Search.propTypes = {
@@ -183,6 +185,7 @@ Search.propTypes = {
   searchLabel: PropTypes.string.isRequired,
   searchTermLabel: PropTypes.string.isRequired,
   searchHintLabel: PropTypes.string.isRequired,
+  startFoldedOut: PropTypes.bool,
 };
 
 export default Search;

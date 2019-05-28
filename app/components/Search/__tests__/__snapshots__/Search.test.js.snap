@@ -101,7 +101,7 @@ exports[`Search matches the snapshot 1`] = `
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 }
 
@@ -113,7 +113,6 @@ exports[`Search matches the snapshot 1`] = `
 
 .c5 {
   display: none;
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 }
@@ -152,6 +151,7 @@ exports[`Search matches the snapshot 1`] = `
       class="c2 c3"
       data-testid="search-toggle"
       size="20"
+      type="button"
     >
       <img
         data-testid="searchToggle-search-icon"
@@ -184,6 +184,7 @@ exports[`Search matches the snapshot 1`] = `
         </div>
         <input
           autocapitalize="off"
+          autocomplete="off"
           autocorrect="off"
           class="c8"
           id="searchInput"
@@ -339,7 +340,7 @@ exports[`Search should render results 1`] = `
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 }
 
@@ -351,7 +352,6 @@ exports[`Search should render results 1`] = `
 
 .c5 {
   display: none;
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 }
@@ -454,6 +454,7 @@ exports[`Search should render results 1`] = `
       class="c2 c3"
       data-testid="search-toggle"
       size="20"
+      type="button"
     >
       <img
         data-testid="searchToggle-search-icon"
@@ -486,6 +487,7 @@ exports[`Search should render results 1`] = `
         </div>
         <input
           autocapitalize="off"
+          autocomplete="off"
           autocorrect="off"
           class="c8"
           id="searchInput"

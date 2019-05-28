@@ -99,7 +99,7 @@ const SearchContainer = props => {
     }
   };
 
-  const { intl, results } = props;
+  const { intl, results, show } = props;
   const visibleResults = showSuggest ? results : {};
 
   return (
@@ -116,12 +116,14 @@ const SearchContainer = props => {
       searchHintLabel={intl.formatMessage(messages.search_hint)}
       searchLabel={intl.formatMessage(messages.search)}
       as="form"
+      startFoldedOut={show}
     />
   );
 };
 
 SearchContainer.defaultProps = {
   results: undefined,
+  show: false,
 };
 
 SearchContainer.propTypes = {
@@ -129,6 +131,7 @@ SearchContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
   results: PropTypes.shape({}),
+  show: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
