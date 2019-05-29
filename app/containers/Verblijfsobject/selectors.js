@@ -18,7 +18,7 @@ export const makeSelectVerblijfsobjectData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       const keys = [

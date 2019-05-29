@@ -16,7 +16,7 @@ export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
     const data = yield call(request, `${BRK_OBJECT_API}${adresseerbaarObjectId}`, getRequestOptions());
     const { count } = data;
 
-    if (count) {
+    if (count && count > 0) {
       yield put(loadDataSuccess(data));
     } else {
       yield put(loadDataNoResults());

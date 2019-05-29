@@ -17,7 +17,7 @@ export const makeSelectWoonplaatsData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       const keys = ['naam', 'woonplaatsidentificatie'];
