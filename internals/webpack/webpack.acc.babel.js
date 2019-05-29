@@ -2,7 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const { HashedModuleIdsPlugin } = require('webpack');
+const { HashedModuleIdsPlugin, EnvironmentPlugin } = require('webpack');
 
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
@@ -55,6 +55,10 @@ module.exports = require('./webpack.base.babel')({
       hashFunction: 'sha256',
       hashDigest: 'hex',
       hashDigestLength: 20,
+    }),
+
+    new EnvironmentPlugin({
+      NODE_ENV: 'acceptance',
     }),
   ],
 
