@@ -22,22 +22,12 @@ module.exports = require('./webpack.base.babel')({
     },
   },
 
+  devtool: 'cheap-module-eval-source-map',
+
   plugins: [
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
       template: 'app/index.html',
-      minify: {
-        removeComments: false,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: false,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
       inject: true,
     }),
 
