@@ -25,40 +25,40 @@ export default (state = { toc: [] }, action) =>
         break;
 
       case LOAD_PAND_DATA_SUCCESS:
-        draft.toc[4] = OBJECTS.PAND.NAME;
+        draft.toc[5] = OBJECTS.PAND.NAME;
         break;
 
       case LOAD_NUMMERAANDUIDING_DATA_SUCCESS:
-        draft.toc[2] = OBJECTS.NUMMERAANDUIDING.NAME;
-        draft.toc[9] = OBJECTS.GEBIED.NAME;
+        draft.toc[1] = OBJECTS.NUMMERAANDUIDING.NAME;
+        draft.toc[3] = OBJECTS.GEBIED.NAME;
         break;
 
       case LOAD_KADASTRAAL_OBJECT_DATA_SUCCESS:
-        draft.toc[5] = OBJECTS.KADASTRAAL_OBJECT.NAME;
+        draft.toc[6] = OBJECTS.KADASTRAAL_OBJECT.NAME;
         break;
 
       case LOAD_KADASTRAAL_SUBJECT_NP_DATA_SUCCESS:
-        draft.toc[6] = OBJECTS.KADASTRAAL_SUBJECT_NP.NAME;
+        draft.toc[7] = OBJECTS.KADASTRAAL_SUBJECT_NP.NAME;
         break;
 
       case LOAD_KADASTRAAL_SUBJECT_NNP_DATA_SUCCESS:
-        draft.toc[7] = OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME;
+        draft.toc[8] = OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME;
         break;
 
       case LOAD_VERBLIJFSOBJECT_DATA_SUCCESS:
-        draft.toc[3] = OBJECTS.VERBLIJFSOBJECT.NAME;
+        draft.toc[4] = OBJECTS.VERBLIJFSOBJECT.NAME;
         break;
 
       case LOAD_VESTIGING_DATA_SUCCESS:
-        draft.toc[8] = OBJECTS.VESTIGING.NAME;
+        draft.toc[9] = OBJECTS.VESTIGING.NAME;
         break;
 
       case LOAD_OPENBARE_RUIMTE_DATA_SUCCESS:
-        draft.toc[0] = OBJECTS.OPENBARE_RUIMTE.NAME;
+        draft.toc[2] = OBJECTS.OPENBARE_RUIMTE.NAME;
         break;
 
       case LOAD_WOONPLAATS_DATA_SUCCESS:
-        draft.toc[1] = OBJECTS.WOONPLAATS.NAME;
+        draft.toc[0] = OBJECTS.WOONPLAATS.NAME;
         break;
     }
   });

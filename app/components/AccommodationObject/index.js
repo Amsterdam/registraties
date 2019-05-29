@@ -70,7 +70,7 @@ class AccommodationObjectComponent extends React.Component {
   render() {
     const { onInput } = this;
     const { filledInBy, notitie } = this.state;
-    const { intl, status } = this.props;
+    const { intl, status, brkData } = this.props;
     const { formatMessage } = intl;
 
     return (
@@ -82,32 +82,34 @@ class AccommodationObjectComponent extends React.Component {
               <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
             </header>
 
-            <OpenbareRuimte />
-
             <Woonplaats />
 
             <Nummeraanduiding />
+
+            <OpenbareRuimte />
+
+            <Gebied />
 
             <Verblijfsobject />
 
             <Pand />
           </section>
 
-          <section>
-            <header>
-              <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
-            </header>
+          {!!brkData && (
+            <section>
+              <header>
+                <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
+              </header>
 
-            <KadastraalObject />
+              <KadastraalObject />
 
-            <KadastraalSubjectNP />
+              <KadastraalSubjectNP />
 
-            <KadastraalSubjectNNP />
+              <KadastraalSubjectNNP />
 
-            <Vestiging />
-
-            <Gebied />
-          </section>
+              <Vestiging />
+            </section>
+          )}
         </article>
 
         <Aside className="col-4">
@@ -175,6 +177,7 @@ AccommodationObjectComponent.defaultProps = {
 };
 
 AccommodationObjectComponent.propTypes = {
+  brkData: PropTypes.shape({}),
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
