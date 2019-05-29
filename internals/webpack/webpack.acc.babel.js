@@ -10,10 +10,16 @@ module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [require.resolve('react-app-polyfill/ie11'), path.join(process.cwd(), 'app/app.js')],
 
-  // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
+  // Don't use hashes in dev mode for better performance
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 
   plugins: [
