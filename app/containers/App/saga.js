@@ -15,6 +15,7 @@ export function* callLogin(action) {
     login(action.payload);
   } catch (error) {
     yield put(showGlobalError('LOGIN_FAILED'));
+    throw error;
   }
 }
 
@@ -28,6 +29,7 @@ export function* callLogout() {
     yield put(push('/'));
   } catch (error) {
     yield put(showGlobalError('LOGOUT_FAILED'));
+    throw error;
   }
 }
 
@@ -44,6 +46,7 @@ export function* callAuthorize(action) {
     }
   } catch (error) {
     yield put(showGlobalError('AUTHORIZE_FAILED'));
+    throw error;
   }
 }
 

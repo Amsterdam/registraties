@@ -18,6 +18,7 @@ export function* fetchOpenbareRuimteData(openbareRuimteId) {
     yield put(loadDataSuccess(data));
   } catch (error) {
     yield put(loadDataFailed(error));
+    throw error;
   } finally {
     yield put(incrementProgress());
   }
