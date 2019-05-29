@@ -22,7 +22,7 @@ COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
 RUN npm config set registry https://repo.data.amsterdam.nl/repository/npm-group/ && \
-        --production=false \
+    npm --production=false \
         --unsafe-perm \
         --verbose \
         --no-progress \
