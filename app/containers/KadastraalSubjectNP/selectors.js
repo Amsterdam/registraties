@@ -17,9 +17,13 @@ export const makeSelectKadastraalSubjectNPData = () =>
         return undefined;
       }
 
+      if (!state.data) {
+        return state.data;
+      }
+
       const { data } = state;
 
-      if (!data || !isArray(data) || !data.length) {
+      if (!isArray(data) || !data.length) {
         return data;
       }
 

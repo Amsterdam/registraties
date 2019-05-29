@@ -16,7 +16,7 @@ export const makeSelectVestigingData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       const filtered = data
