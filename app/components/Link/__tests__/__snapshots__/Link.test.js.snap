@@ -58,6 +58,7 @@ exports[`Link matches the snapshot 1`] = `
 >
   <img
     class="c2"
+    focusable="false"
     width="14"
   />
   <span

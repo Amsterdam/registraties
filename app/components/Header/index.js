@@ -86,13 +86,13 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
             <>
               <li>
                 <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                  <LoginIcon width={20} />
+                  <LoginIcon focusable="false" width={20} />
                   <span>{intl.formatMessage(messages.log_in)}</span>
                 </button>
               </li>
               <li>
                 <button className="login-adw" type="button" onClick={event => onLoginLogoutButtonClick(event, 'grip')}>
-                  <LoginIcon width={20} />
+                  <LoginIcon focusable="false" width={20} />
                   <span>{intl.formatMessage(messages.log_in_adw)}</span>
                 </button>
               </li>
@@ -101,7 +101,7 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
           {isAuthenticated ? (
             <li>
               <button type="button" onClick={onLoginLogoutButtonClick}>
-                <LogoutIcon width={20} />
+                <LogoutIcon focusable="false" width={20} />
                 <span>{intl.formatMessage(messages.log_out)}</span>
               </button>
             </li>
