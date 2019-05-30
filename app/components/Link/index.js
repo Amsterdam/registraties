@@ -25,7 +25,7 @@ const StyledIcon = styled(ChevronRight)`
 
 const Link = ({ href, onClick, className, label, ...rest }) => (
   <StyledT element="a" href={href} onClick={onClick} className={className} {...rest}>
-    <StyledIcon width={14} />
+    <StyledIcon focusable="false" width={14} />
     <span className="linklabel">{label}</span>
   </StyledT>
 );

@@ -75,6 +75,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  picture, main {
+    display: block;
+  }
+
   #app {
     min-height: 100%;
     min-width: 100%;
