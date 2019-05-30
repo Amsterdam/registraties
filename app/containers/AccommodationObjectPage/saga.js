@@ -18,6 +18,9 @@ import { LOAD_BAG_DATA } from 'containers/App/constants';
 import { loadDataNoResults as loadKadastraalObjectDataNoResults } from 'containers/KadastraalObject/actions';
 import { loadDataNoResults as loadKadastraalSubjectNPDataNoResults } from 'containers/KadastraalSubjectNP/actions';
 import { loadDataNoResults as loadKadastraalSubjectNNPDataNoResults } from 'containers/KadastraalSubjectNNP/actions';
+import { loadDataNoResults as loadNummeraanduidingDataNoResults } from 'containers/Nummeraanduiding/actions';
+import { loadDataNoResults as loadWoonplaatsDataNoResults } from 'containers/Woonplaats/actions';
+import { loadDataNoResults as loadOpenbareRuimteDataNoResults } from 'containers/OpenbareRuimte/actions';
 
 import { fetchKadastraalObjectData } from 'containers/KadastraalObject/saga';
 import { fetchKadastraalSubjectNNPData } from 'containers/KadastraalSubjectNNP/saga';
@@ -73,15 +76,28 @@ export function* fetchData(action) {
       yield put(loadKadastraalSubjectNNPDataNoResults());
 
       nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
+    } else {
+      yield put(maxProgressCount(7));
     }
 
-    yield call(fetchNummeraanduidingData, nummeraanduidingId);
-    yield call(fetchWoonplaatsData);
+    if (!nummeraanduidingId) {
+      yield put(loadKadastraalObjectDataNoResults());
+      yield put(loadKadastraalSubjectNPDataNoResults());
+      yield put(loadKadastraalSubjectNNPDataNoResults());
+      yield put(loadNummeraanduidingDataNoResults());
+      yield put(loadWoonplaatsDataNoResults());
+      yield put(loadOpenbareRuimteDataNoResults());
 
-    const oprId = yield select(makeSelectOpenbareRuimteId());
-    yield call(fetchOpenbareRuimteData, oprId);
+      yield put(showGlobalError('no_data_available'));
+    } else {
+      yield call(fetchNummeraanduidingData, nummeraanduidingId);
+      yield call(fetchWoonplaatsData);
 
-    yield put(statusSuccess());
+      const oprId = yield select(makeSelectOpenbareRuimteId());
+      yield call(fetchOpenbareRuimteData, oprId);
+
+      yield put(statusSuccess());
+    }
   } catch (error) {
     if (error.message === 'Failed to fetch') {
       // unable to fetch

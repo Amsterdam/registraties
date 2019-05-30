@@ -20,7 +20,7 @@ import CSVDownloadContainer from 'containers/CSVDownload';
 import TOC from 'containers/TOC';
 import Map from 'containers/Map';
 import messages from 'containers/App/messages';
-import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
+import { LOAD_DATA_SUCCESS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
 
@@ -111,13 +111,17 @@ class AccommodationObjectComponent extends React.Component {
         </article>
 
         <Aside className="col-4">
-          <section>
-            <TOC />
-          </section>
+          {status !== LOAD_DATA_FAILED && (
+            <>
+              <section>
+                <TOC />
+              </section>
 
-          <section>
-            <Summary />
-          </section>
+              <section>
+                <Summary />
+              </section>
+            </>
+          )}
 
           <Map marker search={false} zoom={14} />
 

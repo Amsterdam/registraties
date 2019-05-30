@@ -17,10 +17,14 @@ export function* fetchKadastraalSubjectNNPData() {
     if (rechten) {
       const data = yield all([...rechten.map(link => call(request, link, getRequestOptions()))]);
 
-      const validEntities = data.filter(isValidSubjectNNP);
+      if (data) {
+        const validEntities = data.filter(isValidSubjectNNP);
 
-      if (validEntities && validEntities.length) {
-        yield put(loadDataSuccess(data));
+        if (validEntities && validEntities.length) {
+          yield put(loadDataSuccess(data));
+        } else {
+          yield put(loadDataNoResults());
+        }
       } else {
         yield put(loadDataNoResults());
       }
