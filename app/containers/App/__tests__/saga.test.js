@@ -58,13 +58,6 @@ describe('App saga', () => {
       expect(logout).toHaveBeenCalledWith();
     });
 
-    it('should grip success', () => {
-      getOauthDomain.mockImplementation(() => 'grip');
-      const gen = callLogout();
-      gen.next();
-      expect(window.open).toHaveBeenCalledWith('https://auth.grip-on-it.com/v2/logout?tenantId=rjsfm52t', '_blank');
-    });
-
     it('should error', () => {
       // const error = new Error();
       const gen = callLogout();
