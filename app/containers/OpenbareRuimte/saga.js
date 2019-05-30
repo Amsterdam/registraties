@@ -5,7 +5,7 @@ import { getAuthHeaders } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import { incrementProgress } from 'containers/App/actions';
 
-import { loadDataSuccess, loadDataFailed } from './actions';
+import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 import { LOAD_DATA } from './constants';
 
 const { API_ROOT } = configuration;
@@ -15,7 +15,11 @@ export function* fetchOpenbareRuimteData(openbareRuimteId) {
   try {
     const data = yield call(request, `${OPENBARE_RUIMTE_API}${openbareRuimteId}/`, getAuthHeaders());
 
-    yield put(loadDataSuccess(data));
+    if (data) {
+      yield put(loadDataSuccess(data));
+    } else {
+      yield put(loadDataNoResults());
+    }
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;

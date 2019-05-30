@@ -51,7 +51,7 @@ export const makeSelectVBONummeraanduidingId = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       return data.hoofdadres.landelijk_id;
