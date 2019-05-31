@@ -1513,7 +1513,6 @@ exports[`AccommodationObject should render without problems 2`] = `
         class="c1"
         download="registraties_export.csv"
         tabindex="0"
-        target="_blank"
       >
         CSV
       </a>

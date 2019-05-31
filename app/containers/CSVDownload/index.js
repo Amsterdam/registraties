@@ -21,7 +21,12 @@ import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
 import { makeSelectWoonplaatsData } from 'containers/Woonplaats/selectors';
 
 const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
-  <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} target="_blank" {...rest} />
+  <DownloadLink
+    name={`${intl.formatMessage(messages.csv_file_name)}.csv`}
+    target="_blank"
+    rel="noopener noreferrer"
+    {...rest}
+  />
 ));
 
 IntlDownloadLink.propTypes = {
@@ -140,8 +145,16 @@ class CSVDownloadContainer extends Component {
 
     const csv = this.getParsedData();
 
-    // eslint-disable-next-line no-param-reassign
-    event.target.href = `data:text/plain;charset=utf-8,${csv}`;
+    if (navigator.msSaveBlob) {
+      event.preventDefault();
+      const blob = new Blob([csv], { type: 'text/plain;charset=utf-8;' });
+      const fileName = `${this.props.intl.formatMessage(messages.csv_file_name)}.csv`;
+
+      window.navigator.msSaveOrOpenBlob(blob, fileName);
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      event.target.href = `data:text/plain;charset=utf-8,${csv}`;
+    }
   }
 
   render() {
