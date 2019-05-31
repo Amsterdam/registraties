@@ -10,17 +10,18 @@ import { isArray, isArrayOfArrays, isObject } from 'utils';
 import DownloadLink from 'components/DownloadLink';
 import messages from 'containers/App/messages';
 import { OBJECTS } from 'containers/App/constants';
-import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
-import { makeSelectOpenbareRuimteData } from 'containers/OpenbareRuimte/selectors';
-import { makeSelectPandData } from 'containers/Pand/selectors';
-import { makeSelectVerblijfsobjectData } from 'containers/Verblijfsobject/selectors';
-import { makeSelectNummeraanduidingData, makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
 import { makeSelectKadastraalObjectData } from 'containers/KadastraalObject/selectors';
 import { makeSelectKadastraalSubjectNNPData } from 'containers/KadastraalSubjectNNP/selectors';
 import { makeSelectKadastraalSubjectNPData } from 'containers/KadastraalSubjectNP/selectors';
+import { makeSelectNummeraanduidingData, makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
+import { makeSelectOpenbareRuimteData } from 'containers/OpenbareRuimte/selectors';
+import { makeSelectPandData } from 'containers/Pand/selectors';
+import { makeSelectVerblijfsobjectData } from 'containers/Verblijfsobject/selectors';
+import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
+import { makeSelectWoonplaatsData } from 'containers/Woonplaats/selectors';
 
 const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
-  <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} {...rest} />
+  <DownloadLink name={`${intl.formatMessage(messages.csv_file_name)}.csv`} target="_blank" {...rest} />
 ));
 
 IntlDownloadLink.propTypes = {
@@ -138,6 +139,7 @@ class CSVDownloadContainer extends Component {
     event.persist();
 
     const csv = this.getParsedData();
+
     // eslint-disable-next-line no-param-reassign
     event.target.href = `data:text/plain;charset=utf-8,${csv}`;
   }
@@ -158,6 +160,7 @@ CSVDownloadContainer.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   OPENBARE_RUIMTE: makeSelectOpenbareRuimteData(),
+  WOONPLAATS: makeSelectWoonplaatsData(),
   NUMMERAANDUIDING: makeSelectNummeraanduidingData(),
   VERBLIJFSOBJECT: makeSelectVerblijfsobjectData(),
   PAND: makeSelectPandData(),

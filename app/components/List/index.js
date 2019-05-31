@@ -38,7 +38,7 @@ const Ul = styled.ul`
     padding-left: 0;
 
     &:before {
-      content: unset;
+      content: none;
     }
   }
 `;

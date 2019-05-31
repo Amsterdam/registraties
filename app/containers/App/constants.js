@@ -32,6 +32,11 @@ export const OBJECTS = {
     NAME: { id: 'registraties.public_space' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/',
   },
+  WOONPLAATS: {
+    ABBR: 'wpl',
+    NAME: { id: 'registraties.residence' },
+    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/',
+  },
   NUMMERAANDUIDING: {
     ABBR: 'num',
     NAME: { id: 'registraties.number_identification' },
@@ -71,10 +76,5 @@ export const OBJECTS = {
     ABBR: 'geb',
     NAME: { id: 'registraties.area' },
     STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/gebieden-index/catalogus/',
-  },
-  WOONPLAATS: {
-    ABBR: 'wpl',
-    NAME: { id: 'registraties.residence' },
-    STELSELPEDIA_LINK: '//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/',
   },
 };
