@@ -92,7 +92,7 @@ class AccommodationObjectComponent extends React.Component {
         <article className="col-7">
           <section>
             {this.hasBagResults() && (
-              <header>
+              <header data-testid="accommodationObjectBAGHeader">
                 <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
               </header>
             )}
@@ -112,7 +112,7 @@ class AccommodationObjectComponent extends React.Component {
 
           <section>
             {this.hasBrkResults() && (
-              <header>
+              <header data-testid="accommodationObjectBRKHeader">
                 <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
               </header>
             )}

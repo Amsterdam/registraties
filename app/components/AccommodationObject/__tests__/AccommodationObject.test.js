@@ -53,6 +53,59 @@ describe('AccommodationObject', () => {
     }).not.toThrow();
   });
 
+  it('should not render section headings', () => {
+    const { rerender, queryByTestId } = render(
+      <ThemeProvider>
+        <Provider store={store}>
+          <IntlProvider locale="nl" messages={messages}>
+            <AccommodationObject intl={intl} loadBAGData={() => {}} match={match} />
+          </IntlProvider>
+        </Provider>
+      </ThemeProvider>,
+    );
+
+    expect(queryByTestId('accommodationObjectBAGHeader')).toBeNull();
+    expect(queryByTestId('accommodationObjectBRKHeader')).toBeNull();
+
+    rerender(
+      <ThemeProvider>
+        <Provider store={store}>
+          <IntlProvider locale="nl" messages={messages}>
+            <AccommodationObject
+              intl={intl}
+              loadBAGData={() => {}}
+              match={match}
+              status={LOAD_DATA_SUCCESS}
+              summary={{ house_id: { value: '' } }}
+            />
+          </IntlProvider>
+        </Provider>
+      </ThemeProvider>,
+    );
+
+    expect(queryByTestId('accommodationObjectBAGHeader')).not.toBeNull();
+    expect(queryByTestId('accommodationObjectBRKHeader')).toBeNull();
+
+    rerender(
+      <ThemeProvider>
+        <Provider store={store}>
+          <IntlProvider locale="nl" messages={messages}>
+            <AccommodationObject
+              intl={intl}
+              loadBAGData={() => {}}
+              match={match}
+              status={LOAD_DATA_SUCCESS}
+              summary={{ cadastral_object_nr: { value: '' } }}
+            />
+          </IntlProvider>
+        </Provider>
+      </ThemeProvider>,
+    );
+
+    expect(queryByTestId('accommodationObjectBAGHeader')).toBeNull();
+    expect(queryByTestId('accommodationObjectBRKHeader')).not.toBeNull();
+  });
+
   it('should call action that initiates data fetch', () => {
     const loadBAGData = jest.fn();
     const { vboId } = match.params;
