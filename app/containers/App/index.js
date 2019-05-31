@@ -78,6 +78,6 @@ const withConnect = connect(
 );
 
 export default compose(
-  withConnect,
   injectSaga({ key: 'global', saga }),
+  withConnect,
 )(App);

@@ -15,13 +15,13 @@ export const makeSelectKadastraalObjectData = () =>
       }
 
       if (!state.data) {
-        return null;
+        return state.data;
       }
 
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
-        return undefined;
+        return null;
       }
 
       const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
@@ -38,10 +38,14 @@ export const makeSelectFromObjectAppartment = key =>
         return undefined;
       }
 
+      if (!state.data) {
+        return state.data;
+      }
+
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
-        return undefined;
+        return null;
       }
 
       return results
@@ -57,6 +61,10 @@ export const makeSelectFromObject = key =>
     state => {
       if (!state) {
         return undefined;
+      }
+
+      if (!state.data) {
+        return state.data;
       }
 
       const { data: { results } = {} } = state;
@@ -75,6 +83,10 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
     state => {
       if (!state) {
         return undefined;
+      }
+
+      if (!state.data) {
+        return state.data;
       }
 
       const { data: { results } = {} } = state;

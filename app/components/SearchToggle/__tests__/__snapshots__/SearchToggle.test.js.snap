@@ -30,6 +30,7 @@ exports[`SearchToggle matches the snapshot 1`] = `
 >
   <img
     data-testid="searchToggle-search-icon"
+    focusable="false"
     width="20"
   />
   <span
@@ -49,6 +50,7 @@ exports[`SearchToggle matches the snapshot 2`] = `
 >
   <img
     data-testid="searchToggle-close-icon"
+    focusable="false"
     width="20"
   />
   <span

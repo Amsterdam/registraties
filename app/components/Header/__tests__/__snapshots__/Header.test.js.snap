@@ -363,6 +363,7 @@ exports[`Header matches the snapshot 1`] = `
                   type="button"
                 >
                   <img
+                    focusable="false"
                     width="20"
                   />
                   <span>
@@ -370,20 +371,6 @@ exports[`Header matches the snapshot 1`] = `
                   </span>
                 </button>
               </li>
-              <li>
-                <button
-                  class="login-adw"
-                  type="button"
-                >
-                  <img
-                    width="20"
-                  />
-                  <span>
-                    Inloggen ADW
-                  </span>
-                </button>
-              </li>
-              
             </ul>
           </nav>
         </div>
@@ -436,6 +423,7 @@ exports[`Header matches the snapshot 2`] = `
                   type="button"
                 >
                   <img
+                    focusable="false"
                     width="20"
                   />
                   <span>

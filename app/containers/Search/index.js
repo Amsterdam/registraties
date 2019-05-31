@@ -21,15 +21,15 @@ const SearchContainer = props => {
   const [showSuggest, setShowSuggest] = useState(true);
 
   const setup = () => {
-    if (inputRef.current) inputRef.current.addEventListener('blur', onBlur, true);
-    if (suggestRef.current) suggestRef.current.addEventListener('blur', onBlur, true);
+    if (inputRef.current) inputRef.current.addEventListener('focusout', onFocusOut, true);
+    if (suggestRef.current) suggestRef.current.addEventListener('focusout', onFocusOut, true);
 
     document.addEventListener('click', onClick, true);
   };
 
   const teardown = () => {
-    if (inputRef.current) inputRef.current.removeEventListener('blur', onBlur);
-    if (suggestRef.current) suggestRef.current.removeEventListener('blur', onBlur);
+    if (inputRef.current) inputRef.current.removeEventListener('focusout', onFocusOut);
+    if (suggestRef.current) suggestRef.current.removeEventListener('focusout', onFocusOut);
 
     document.removeEventListener('click', onClick);
   };
@@ -40,7 +40,7 @@ const SearchContainer = props => {
     return teardown;
   }, [inputRef.current, suggestRef.current]);
 
-  const onBlur = event => {
+  const onFocusOut = event => {
     const { relatedTarget } = event;
     const { current: input } = inputRef;
     const { current: suggest } = suggestRef;

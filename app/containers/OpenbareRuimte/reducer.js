@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { LOAD_DATA_PENDING } from 'containers/App/constants';
 
-import { LOAD_DATA_FAILED, LOAD_DATA_SUCCESS } from './constants';
+import { LOAD_DATA_FAILED, LOAD_DATA_SUCCESS, LOAD_DATA_NO_RESULTS } from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -23,7 +23,12 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA_FAILED:
+        draft.data = null;
         draft.error = action.payload;
+        break;
+
+      case LOAD_DATA_NO_RESULTS:
+        draft.data = null;
         break;
     }
   });

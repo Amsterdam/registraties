@@ -17,7 +17,7 @@ export const makeSelectNummeraanduidingData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       const keys = [

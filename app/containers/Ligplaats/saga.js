@@ -6,7 +6,7 @@ import configuration from 'shared/services/configuration/configuration';
 import { incrementProgress } from 'containers/App/actions';
 
 import { LOAD_DATA } from './constants';
-import { loadDataSuccess, loadDataFailed } from './actions';
+import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 
 const { API_ROOT } = configuration;
 const LIGPLAATS_API = `${API_ROOT}bag/ligplaats/`;
@@ -15,7 +15,11 @@ export function* fetchLigplaatsData(ligplaatsId) {
   try {
     const data = yield call(request, `${LIGPLAATS_API}${ligplaatsId}/`, getRequestOptions());
 
-    yield put(loadDataSuccess(data));
+    if (data) {
+      yield put(loadDataSuccess(data));
+    } else {
+      yield put(loadDataNoResults());
+    }
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;

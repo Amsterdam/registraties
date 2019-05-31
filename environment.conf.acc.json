@@ -1,5 +1,5 @@
 {
-  "API_ROOT": "https://acc.api.data.amsterdam.nl/",
+  "API_ROOT": "https://api.data.amsterdam.nl/",
   "ROOT": "https://acc.registraties.amsterdam.nl/",
-  "AUTH_ROOT": "https://acc.api.data.amsterdam.nl/"
+  "AUTH_ROOT": "https://api.data.amsterdam.nl/"
 }

@@ -19,10 +19,16 @@ const environmentConfig = () => {
 
   const hostname = window && window.location && window.location.hostname;
 
-  if (hostname === domainName || hostname === `acc.${domainName}`) {
+  if (hostname === domainName) {
     environment = {
       API_ROOT: `https://${apiDomainName}/`,
       ROOT: `https://${hostname}/`,
+      AUTH_ROOT: `https://${apiDomainName}/`,
+    };
+  } else if (hostname === `acc.${domainName}`) {
+    environment = {
+      API_ROOT: `https://${apiDomainName}/`,
+      ROOT: `https://acc.${hostname}/`,
       AUTH_ROOT: `https://${apiDomainName}/`,
     };
   } else {

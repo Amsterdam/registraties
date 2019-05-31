@@ -28,6 +28,8 @@ export function* fetchVestigingData() {
       } else {
         yield put(loadDataSuccess(data));
       }
+    } else {
+      yield put(loadDataNoResults());
     }
   } catch (error) {
     yield put(loadDataFailed());
