@@ -14,18 +14,26 @@ export default (state = initialState, action) =>
     switch (action.type) {
       case LOAD_DATA_PENDING:
         draft.data = undefined;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA:
         draft.maatschappelijkeActiviteitId = action.payload.maatschappelijkeActiviteitId;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_FAILED:
-        draft.error = action.payload;
+        draft.data = null;
+        draft.error = true;
+        draft.errorMessage = action.payload;
         break;
     }
   });

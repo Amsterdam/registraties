@@ -53,7 +53,7 @@ export function* fetchData(action) {
       // fetch vboId from VERBLIJFSOBJECT_API with brkId param
       landelijkVboId = yield* fetchVerblijfsobjectId(brkId);
     } else {
-      yield put(maxProgressCount(11));
+      yield put(maxProgressCount(10));
     }
 
     const vboIdentifier = vboId || landelijkVboId;

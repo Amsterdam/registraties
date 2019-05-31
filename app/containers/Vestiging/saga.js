@@ -68,7 +68,8 @@ export function* fetchVestigingData(vestigingIdData) {
     yield put(loadDataFailed(error));
     throw error;
   } finally {
-    yield put(incrementProgress());
+    // this saga shouldn't report progress, because it is called on the condition that the fetchVestigingIdData saga
+    // yields data
   }
 }
 
