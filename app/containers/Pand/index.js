@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { dataPropType } from 'utils/propTypes';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
@@ -28,20 +29,7 @@ PandContainer.defaultProps = {
 };
 
 PandContainer.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      formattedKey: PropTypes.oneOfType([
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-        }),
-        PropTypes.string,
-      ]).isRequired,
-      formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      key: PropTypes.string.isRequired,
-      value: PropTypes.any,
-    }),
-  ),
+  data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
 };

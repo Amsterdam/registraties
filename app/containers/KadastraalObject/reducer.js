@@ -6,6 +6,7 @@ export const initialState = {
   data: undefined,
   adresseerbaarObjectId: null,
   error: false,
+  errorMessage: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -14,23 +15,32 @@ export default (state = initialState, action) =>
     switch (action.type) {
       case LOAD_DATA_PENDING:
         draft.data = undefined;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_FAILED:
         draft.data = null;
-        draft.error = action.payload;
+        draft.error = true;
+        draft.errorMessage = action.payload;
         break;
 
       case LOAD_DATA_NO_RESULTS:
         draft.data = null;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
     }
   });

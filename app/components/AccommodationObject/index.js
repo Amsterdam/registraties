@@ -23,6 +23,7 @@ import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
+import { summaryPropType } from 'utils/propTypes';
 
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
@@ -67,10 +68,22 @@ class AccommodationObjectComponent extends React.Component {
     }
   }
 
+  hasBagResults() {
+    const summaryKeys = Object.keys(this.props.summary);
+
+    return summaryKeys.some(key =>
+      ['accommodation_object_id', 'house_id', 'public_space_id', 'number_indication_id'].includes(key),
+    );
+  }
+
+  hasBrkResults() {
+    return Object.keys(this.props.summary).includes('cadastral_object_nr');
+  }
+
   render() {
     const { onInput } = this;
     const { filledInBy, notitie } = this.state;
-    const { intl, status, brkData } = this.props;
+    const { intl, status } = this.props;
     const { formatMessage } = intl;
 
     return (
@@ -78,9 +91,11 @@ class AccommodationObjectComponent extends React.Component {
         <Progress />
         <article className="col-7">
           <section>
-            <header>
-              <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
-            </header>
+            {this.hasBagResults() && (
+              <header>
+                <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
+              </header>
+            )}
 
             <Woonplaats />
 
@@ -95,21 +110,21 @@ class AccommodationObjectComponent extends React.Component {
             <Pand />
           </section>
 
-          {!!brkData && (
-            <section>
+          <section>
+            {this.hasBrkResults() && (
               <header>
                 <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
               </header>
+            )}
 
-              <KadastraalObject />
+            <KadastraalObject />
 
-              <KadastraalSubjectNP />
+            <KadastraalSubjectNP />
 
-              <KadastraalSubjectNNP />
+            <KadastraalSubjectNNP />
 
-              <Vestiging />
-            </section>
-          )}
+            <Vestiging />
+          </section>
         </article>
 
         <Aside className="col-4">
@@ -173,11 +188,12 @@ class AccommodationObjectComponent extends React.Component {
 }
 
 AccommodationObjectComponent.defaultProps = {
+  summary: {},
   status: undefined,
 };
 
 AccommodationObjectComponent.propTypes = {
-  brkData: PropTypes.shape({}),
+  summary: summaryPropType,
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,

@@ -20,13 +20,19 @@ export const makeSelectKadastraalObjectData = () =>
 
       const { data: { results } = {} } = state;
 
-      if (!results || !isArray(results) || !results.length) {
-        return null;
-      }
-
       const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
 
-      return results.map(object => formatData({ data: object, keys, locale }));
+      if (results) {
+        return results.map(object => formatData({ data: object, keys, locale }));
+      }
+
+      const { data } = state;
+
+      if (data.id) {
+        return formatData({ data, keys });
+      }
+
+      return null;
     },
   );
 

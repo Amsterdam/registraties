@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import injectSaga from 'utils/injectSaga';
 import { makeSelectStatus } from 'containers/App/selectors';
-import { makeSelectKadastraalObjectData } from 'containers/KadastraalObject/selectors';
+import { makeSelectSummary } from 'containers/Summary/selectors';
 import { loadBAGData } from 'containers/App/actions';
 import AccObjPageComponent from 'components/AccommodationObject';
 import saga from './saga';
@@ -13,7 +13,7 @@ import saga from './saga';
 const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
 
 const mapStateToProps = createStructuredSelector({
-  brkData: makeSelectKadastraalObjectData(),
+  summary: makeSelectSummary(),
   status: makeSelectStatus(),
 });
 
