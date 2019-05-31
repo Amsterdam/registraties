@@ -22,6 +22,9 @@ import saga from './saga';
 import GlobalStyles from '../../global-styles';
 
 export const App = ({ onAuthenticateUser, showError }) => {
+  const { pathname } = document.location;
+  const show = !/\d+\/$/.test(pathname);
+
   useEffect(() => {
     const credentials = authenticate();
     onAuthenticateUser(credentials);
@@ -35,7 +38,7 @@ export const App = ({ onAuthenticateUser, showError }) => {
     <ThemeProvider>
       <div className="container app-container">
         <Header />
-        <Search />
+        <Search show={show} />
         <GlobalError />
         <main className="content container">
           <Switch>
@@ -75,6 +78,6 @@ const withConnect = connect(
 );
 
 export default compose(
-  withConnect,
   injectSaga({ key: 'global', saga }),
+  withConnect,
 )(App);

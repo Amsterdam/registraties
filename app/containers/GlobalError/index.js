@@ -63,7 +63,7 @@ export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
         <ErrorContainer>
           <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
           <Button type="button" onClick={onClose}>
-            <CloseIcon width={14} fill="#fff" />
+            <CloseIcon focusable="false" width={14} fill="#fff" />
             <Label>{intl.formatMessage(appMessages.close)}</Label>
           </Button>
         </ErrorContainer>

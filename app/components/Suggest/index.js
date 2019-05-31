@@ -20,6 +20,12 @@ const Ul = styled.ul`
   li:first-of-type {
     margin-top: 8px !important;
   }
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    a {
+      height: 26px;
+    }
+  }
 `;
 
 /* eslint-disable indent,react/jsx-indent */

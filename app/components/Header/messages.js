@@ -10,10 +10,6 @@ export default defineMessages({
     id: `${scope}.log_in`,
     defaultMessage: 'Log in',
   },
-  log_in_adw: {
-    id: `${scope}.log_in_adw`,
-    defaultMessage: 'Log in ADW',
-  },
   log_out: {
     id: `${scope}.log_out`,
     defaultMessage: 'Log out',

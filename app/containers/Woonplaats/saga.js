@@ -22,7 +22,11 @@ export function* fetchWoonplaatsData() {
   try {
     const data = yield call(request, `${WOONPLAATS_API}${woonplaatsId}/`);
 
-    yield put(loadDataSuccess(data));
+    if (data) {
+      yield put(loadDataSuccess(data));
+    } else {
+      yield put(loadDataNoResults());
+    }
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;

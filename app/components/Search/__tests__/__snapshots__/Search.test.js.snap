@@ -101,7 +101,7 @@ exports[`Search matches the snapshot 1`] = `
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 }
 
@@ -113,7 +113,6 @@ exports[`Search matches the snapshot 1`] = `
 
 .c5 {
   display: none;
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 }
@@ -152,9 +151,11 @@ exports[`Search matches the snapshot 1`] = `
       class="c2 c3"
       data-testid="search-toggle"
       size="20"
+      type="button"
     >
       <img
         data-testid="searchToggle-search-icon"
+        focusable="false"
         width="20"
       />
       <span
@@ -184,6 +185,7 @@ exports[`Search matches the snapshot 1`] = `
         </div>
         <input
           autocapitalize="off"
+          autocomplete="off"
           autocorrect="off"
           class="c8"
           id="searchInput"
@@ -339,7 +341,7 @@ exports[`Search should render results 1`] = `
   min-width: 70px;
   max-width: 620px;
   width: 100%;
-  bottom: -71px;
+  top: calc(100% - 11px);
   z-index: -1;
 }
 
@@ -351,7 +353,6 @@ exports[`Search should render results 1`] = `
 
 .c5 {
   display: none;
-  padding-bottom: 30px;
   max-width: 620px;
   margin: 0 auto;
 }
@@ -420,6 +421,12 @@ exports[`Search should render results 1`] = `
   color: #ec0000;
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c10 a {
+    height: 26px;
+  }
+}
+
 @media (max-width:1200px) {
   .c0 {
     padding-top: 100px;
@@ -454,9 +461,11 @@ exports[`Search should render results 1`] = `
       class="c2 c3"
       data-testid="search-toggle"
       size="20"
+      type="button"
     >
       <img
         data-testid="searchToggle-search-icon"
+        focusable="false"
         width="20"
       />
       <span
@@ -486,6 +495,7 @@ exports[`Search should render results 1`] = `
         </div>
         <input
           autocapitalize="off"
+          autocomplete="off"
           autocorrect="off"
           class="c8"
           id="searchInput"
@@ -517,6 +527,7 @@ exports[`Search should render results 1`] = `
                 >
                   <img
                     class="c15"
+                    focusable="false"
                     width="14"
                   />
                   <span
@@ -534,6 +545,7 @@ exports[`Search should render results 1`] = `
                 >
                   <img
                     class="c15"
+                    focusable="false"
                     width="14"
                   />
                   <span

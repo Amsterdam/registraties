@@ -14,10 +14,15 @@ const BRK_OBJECT_API = `${API_ROOT}brk/object-expand/?verblijfsobjecten__id=`;
 export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
   try {
     const data = yield call(request, `${BRK_OBJECT_API}${adresseerbaarObjectId}`, getRequestOptions());
-    const { count } = data;
 
-    if (count) {
-      yield put(loadDataSuccess(data));
+    if (data) {
+      const { count } = data;
+
+      if (count && count > 0) {
+        yield put(loadDataSuccess(data));
+      } else {
+        yield put(loadDataNoResults());
+      }
     } else {
       yield put(loadDataNoResults());
     }

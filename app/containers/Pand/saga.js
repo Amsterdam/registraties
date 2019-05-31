@@ -11,6 +11,7 @@ import {
   loadlistDataFailed,
   loadDataSuccess,
   loadDataFailed,
+  loadDataNoResults,
 } from './actions';
 
 const { API_ROOT } = configuration;
@@ -38,7 +39,11 @@ export function* fetchPandData(landelijkId) {
   try {
     const data = yield call(request, `${PAND_API}${landelijkId}/`);
 
-    yield put(loadDataSuccess(data));
+    if (data) {
+      yield put(loadDataSuccess(data));
+    } else {
+      yield put(loadDataNoResults());
+    }
   } catch (error) {
     yield put(loadDataFailed(error));
     throw error;

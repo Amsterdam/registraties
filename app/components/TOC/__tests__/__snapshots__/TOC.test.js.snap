@@ -316,6 +316,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -334,6 +335,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -352,6 +354,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -370,6 +373,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -388,6 +392,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -406,6 +411,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -424,6 +430,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span
@@ -442,6 +449,7 @@ exports[`TOC matches the snapshot 1`] = `
       >
         <img
           class="c4"
+          focusable="false"
           width="14"
         />
         <span

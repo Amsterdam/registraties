@@ -21,7 +21,7 @@ RUN git config --global url."https://github.com/".insteadOf git@github.com:
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
-# RUN npm config set registry https://repo.data.amsterdam.nl/repository/npm-group/ && \
+# RUN npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
 RUN npm --production=false \
         --unsafe-perm \
         --verbose \

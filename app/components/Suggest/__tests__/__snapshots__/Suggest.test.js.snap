@@ -135,6 +135,12 @@ exports[`Suggest matches the snapshot 1`] = `
   color: #ec0000;
 }
 
+@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
+  .c0 a {
+    height: 26px;
+  }
+}
+
 <ul
   class=" links c0"
 >
@@ -155,6 +161,7 @@ exports[`Suggest matches the snapshot 1`] = `
         >
           <img
             class="c5"
+            focusable="false"
             width="14"
           />
           <span
@@ -172,6 +179,7 @@ exports[`Suggest matches the snapshot 1`] = `
         >
           <img
             class="c5"
+            focusable="false"
             width="14"
           />
           <span
@@ -189,6 +197,7 @@ exports[`Suggest matches the snapshot 1`] = `
         >
           <img
             class="c5"
+            focusable="false"
             width="14"
           />
           <span

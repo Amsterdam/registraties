@@ -25,6 +25,7 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA_FAILED:
+        draft.data = null;
         draft.error = action.payload;
         break;
 

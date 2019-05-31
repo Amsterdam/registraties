@@ -38,7 +38,6 @@ describe('Header', () => {
     );
 
     expect(getByText('Inloggen')).not.toBeUndefined();
-    expect(getByText('Inloggen ADW')).not.toBeUndefined();
   });
 
   it('should render a log out button', () => {
@@ -68,14 +67,5 @@ describe('Header', () => {
     );
 
     expect(onLoginLogoutButtonClick).toHaveBeenCalledWith(expect.anything(), 'datapunt');
-
-    fireEvent(
-      getByText('Inloggen ADW'),
-      new MouseEvent('click', {
-        bubbles: true,
-      }),
-    );
-
-    expect(onLoginLogoutButtonClick).toHaveBeenCalledWith(expect.anything(), 'grip');
   });
 });

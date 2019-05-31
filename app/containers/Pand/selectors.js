@@ -17,7 +17,7 @@ export const makeSelectPandData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       const keys = [

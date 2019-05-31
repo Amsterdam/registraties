@@ -10,8 +10,6 @@ import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
-import ligplaatsSaga from 'containers/Ligplaats/saga';
-import ligplaatsReducer from 'containers/Ligplaats/reducer';
 
 import { makeSelectVerblijfsobjectData } from './selectors';
 import saga from './saga';
@@ -56,6 +54,4 @@ export default compose(
   withConnect,
   injectSaga({ key: 'verblijfsobject', saga }),
   injectReducer({ key: 'verblijfsobject', reducer }),
-  injectSaga({ key: 'ligplaats', saga: ligplaatsSaga }),
-  injectReducer({ key: 'ligplaats', reducer: ligplaatsReducer }),
 )(memo(Intl));

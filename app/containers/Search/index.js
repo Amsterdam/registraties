@@ -21,15 +21,15 @@ const SearchContainer = props => {
   const [showSuggest, setShowSuggest] = useState(true);
 
   const setup = () => {
-    if (inputRef.current) inputRef.current.addEventListener('blur', onBlur, true);
-    if (suggestRef.current) suggestRef.current.addEventListener('blur', onBlur, true);
+    if (inputRef.current) inputRef.current.addEventListener('focusout', onFocusOut, true);
+    if (suggestRef.current) suggestRef.current.addEventListener('focusout', onFocusOut, true);
 
     document.addEventListener('click', onClick, true);
   };
 
   const teardown = () => {
-    if (inputRef.current) inputRef.current.removeEventListener('blur', onBlur);
-    if (suggestRef.current) suggestRef.current.removeEventListener('blur', onBlur);
+    if (inputRef.current) inputRef.current.removeEventListener('focusout', onFocusOut);
+    if (suggestRef.current) suggestRef.current.removeEventListener('focusout', onFocusOut);
 
     document.removeEventListener('click', onClick);
   };
@@ -40,7 +40,7 @@ const SearchContainer = props => {
     return teardown;
   }, [inputRef.current, suggestRef.current]);
 
-  const onBlur = event => {
+  const onFocusOut = event => {
     const { relatedTarget } = event;
     const { current: input } = inputRef;
     const { current: suggest } = suggestRef;
@@ -99,7 +99,7 @@ const SearchContainer = props => {
     }
   };
 
-  const { intl, results } = props;
+  const { intl, results, show } = props;
   const visibleResults = showSuggest ? results : {};
 
   return (
@@ -116,12 +116,14 @@ const SearchContainer = props => {
       searchHintLabel={intl.formatMessage(messages.search_hint)}
       searchLabel={intl.formatMessage(messages.search)}
       as="form"
+      startFoldedOut={show}
     />
   );
 };
 
 SearchContainer.defaultProps = {
   results: undefined,
+  show: false,
 };
 
 SearchContainer.propTypes = {
@@ -129,6 +131,7 @@ SearchContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
   results: PropTypes.shape({}),
+  show: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

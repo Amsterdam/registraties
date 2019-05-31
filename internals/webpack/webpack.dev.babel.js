@@ -40,6 +40,12 @@ module.exports = require('./webpack.base.babel')({
       exclude: /a\.js|node_modules/, // exclude node_modules
       failOnError: false, // show a warning when there is a circular dependency
     }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      HOST: 'localhost',
+      PORT: 8080,
+      HTTPS: false,
+    }),
   ],
 
   // Emit a source map for easier debugging
@@ -48,5 +54,12 @@ module.exports = require('./webpack.base.babel')({
 
   performance: {
     hints: false,
+  },
+
+  externals: {
+    globalConfig: JSON.stringify(
+      // eslint-disable-next-line global-require
+      require(path.resolve(process.cwd(), 'environment.conf.json')),
+    ),
   },
 });

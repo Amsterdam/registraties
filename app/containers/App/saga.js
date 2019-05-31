@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 
 import { authCall } from 'shared/services/api/api';
 import CONFIGURATION from 'shared/services/configuration/configuration';
-import { login, logout, getOauthDomain } from 'shared/services/auth/auth';
+import { login, logout } from 'shared/services/auth/auth';
 
 import { LOGOUT, LOGIN } from './constants';
 import { showGlobalError, authorizeUser } from './actions';
@@ -15,19 +15,17 @@ export function* callLogin(action) {
     login(action.payload);
   } catch (error) {
     yield put(showGlobalError('LOGIN_FAILED'));
+    throw error;
   }
 }
 
 export function* callLogout() {
   try {
-    // This forces the remove of the grip cookies.
-    if (getOauthDomain() === 'grip') {
-      window.open('https://auth.grip-on-it.com/v2/logout?tenantId=rjsfm52t', '_blank').close();
-    }
     logout();
     yield put(push('/'));
   } catch (error) {
     yield put(showGlobalError('LOGOUT_FAILED'));
+    throw error;
   }
 }
 
@@ -44,6 +42,7 @@ export function* callAuthorize(action) {
     }
   } catch (error) {
     yield put(showGlobalError('AUTHORIZE_FAILED'));
+    throw error;
   }
 }
 

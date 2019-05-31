@@ -58,7 +58,7 @@ export const makeSelectMaatschappelijkeActiviteitIds = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return data;
       }
 
       return data.map(({ maatschappelijke_activiteit: ma }) => ma.replace(/(?:[^\d]+)(\d+)(?:[^\d]*)/, '$1'));

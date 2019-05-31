@@ -29,7 +29,7 @@ const withConnect = connect(
 );
 
 export default compose(
-  injectSaga({ key: 'global', saga }),
+  injectSaga({ key: 'accObjPage', saga }),
   withConnect,
   injectIntl,
 )(AccommodationObjectPageComponent);

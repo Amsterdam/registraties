@@ -1,2 +1,5 @@
 {
+  "API_ROOT": "https://api.data.amsterdam.nl/",
+  "ROOT": "/",
+  "AUTH_ROOT": "https://api.data.amsterdam.nl/"
 }

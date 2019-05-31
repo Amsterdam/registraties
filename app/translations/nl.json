@@ -17,7 +17,6 @@
   "registraties.export_cta": "Exporteren",
   "registraties.house.id": "Pand-ID",
   "registraties.house": "Pand",
-  "registraties.log_in_adw": "Inloggen ADW",
   "registraties.log_in": "Inloggen",
   "registraties.log_out": "Uitloggen",
   "registraties.logged_in_as": "Ingelogd als: {name}",
@@ -51,5 +50,6 @@
   "registraties.server_error": "Er is een fout opgetreden op de server. Niet alle gegevens uit de databronnen kunnen opgehaald worden. Probeer het over een paar minuten nogmaals.",
   "registraties.service_unavailable": "Een van de databronnen is niet beschikbaar. Probeer het over een paar minuten nogmaals.",
   "registraties.filled_in_by": "Ingevuld door",
-  "registraties.resource_not_found": "Een of meerdere databronnen zijn niet beschikbaar of retourneerden geen gegevens. Controleer de URL of probeer het over enkele minuten nogmaals."
+  "registraties.resource_not_found": "Een of meerdere databronnen zijn niet beschikbaar of retourneerden geen gegevens. Controleer de URL of probeer het over enkele minuten nogmaals.",
+  "registraties.no_data_available": "Er konden geen relevante gegevens gevonden worden"
 }
