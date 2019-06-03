@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const dataPropType = PropTypes.arrayOf(
+const dataType = PropTypes.arrayOf(
   PropTypes.shape({
     type: PropTypes.string.isRequired,
     formattedKey: PropTypes.oneOfType([
@@ -9,11 +9,14 @@ export const dataPropType = PropTypes.arrayOf(
       }),
       PropTypes.string,
     ]).isRequired,
-    formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     key: PropTypes.string.isRequired,
     value: PropTypes.any,
   }),
 );
+
+dataType.formattedValue = PropTypes.oneOfType([PropTypes.string, PropTypes.number, dataType]).isRequired;
+
+export const dataPropType = PropTypes.oneOfType([dataType, PropTypes.arrayOf(dataType)]);
 
 const dataShape = {
   label: PropTypes.shape({

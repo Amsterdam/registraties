@@ -59,7 +59,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
     }
 
     return (
-      <li key={listItem.key || Math.random()}>
+      <li key={listItem.key || Math.random()} className={isArray(listItem) ? 'is-nested' : null}>
         {isArray(listItem) ? (
           renderList(listItem)
         ) : (
@@ -75,7 +75,12 @@ export const SectionComponent = ({ name, href, data, intl }) => {
     <List>
       {listData.map(listItem => {
         if (isArray(listItem.formattedValue)) {
-          return listItem.formattedValue.map(value => renderListItem(value));
+          return (
+            <li key={listItem.key || Math.random()}>
+              {listItem.formattedKey}
+              {renderList(listItem.formattedValue)}
+            </li>
+          );
         }
 
         return renderListItem(listItem);

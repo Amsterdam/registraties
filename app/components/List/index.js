@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Ul = styled.ul`
-  padding: 0;
+  &,
+  ul {
+    padding: 0;
+  }
+
   list-style: none;
   padding-bottom: 30px;
 
@@ -34,7 +38,11 @@ const Ul = styled.ul`
     }
   }
 
-  & & li {
+  li.is-nested {
+    ul {
+      padding-bottom: 1em;
+    }
+
     padding-left: 0;
 
     &:before {
