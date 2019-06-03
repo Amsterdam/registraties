@@ -79,7 +79,7 @@ describe('Section', () => {
       </Provider>,
     );
 
-    expect(isArray).toHaveBeenCalledTimes(4); // will call isArrayOfArrays
+    expect(isArray).toHaveBeenCalledTimes(7); // will call isArrayOfArrays
     expect(isArray).toHaveBeenCalledWith(data[0]);
     expect(isArray).toHaveBeenLastCalledWith(data[1]);
     expect(document.getElementsByTagName('li')).toHaveLength(2);
@@ -96,7 +96,7 @@ describe('Section', () => {
       </Provider>,
     );
 
-    expect(isArray).toHaveBeenCalledTimes(3);
+    expect(isArray).toHaveBeenCalledTimes(5);
     expect(isArray).toHaveBeenCalledWith(data2[0]);
     expect(document.getElementsByTagName('li')).toHaveLength(1);
 
@@ -112,7 +112,7 @@ describe('Section', () => {
       </Provider>,
     );
 
-    expect(isArray).toHaveBeenCalledTimes(4);
+    expect(isArray).toHaveBeenCalledTimes(7);
     expect(document.getElementsByTagName('ul')).toHaveLength(2);
   });
 

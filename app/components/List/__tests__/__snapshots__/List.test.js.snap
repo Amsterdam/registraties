@@ -2,21 +2,36 @@
 
 exports[`List should match the snapshot 1`] = `
 .c0 {
-  padding: 0;
+  padding-left: 0;
   list-style: none;
+}
+
+.c0.depth-1 {
+  padding: 0 0 30px;
+}
+
+.c0.depth-1 ul {
+  padding: 0;
+}
+
+.c0.depth-2 > li {
+  padding-left: 0;
+}
+
+.c0.depth-2 > li > ul {
   padding-bottom: 30px;
+}
+
+.c0.depth-2 > li > ul > li.has-list {
+  padding-left: 0 !important;
+}
+
+.c0.depth-2 > li:before {
+  content: none;
 }
 
 .c0:not(:first-child) {
   border-bottom: 4px solid #767676;
-}
-
-.c0 li:last-of-type ul {
-  padding-bottom: 0;
-}
-
-.c0 *:last-of-type > *:last-of-type ul:last-of-type {
-  border: 0;
 }
 
 .c0 li {
@@ -32,23 +47,6 @@ exports[`List should match the snapshot 1`] = `
   height: 8px;
   margin-top: 7px;
   background-color: #767676;
-}
-
-.c0.is-nested {
-  padding-bottom: 0;
-}
-
-.c0.is-nested ul:not(:last-of-type),
-.c0.is-nested:not(:last-of-type) {
-  padding-bottom: 1em;
-}
-
-.c0.is-nested > li {
-  padding-left: 0;
-}
-
-.c0.is-nested > li:before {
-  content: none;
 }
 
 <ul
