@@ -3,20 +3,37 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Ul = styled.ul`
-  padding: 0;
+  padding-left: 0;
+
+  &.depth-1 {
+    padding: 0 0 30px;
+
+    ul {
+      padding: 0;
+    }
+  }
   list-style: none;
-  padding-bottom: 30px;
+
+  &.depth-2 {
+    & > li {
+      padding-left: 0;
+
+      & > ul {
+        padding-bottom: 30px;
+
+        & > li.has-list {
+          padding-left: 0 !important;
+        }
+      }
+
+      & :before {
+        content: none;
+      }
+    }
+  }
 
   &:not(:first-child) {
     border-bottom: 4px solid #767676;
-  }
-
-  & li:last-of-type ul {
-    padding-bottom: 0;
-  }
-
-  *:last-of-type > *:last-of-type ul:last-of-type {
-    border: 0;
   }
 
   li {
@@ -31,23 +48,6 @@ const Ul = styled.ul`
       height: 8px;
       margin-top: 7px;
       background-color: #767676;
-    }
-  }
-
-  &.is-nested {
-    padding-bottom: 0;
-
-    ul:not(:last-of-type),
-    &:not(:last-of-type) {
-      padding-bottom: 1em;
-    }
-
-    & > li {
-      padding-left: 0;
-
-      &:before {
-        content: none;
-      }
     }
   }
 `;

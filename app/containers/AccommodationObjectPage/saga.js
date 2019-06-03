@@ -50,7 +50,7 @@ export function* fetchData(action) {
     let landelijkVboId;
 
     if (brkId) {
-      yield put(maxProgressCount(12));
+      yield put(maxProgressCount(11));
 
       // fetch vboId from VERBLIJFSOBJECT_API with brkId param
       landelijkVboId = yield* fetchVerblijfsobjectId(brkId);
