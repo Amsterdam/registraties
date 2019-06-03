@@ -11,6 +11,8 @@ import injectReducer from 'utils/injectReducer';
 import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
+import maReducer from 'containers/MaatschappelijkeActiviteit/reducer';
+import maSaga from 'containers/MaatschappelijkeActiviteit/saga';
 
 import { makeSelectVestigingData } from './selectors';
 import saga from './saga';
@@ -19,6 +21,7 @@ import reducer from './reducer';
 export const VestigingContainer = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.VESTIGING.NAME);
   const href = OBJECTS.VESTIGING.STELSELPEDIA_LINK;
+
   const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
@@ -46,4 +49,6 @@ export default compose(
   withConnect,
   injectSaga({ key: 'vestiging', saga }),
   injectReducer({ key: 'vestiging', reducer }),
+  injectSaga({ key: 'maatschappelijkeActiviteit', saga: maSaga }),
+  injectReducer({ key: 'maatschappelijkeActiviteit', reducer: maReducer }),
 )(memo(VestigingContainer));

@@ -1,7 +1,14 @@
 import messages from 'containers/App/messages';
 import { translationMessages } from '../i18n';
 
-const dateFields = ['begin_geldigheid', 'document_mutatie', 'einde_geldigheid', 'toestandsdatum', 'geboortedatum'];
+const dateFields = [
+  'begin_geldigheid',
+  'document_mutatie',
+  'einde_geldigheid',
+  'toestandsdatum',
+  'geboortedatum',
+  'datum_aanvang',
+];
 const currencyFields = ['koopsom'];
 
 /**
@@ -163,7 +170,23 @@ const isPlainValue = type => ['string', 'number', 'currency', 'surface'].include
  */
 export const formatData = ({ data, keys, locale = 'default' }) => {
   const objKeys = Object.keys(data);
-  const filteredKeys = keys ? objKeys.filter(isValidKey(keys)).filter(isValidValue(data)) : objKeys;
+  const parentKeys = [...new Set(keys.map(key => key.split('.')[0]))];
+  const childKeys = {};
+
+  if (keys) {
+    keys
+      .filter(key => key.split('.').length > 1)
+      .forEach(key => {
+        const [parent, child] = key.split('.');
+
+        if (!childKeys[parent]) {
+          childKeys[parent] = [];
+        }
+        childKeys[parent].push(child);
+      });
+  }
+
+  const filteredKeys = keys ? objKeys.filter(isValidKey(parentKeys)).filter(isValidValue(data)) : objKeys;
   const localeMessages = translationMessages[locale];
 
   return filteredKeys
@@ -210,7 +233,8 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
             return formatData({ data: value });
           }
         } else if (isArray(value)) {
-          const valueList = value.filter(isValidValue(value)).map(obj => obj.omschrijving);
+          // const valueList = value.filter(isValidValue(value)).map(obj => obj.omschrijving);
+          const valueList = value.map(obj => formatData({ data: obj, keys: childKeys[key] }));
 
           if (valueList.length) {
             formattedValue = valueList.length === 1 ? valueList[0] : valueList;

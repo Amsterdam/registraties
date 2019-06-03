@@ -1,17 +1,11 @@
 import produce from 'immer';
 import { LOAD_DATA_PENDING } from 'containers/App/constants';
-import {
-  LOAD_DATA_SUCCESS,
-  LOAD_DATA_FAILED,
-  LOAD_DATA_NO_RESULTS,
-  LOAD_IDS_FAILED,
-  LOAD_IDS_NO_RESULTS,
-} from './constants';
+import { LOAD_DATA_SUCCESS, LOAD_DATA_FAILED, LOAD_DATA } from './constants';
 
 export const initialState = {
   data: undefined,
   error: false,
-  errorMessage: '',
+  maatschappelijkeActiviteitId: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -24,6 +18,12 @@ export default (state = initialState, action) =>
         draft.errorMessage = '';
         break;
 
+      case LOAD_DATA:
+        draft.maatschappelijkeActiviteitId = action.payload.maatschappelijkeActiviteitId;
+        draft.error = false;
+        draft.errorMessage = '';
+        break;
+
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
         draft.error = false;
@@ -31,17 +31,9 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA_FAILED:
-      case LOAD_IDS_FAILED:
         draft.data = null;
         draft.error = true;
         draft.errorMessage = action.payload;
-        break;
-
-      case LOAD_DATA_NO_RESULTS:
-      case LOAD_IDS_NO_RESULTS:
-        draft.data = null;
-        draft.error = false;
-        draft.errorMessage = '';
         break;
     }
   });
