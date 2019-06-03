@@ -32,7 +32,7 @@ VestigingContainer.defaultProps = {
 };
 
 VestigingContainer.propTypes = {
-  data: PropTypes.oneOfType([dataPropType, PropTypes.arrayOf(dataPropType)]),
+  data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
 };

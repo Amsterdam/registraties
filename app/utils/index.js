@@ -140,6 +140,23 @@ const formatKey = key =>
     .trim();
 
 /**
+ * Checks if a field with a number value is a value that should not be formatted as a number. This is the case
+ * for house numbers or years.
+ *
+ * @param   {String} key - field key to check
+ * @returns {Boolean}
+ */
+const shouldBeStringValue = key => ['huisnummer', 'oorspronkelijk_bouwjaar'].includes(key);
+
+/**
+ * Checks if a field's value should be tranformed by the field type
+ *
+ * @param   {String} type - a field's type
+ * @returns {Boolean}
+ */
+const isPlainValue = type => ['string', 'number', 'currency', 'surface'].includes(type);
+
+/**
  * Returns a formatted dataset
  *
  * Will filter invalid keys and values out of the set, format values and apply translations to key values. A custom
@@ -184,6 +201,12 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
         readableKey = `${key.slice(0, 3).toUpperCase()}-${key.slice(3).replace('_', '')}`;
       }
 
+      if (key === 'oppervlakte') {
+        type = 'surface';
+      } else if (shouldBeStringValue(key)) {
+        type = 'string';
+      }
+
       try {
         if (type === 'boolean') {
           formattedValue = value ? localeMessages[messages.yes.id] : localeMessages[messages.no.id];
@@ -194,7 +217,7 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
         } else if (value === null) {
           type = 'boolean';
           formattedValue = localeMessages[messages.unknown.id];
-        } else if (type === 'string' || type === 'number' || type === 'currency') {
+        } else if (isPlainValue(type)) {
           formattedValue = value;
         } else if (isCount(value)) {
           type = 'number';

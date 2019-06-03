@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { intlShape } from 'react-intl';
 import styled from 'styled-components';
 
+import { summaryPropType } from 'utils/propTypes';
 import SectionHeading from 'components/SectionHeading';
 import messages from 'containers/App/messages';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -37,22 +37,8 @@ const Summary = ({ data, intl: { locale, formatMessage } }) => {
   );
 };
 
-const dataShape = {
-  label: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
-  value: PropTypes.string.isRequired,
-};
-
 Summary.propTypes = {
-  data: PropTypes.shape({
-    RSIN: PropTypes.shape(dataShape),
-    accommodation_object_id: PropTypes.shape(dataShape),
-    cadastral_object_nr: PropTypes.shape(dataShape),
-    chamber_of_commerce_nr: PropTypes.shape(dataShape),
-    house_id: PropTypes.shape(dataShape),
-    number_indication_id: PropTypes.shape(dataShape),
-  }),
+  data: summaryPropType,
   intl: intlShape.isRequired,
 };
 

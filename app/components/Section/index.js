@@ -27,15 +27,21 @@ const printValue = meta => {
       return (
         <FormattedNumber
           value={formattedValue}
-          style="currency" // eslint-disable-line
+          // disabling linter, because it will trip over the use of the 'style' prop
+          // eslint-disable-next-line react/style-prop-object
+          style="currency"
           currency="EUR"
           currencyDisplay="symbol"
           minimumFractionDigits={0}
           maximumFractionDigits={0}
         />
       );
-
-    case 'object':
+    case 'surface':
+      return (
+        <>
+          <FormattedNumber value={formattedValue} /> m<sup>2</sup>
+        </>
+      );
     default:
       return formattedValue;
   }

@@ -17,7 +17,7 @@ export const makeSelectNummeraanduidingData = () =>
       const { data } = state;
 
       if (!data) {
-        return data;
+        return null;
       }
 
       const keys = [
@@ -61,7 +61,7 @@ export const makeSelectWoonplaatsId = () =>
       const { data } = state;
 
       if (!data || !data.woonplaats || !data.woonplaats.landelijk_id) {
-        return undefined;
+        return null;
       }
 
       return data.woonplaats.landelijk_id;
@@ -79,7 +79,7 @@ export const makeSelectOpenbareRuimteId = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return null;
       }
 
       return data.openbare_ruimte.landelijk_id;
@@ -98,7 +98,7 @@ export const makeSelectGebiedData = () =>
       const { data } = state;
 
       if (!data) {
-        return undefined;
+        return null;
       }
 
       data.wijk = data.buurtcombinatie;

@@ -23,6 +23,7 @@ import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
+import { summaryPropType } from 'utils/propTypes';
 
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
@@ -67,6 +68,18 @@ class AccommodationObjectComponent extends React.Component {
     }
   }
 
+  hasBagResults() {
+    const summaryKeys = Object.keys(this.props.summary);
+
+    return summaryKeys.some(key =>
+      ['accommodation_object_id', 'house_id', 'public_space_id', 'number_indication_id'].includes(key),
+    );
+  }
+
+  hasBrkResults() {
+    return Object.keys(this.props.summary).includes('cadastral_object_nr');
+  }
+
   render() {
     const { onInput } = this;
     const { filledInBy, notitie } = this.state;
@@ -78,15 +91,19 @@ class AccommodationObjectComponent extends React.Component {
         <Progress />
         <article className="col-7">
           <section>
-            <header>
-              <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
-            </header>
-
-            <OpenbareRuimte />
+            {this.hasBagResults() && (
+              <header data-testid="accommodationObjectBAGHeader">
+                <ArticleHeading marginCollapse>{intl.formatMessage(messages.bag_objects)}</ArticleHeading>
+              </header>
+            )}
 
             <Woonplaats />
 
             <Nummeraanduiding />
+
+            <OpenbareRuimte />
+
+            <Gebied />
 
             <Verblijfsobject />
 
@@ -94,9 +111,11 @@ class AccommodationObjectComponent extends React.Component {
           </section>
 
           <section>
-            <header>
-              <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
-            </header>
+            {this.hasBrkResults() && (
+              <header data-testid="accommodationObjectBRKHeader">
+                <ArticleHeading>{intl.formatMessage(messages.brk_objects)}</ArticleHeading>
+              </header>
+            )}
 
             <KadastraalObject />
 
@@ -105,8 +124,6 @@ class AccommodationObjectComponent extends React.Component {
             <KadastraalSubjectNNP />
 
             <Vestiging />
-
-            <Gebied />
           </section>
         </article>
 
@@ -171,10 +188,12 @@ class AccommodationObjectComponent extends React.Component {
 }
 
 AccommodationObjectComponent.defaultProps = {
+  summary: {},
   status: undefined,
 };
 
 AccommodationObjectComponent.propTypes = {
+  summary: summaryPropType,
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,

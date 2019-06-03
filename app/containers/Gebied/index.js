@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { dataPropType } from 'utils/propTypes';
 import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
@@ -23,14 +24,7 @@ GebiedContainer.defaultProps = {
 };
 
 GebiedContainer.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      formattedKey: PropTypes.string.isRequired,
-      formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      key: PropTypes.string.isRequired,
-      value: PropTypes.any,
-    }),
-  ),
+  data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
 };

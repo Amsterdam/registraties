@@ -9,7 +9,7 @@ export const dataPropType = PropTypes.arrayOf(
       }),
       PropTypes.string,
     ]).isRequired,
-    formattedValue: PropTypes.any.isRequired,
+    formattedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     key: PropTypes.string.isRequired,
     value: PropTypes.any,
   }),
