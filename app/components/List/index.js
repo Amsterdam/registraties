@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Ul = styled.ul`
-  &,
-  ul {
-    padding: 0;
-  }
-
+  padding: 0;
   list-style: none;
   padding-bottom: 30px;
 
@@ -38,15 +34,19 @@ const Ul = styled.ul`
     }
   }
 
-  li.is-nested {
-    ul {
+  ul.is-nested {
+    padding-bottom: 0;
+
+    ul:not(:last-of-type) {
       padding-bottom: 1em;
     }
 
-    padding-left: 0;
+    & > li {
+      padding-left: 0;
 
-    &:before {
-      content: none;
+      &:before {
+        content: none;
+      }
     }
   }
 `;

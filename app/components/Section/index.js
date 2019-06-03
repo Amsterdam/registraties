@@ -8,7 +8,7 @@ import List from 'components/List';
 import SectionHeading from 'components/SectionHeading';
 import LoadingIndicator from 'components/LoadingIndicator';
 import messages from 'containers/App/messages';
-import { isArray, isObject } from 'utils';
+import { isArray, isArrayOfArrays, isObject } from 'utils';
 
 import { Key, StelselpediaLink } from 'components/AccommodationObject/styled';
 
@@ -59,7 +59,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
     }
 
     return (
-      <li key={listItem.key || Math.random()} className={isArray(listItem) ? 'is-nested' : null}>
+      <li key={listItem.key || Math.random()}>
         {isArray(listItem) ? (
           renderList(listItem)
         ) : (
@@ -72,7 +72,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
   };
 
   const renderList = listData => (
-    <List>
+    <List className={isArrayOfArrays(listData) ? 'is-nested' : null}>
       {listData.map(listItem => {
         if (isArray(listItem.formattedValue)) {
           return (

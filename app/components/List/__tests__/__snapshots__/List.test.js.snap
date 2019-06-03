@@ -2,13 +2,9 @@
 
 exports[`List should match the snapshot 1`] = `
 .c0 {
+  padding: 0;
   list-style: none;
   padding-bottom: 30px;
-}
-
-.c0,
-.c0 ul {
-  padding: 0;
 }
 
 .c0:not(:first-child) {
@@ -38,15 +34,19 @@ exports[`List should match the snapshot 1`] = `
   background-color: #767676;
 }
 
-.c0 li.is-nested {
-  padding-left: 0;
+.c0 ul.is-nested {
+  padding-bottom: 0;
 }
 
-.c0 li.is-nested ul {
+.c0 ul.is-nested ul:not(:last-of-type) {
   padding-bottom: 1em;
 }
 
-.c0 li.is-nested:before {
+.c0 ul.is-nested > li {
+  padding-left: 0;
+}
+
+.c0 ul.is-nested > li:before {
   content: none;
 }
 
