@@ -34,10 +34,11 @@ const Ul = styled.ul`
     }
   }
 
-  ul.is-nested {
+  &.is-nested {
     padding-bottom: 0;
 
-    ul:not(:last-of-type) {
+    ul:not(:last-of-type),
+    &:not(:last-of-type) {
       padding-bottom: 1em;
     }
 
