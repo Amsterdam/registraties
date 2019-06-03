@@ -20,15 +20,19 @@ const Ul = styled.ul`
 
       & > ul {
         padding-bottom: 30px;
-
-        & > li.has-list {
-          padding-left: 0 !important;
-        }
       }
 
-      & :before {
+      &:before {
         content: none;
       }
+    }
+  }
+
+  & > li.has-list {
+    padding-left: 0 !important;
+
+    &:before {
+      content: none;
     }
   }
 

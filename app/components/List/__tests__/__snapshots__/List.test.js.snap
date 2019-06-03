@@ -22,11 +22,15 @@ exports[`List should match the snapshot 1`] = `
   padding-bottom: 30px;
 }
 
-.c0.depth-2 > li > ul > li.has-list {
+.c0.depth-2 > li:before {
+  content: none;
+}
+
+.c0 > li.has-list {
   padding-left: 0 !important;
 }
 
-.c0.depth-2 > li:before {
+.c0 > li.has-list:before {
   content: none;
 }
 
