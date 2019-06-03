@@ -109,14 +109,6 @@ const isCount = value => isObject(value) && value.count;
 const isPostCode = value => /^\d{4}[A-Z]{2}$/i.test(value);
 
 /**
- * KVK field key detector
- *
- * @param {String} key
- * @returns {Boolean}
- */
-const keyIsKVK = key => /^kvk/i.test(key);
-
-/**
  * Currency detector
  *
  * @param {String} key
@@ -197,7 +189,7 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
       let type = isCurrency(key, value) ? 'currency' : typeof value;
       let readableKey = formatKey(key);
 
-      if (keyIsKVK(key)) {
+      if (key.startsWith('kvk') || key.startsWith('sbi')) {
         readableKey = `${key.slice(0, 3).toUpperCase()}-${key.slice(3).replace('_', '')}`;
       }
 
