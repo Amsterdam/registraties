@@ -23,7 +23,7 @@ export default defineMessages({
   resource_not_found: {
     id: `${scope}.resource_not_found`,
   },
-  no_data_available: {
-    id: `${scope}.no_data_available`,
+  no_vbo_data_available: {
+    id: `${scope}.no_vbo_data_available`,
   },
 });

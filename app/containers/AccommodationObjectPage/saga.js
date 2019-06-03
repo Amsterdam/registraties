@@ -3,6 +3,7 @@ import { call, put, select, spawn, takeLatest } from 'redux-saga/effects';
 import appSaga from 'containers/App/saga';
 import {
   maxProgressCount,
+  resetGlobalError,
   resetProgress,
   showGlobalError,
   statusFailed,
@@ -39,6 +40,7 @@ import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors'
 export function* fetchData(action) {
   yield put(resetProgress());
   yield put(statusPending());
+  yield put(resetGlobalError());
 
   const { vboId, ligId, brkId } = action.payload;
 
@@ -77,18 +79,20 @@ export function* fetchData(action) {
 
       nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
     } else {
-      yield put(maxProgressCount(7));
+      // no verblijfsobject or ligplaats data could be retrieved with the identifiers that we have
+      // the only thing left is to try to get BRK object and/or subject data
+      yield put(maxProgressCount(4));
+      yield call(fetchKadastraalObjectData, brkId);
+      yield call(fetchKadastraalSubjectNNPData);
+      yield call(fetchKadastraalSubjectNPData);
     }
 
     if (!nummeraanduidingId) {
-      yield put(loadKadastraalObjectDataNoResults());
-      yield put(loadKadastraalSubjectNPDataNoResults());
-      yield put(loadKadastraalSubjectNNPDataNoResults());
       yield put(loadNummeraanduidingDataNoResults());
       yield put(loadWoonplaatsDataNoResults());
       yield put(loadOpenbareRuimteDataNoResults());
 
-      yield put(showGlobalError('no_data_available'));
+      yield put(showGlobalError('no_vbo_data_available'));
     } else {
       yield call(fetchNummeraanduidingData, nummeraanduidingId);
       yield call(fetchWoonplaatsData);

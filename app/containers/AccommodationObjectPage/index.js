@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import injectSaga from 'utils/injectSaga';
 import { makeSelectStatus } from 'containers/App/selectors';
+import { makeSelectSummary } from 'containers/Summary/selectors';
 import { loadBAGData } from 'containers/App/actions';
 import AccObjPageComponent from 'components/AccommodationObject';
 import saga from './saga';
@@ -12,6 +13,7 @@ import saga from './saga';
 const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
 
 const mapStateToProps = createStructuredSelector({
+  summary: makeSelectSummary(),
   status: makeSelectStatus(),
 });
 
