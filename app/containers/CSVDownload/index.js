@@ -37,7 +37,25 @@ export const getData = dataset => {
   const obj = {};
 
   dataset.forEach(({ key, formattedValue }) => {
-    obj[key] = formattedValue;
+    if (isArrayOfArrays(formattedValue)) {
+      formattedValue.forEach((value, index) => {
+        const objKey = `${key}_${index + 1}`;
+
+        obj[objKey] = obj[objKey] || {};
+
+        value.forEach(val => {
+          obj[objKey][val.key] = val.formattedValue;
+        });
+      });
+    } else if (isArray(formattedValue)) {
+      obj[key] = obj[key] || {};
+
+      formattedValue.forEach(val => {
+        obj[key][val.key] = val.formattedValue;
+      });
+    } else {
+      obj[key] = formattedValue;
+    }
   });
 
   return obj;
@@ -101,7 +119,7 @@ class CSVDownloadContainer extends Component {
     const { locale } = this.props.intl;
     const date = new Intl.DateTimeFormat(locale).format(new Date());
     const data = { date };
-    const unwind = [];
+    const unwind = new Set();
 
     this.state.data.forEach((value, key) => {
       data[key] = value;
@@ -113,7 +131,7 @@ class CSVDownloadContainer extends Component {
 
     const getKeys = (obj, parentKey, separator = '.') =>
       Object.keys(obj)
-        .filter(key => obj[key])
+        .filter(key => !!obj[key])
         .map(key => {
           const value = obj[key];
           const joinedKey = [parentKey, key].filter(Boolean).join(separator);
@@ -124,18 +142,26 @@ class CSVDownloadContainer extends Component {
 
           if (isArray(value)) {
             if (parentKey) {
-              unwind.push(joinedKey);
+              unwind.add(joinedKey);
             }
 
-            return value.map(item => getKeys(item, joinedKey, separator)).reduce(reduce, []);
+            return value
+              .map(item => {
+                Object.keys(item).forEach(itemKey => {
+                  unwind.add(`${joinedKey}${separator}${itemKey}`);
+                });
+
+                return getKeys(item, joinedKey, separator);
+              })
+              .reduce(reduce, []);
           }
 
           return joinedKey;
         })
         .reduce(reduce, []);
 
-    const fields = getKeys(data);
-    const parseOptions = { fields, unwind };
+    const fields = new Set([...getKeys(data)]);
+    const parseOptions = { fields: [...fields], unwind: [...unwind] };
 
     return parse(data, parseOptions);
   }
