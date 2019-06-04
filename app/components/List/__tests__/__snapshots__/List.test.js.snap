@@ -53,6 +53,10 @@ exports[`List should match the snapshot 1`] = `
   background-color: #767676;
 }
 
+.c0 li a {
+  line-height: normal;
+}
+
 <ul
   class="c0"
 >

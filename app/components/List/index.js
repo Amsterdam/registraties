@@ -53,6 +53,10 @@ const Ul = styled.ul`
       margin-top: 7px;
       background-color: #767676;
     }
+
+    a {
+      line-height: normal;
+    }
   }
 `;
 
