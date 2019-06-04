@@ -39,20 +39,16 @@ export const getData = dataset => {
   dataset.forEach(({ key, formattedValue }) => {
     if (isArrayOfArrays(formattedValue)) {
       formattedValue.forEach((value, index) => {
-        const objKey = `${key}_${index}`;
+        const objKey = `${key}_${index + 1}`;
 
-        if (!obj[objKey]) {
-          obj[objKey] = {};
-        }
+        obj[objKey] = obj[objKey] || {};
 
         value.forEach(val => {
           obj[objKey][val.key] = val.formattedValue;
         });
       });
     } else if (isArray(formattedValue)) {
-      if (!obj[key]) {
-        obj[key] = {};
-      }
+      obj[key] = obj[key] || {};
 
       formattedValue.forEach(val => {
         obj[key][val.key] = val.formattedValue;
