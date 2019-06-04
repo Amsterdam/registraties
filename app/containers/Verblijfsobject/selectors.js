@@ -40,6 +40,24 @@ export const makeSelectVerblijfsobjectData = () =>
     },
   );
 
+export const makeSelectVerblijfsobjectId = () =>
+  createSelector(
+    selectVerblijfsobject,
+    state => {
+      if (!state) {
+        return undefined;
+      }
+
+      const { data } = state;
+
+      if (!data) {
+        return data;
+      }
+
+      return data.verblijfsobjectidentificatie;
+    },
+  );
+
 export const makeSelectVBONummeraanduidingId = () =>
   createSelector(
     selectVerblijfsobject,

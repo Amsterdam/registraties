@@ -8,13 +8,31 @@ import List from 'components/List';
 import SectionHeading from 'components/SectionHeading';
 import LoadingIndicator from 'components/LoadingIndicator';
 import messages from 'containers/App/messages';
-import { isArray, isArrayOfArrays, isObject } from 'utils';
+import { isArray, isObject } from 'utils';
 
 import { Key, StelselpediaLink } from 'components/AccommodationObject/styled';
 
 const SectionWrapper = styled.section`
   position: relative;
 `;
+
+const max = (array, count = 0) => (isArray(array) ? max(maxDepth(array), count + 1) : count);
+
+const maxDepth = array => {
+  let maxVal = Number.MIN_VALUE;
+  let item;
+
+  array.forEach(val => {
+    const depth = max(val);
+
+    if (depth > maxVal) {
+      maxVal = depth;
+      item = val;
+    }
+  });
+
+  return item;
+};
 
 const printValue = meta => {
   const { type, formattedValue } = meta;
@@ -59,7 +77,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
     }
 
     return (
-      <li key={listItem.key || Math.random()}>
+      <li key={listItem.key || Math.random()} className={isArray(listItem) ? 'has-list' : null}>
         {isArray(listItem) ? (
           renderList(listItem)
         ) : (
@@ -71,16 +89,11 @@ export const SectionComponent = ({ name, href, data, intl }) => {
     );
   };
 
-  const renderList = listData => (
-    <List className={isArrayOfArrays(listData) ? 'is-nested' : null}>
+  const renderList = (listData, depth) => (
+    <List className={depth ? `depth-${depth}` : null}>
       {listData.map(listItem => {
         if (isArray(listItem.formattedValue)) {
-          return (
-            <li key={listItem.key || Math.random()}>
-              {listItem.formattedKey}
-              {renderList(listItem.formattedValue)}
-            </li>
-          );
+          return listItem.formattedValue.map(fValue => renderListItem(fValue));
         }
 
         return renderListItem(listItem);
@@ -109,7 +122,7 @@ export const SectionComponent = ({ name, href, data, intl }) => {
       {name && data !== null && <Title />}
 
       {data === undefined && <LoadingIndicator />}
-      {data && renderList(sectionData)}
+      {data && renderList(sectionData, max(sectionData))}
     </SectionWrapper>
   );
 };
