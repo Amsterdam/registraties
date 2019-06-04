@@ -1,39 +1,26 @@
 import React from 'react';
-import * as effects from 'redux-saga/effects';
+// import * as effects from 'redux-saga/effects';
 // import { render, cleanup, fireEvent } from 'react-testing-library';
 import { mount } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 import history from 'utils/history';
 import { Provider } from 'react-redux';
 
-import * as actions from 'containers/App/actions';
+// import * as actions from 'containers/App/actions';
 
 import messages from '../../../translations/nl.json';
 import AccommodationObjectPageContainer from '..';
 
 import configureStore from '../../../configureStore';
-const store = configureStore({}, history);
-
-// jest.mock('redux');
-jest.mock('redux-saga/effects', () => {
-  const actual = jest.requireActual('redux-saga/effects');
-
-  return {
-    __esModule: true,
-    ...actual,
-    put: jest.fn(),
-  };
-});
+const store = configureStore({ global: { status: undefined } }, history);
 
 describe('AccommodationObjectPageContainer', () => {
   it('should export a composed component', () => {
-    // expect(AccommodationObjectPageContainer).toBeInstanceOf()
+    expect(AccommodationObjectPageContainer).toBeInstanceOf('Foo');
   });
 
-  it('should inject translations', () => {});
-
   it('should inject saga', () => {
-    const putSpy = jest.spyOn(effects, 'put');
+    // const putSpy = jest.spyOn(effects, 'put');
     const vboId = 'fooBarBaz';
 
     const tree = mount(
@@ -44,10 +31,6 @@ describe('AccommodationObjectPageContainer', () => {
       </Provider>,
     );
 
-    tree.debug();
-
-    actions.loadBAGData({ vboId });
-
-    expect(putSpy).toHaveBeenCalledWith('watchAccommodationObjectPageSaga');
+    console.log(tree.find(AccommodationObjectPageContainer).props());
   });
 });

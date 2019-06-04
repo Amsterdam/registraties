@@ -10,11 +10,11 @@ import { loadBAGData } from 'containers/App/actions';
 import AccObjPageComponent from 'components/AccommodationObject';
 import saga from './saga';
 
-export const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
+const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
 
 const mapStateToProps = createStructuredSelector({
-  summary: makeSelectSummary(),
-  status: makeSelectStatus(),
+  summary: makeSelectSummary,
+  status: makeSelectStatus,
 });
 
 const mapDispatchToProps = dispatch =>

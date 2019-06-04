@@ -1,193 +1,422 @@
-import * as constants from 'containers/App/constants';
+import { testSaga } from 'redux-saga-test-plan';
+
+import appSaga from 'containers/App/saga';
+import * as appActions from 'containers/App/actions';
+import * as appConstants from 'containers/App/constants';
+import * as appSelectors from 'containers/App/selectors';
+import * as kadastraalObjectSaga from 'containers/KadastraalObject/saga';
+import { fetchKadastraalSubjectNNPData } from 'containers/KadastraalSubjectNNP/saga';
+import { fetchKadastraalSubjectNPData } from 'containers/KadastraalSubjectNP/saga';
+import { fetchLigplaatsData } from 'containers/Ligplaats/saga';
+import { fetchNummeraanduidingData } from 'containers/Nummeraanduiding/saga';
+import { fetchOpenbareRuimteData } from 'containers/OpenbareRuimte/saga';
+import { fetchPandlistData } from 'containers/Pand/saga';
+import { fetchVerblijfsobjectData, fetchVerblijfsobjectId } from 'containers/Verblijfsobject/saga';
+import { fetchVestigingIdData } from 'containers/Vestiging/saga';
+import { fetchWoonplaatsData } from 'containers/Woonplaats/saga';
+import { fetchMaatschappelijkeActiviteitData } from 'containers/MaatschappelijkeActiviteit/saga';
 import * as verblijfsobjectSelectors from 'containers/Verblijfsobject/selectors';
+import { makeSelectOpenbareRuimteId } from 'containers/Nummeraanduiding/selectors';
+import { loadDataNoResults as loadKadastraalObjectDataNoResults } from 'containers/KadastraalObject/actions';
+import { loadDataNoResults as loadKadastraalSubjectNPDataNoResults } from 'containers/KadastraalSubjectNP/actions';
+import { loadDataNoResults as loadKadastraalSubjectNNPDataNoResults } from 'containers/KadastraalSubjectNNP/actions';
+import { loadDataNoResults as loadNummeraanduidingDataNoResults } from 'containers/Nummeraanduiding/actions';
+import { loadDataNoResults as loadWoonplaatsDataNoResults } from 'containers/Woonplaats/actions';
+import { loadDataNoResults as loadOpenbareRuimteDataNoResults } from 'containers/OpenbareRuimte/actions';
+import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors';
 
-import { fetchData } from '../saga';
+import watchAccommodationObjectPageSaga, { fetchData } from '../saga';
 
-describe('saga', () => {
-  describe('watchAccommodationObjectPageSaga', () => {
-    it('should spawn the App saga', () => {
-      expect(false).toBeTruthy();
-    });
-    it('should fetch data on LOAD_BAG_DATA', () => {
-      expect(false).toBeTruthy();
-    });
+describe('AccommodationObjectPage/saga', () => {
+  const action = { type: appConstants.LOAD_BAG_DATA };
+
+  it('should watch "LOAD_BAG_DATA" and call fetchData', () => {
+    testSaga(watchAccommodationObjectPageSaga)
+      .next()
+      .spawn(appSaga)
+      .next()
+      .takeLatest(appConstants.LOAD_BAG_DATA, fetchData)
+      .next(action)
+      .isDone();
   });
 
-  describe.only('fetchData', () => {
-    const vboId = '0363010001008585';
-    // const brkId = 'NL.KAD.OnroerendeZaak.11520480510035';
-    // const ligId = '0363020001027057';
-    const generator = fetchData({ payload: { vboId } });
+  it('should retrieve data with vboId as source ID', () => {
+    const vboId = '0363010001008599';
+    const nummeraanduidingId = '0363200000201429';
+    const oprId = '0363300000004297';
 
-    it('should reset progress', () => {
-      const val = generator.next().value;
+    // when nummeraanduidingId can be resolved
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .next()
+      .call(kadastraalObjectSaga.fetchKadastraalObjectData, vboId)
+      .next()
+      .call(fetchVerblijfsobjectData, vboId)
+      .next()
+      .call(fetchKadastraalSubjectNNPData)
+      .next()
+      .call(fetchKadastraalSubjectNPData)
+      .next()
+      .call(fetchVestigingIdData)
+      .next()
+      .call(fetchMaatschappelijkeActiviteitData)
+      .next()
+      .call(fetchPandlistData, vboId)
+      .next()
+      .select(verblijfsobjectSelectors.makeSelectVBONummeraanduidingId)
+      .next(nummeraanduidingId)
+      .call(fetchNummeraanduidingData, nummeraanduidingId)
+      .next()
+      .call(fetchWoonplaatsData)
+      .next()
+      .select(makeSelectOpenbareRuimteId)
+      .next(oprId)
+      .call(fetchOpenbareRuimteData, oprId)
+      .next()
+      .put(appActions.statusSuccess())
+      .next()
+      .isDone();
 
-      expect(val.type).toBe('PUT');
-      expect(val.payload.action.type).toBe(constants.RESET_PROGRESS);
-    });
+    // when nummeraanduidingId can NOT be resolved
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .next()
+      .call(kadastraalObjectSaga.fetchKadastraalObjectData, vboId)
+      .next()
+      .call(fetchVerblijfsobjectData, vboId)
+      .next()
+      .call(fetchKadastraalSubjectNNPData)
+      .next()
+      .call(fetchKadastraalSubjectNPData)
+      .next()
+      .call(fetchVestigingIdData)
+      .next()
+      .call(fetchMaatschappelijkeActiviteitData)
+      .next()
+      .call(fetchPandlistData, vboId)
+      .next()
+      .select(verblijfsobjectSelectors.makeSelectVBONummeraanduidingId)
+      .next()
+      .put(loadNummeraanduidingDataNoResults())
+      .next()
+      .put(loadWoonplaatsDataNoResults())
+      .next()
+      .put(loadOpenbareRuimteDataNoResults())
+      .next()
+      .put(appActions.showGlobalError('no_vbo_data_available'))
+      .next()
+      .isDone();
+  });
 
-    it('should set the global status to pending', () => {
-      const val = generator.next().value;
+  it('should retrieve data with brkId as source ID', () => {
+    const vboId = '0363010000980007';
+    const brkId = 'NL.KAD.OnroerendeZaak.11530351210002';
+    const nummeraanduidingId = '0363200000459435';
+    const oprId = '0363300000003480';
 
-      expect(val.type).toBe('PUT');
-      expect(val.payload.action.type).toBe(constants.LOAD_DATA_PENDING);
-    });
+    // when nummeraanduidingId can be resolved
+    testSaga(fetchData, { ...action, payload: { brkId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(11))
+      .next()
+      .call(fetchVerblijfsobjectId, brkId)
+      .next(vboId)
+      .call(kadastraalObjectSaga.fetchKadastraalObjectData, vboId)
+      .next()
+      .call(fetchVerblijfsobjectData, vboId)
+      .next()
+      .call(fetchKadastraalSubjectNNPData)
+      .next()
+      .call(fetchKadastraalSubjectNPData)
+      .next()
+      .call(fetchVestigingIdData)
+      .next()
+      .call(fetchMaatschappelijkeActiviteitData)
+      .next()
+      .call(fetchPandlistData, vboId)
+      .next()
+      .select(verblijfsobjectSelectors.makeSelectVBONummeraanduidingId)
+      .next(nummeraanduidingId)
+      .call(fetchNummeraanduidingData, nummeraanduidingId)
+      .next()
+      .call(fetchWoonplaatsData)
+      .next()
+      .select(makeSelectOpenbareRuimteId)
+      .next(oprId)
+      .call(fetchOpenbareRuimteData, oprId)
+      .next()
+      .put(appActions.statusSuccess())
+      .next()
+      .isDone();
 
-    it('should reset the global error message', () => {
-      const val = generator.next().value;
+    // when nummeraanduidingId can NOT be resolved
+    testSaga(fetchData, { ...action, payload: { brkId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(11))
+      .next()
+      .call(fetchVerblijfsobjectId, brkId)
+      .next()
+      .put(appActions.maxProgressCount(4))
+      .next()
+      .call(kadastraalObjectSaga.fetchKadastraalObjectData, brkId)
+      .next()
+      .call(fetchKadastraalSubjectNNPData)
+      .next()
+      .call(fetchKadastraalSubjectNPData)
+      .next()
+      .put(loadNummeraanduidingDataNoResults())
+      .next()
+      .put(loadWoonplaatsDataNoResults())
+      .next()
+      .put(loadOpenbareRuimteDataNoResults())
+      .next()
+      .put(appActions.showGlobalError('no_vbo_data_available'))
+      .next()
+      .isDone();
+  });
 
-      expect(val.type).toBe('PUT');
-      expect(val.payload.action.type).toBe(constants.RESET_GLOBAL_ERROR);
-    });
+  it('should retrieve data with ligId as source ID', () => {
+    const ligId = '0363020001024636';
+    const nummeraanduidingId = '0363200000510414';
+    const oprId = '0363300000004526';
 
-    describe('VBO', () => {
-      it('should set max progress count', () => {
-        const {
-          type,
-          payload: { action },
-        } = generator.next().value;
+    // when nummeraanduidingId can be resolved
+    testSaga(fetchData, { ...action, payload: { ligId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(4))
+      .next()
+      .call(fetchLigplaatsData, ligId)
+      .next()
+      .put(loadKadastraalObjectDataNoResults())
+      .next()
+      .put(loadKadastraalSubjectNPDataNoResults())
+      .next()
+      .put(loadKadastraalSubjectNNPDataNoResults())
+      .next()
+      .select(makeSelectLIGNummeraanduidingId)
+      .next(nummeraanduidingId)
+      .call(fetchNummeraanduidingData, nummeraanduidingId)
+      .next()
+      .call(fetchWoonplaatsData)
+      .next()
+      .select(makeSelectOpenbareRuimteId)
+      .next(oprId)
+      .call(fetchOpenbareRuimteData, oprId)
+      .next()
+      .put(appActions.statusSuccess())
+      .next()
+      .isDone();
 
-        expect(type).toBe('PUT');
-        expect(action.type).toBe(constants.MAX_PROGRESS_COUNT);
-        expect(action.payload).toBe(10);
-      });
+    // when nummeraanduidingId can NOT be resolved
+    testSaga(fetchData, { ...action, payload: { ligId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(4))
+      .next()
+      .call(fetchLigplaatsData, ligId)
+      .next()
+      .put(loadKadastraalObjectDataNoResults())
+      .next()
+      .put(loadKadastraalSubjectNPDataNoResults())
+      .next()
+      .put(loadKadastraalSubjectNNPDataNoResults())
+      .next()
+      .select(makeSelectLIGNummeraanduidingId)
+      .next(undefined)
+      .put(loadNummeraanduidingDataNoResults())
+      .next()
+      .put(loadWoonplaatsDataNoResults())
+      .next()
+      .put(loadOpenbareRuimteDataNoResults())
+      .next()
+      .put(appActions.showGlobalError('no_vbo_data_available'))
+      .next()
+      .isDone();
+  });
 
-      it('should call fetchKadastraalObjectData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
+  it('should catch exceptions', () => {
+    const vboId = '0363010001008599';
+    const error = new Error('Something bad happened');
 
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchKadastraalObjectData');
-        expect(args).toStrictEqual([vboId]);
-      });
+    // unable to fetch
+    error.message = 'Failed to fetch';
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .put(appActions.showGlobalError('unable_to_fetch'))
+      .next()
+      .put(appActions.statusUnableToFetch())
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-      it('should call fetchVerblijfsobjectData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
+    error.message = undefined;
+    error.response = {
+      status: 401,
+    };
+    // unauthorized authenticated
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .select(appSelectors.makeSelectIsAuthenticated)
+      .next(true)
+      .put(appActions.showGlobalError('session_expired'))
+      .next()
+      .put(appActions.statusUnauthorized())
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchVerblijfsobjectData');
-        expect(args).toStrictEqual([vboId]);
-      });
+    // unauthorized NOT authenticated
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .select(appSelectors.makeSelectIsAuthenticated)
+      .next(false)
+      .put(appActions.showGlobalError('unauthorized'))
+      .next()
+      .put(appActions.statusUnauthorized())
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-      it('should call fetchKadastraalSubjectNNPData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
+    error.response = {
+      status: 404,
+    };
+    // unable to find resource
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .put(appActions.showGlobalError('resource_not_found'))
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchKadastraalSubjectNNPData');
-        expect(args).toStrictEqual([]);
-      });
+    error.response = {
+      status: 500,
+    };
+    // server error
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .put(appActions.showGlobalError('server_error'))
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-      it('should call fetchKadastraalSubjectNPData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
+    error.response = {
+      status: 503,
+    };
+    // service unavailable
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .put(appActions.showGlobalError('service_unavailable'))
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
 
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchKadastraalSubjectNPData');
-        expect(args).toStrictEqual([]);
-      });
-
-      it('should call fetchVestigingIdData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
-
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchVestigingIdData');
-        expect(args).toStrictEqual([]);
-      });
-
-      it('should call fetchMaatschappelijkeActiviteitData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
-
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchMaatschappelijkeActiviteitData');
-        expect(args).toStrictEqual([]);
-      });
-
-      it('should call fetchPandlistData generator', () => {
-        const {
-          type,
-          payload: { fn, args },
-        } = generator.next().value;
-
-        expect(type).toBe('CALL');
-        expect(fn.constructor.name).toBe('GeneratorFunction');
-        expect(fn.name).toBe('fetchPandlistData');
-        expect(args).toStrictEqual([vboId]);
-      });
-
-      it('should select nummeraanduiding id', () => {
-        const makeSelectVBONummeraanduidingIdSpy = jest.spyOn(
-          verblijfsobjectSelectors,
-          'makeSelectVBONummeraanduidingId',
-        );
-        const { type } = generator.next().value;
-
-        expect(type).toBe('SELECT');
-        expect(makeSelectVBONummeraanduidingIdSpy).toHaveBeenCalled();
-      });
-    });
-
-    describe.skip('BRK', () => {
-      it('should set max progress count', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should fetch verblijfsobjectId', () => {
-        expect(false).toBeTruthy();
-      });
-    });
-
-    describe.skip('LIG', () => {
-      it('should set max progress count', () => {
-        expect(false).toBeTruthy();
-      });
-    });
-
-    describe.skip('Exceptions', () => {
-      it('should catch a "failed to fetch" error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a "session_expired" error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a "unauthenticated" error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a 404 error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a 500 error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a 503 error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should catch a unknown error', () => {
-        expect(false).toBeTruthy();
-      });
-      it('should set the global status to failed', () => {
-        expect(false).toBeTruthy();
-      });
-    });
+    delete error.response;
+    // general error
+    testSaga(fetchData, { ...action, payload: { vboId } })
+      .next()
+      .put(appActions.resetProgress())
+      .next()
+      .put(appActions.statusPending())
+      .next()
+      .put(appActions.resetGlobalError())
+      .next()
+      .put(appActions.maxProgressCount(10))
+      .throw(error)
+      .put(appActions.showGlobalError('unknown_error'))
+      .next()
+      .put(appActions.statusFailed(error))
+      .next()
+      .isDone();
   });
 });

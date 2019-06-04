@@ -53,9 +53,10 @@ export function* fetchData(action) {
       yield put(maxProgressCount(11));
 
       // fetch vboId from VERBLIJFSOBJECT_API with brkId param
-      landelijkVboId = yield* fetchVerblijfsobjectId(brkId);
+      landelijkVboId = yield call(fetchVerblijfsobjectId, brkId);
     } else {
-      yield put(maxProgressCount(10));
+      const count = ligId ? 4 : 10;
+      yield put(maxProgressCount(count));
     }
 
     const vboIdentifier = vboId || landelijkVboId;
@@ -69,17 +70,15 @@ export function* fetchData(action) {
       yield call(fetchMaatschappelijkeActiviteitData);
       yield call(fetchPandlistData, vboIdentifier);
 
-      nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId());
+      nummeraanduidingId = yield select(makeSelectVBONummeraanduidingId);
     } else if (ligId) {
-      yield put(maxProgressCount(4));
-
       yield call(fetchLigplaatsData, ligId);
 
       yield put(loadKadastraalObjectDataNoResults());
       yield put(loadKadastraalSubjectNPDataNoResults());
       yield put(loadKadastraalSubjectNNPDataNoResults());
 
-      nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId());
+      nummeraanduidingId = yield select(makeSelectLIGNummeraanduidingId);
     } else {
       // no verblijfsobject or ligplaats data could be retrieved with the identifiers that we have
       // the only thing left is to try to get BRK object and/or subject data
@@ -99,7 +98,7 @@ export function* fetchData(action) {
       yield call(fetchNummeraanduidingData, nummeraanduidingId);
       yield call(fetchWoonplaatsData);
 
-      const oprId = yield select(makeSelectOpenbareRuimteId());
+      const oprId = yield select(makeSelectOpenbareRuimteId);
       yield call(fetchOpenbareRuimteData, oprId);
 
       yield put(statusSuccess());
@@ -111,7 +110,7 @@ export function* fetchData(action) {
       yield put(statusUnableToFetch());
     } else if (error.response && error.response.status === 401) {
       // unauthorized
-      const isAuthenticated = yield select(makeSelectIsAuthenticated());
+      const isAuthenticated = yield select(makeSelectIsAuthenticated);
 
       if (isAuthenticated) {
         yield put(showGlobalError('session_expired'));
