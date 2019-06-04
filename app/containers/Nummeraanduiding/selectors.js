@@ -68,23 +68,22 @@ export const makeSelectWoonplaatsId = () =>
     },
   );
 
-export const makeSelectOpenbareRuimteId = () =>
-  createSelector(
-    selectNummeraanduiding,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+export const makeSelectOpenbareRuimteId = createSelector(
+  selectNummeraanduiding,
+  state => {
+    if (!state) {
+      return undefined;
+    }
 
-      const { data } = state;
+    const { data } = state;
 
-      if (!data) {
-        return null;
-      }
+    if (!data) {
+      return null;
+    }
 
-      return data.openbare_ruimte.landelijk_id;
-    },
-  );
+    return data.openbare_ruimte.landelijk_id;
+  },
+);
 
 export const makeSelectGebiedData = () =>
   createSelector(

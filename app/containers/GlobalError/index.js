@@ -86,8 +86,8 @@ GlobalError.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  error: makeSelectError(),
-  errorMessage: makeSelectErrorMessage(),
+  error: makeSelectError,
+  errorMessage: makeSelectErrorMessage,
 });
 
 export const mapDispatchToProps = dispatch =>

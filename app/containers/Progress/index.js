@@ -23,12 +23,12 @@ ProgressContainer.propTypes = {
     current: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
   }).isRequired,
-  status: PropTypes.string,
+  status: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  progress: makeSelectProgress(),
-  status: makeSelectStatus(),
+  progress: makeSelectProgress,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

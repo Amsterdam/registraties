@@ -58,23 +58,22 @@ export const makeSelectVerblijfsobjectId = () =>
     },
   );
 
-export const makeSelectVBONummeraanduidingId = () =>
-  createSelector(
-    selectVerblijfsobject,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+export const makeSelectVBONummeraanduidingId = createSelector(
+  selectVerblijfsobject,
+  state => {
+    if (!state) {
+      return undefined;
+    }
 
-      const { data } = state;
+    const { data } = state;
 
-      if (!data) {
-        return data;
-      }
+    if (!data) {
+      return data;
+    }
 
-      return data.hoofdadres.landelijk_id;
-    },
-  );
+    return data.hoofdadres.landelijk_id;
+  },
+);
 
 export const makeSelectCoordinates = () =>
   createSelector(

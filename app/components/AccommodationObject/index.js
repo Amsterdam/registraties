@@ -23,7 +23,6 @@ import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
-import { summaryPropType } from 'utils/propTypes';
 
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
@@ -188,13 +187,13 @@ class AccommodationObjectComponent extends React.Component {
 }
 
 AccommodationObjectComponent.defaultProps = {
-  summary: {},
+  summary: undefined,
   status: undefined,
 };
 
 AccommodationObjectComponent.propTypes = {
-  summary: summaryPropType,
-  status: PropTypes.string,
+  summary: PropTypes.func,
+  status: PropTypes.func,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({
