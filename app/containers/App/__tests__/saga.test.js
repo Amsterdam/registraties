@@ -10,7 +10,7 @@ import { authorizeUser, showGlobalError } from '../actions';
 jest.mock('shared/services/auth/auth');
 jest.mock('shared/services/api/api');
 
-describe('App saga', () => {
+describe('containers/App/saga', () => {
   beforeEach(() => {
     global.window.open = jest.fn();
   });

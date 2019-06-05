@@ -6,7 +6,7 @@ import HeaderContainer from 'containers/Header';
 import Footer from 'components/Footer';
 import { App } from '../index';
 
-describe('<App />', () => {
+describe('containers/App', () => {
   const onAuthenticateUser = jest.fn();
   const showError = jest.fn();
 

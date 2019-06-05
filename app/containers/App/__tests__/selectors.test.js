@@ -7,7 +7,7 @@ import {
   makeSelectLocation,
 } from '../selectors';
 
-describe('selectors', () => {
+describe('containers/App/selectors', () => {
   it('should select the global state', () => {
     const globalState = {};
     const mockedState = {
