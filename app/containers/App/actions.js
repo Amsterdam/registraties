@@ -91,7 +91,6 @@ export const progress = payload => ({
 
 export const resetProgress = () => ({
   type: RESET_PROGRESS,
-  payload: 0,
 });
 
 export const completeProgress = () => ({

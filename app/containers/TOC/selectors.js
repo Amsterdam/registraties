@@ -1,15 +1,16 @@
 import { createSelector } from 'reselect';
 
-const selectTOC = state => state.toc;
+import { initialState } from './reducer';
 
-export const makeSelectTOC = () =>
-  createSelector(
-    selectTOC,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+const selectTOC = state => (state && state.toc) || initialState;
 
-      return state.toc;
-    },
-  );
+export const makeSelectTOC = createSelector(
+  selectTOC,
+  state => {
+    if (!state) {
+      return undefined;
+    }
+
+    return state.toc;
+  },
+);

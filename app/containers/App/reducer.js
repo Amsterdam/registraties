@@ -24,8 +24,10 @@ export const initialState = {
   error: false,
   errorMessage: '',
   loading: false,
-  maxProgressCount: 0,
-  progress: 0,
+  progress: {
+    current: 0,
+    max: 1,
+  },
   status: undefined,
   userName: undefined,
   userScopes: [],
@@ -77,23 +79,23 @@ export default (state = initialState, action) =>
         break;
 
       case PROGRESS:
-        draft.progress = payload;
+        draft.progress.current = payload;
         break;
 
       case RESET_PROGRESS:
-        draft.progress = 0;
+        draft.progress.current = 0;
         break;
 
       case COMPLETE_PROGRESS:
-        draft.progress = state.maxProgressCount;
+        draft.progress.current = state.progress.max;
         break;
 
       case INCREMENT_PROGRESS:
-        draft.progress += 1;
+        draft.progress.current += 1;
         break;
 
       case MAX_PROGRESS_COUNT:
-        draft.maxProgressCount = payload;
+        draft.progress.max = payload;
         break;
 
       case LOAD_BAG_DATA:

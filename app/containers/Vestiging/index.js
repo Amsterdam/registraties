@@ -38,8 +38,8 @@ VestigingContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectVestigingData(),
-  status: makeSelectStatus(),
+  data: makeSelectVestigingData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

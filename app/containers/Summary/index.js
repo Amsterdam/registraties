@@ -7,7 +7,7 @@ import Summary from 'components/Summary';
 import { makeSelectSummary } from './selectors';
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectSummary(),
+  data: makeSelectSummary,
 });
 
 const withConnect = connect(mapStateToProps);

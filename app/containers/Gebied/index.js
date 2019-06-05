@@ -30,8 +30,8 @@ GebiedContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectGebiedData(),
-  status: makeSelectStatus(),
+  data: makeSelectGebiedData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

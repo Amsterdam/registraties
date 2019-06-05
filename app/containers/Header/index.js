@@ -38,7 +38,7 @@ HeaderContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  userName: makeSelectUserName(),
+  userName: makeSelectUserName,
 });
 
 export const mapDispatchToProps = dispatch =>

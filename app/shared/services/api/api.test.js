@@ -47,7 +47,7 @@ describe('api service', () => {
         },
       };
       const gen = authCall(url, params);
-      expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next().value).toEqual(select(makeSelectAccessToken)); // eslint-disable-line redux-saga/yield-effects
       expect(gen.next(token).value).toEqual(call(request, fullUrl, options)); // eslint-disable-line redux-saga/yield-effects
     });
 
@@ -60,7 +60,7 @@ describe('api service', () => {
         },
       };
       const gen = authCall(url, params);
-      expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next().value).toEqual(select(makeSelectAccessToken)); // eslint-disable-line redux-saga/yield-effects
       expect(gen.next().value).toEqual(call(request, fullUrl, options)); // eslint-disable-line redux-saga/yield-effects
     });
 
@@ -73,7 +73,7 @@ describe('api service', () => {
         },
       };
       const gen = authCall(url, undefined);
-      expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next().value).toEqual(select(makeSelectAccessToken)); // eslint-disable-line redux-saga/yield-effects
       expect(gen.next(token).value).toEqual(call(request, url, options)); // eslint-disable-line redux-saga/yield-effects
     });
 
@@ -103,7 +103,7 @@ describe('api service', () => {
         body: JSON.stringify(params),
       };
       const gen = authPostCall(url, params);
-      expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next().value).toEqual(select(makeSelectAccessToken)); // eslint-disable-line redux-saga/yield-effects
       expect(gen.next(token).value).toEqual(call(request, fullUrl, options)); // eslint-disable-line redux-saga/yield-effects
     });
 
@@ -117,7 +117,7 @@ describe('api service', () => {
         body: JSON.stringify(params),
       };
       const gen = authPostCall(url, params);
-      expect(gen.next().value).toEqual(select(makeSelectAccessToken())); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.next().value).toEqual(select(makeSelectAccessToken)); // eslint-disable-line redux-saga/yield-effects
       expect(gen.next().value).toEqual(call(request, fullUrl, options)); // eslint-disable-line redux-saga/yield-effects
     });
   });

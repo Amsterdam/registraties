@@ -1,21 +1,22 @@
 import { createSelector } from 'reselect';
 
-const selectLigplaats = state => state.ligplaats;
+import { initialState } from './reducer';
 
-export const makeSelectLIGNummeraanduidingId = () =>
-  createSelector(
-    selectLigplaats,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+const selectLigplaats = state => (state && state.ligplaats) || initialState;
 
-      if (!state.data) {
-        return state.data;
-      }
+export const makeSelectLIGNummeraanduidingId = createSelector(
+  selectLigplaats,
+  state => {
+    if (!state) {
+      return undefined;
+    }
 
-      const { data } = state;
+    if (!state.data) {
+      return state.data;
+    }
 
-      return data.hoofdadres.landelijk_id;
-    },
-  );
+    const { data } = state;
+
+    return data.hoofdadres.landelijk_id;
+  },
+);

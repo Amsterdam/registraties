@@ -26,7 +26,7 @@ export function* authCall(url, params, authorizationToken) {
   if (authorizationToken) {
     headers.Authorization = `Bearer ${authorizationToken}`;
   } else {
-    const token = yield select(makeSelectAccessToken());
+    const token = yield select(makeSelectAccessToken);
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     }
@@ -47,7 +47,7 @@ export function* authPostCall(url, params) {
     'Content-Type': 'application/json',
   };
 
-  const token = yield select(makeSelectAccessToken());
+  const token = yield select(makeSelectAccessToken);
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }

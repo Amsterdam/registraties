@@ -3,10 +3,14 @@ import { SEARCH_SELECT, INPUT_CHANGE, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED } fr
 
 // The initial state of the App
 export const initialState = {
+  brkId: undefined,
   error: false,
+  errorMessage: '',
   input: '',
+  ligId: undefined,
   loading: false,
   results: [],
+  vboId: undefined,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -30,7 +34,8 @@ export default (state = initialState, action) =>
         break;
 
       case TYPE_AHEAD_FAILED:
-        draft.error = action.payload;
+        draft.error = true;
+        draft.errorMessage = action.payload;
         break;
     }
   });

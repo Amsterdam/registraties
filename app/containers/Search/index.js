@@ -135,7 +135,7 @@ SearchContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  results: makeSelectResults(),
+  results: makeSelectResults,
 });
 
 const mapDispatchToProps = dispatch =>

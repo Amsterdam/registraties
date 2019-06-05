@@ -3,25 +3,26 @@ import { createSelector } from 'reselect';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { formatData } from 'utils';
 
-const selectOpenbareRuimte = state => state.openbareRuimte;
+import { initialState } from './reducer';
 
-export const makeSelectOpenbareRuimteData = () =>
-  createSelector(
-    selectOpenbareRuimte,
-    makeSelectLocale(),
-    (state, locale) => {
-      if (!state) {
-        return undefined;
-      }
+const selectOpenbareRuimte = state => (state && state.openbareRuimte) || initialState;
 
-      const { data } = state;
+export const makeSelectOpenbareRuimteData = createSelector(
+  selectOpenbareRuimte,
+  makeSelectLocale,
+  (state, locale) => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!data) {
-        return data;
-      }
+    const { data } = state;
 
-      const keys = ['naam', 'type', 'openbare_ruimte_identificatie'];
+    if (!data) {
+      return data;
+    }
 
-      return formatData({ data, keys, locale });
-    },
-  );
+    const keys = ['naam', 'type', 'openbare_ruimte_identificatie'];
+
+    return formatData({ data, keys, locale });
+  },
+);

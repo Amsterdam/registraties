@@ -10,13 +10,14 @@ import { LOAD_DATA, LOAD_ID } from './constants';
 
 const { API_ROOT } = configuration;
 const VERBLIJFSOBJECT_API = `${API_ROOT}bag/verblijfsobject/`;
+export const API_BY_BRK_OBJECT_ID = `${VERBLIJFSOBJECT_API}?kadastrale_objecten__id=`;
 
 // eslint-disable-next-line consistent-return
 export function* fetchVerblijfsobjectId(adresseerbaarObjectId) {
   try {
     const data = yield call(
       request,
-      `${VERBLIJFSOBJECT_API}?kadastrale_objecten__id=${encodeURIComponent(adresseerbaarObjectId)}`,
+      `${API_BY_BRK_OBJECT_ID}${encodeURIComponent(adresseerbaarObjectId)}`,
       getRequestOptions(),
     );
 

@@ -14,6 +14,7 @@ import { OBJECTS, LOAD_BAG_DATA } from 'containers/App/constants';
 export const initialState = {
   loading: false,
   error: false,
+  toc: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
