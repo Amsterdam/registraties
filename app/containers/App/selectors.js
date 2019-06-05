@@ -1,63 +1,50 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectGlobal = state => (state && state.global) || initialState;
-const selectRoute = state => state.route;
+export const selectGlobal = state => (state && state.global) || initialState;
+const selectRoute = state => (state && state.route) || { location: '/' };
 
-const makeSelectStatus = createSelector(
+export const makeSelectStatus = createSelector(
   selectGlobal,
-  globalState => globalState.status,
+  ({ status }) => status,
 );
 
-const makeSelectUserName = createSelector(
+export const makeSelectUserName = createSelector(
   selectGlobal,
-  globalState => globalState.userName,
+  ({ userName }) => userName,
 );
 
-const makeSelectAccessToken = createSelector(
+export const makeSelectAccessToken = createSelector(
   selectGlobal,
-  globalState => globalState.accessToken,
+  ({ accessToken }) => accessToken,
 );
 
-const makeSelectLoading = createSelector(
+export const makeSelectLoading = createSelector(
   selectGlobal,
-  globalState => globalState.loading,
+  ({ loading }) => loading,
 );
 
-const makeSelectError = createSelector(
+export const makeSelectError = createSelector(
   selectGlobal,
-  globalState => globalState.error,
+  ({ error }) => error,
 );
 
-const makeSelectErrorMessage = createSelector(
+export const makeSelectErrorMessage = createSelector(
   selectGlobal,
-  globalState => globalState.errorMessage,
+  ({ errorMessage }) => errorMessage,
 );
 
-const makeSelectLocation = createSelector(
+export const makeSelectLocation = createSelector(
   selectRoute,
-  routeState => routeState.location,
+  ({ location }) => location,
 );
 
-const makeSelectIsAuthenticated = createSelector(
+export const makeSelectIsAuthenticated = createSelector(
   selectGlobal,
-  globalState => !globalState.accessToken === false,
+  ({ accessToken }) => !!accessToken,
 );
 
-const makeSelectProgress = createSelector(
+export const makeSelectProgress = createSelector(
   selectGlobal,
   ({ progress }) => progress,
 );
-
-export {
-  makeSelectAccessToken,
-  makeSelectError,
-  makeSelectErrorMessage,
-  makeSelectIsAuthenticated,
-  makeSelectLoading,
-  makeSelectLocation,
-  makeSelectProgress,
-  makeSelectStatus,
-  makeSelectUserName,
-  selectGlobal,
-};

@@ -27,7 +27,7 @@ import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors'
 
 import watchAccommodationObjectPageSaga, { fetchData } from '../saga';
 
-describe('AccommodationObjectPage/saga', () => {
+describe('containers/AccommodationObjectPage/saga', () => {
   const action = { type: appConstants.LOAD_BAG_DATA };
 
   it('should watch "LOAD_BAG_DATA" and call fetchData', () => {

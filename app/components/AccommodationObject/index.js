@@ -187,7 +187,7 @@ class AccommodationObjectComponent extends React.Component {
 }
 
 AccommodationObjectComponent.defaultProps = {
-  summary: undefined,
+  summary: {},
   status: undefined,
 };
 

@@ -13,7 +13,7 @@ import configureStore from '../../../configureStore';
 const store = configureStore({}, history);
 
 describe('AccommodationObjectPageContainer', () => {
-  it.only('should have props from structured selector', () => {
+  it('should have props from structured selector', () => {
     const vboId = 'fooBarBaz';
     const tree = mount(
       <Provider store={store}>
@@ -24,23 +24,9 @@ describe('AccommodationObjectPageContainer', () => {
     );
 
     const props = tree.find(AccommodationObjectPageComponent).props();
+
     expect(props.summary).toEqual({});
     expect(props.loadBAGData).not.toBeUndefined();
     expect(props.loadBAGData({ vboId })).toEqual(loadBAGData({ vboId }));
-  });
-
-  it('should inject saga', () => {
-    // const putSpy = jest.spyOn(effects, 'put');
-    const vboId = 'fooBarBaz';
-
-    const tree = mount(
-      <Provider store={store}>
-        <IntlProvider locale="nl" messages={messages}>
-          <AccommodationObjectPageContainer match={{ params: { vboId } }} />
-        </IntlProvider>
-      </Provider>,
-    );
-
-    console.log(tree.find(AccommodationObjectPageContainer).props());
   });
 });

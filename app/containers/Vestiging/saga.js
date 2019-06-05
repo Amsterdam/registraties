@@ -20,7 +20,7 @@ const { API_ROOT } = configuration;
 const VESTIGING_API = `${API_ROOT}handelsregister/vestiging/`;
 
 export function* fetchVestigingIdData() {
-  const vboId = yield select(makeSelectVerblijfsobjectId());
+  const vboId = yield select(makeSelectVerblijfsobjectId);
 
   try {
     if (vboId) {
