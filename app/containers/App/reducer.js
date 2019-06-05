@@ -33,6 +33,8 @@ export const initialState = {
   userScopes: [],
 };
 
+export const initialRouteState = { location: '/' };
+
 /* eslint-disable default-case, no-param-reassign */
 export default (state = initialState, action) =>
   produce(state, draft => {
