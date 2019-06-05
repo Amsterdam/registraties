@@ -7,6 +7,7 @@
 
 // Needed for redux-saga es6 generator support
 import '@babel/polyfill';
+import * as Sentry from '@sentry/browser';
 
 // Import all the third party stuff
 import React from 'react';
@@ -58,6 +59,13 @@ if (module.hot) {
     render(translationMessages);
   });
 }
+
+const environment = process.env.NODE_ENV;
+
+Sentry.init({
+  environment,
+  dsn: 'https://e102f85871f147a182e002f4e1a2b631@sentry.data.amsterdam.nl/15',
+});
 
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {

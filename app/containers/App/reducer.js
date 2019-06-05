@@ -13,6 +13,7 @@ import {
   PROGRESS,
   RESET_GLOBAL_ERROR,
   RESET_PROGRESS,
+  SHOW_FEEDBACK_BUTTON,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -22,6 +23,7 @@ import {
 export const initialState = {
   accessToken: undefined,
   error: false,
+  errorEventId: undefined,
   errorMessage: '',
   loading: false,
   maxProgressCount: 0,
@@ -54,6 +56,7 @@ export default (state = initialState, action) =>
         draft.error = false;
         draft.errorMessage = '';
         draft.loading = false;
+        draft.errorEventId = undefined;
         break;
 
       case LOAD_DATA_PENDING:
@@ -100,6 +103,10 @@ export default (state = initialState, action) =>
         draft.vboId = payload.vboId;
         draft.ligId = payload.ligId;
         draft.brkId = payload.brkId;
+        break;
+
+      case SHOW_FEEDBACK_BUTTON:
+        draft.errorEventId = payload.eventId;
         break;
     }
   });

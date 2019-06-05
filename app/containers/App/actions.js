@@ -13,6 +13,7 @@ import {
   PROGRESS,
   RESET_GLOBAL_ERROR,
   RESET_PROGRESS,
+  SHOW_FEEDBACK_BUTTON,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -110,4 +111,9 @@ export const maxProgressCount = payload => ({
 export const loadBAGData = payload => ({
   type: LOAD_BAG_DATA,
   payload,
+});
+
+export const errorOccurred = eventId => ({
+  type: SHOW_FEEDBACK_BUTTON,
+  payload: { eventId },
 });

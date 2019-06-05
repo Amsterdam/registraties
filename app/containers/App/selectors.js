@@ -61,6 +61,12 @@ const makeSelectProgress = () =>
     }),
   );
 
+const makeSelectErrorEventId = () =>
+  createSelector(
+    selectGlobal,
+    ({ errorEventId }) => errorEventId,
+  );
+
 export {
   makeSelectAccessToken,
   makeSelectError,
@@ -69,6 +75,7 @@ export {
   makeSelectLoading,
   makeSelectLocation,
   makeSelectProgress,
+  makeSelectErrorEventId,
   makeSelectStatus,
   makeSelectUserName,
   selectGlobal,

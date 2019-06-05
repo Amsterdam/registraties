@@ -51,5 +51,19 @@
   "registraties.service_unavailable": "Een van de databronnen is niet beschikbaar. Probeer het over een paar minuten nogmaals.",
   "registraties.filled_in_by": "Ingevuld door",
   "registraties.resource_not_found": "Een of meerdere databronnen zijn niet beschikbaar of retourneerden geen gegevens. Controleer de URL of probeer het over enkele minuten nogmaals.",
-  "registraties.no_vbo_data_available": "Er konden geen verblijfsobject gegevens gevonden worden in de basisregistratie"
+  "registraties.no_vbo_data_available": "Er konden geen verblijfsobject gegevens gevonden worden in de basisregistratie",
+  "registraties.login_failed": "Inloggen mislukt. Probeer het (later) nogmaals.",
+  "registraties.logout_failed": "Uitloggen op dit moment niet mogelijk. Probeer het (later) nogmaals.",
+  "registraties.authorize_failed": "Authorisatie kon niet voltooid worden. Probeer het (later) nogmaals.",
+  "registraties.error_reporting_title": "Er lijkt iets mis te zijn gegaan",
+  "registraties.error_reporting_subtitle": "Er is een foutmeldingsrapport verstuurd.",
+  "registraties.error_reporting_subtitle2": "Zou je ons willen laten weten wat er fout ging? Met deze informatie kunnen we het probleem sneller oplossen.",
+  "registraties.error_reporting_label_name": "Naam",
+  "registraties.error_reporting_label_email": "E-mail",
+  "registraties.error_reporting_label_comments": "Wat ging er fout?",
+  "registraties.error_reporting_label_close": "Sluit",
+  "registraties.error_reporting_label_submit": "Versturen",
+  "registraties.error_reporting_success_message": "Je bericht is verstuurd. Bedankt voor de moeite!",
+  "registraties.error_reporting_error_generic": "Er ging iets niet goed met het versturen van je feedback. Probeer het nogmaals.",
+  "registraties.error_reporting_error_form": "Niet alle velden zijn correct ingevuld."
 }

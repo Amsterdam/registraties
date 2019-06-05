@@ -53,16 +53,17 @@ describe('App saga', () => {
     it('should success', () => {
       getOauthDomain.mockImplementation(() => '');
       const gen = callLogout();
+      gen.next();
+      expect(logout).toHaveBeenCalledWith();
       const { value } = gen.next();
       expect(value).toEqual(put(push('/'))); // eslint-disable-line redux-saga/yield-effects
-      expect(logout).toHaveBeenCalledWith();
     });
 
     it('should error', () => {
       // const error = new Error();
       const gen = callLogout();
       gen.next();
-      expect(gen.throw().value).toEqual(put(showGlobalError('LOGOUT_FAILED'))); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.throw().value).toEqual(put(showGlobalError('logout_failed'))); // eslint-disable-line redux-saga/yield-effects
     });
   });
 
@@ -111,7 +112,7 @@ describe('App saga', () => {
     it('should error', () => {
       const gen = callAuthorize({ payload });
       gen.next();
-      expect(gen.throw().value).toEqual(put(showGlobalError('AUTHORIZE_FAILED'))); // eslint-disable-line redux-saga/yield-effects
+      expect(gen.throw().value).toEqual(put(showGlobalError('authorize_failed'))); // eslint-disable-line redux-saga/yield-effects
     });
   });
 });

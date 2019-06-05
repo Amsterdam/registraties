@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 import styled from 'styled-components';
+import * as Sentry from '@sentry/browser';
 
 import CloseIcon from '@datapunt/asc-assets/lib/Icons/Close.svg';
+import AlertIcon from '@datapunt/asc-assets/lib/Icons/Alert.svg';
 
-import { makeSelectError, makeSelectErrorMessage } from 'containers/App/selectors';
+import { makeSelectError, makeSelectErrorMessage, makeSelectErrorEventId } from 'containers/App/selectors';
 import appMessages from 'containers/App/messages';
 import { resetGlobalError } from 'containers/App/actions';
 
@@ -29,8 +31,8 @@ const ErrorContainer = styled.div`
 
 const P = styled.p`
   margin: 0;
-  float: left;
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 60px);
+  flex: 1;
 `;
 
 const Button = styled.button`
@@ -56,26 +58,48 @@ const Label = styled.span`
   width: 1px;
 `;
 
-export const GlobalError = ({ error, errorMessage, intl, onClose }) => (
-  <Fragment>
-    {error ? (
+export const GlobalError = ({ error, errorMessage, intl, onClose, errorEventId }) => {
+  const showReportDialog = () => {
+    Sentry.showReportDialog({
+      eventId: errorEventId,
+      title: intl.formatMessage(errorMessages.error_reporting_title),
+      subtitle: intl.formatMessage(errorMessages.error_reporting_subtitle),
+      subtitle2: intl.formatMessage(errorMessages.error_reporting_subtitle2),
+      labelName: intl.formatMessage(errorMessages.error_reporting_label_name),
+      labelEmail: intl.formatMessage(errorMessages.error_reporting_label_email),
+      labelComments: intl.formatMessage(errorMessages.error_reporting_label_comments),
+      labelClose: intl.formatMessage(errorMessages.error_reporting_label_close),
+      labelSubmit: intl.formatMessage(errorMessages.error_reporting_label_submit),
+      errorGeneric: intl.formatMessage(errorMessages.error_reporting_error_generic),
+      errorFormEntry: intl.formatMessage(errorMessages.error_reporting_error_form),
+      successMessage: intl.formatMessage(errorMessages.error_reporting_success_message),
+    });
+  };
+
+  return (
+    error && (
       <ErrorWrapper className="no-print cf">
         <ErrorContainer>
           <P>{intl.formatMessage(errorMessages[errorMessage])}</P>
+          {errorEventId && (
+            <Button type="button" onClick={showReportDialog} title="Report feedback">
+              <AlertIcon focusable="false" width={20} fill="#fff" />
+              <Label>Report feedback</Label>
+            </Button>
+          )}
           <Button type="button" onClick={onClose}>
-            <CloseIcon focusable="false" width={14} fill="#fff" />
+            <CloseIcon focusable="false" width={20} fill="#fff" />
             <Label>{intl.formatMessage(appMessages.close)}</Label>
           </Button>
         </ErrorContainer>
       </ErrorWrapper>
-    ) : (
-      ''
-    )}
-  </Fragment>
-);
+    )
+  );
+};
 
 GlobalError.defaultProps = {
   error: false,
+  errorEventId: undefined,
 };
 
 GlobalError.propTypes = {
@@ -83,11 +107,13 @@ GlobalError.propTypes = {
   errorMessage: PropTypes.string,
   intl: intlShape.isRequired,
   onClose: PropTypes.func,
+  errorEventId: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
   error: makeSelectError(),
   errorMessage: makeSelectErrorMessage(),
+  errorEventId: makeSelectErrorEventId(),
 });
 
 export const mapDispatchToProps = dispatch =>
