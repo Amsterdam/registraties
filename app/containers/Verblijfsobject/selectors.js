@@ -1,62 +1,63 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+import { initialState as ligplaatsInitialState } from 'containers/Ligplaats/reducer';
 import { formatData } from 'utils';
 
-const selectVerblijfsobject = state => state.verblijfsobject;
-const selectLigplaats = state => state.ligplaats;
+import { initialState } from './reducer';
 
-export const makeSelectVerblijfsobjectData = () =>
-  createSelector(
-    selectVerblijfsobject,
-    makeSelectLocale(),
-    (state, locale) => {
-      if (!state) {
-        return undefined;
-      }
+const selectVerblijfsobject = state => (state && state.verblijfsobject) || initialState;
+const selectLigplaats = state => (state && state.ligplaats) || ligplaatsInitialState;
 
-      const { data } = state;
+export const makeSelectVerblijfsobjectData = createSelector(
+  selectVerblijfsobject,
+  makeSelectLocale,
+  (state, locale) => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!data) {
-        return data;
-      }
+    const { data } = state;
 
-      const keys = [
-        'aanduiding_in_onderzoek',
-        'aantal_kamers',
-        'bouwlagen',
-        'eigendomsverhouding',
-        'gebruik',
-        'gebruiksdoelen',
-        'indicatie_geconstateerd',
-        'oppervlakte',
-        'status',
-        'toegang',
-        'verblijfsobjectidentificatie',
-        'verhuurbare_eenheden',
-      ];
+    if (!data) {
+      return data;
+    }
 
-      return formatData({ data, keys, locale });
-    },
-  );
+    const keys = [
+      'aanduiding_in_onderzoek',
+      'aantal_kamers',
+      'bouwlagen',
+      'eigendomsverhouding',
+      'gebruik',
+      'gebruiksdoelen',
+      'indicatie_geconstateerd',
+      'oppervlakte',
+      'status',
+      'toegang',
+      'verblijfsobjectidentificatie',
+      'verhuurbare_eenheden',
+    ];
 
-export const makeSelectVerblijfsobjectId = () =>
-  createSelector(
-    selectVerblijfsobject,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+    return formatData({ data, keys, locale });
+  },
+);
 
-      const { data } = state;
+export const makeSelectVerblijfsobjectId = createSelector(
+  selectVerblijfsobject,
+  state => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!data) {
-        return data;
-      }
+    const { data } = state;
 
-      return data.verblijfsobjectidentificatie;
-    },
-  );
+    if (!data) {
+      return data;
+    }
+
+    return data.verblijfsobjectidentificatie;
+  },
+);
 
 export const makeSelectVBONummeraanduidingId = createSelector(
   selectVerblijfsobject,
@@ -75,33 +76,32 @@ export const makeSelectVBONummeraanduidingId = createSelector(
   },
 );
 
-export const makeSelectCoordinates = () =>
-  createSelector(
-    selectVerblijfsobject,
-    selectLigplaats,
-    (vbo, lig) => {
-      const hasVboData = !!vbo && !!vbo.data;
-      const hasLigData = !!lig && !!lig.data;
-      if (!hasVboData && !hasLigData) {
-        return undefined;
-      }
+export const makeSelectCoordinates = createSelector(
+  selectVerblijfsobject,
+  selectLigplaats,
+  (vbo, lig) => {
+    const hasVboData = !!vbo && !!vbo.data;
+    const hasLigData = !!lig && !!lig.data;
+    if (!hasVboData && !hasLigData) {
+      return undefined;
+    }
 
-      const data = vbo.data || lig.data;
+    const data = vbo.data || lig.data;
 
-      if (!data || (!data.bbox && !data.geometrie)) {
-        return undefined;
-      }
+    if (!data || (!data.bbox && !data.geometrie)) {
+      return undefined;
+    }
 
-      let x;
-      let y;
+    let x;
+    let y;
 
-      if (data.geometrie.type === 'Point') {
-        [x, y] = data.geometrie.coordinates;
-      } else {
-        x = Math.floor((data.bbox[2] + data.bbox[0]) / 2);
-        y = Math.floor((data.bbox[3] + data.bbox[1]) / 2);
-      }
+    if (data.geometrie.type === 'Point') {
+      [x, y] = data.geometrie.coordinates;
+    } else {
+      x = Math.floor((data.bbox[2] + data.bbox[0]) / 2);
+      y = Math.floor((data.bbox[3] + data.bbox[1]) / 2);
+    }
 
-      return { x, y };
-    },
-  );
+    return { x, y };
+  },
+);

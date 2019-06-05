@@ -1,66 +1,69 @@
 import { createSelector } from 'reselect';
+
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+import { initialState as maatschappelijkeActiviteitInitialState } from 'containers/MaatschappelijkeActiviteit/reducer';
 import { formatData } from 'utils';
 
-const selectVestiging = state => state.vestiging;
-const selectMaatschappelijkeActiviteit = state => state.maatschappelijkeActiviteit;
+import { initialState } from './reducer';
 
-export const makeSelectVestigingData = () =>
-  createSelector(
-    selectVestiging,
-    selectMaatschappelijkeActiviteit,
-    makeSelectLocale(),
-    (vestiging, maatschappelijkeActiviteit, locale) => {
-      if (!vestiging || !maatschappelijkeActiviteit) {
-        return undefined;
-      }
+const selectVestiging = state => (state && state.vestiging) || initialState;
+const selectMaatschappelijkeActiviteit = state =>
+  (state && state.maatschappelijkeActiviteit) || maatschappelijkeActiviteitInitialState;
 
-      if (!vestiging.data || !maatschappelijkeActiviteit.data) {
-        return undefined;
-      }
+export const makeSelectVestigingData = createSelector(
+  selectVestiging,
+  selectMaatschappelijkeActiviteit,
+  makeSelectLocale,
+  (vestiging, maatschappelijkeActiviteit, locale) => {
+    if (!vestiging || !maatschappelijkeActiviteit) {
+      return undefined;
+    }
 
-      const keys = [
-        'activiteiten',
-        'vestigingsnummer',
-        'naam',
-        'datum_aanvang',
-        'kvk_nummer',
-        'postadres',
-        'bezoekadres',
-        'activiteiten.activiteitsomschrijving',
-        'activiteiten.sbi_code',
-        'activiteiten.sbi_omschrijving',
-      ];
+    if (!vestiging.data || !maatschappelijkeActiviteit.data) {
+      return undefined;
+    }
 
-      const data = vestiging.data.map((obj, index) => {
-        const vestigingObj = { ...obj };
-        const maatschappelijkeActiviteitObj = maatschappelijkeActiviteit.data[index];
+    const keys = [
+      'activiteiten',
+      'vestigingsnummer',
+      'naam',
+      'datum_aanvang',
+      'kvk_nummer',
+      'postadres',
+      'bezoekadres',
+      'activiteiten.activiteitsomschrijving',
+      'activiteiten.sbi_code',
+      'activiteiten.sbi_omschrijving',
+    ];
 
-        vestigingObj.kvk_nummer = maatschappelijkeActiviteitObj.kvk_nummer;
-        vestigingObj.postadres = vestigingObj.postadres.volledig_adres;
-        vestigingObj.bezoekadres = vestigingObj.bezoekadres.volledig_adres;
+    const data = vestiging.data.map((obj, index) => {
+      const vestigingObj = { ...obj };
+      const maatschappelijkeActiviteitObj = maatschappelijkeActiviteit.data[index];
 
-        return vestigingObj;
-      });
+      vestigingObj.kvk_nummer = maatschappelijkeActiviteitObj.kvk_nummer;
+      vestigingObj.postadres = vestigingObj.postadres.volledig_adres;
+      vestigingObj.bezoekadres = vestigingObj.bezoekadres.volledig_adres;
 
-      return data.map(dataObj => formatData({ data: dataObj, keys, locale }));
-    },
-  );
+      return vestigingObj;
+    });
 
-export const makeSelectMaatschappelijkeActiviteitIds = () =>
-  createSelector(
-    selectVestiging,
-    state => {
-      if (!state) {
-        return undefined;
-      }
+    return data.map(dataObj => formatData({ data: dataObj, keys, locale }));
+  },
+);
 
-      const { data } = state;
+export const makeSelectMaatschappelijkeActiviteitIds = createSelector(
+  selectVestiging,
+  state => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!data) {
-        return data;
-      }
+    const { data } = state;
 
-      return data.map(({ maatschappelijke_activiteit: ma }) => ma.replace(/(?:[^\d]+)(\d+)(?:[^\d]*)/, '$1'));
-    },
-  );
+    if (!data) {
+      return data;
+    }
+
+    return data.map(({ maatschappelijke_activiteit: ma }) => ma.replace(/(?:[^\d]+)(\d+)(?:[^\d]*)/, '$1'));
+  },
+);

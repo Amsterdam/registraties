@@ -7,10 +7,12 @@ import Progress from 'components/Progress';
 import { makeSelectProgress, makeSelectStatus } from 'containers/App/selectors';
 import { LOAD_DATA_FAILED } from 'containers/App/constants';
 
-const ProgressContainer = ({ progress: { current, max }, status }) => {
+const ProgressContainer = ({ progress, status }) => {
+  const { current, max } = progress;
   const statusFailed = status === LOAD_DATA_FAILED;
   const className = statusFailed ? 'finished' : '';
   const now = statusFailed ? 1 : current / max;
+
   return <Progress now={now} labelPosition="bottom" className={className} />;
 };
 
@@ -23,7 +25,7 @@ ProgressContainer.propTypes = {
     current: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
   }).isRequired,
-  status: PropTypes.func,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -1,22 +1,32 @@
 import React from 'react';
-// import * as effects from 'redux-saga/effects';
-// import { render, cleanup, fireEvent } from 'react-testing-library';
 import { mount } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 import history from 'utils/history';
 import { Provider } from 'react-redux';
 
-// import * as actions from 'containers/App/actions';
+import { loadBAGData } from 'containers/App/actions';
 
 import messages from '../../../translations/nl.json';
-import AccommodationObjectPageContainer from '..';
-
+import AccommodationObjectPageContainer, { AccommodationObjectPageComponent } from '..';
 import configureStore from '../../../configureStore';
-const store = configureStore({ global: { status: undefined } }, history);
+
+const store = configureStore({}, history);
 
 describe('AccommodationObjectPageContainer', () => {
-  it('should export a composed component', () => {
-    expect(AccommodationObjectPageContainer).toBeInstanceOf('Foo');
+  it.only('should have props from structured selector', () => {
+    const vboId = 'fooBarBaz';
+    const tree = mount(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <AccommodationObjectPageContainer match={{ params: { vboId } }} />
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const props = tree.find(AccommodationObjectPageComponent).props();
+    expect(props.summary).toEqual({});
+    expect(props.loadBAGData).not.toBeUndefined();
+    expect(props.loadBAGData({ vboId })).toEqual(loadBAGData({ vboId }));
   });
 
   it('should inject saga', () => {

@@ -35,8 +35,8 @@ PandContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectPandData(),
-  status: makeSelectStatus(),
+  data: makeSelectPandData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

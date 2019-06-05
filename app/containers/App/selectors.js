@@ -1,14 +1,13 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectGlobal = state => state.global || initialState;
+const selectGlobal = state => (state && state.global) || initialState;
 const selectRoute = state => state.route;
 
-const makeSelectStatus = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.status,
-  );
+const makeSelectStatus = createSelector(
+  selectGlobal,
+  globalState => globalState.status,
+);
 
 const makeSelectUserName = createSelector(
   selectGlobal,
@@ -47,10 +46,7 @@ const makeSelectIsAuthenticated = createSelector(
 
 const makeSelectProgress = createSelector(
   selectGlobal,
-  ({ progress, maxProgressCount }) => ({
-    current: progress,
-    max: maxProgressCount,
-  }),
+  ({ progress }) => progress,
 );
 
 export {

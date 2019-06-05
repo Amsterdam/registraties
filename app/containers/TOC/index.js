@@ -12,7 +12,7 @@ import reducer from './reducer';
 const Intl = injectIntl(TOC);
 
 const mapStateToProps = createStructuredSelector({
-  sections: makeSelectTOC(),
+  sections: makeSelectTOC,
 });
 
 const withConnect = connect(mapStateToProps);

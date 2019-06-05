@@ -192,8 +192,8 @@ AccommodationObjectComponent.defaultProps = {
 };
 
 AccommodationObjectComponent.propTypes = {
-  summary: PropTypes.func,
-  status: PropTypes.func,
+  summary: PropTypes.shape({}),
+  status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,
   match: PropTypes.shape({

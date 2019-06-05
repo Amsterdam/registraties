@@ -3,25 +3,26 @@ import { createSelector } from 'reselect';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { formatData } from 'utils';
 
-const selectWoonplaatsData = state => state.woonplaats;
+import { initialState } from './reducer';
 
-export const makeSelectWoonplaatsData = () =>
-  createSelector(
-    selectWoonplaatsData,
-    makeSelectLocale(),
-    (state, locale) => {
-      if (!state) {
-        return undefined;
-      }
+const selectWoonplaatsData = state => (state && state.woonplaats) || initialState;
 
-      const { data } = state;
+export const makeSelectWoonplaatsData = createSelector(
+  selectWoonplaatsData,
+  makeSelectLocale,
+  (state, locale) => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!data) {
-        return data;
-      }
+    const { data } = state;
 
-      const keys = ['naam', 'woonplaatsidentificatie'];
+    if (!data) {
+      return data;
+    }
 
-      return formatData({ data, keys, locale });
-    },
-  );
+    const keys = ['naam', 'woonplaatsidentificatie'];
+
+    return formatData({ data, keys, locale });
+  },
+);

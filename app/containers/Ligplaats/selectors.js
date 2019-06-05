@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectLigplaats = state => state.ligplaats;
+import { initialState } from './reducer';
+
+const selectLigplaats = state => (state && state.ligplaats) || initialState;
 
 export const makeSelectLIGNummeraanduidingId = createSelector(
   selectLigplaats,

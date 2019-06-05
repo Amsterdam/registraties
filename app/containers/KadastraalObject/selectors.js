@@ -2,39 +2,39 @@ import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { formatData, isArray, isAppartment } from 'utils';
+import { initialState } from './reducer';
 
-const selectKadastraalObject = state => state.kadastraalObject;
+const selectKadastraalObject = state => (state && state.kadastraalObject) || initialState;
 
-export const makeSelectKadastraalObjectData = () =>
-  createSelector(
-    selectKadastraalObject,
-    makeSelectLocale(),
-    (state, locale) => {
-      if (!state) {
-        return undefined;
-      }
+export const makeSelectKadastraalObjectData = createSelector(
+  selectKadastraalObject,
+  makeSelectLocale,
+  (state, locale) => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!state.data) {
-        return state.data;
-      }
+    if (!state.data) {
+      return state.data;
+    }
 
-      const { data: { results } = {} } = state;
+    const { data: { results } = {} } = state;
 
-      const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
+    const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
 
-      if (results) {
-        return results.map(object => formatData({ data: object, keys, locale }));
-      }
+    if (results) {
+      return results.map(object => formatData({ data: object, keys, locale }));
+    }
 
-      const { data } = state;
+    const { data } = state;
 
-      if (data.id) {
-        return formatData({ data, keys });
-      }
+    if (data.id) {
+      return formatData({ data, keys });
+    }
 
-      return null;
-    },
-  );
+    return null;
+  },
+);
 
 export const makeSelectFromObjectAppartment = key =>
   createSelector(
