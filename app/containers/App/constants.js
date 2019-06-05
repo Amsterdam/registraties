@@ -14,7 +14,7 @@ export const UNAUTHORIZED = `${containerScope}/UNAUTHORIZED`;
 export const AUTHENTICATE_USER = `${containerScope}/AUTHENTICATE_USER`;
 export const AUTHORIZE_USER = `${containerScope}/AUTHORIZE_USER`;
 
-export const SHOW_FEEDBACK_BUTTON = `${containerScope}/SHOW_FEEDBACK_BUTTON`;
+export const EXCEPTION_OCCURRED = `${containerScope}/EXCEPTION_OCCURRED`;
 export const SHOW_GLOBAL_ERROR = `${containerScope}/SHOW_GLOBAL_ERROR`;
 export const RESET_GLOBAL_ERROR = `${containerScope}/App/RESET_GLOBAL_ERROR`;
 

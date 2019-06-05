@@ -31,8 +31,8 @@ KadastraalObjectContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectKadastraalObjectData(),
-  status: makeSelectStatus(),
+  data: makeSelectKadastraalObjectData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

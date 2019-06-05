@@ -7,7 +7,7 @@ import CONFIGURATION from 'shared/services/configuration/configuration';
 import { login, logout } from 'shared/services/auth/auth';
 
 import { LOGOUT, LOGIN } from './constants';
-import { showGlobalError, authorizeUser, errorOccurred } from './actions';
+import { showGlobalError, authorizeUser, exceptionOccurred } from './actions';
 
 export const baseUrl = `${CONFIGURATION.API_ROOT}signals/auth/me`;
 
@@ -17,7 +17,7 @@ export function* callLogin(action) {
   } catch (error) {
     yield put(showGlobalError('login_failed'));
     const eventId = Sentry.captureException(error);
-    yield put(errorOccurred(eventId));
+    yield put(exceptionOccurred(eventId));
   }
 }
 
@@ -28,7 +28,7 @@ export function* callLogout() {
   } catch (error) {
     yield put(showGlobalError('logout_failed'));
     const eventId = Sentry.captureException(error);
-    yield put(errorOccurred(eventId));
+    yield put(exceptionOccurred(eventId));
   }
 }
 
@@ -46,7 +46,7 @@ export function* callAuthorize(action) {
   } catch (error) {
     yield put(showGlobalError('authorize_failed'));
     const eventId = Sentry.captureException(error);
-    yield put(errorOccurred(eventId));
+    yield put(exceptionOccurred(eventId));
   }
 }
 

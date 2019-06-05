@@ -37,8 +37,8 @@ NummeraanduidingContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectNummeraanduidingData(),
-  status: makeSelectStatus(),
+  data: makeSelectNummeraanduidingData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

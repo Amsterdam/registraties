@@ -10,11 +10,11 @@ import { loadBAGData } from 'containers/App/actions';
 import AccObjPageComponent from 'components/AccommodationObject';
 import saga from './saga';
 
-const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
+export const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);
 
 const mapStateToProps = createStructuredSelector({
-  summary: makeSelectSummary(),
-  status: makeSelectStatus(),
+  summary: makeSelectSummary,
+  status: makeSelectStatus,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -30,8 +30,9 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
+const withInjectSaga = injectSaga({ key: 'accObjPage', saga });
+
 export default compose(
-  injectSaga({ key: 'accObjPage', saga }),
   withConnect,
-  injectIntl,
+  withInjectSaga,
 )(AccommodationObjectPageComponent);

@@ -85,9 +85,9 @@ exports[`AccommodationObject should render without problems 1`] = `
 }
 
 .c2::before {
-  -webkit-transform: rotate(NaNdeg);
-  -ms-transform: rotate(NaNdeg);
-  transform: rotate(NaNdeg);
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .c2::after {
@@ -299,7 +299,7 @@ exports[`AccommodationObject should render without problems 1`] = `
       class="c3"
       data-testid="progress-label"
     >
-      NaN %
+      0 %
     </div>
   </div>
   <article
@@ -499,9 +499,9 @@ exports[`AccommodationObject should render without problems 2`] = `
 }
 
 .c0::before {
-  -webkit-transform: rotate(NaNdeg);
-  -ms-transform: rotate(NaNdeg);
-  transform: rotate(NaNdeg);
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .c0::after {
@@ -522,7 +522,7 @@ exports[`AccommodationObject should render without problems 2`] = `
       class="Progress__Label-yfxggj-2 fWvHLa"
       data-testid="progress-label"
     >
-      NaN %
+      0 %
     </div>
   </div>
   <article

@@ -12,7 +12,7 @@ const { API_ROOT } = configuration;
 const MA_API = `${API_ROOT}handelsregister/maatschappelijkeactiviteit/`;
 
 export function* fetchMaatschappelijkeActiviteitData() {
-  const maIds = yield select(makeSelectMaatschappelijkeActiviteitIds());
+  const maIds = yield select(makeSelectMaatschappelijkeActiviteitIds);
 
   try {
     if (maIds) {

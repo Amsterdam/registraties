@@ -2,39 +2,39 @@ import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { formatData, isArray, isValidSubjectNNP } from 'utils';
+import { initialState } from './reducer';
 
-const selectKadastraalSubjectNNP = state => state.kadastraalSubjectNNP;
+const selectKadastraalSubjectNNP = state => (state && state.kadastraalSubjectNNP) || initialState;
 
 /**
  * Niet-natuurlijk persoon
  */
-export const makeSelectKadastraalSubjectNNPData = () =>
-  createSelector(
-    selectKadastraalSubjectNNP,
-    makeSelectLocale(),
-    (state, locale) => {
-      if (!state) {
-        return undefined;
-      }
+export const makeSelectKadastraalSubjectNNPData = createSelector(
+  selectKadastraalSubjectNNP,
+  makeSelectLocale,
+  (state, locale) => {
+    if (!state) {
+      return undefined;
+    }
 
-      if (!state.data) {
-        return state.data;
-      }
+    if (!state.data) {
+      return state.data;
+    }
 
-      const { data } = state;
+    const { data } = state;
 
-      if (!isArray(data) || !data.length) {
-        return data;
-      }
+    if (!isArray(data) || !data.length) {
+      return data;
+    }
 
-      const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
+    const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 
-      const results = data.filter(isValidSubjectNNP).map(subject => formatData({ data: subject, keys, locale }));
+    const results = data.filter(isValidSubjectNNP).map(subject => formatData({ data: subject, keys, locale }));
 
-      if (!results.length) {
-        return null;
-      }
+    if (!results.length) {
+      return null;
+    }
 
-      return results;
-    },
-  );
+    return results;
+  },
+);

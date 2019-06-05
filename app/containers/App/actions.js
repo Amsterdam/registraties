@@ -2,6 +2,7 @@ import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
   COMPLETE_PROGRESS,
+  EXCEPTION_OCCURRED,
   INCREMENT_PROGRESS,
   LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
@@ -13,7 +14,6 @@ import {
   PROGRESS,
   RESET_GLOBAL_ERROR,
   RESET_PROGRESS,
-  SHOW_FEEDBACK_BUTTON,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -92,7 +92,6 @@ export const progress = payload => ({
 
 export const resetProgress = () => ({
   type: RESET_PROGRESS,
-  payload: 0,
 });
 
 export const completeProgress = () => ({
@@ -113,7 +112,7 @@ export const loadBAGData = payload => ({
   payload,
 });
 
-export const errorOccurred = eventId => ({
-  type: SHOW_FEEDBACK_BUTTON,
-  payload: { eventId },
+export const exceptionOccurred = eventId => ({
+  type: EXCEPTION_OCCURRED,
+  payload: eventId,
 });

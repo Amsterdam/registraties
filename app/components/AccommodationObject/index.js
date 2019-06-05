@@ -23,7 +23,6 @@ import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
-import { summaryPropType } from 'utils/propTypes';
 
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
@@ -193,7 +192,7 @@ AccommodationObjectComponent.defaultProps = {
 };
 
 AccommodationObjectComponent.propTypes = {
-  summary: summaryPropType,
+  summary: PropTypes.shape({}),
   status: PropTypes.string,
   intl: intlShape.isRequired,
   loadBAGData: PropTypes.func.isRequired,

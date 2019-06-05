@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GlobalError /> rendering should render showing no error by default 1`] = `ShallowWrapper {}`;
+exports[`<GlobalError /> should render a feedback button 1`] = `ReactWrapper {}`;
+
+exports[`<GlobalError /> should render showing an error when defined 1`] = `null`;

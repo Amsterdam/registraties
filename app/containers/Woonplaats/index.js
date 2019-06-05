@@ -35,8 +35,8 @@ WoonplaatsContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectWoonplaatsData(),
-  status: makeSelectStatus(),
+  data: makeSelectWoonplaatsData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

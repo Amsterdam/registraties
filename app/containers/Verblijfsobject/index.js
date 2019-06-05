@@ -34,8 +34,8 @@ VerblijfsObjectContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectVerblijfsobjectData(),
-  status: makeSelectStatus(),
+  data: makeSelectVerblijfsobjectData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

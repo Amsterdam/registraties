@@ -198,16 +198,16 @@ CSVDownloadContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  OPENBARE_RUIMTE: makeSelectOpenbareRuimteData(),
-  WOONPLAATS: makeSelectWoonplaatsData(),
-  NUMMERAANDUIDING: makeSelectNummeraanduidingData(),
-  VERBLIJFSOBJECT: makeSelectVerblijfsobjectData(),
-  PAND: makeSelectPandData(),
-  KADASTRAAL_OBJECT: makeSelectKadastraalObjectData(),
-  KADASTRAAL_SUBJECT_NNP: makeSelectKadastraalSubjectNNPData(),
-  KADASTRAAL_SUBJECT_NP: makeSelectKadastraalSubjectNPData(),
-  VESTIGING: makeSelectVestigingData(),
-  GEBIED: makeSelectGebiedData(),
+  OPENBARE_RUIMTE: makeSelectOpenbareRuimteData,
+  WOONPLAATS: makeSelectWoonplaatsData,
+  NUMMERAANDUIDING: makeSelectNummeraanduidingData,
+  VERBLIJFSOBJECT: makeSelectVerblijfsobjectData,
+  PAND: makeSelectPandData,
+  KADASTRAAL_OBJECT: makeSelectKadastraalObjectData,
+  KADASTRAAL_SUBJECT_NNP: makeSelectKadastraalSubjectNNPData,
+  KADASTRAAL_SUBJECT_NP: makeSelectKadastraalSubjectNPData,
+  VESTIGING: makeSelectVestigingData,
+  GEBIED: makeSelectGebiedData,
 });
 
 const withConnect = connect(mapStateToProps);

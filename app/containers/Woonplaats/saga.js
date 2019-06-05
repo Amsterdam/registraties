@@ -12,7 +12,7 @@ const { API_ROOT } = configuration;
 const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
 
 export function* fetchWoonplaatsData() {
-  const woonplaatsId = yield select(makeSelectWoonplaatsId());
+  const woonplaatsId = yield select(makeSelectWoonplaatsId);
 
   if (!woonplaatsId) {
     yield put(loadDataNoResults());

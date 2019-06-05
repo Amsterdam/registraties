@@ -35,8 +35,8 @@ OpenbareRuimteContainer.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectOpenbareRuimteData(),
-  status: makeSelectStatus(),
+  data: makeSelectOpenbareRuimteData,
+  status: makeSelectStatus,
 });
 
 const withConnect = connect(mapStateToProps);

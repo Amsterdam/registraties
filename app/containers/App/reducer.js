@@ -4,6 +4,7 @@ import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
   COMPLETE_PROGRESS,
+  EXCEPTION_OCCURRED,
   INCREMENT_PROGRESS,
   LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
@@ -13,7 +14,6 @@ import {
   PROGRESS,
   RESET_GLOBAL_ERROR,
   RESET_PROGRESS,
-  SHOW_FEEDBACK_BUTTON,
   SHOW_GLOBAL_ERROR,
   UNABLE_TO_FETCH,
   UNAUTHORIZED,
@@ -26,8 +26,10 @@ export const initialState = {
   errorEventId: undefined,
   errorMessage: '',
   loading: false,
-  maxProgressCount: 0,
-  progress: 0,
+  progress: {
+    current: 0,
+    max: 1,
+  },
   status: undefined,
   userName: undefined,
   userScopes: [],
@@ -47,9 +49,10 @@ export default (state = initialState, action) =>
         break;
 
       case SHOW_GLOBAL_ERROR:
-        draft.error = !!payload;
+        draft.error = true;
         draft.errorMessage = payload;
         draft.loading = false;
+        draft.errorEventId = undefined;
         break;
 
       case RESET_GLOBAL_ERROR:
@@ -80,23 +83,23 @@ export default (state = initialState, action) =>
         break;
 
       case PROGRESS:
-        draft.progress = payload;
+        draft.progress.current = payload;
         break;
 
       case RESET_PROGRESS:
-        draft.progress = 0;
+        draft.progress.current = 0;
         break;
 
       case COMPLETE_PROGRESS:
-        draft.progress = state.maxProgressCount;
+        draft.progress.current = state.progress.max;
         break;
 
       case INCREMENT_PROGRESS:
-        draft.progress += 1;
+        draft.progress.current += 1;
         break;
 
       case MAX_PROGRESS_COUNT:
-        draft.maxProgressCount = payload;
+        draft.progress.max = payload;
         break;
 
       case LOAD_BAG_DATA:
@@ -105,8 +108,8 @@ export default (state = initialState, action) =>
         draft.brkId = payload.brkId;
         break;
 
-      case SHOW_FEEDBACK_BUTTON:
-        draft.errorEventId = payload.eventId;
+      case EXCEPTION_OCCURRED:
+        draft.errorEventId = payload;
         break;
     }
   });

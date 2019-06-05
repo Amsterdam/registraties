@@ -41,9 +41,6 @@ export default defineMessages({
   error_reporting_subtitle: {
     id: `${scope}.error_reporting_subtitle`,
   },
-  error_reporting_subtitle2: {
-    id: `${scope}.error_reporting_subtitle2`,
-  },
   error_reporting_label_name: {
     id: `${scope}.error_reporting_label_name`,
   },

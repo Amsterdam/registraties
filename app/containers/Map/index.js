@@ -6,7 +6,7 @@ import { makeSelectCoordinates } from 'containers/Verblijfsobject/selectors';
 import Map from 'components/Map';
 
 const mapStateToProps = createStructuredSelector({
-  coordinates: makeSelectCoordinates(),
+  coordinates: makeSelectCoordinates,
 });
 
 const withConnect = connect(mapStateToProps);
