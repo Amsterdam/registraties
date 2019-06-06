@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import AccommodationObjectPage from 'containers/AccommodationObjectPage/Loadable';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Footer from 'components/Footer';
+import Footer from 'components/Footer/Loadable';
 import Header from 'containers/Header/Loadable';
 import GlobalError from 'containers/GlobalError';
 import { authenticate, isAuthenticated } from 'shared/services/auth/auth';

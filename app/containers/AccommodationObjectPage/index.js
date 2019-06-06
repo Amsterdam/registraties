@@ -7,7 +7,7 @@ import injectSaga from 'utils/injectSaga';
 import { makeSelectStatus } from 'containers/App/selectors';
 import { makeSelectSummary } from 'containers/Summary/selectors';
 import { loadBAGData } from 'containers/App/actions';
-import AccObjPageComponent from 'components/AccommodationObject';
+import AccObjPageComponent from 'components/AccommodationObject/Loadable';
 import saga from './saga';
 
 export const AccommodationObjectPageComponent = injectIntl(AccObjPageComponent);

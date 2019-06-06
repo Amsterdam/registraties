@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import injectReducer from 'utils/injectReducer';
-import TOC from 'components/TOC';
+import TOC from 'components/TOC/Loadable';
 
 import { makeSelectTOC } from './selectors';
 import reducer from './reducer';

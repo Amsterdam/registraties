@@ -7,7 +7,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 import { isArray, isArrayOfArrays, isObject } from 'utils';
-import DownloadLink from 'components/DownloadLink';
+import DownloadLink from 'components/DownloadLink/Loadable';
 import messages from 'containers/App/messages';
 import { OBJECTS } from 'containers/App/constants';
 import { makeSelectKadastraalObjectData } from 'containers/KadastraalObject/selectors';
