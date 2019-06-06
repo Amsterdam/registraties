@@ -138,6 +138,7 @@ exports[`Search matches the snapshot 1`] = `
 <form
   action=""
   class="no-print c0"
+  data-testid="search-form"
 >
   <legend
     class="visuallyhidden"
@@ -448,6 +449,7 @@ exports[`Search should render results 1`] = `
 <form
   action=""
   class="no-print c0"
+  data-testid="search-form"
 >
   <legend
     class="visuallyhidden"
