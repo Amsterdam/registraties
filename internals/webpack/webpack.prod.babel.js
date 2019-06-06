@@ -50,16 +50,57 @@ module.exports = require('./webpack.base.babel')({
       maxInitialRequests: 3,
       name: true,
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
+        vendor: {
+          test: /[\\/]node_modules[\\/](?!amsterdam-stijl|style-loader|css-loader|amsterdam-amaps|history|stylis|reselect|react|react-dom|(connected-)?react-router|react-router-dom|react-intl|redux|@?redux-saga|react-redux|react-helmet|styled-components|@babel|react-app-polyfill|polished|@datapunt)[\\/]/,
           name: 'vendor',
           chunks: 'all',
+        },
+        amaps: {
+          test: /[\\/]node_modules[\\/](amsterdam-amaps)[\\/]/,
+          name: 'amaps',
+          chunks: 'all',
+          enforce: true,
+        },
+        datapunt: {
+          test: /[\\/]node_modules[\\/](@datapunt)[\\/]/,
+          name: 'datapunt',
+          chunks: 'all',
+          enforce: true,
+        },
+        polyfill: {
+          test: /[\\/]node_modules[\\/](@babel|react-app-polyfill)[\\/]/,
+          name: 'polyfill',
+          chunks: 'all',
+          enforce: true,
+        },
+        amsterdamStijlAssets: {
+          test: /[\\/]node_modules[\\/]amsterdam-stijl[\\/]dist[\\/](?!css)/,
+          name: 'amsterdam-stijl-assets',
+          chunks: 'all',
+          enforce: true,
+        },
+        amsterdamStijlCSS: {
+          test: /[\\/]node_modules[\\/](amsterdam-stijl[\\/]dist[\\/]css)[\\/]/,
+          name: 'amsterdam-stijl-css',
+          chunks: 'all',
+          enforce: true,
+        },
+        styled: {
+          test: /[\\/]node_modules[\\/](styled-components|polished|style-loader|css-loader|stylis)[\\/]/,
+          name: 'styled',
+          chunks: 'all',
+          enforce: true,
+        },
+        react: {
+          test: /[\\/]node_modules[\\/](react|react-dom|(connected-)?react-router|history|react-router-dom|redux|@?redux-saga|react-redux|react-intl|react-helmet|reselect)[\\/]/,
+          name: 'react',
+          chunks: 'all',
+          enforce: true,
         },
         main: {
           chunks: 'all',
           minChunks: 2,
           reuseExistingChunk: true,
-          enforce: true,
         },
       },
     },
