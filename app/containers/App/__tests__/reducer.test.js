@@ -19,8 +19,6 @@ import {
 } from '../constants';
 
 describe('containers/App/reducer', () => {
-  beforeEach(() => {});
-
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
