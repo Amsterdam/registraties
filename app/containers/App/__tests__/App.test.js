@@ -1,27 +1,107 @@
 import React from 'react';
+import { render, cleanup } from 'react-testing-library';
 import { shallow } from 'enzyme';
 import { Route } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import history from 'utils/history';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import 'jest-styled-components';
 
-import HeaderContainer from 'containers/Header';
-import Footer from 'components/Footer';
-import { App } from '../index';
+import * as auth from 'shared/services/auth/auth';
+
+import AppContainer, { App } from '..';
+import GlobalStyles from '../../../global-styles';
+import messages from '../../../translations/nl.json';
+import configureStore from '../../../configureStore';
+
+const store = configureStore({}, history);
+
+jest.mock('shared/services/auth/auth');
 
 describe('containers/App', () => {
-  const onAuthenticateUser = jest.fn();
-  const showError = jest.fn();
+  afterEach(cleanup);
 
-  it.skip('should render the header', () => {
-    const renderedComponent = shallow(<App onAuthenticateUser={onAuthenticateUser} showError={showError} />);
-    expect(renderedComponent.find(HeaderContainer).length).toBe(1);
+  it('should get user credentials on mount', () => {
+    const showError = jest.fn();
+    const onAuthenticateUser = jest.fn();
+    const credentials = { foo: 'bar', baz: null };
+    const authenticateSpy = jest.spyOn(auth, 'authenticate').mockImplementation(() => credentials);
+    const isAuthenticatedSpy = jest
+      .spyOn(auth, 'isAuthenticated')
+      .mockImplementationOnce(() => true)
+      .mockImplementationOnce(() => false);
+
+    const { rerender } = render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <IntlProvider locale="nl" messages={messages}>
+            <App onAuthenticateUser={onAuthenticateUser} showError={showError} />
+          </IntlProvider>
+        </ConnectedRouter>
+      </Provider>,
+    );
+
+    expect(authenticateSpy).toHaveBeenCalled();
+    expect(onAuthenticateUser).toHaveBeenCalledWith(credentials);
+    expect(isAuthenticatedSpy).toHaveBeenCalled();
+    expect(isAuthenticatedSpy).toHaveReturnedWith(true);
+    expect(showError).not.toHaveBeenCalled();
+
+    rerender(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <IntlProvider locale="nl" messages={messages}>
+            <App onAuthenticateUser={onAuthenticateUser} showError={showError} />
+          </IntlProvider>
+        </ConnectedRouter>
+      </Provider>,
+    );
+    expect(showError).toHaveBeenCalledWith('unauthorized');
   });
 
   it('should render some routes', () => {
-    const renderedComponent = shallow(<App onAuthenticateUser={onAuthenticateUser} showError={showError} />);
-    expect(renderedComponent.find(Route).length).not.toBe(0);
+    const tree = shallow(<App onAuthenticateUser={() => {}} showError={() => {}} />);
+
+    expect(tree.find(Route)).not.toHaveLength(0);
   });
 
-  it('should render the footer', () => {
-    const renderedComponent = shallow(<App onAuthenticateUser={onAuthenticateUser} showError={showError} />);
-    expect(renderedComponent.find(Footer).length).toBe(1);
+  it('should render UI components', () => {
+    const { queryByTestId } = render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <IntlProvider locale="nl" messages={messages}>
+            <AppContainer />
+          </IntlProvider>
+        </ConnectedRouter>
+      </Provider>,
+    );
+
+    expect(queryByTestId('site-header')).not.toBeNull();
+    expect(queryByTestId('site-footer')).not.toBeNull();
+    expect(queryByTestId('search-form')).not.toBeNull();
+    expect(queryByTestId('search-foldout')).toHaveStyleRule('display', 'block');
+  });
+
+  it('should NOT render the Search container component', () => {
+    global.history.replaceState({}, '', 'http://localhost/vbo/0363010000864314/');
+
+    const { queryByTestId } = render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <IntlProvider locale="nl" messages={messages}>
+            <AppContainer />
+          </IntlProvider>
+        </ConnectedRouter>
+      </Provider>,
+    );
+
+    expect(queryByTestId('search-foldout')).toHaveStyleRule('display', 'none');
+  });
+
+  it('should render global styles', () => {
+    const tree = shallow(<App onAuthenticateUser={() => {}} showError={() => {}} />);
+
+    expect(tree.find(GlobalStyles)).not.toHaveLength(0);
   });
 });
