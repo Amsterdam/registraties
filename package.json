@@ -7,8 +7,8 @@
     "url": "git@github.com:Amsterdam/registraties.git"
   },
   "engines": {
-    "npm": ">=5",
-    "node": ">=8.15.1"
+    "npm": ">=6.9",
+    "node": ">=10.15.3"
   },
   "author": "Datapunt Amsterdam",
   "license": "MPL-2.0",
