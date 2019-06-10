@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
 import { dataPropType } from 'utils/propTypes';
-import Section from 'components/Section/Loadable';
+import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
 import { makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';

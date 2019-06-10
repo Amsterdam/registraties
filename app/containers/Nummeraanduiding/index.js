@@ -8,7 +8,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { dataPropType } from 'utils/propTypes';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import Section from 'components/Section/Loadable';
+import Section from 'components/Section';
 import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
 import ligplaatsSaga from 'containers/Ligplaats/saga';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Summary from 'components/Summary/Loadable';
+import Summary from 'components/Summary';
 import { makeSelectSummary } from './selectors';
 
 const mapStateToProps = createStructuredSelector({

@@ -9,7 +9,7 @@ import { isAuthenticated } from 'shared/services/auth/auth';
 
 import { makeSelectUserName } from 'containers/App/selectors';
 import { doLogin, doLogout } from 'containers/App/actions';
-import Header from 'components/Header/Loadable';
+import Header from 'components/Header';
 
 const IntlHeader = injectIntl(Header);
 

@@ -18,7 +18,7 @@ import Progress from 'containers/Progress';
 
 import CSVDownloadContainer from 'containers/CSVDownload';
 import TOC from 'containers/TOC';
-import Map from 'containers/Map/Loadable';
+import Map from 'containers/Map';
 import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
 import SectionHeading from 'components/SectionHeading';
