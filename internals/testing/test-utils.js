@@ -19,7 +19,7 @@ export const intl = props => ({
   formatRelative: () => {},
   formatNumber: () => {},
   formatPlural: () => {},
-  formatMessage: ({ id }) => id,
+  formatMessage: () => {},
   formatHTMLMessage: () => {},
   now: () => {},
   ...props,
