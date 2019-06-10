@@ -1,0 +1,72 @@
+{
+  "date": "10-6-2019",
+  "opr": {
+    "openbare_ruimte_identificatie": "0363300000003480",
+    "type": "Weg",
+    "naam": "Jodenbreestraat"
+  },
+  "num": {
+    "nummeraanduidingidentificatie": "0363200012087639",
+    "begin_geldigheid": "10-1-2014",
+    "einde_geldigheid": "n.b.",
+    "adres": "Jodenbreestraat 25",
+    "postcode": "1011 NH",
+    "huisnummer": 25,
+    "type": "Verblijfsobject",
+    "hoofdadres": "Ja"
+  },
+  "brko_1": {
+    "id": "NL.KAD.OnroerendeZaak.11530351210002",
+    "aanduiding": "ASD12 P 03512 A 0002",
+    "objectnummer": "3512",
+    "koopsom": 88888888,
+    "koopjaar": "2014"
+  },
+  "brks_nnp_1": {
+    "rsin": "7777777",
+    "kvknummer": "88888888",
+    "rechtsvorm": "Publiekrechtelijke rechtspersoon",
+    "statutaire_naam": "Gemeente Amsterdam"
+  },
+  "ves_1": {
+    "vestigingsnummer": "000003588726",
+    "naam": "De Vervoerregio Amsterdam",
+    "datum_aanvang": "30-12-2002",
+    "postadres": "Postbus 626 1000AP Amsterdam",
+    "bezoekadres": "Jodenbreestraat 25 1011NH Amsterdam",
+    "activiteiten_1": {
+      "activiteitsomschrijving": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam",
+      "sbi_code": "7112",
+      "sbi_omschrijving": "Ingenieurs en overig technisch ontwerp en advies"
+    },
+    "activiteiten_2": {
+      "sbi_code": "49392",
+      "sbi_omschrijving": "Openbaar interlokaal personenvervoer over de weg"
+    },
+    "activiteiten_3": {
+      "sbi_code": "8211",
+      "sbi_omschrijving": "Brede administratieve dienstverlening"
+    },
+    "kvk_nummer": "88888888"
+  },
+  "ves_2": {
+    "vestigingsnummer": "000007678622",
+    "naam": "Dienst Wonen, Zorg en Samenleven",
+    "datum_aanvang": "1-5-1997",
+    "postadres": "Postbus 1900 1000BX Amsterdam",
+    "bezoekadres": "Jodenbreestraat 25 WZS 1011NH Amsterdam",
+    "activiteiten": {
+      "activiteitsomschrijving": "Het verlenen van woondiensten aan burgers, het coördineren van de stedelijke vernieuwing en het formuleren van het Amsterdamse woonbeleid. Het uitvoeren van de Wet maatschappelijke ondersteuning, in nauwe samenwerking met de stadsdelen",
+      "sbi_code": "68202",
+      "sbi_omschrijving": "Gemeentelijke woningbedrijven"
+    },
+    "kvk_nummer": "88888888"
+  },
+  "geb": {
+    "buurt": "Uilenburg",
+    "stadsdeel": "Centrum",
+    "wijk": "Nieuwmarkt/Lastage"
+  },
+  "notitie": "",
+  "filledInBy": ""
+}
