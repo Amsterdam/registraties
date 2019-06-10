@@ -9,6 +9,7 @@ import { isArrayOfArrays } from 'utils';
 import { OBJECTS } from 'containers/App/constants';
 import DownloadLink from 'components/DownloadLink';
 
+import { intl } from '../../../../internals/testing/test-utils';
 import { CSVDownloadContainer, getData, plainTextMimetype } from '..';
 import messages from '../../../translations/nl.json';
 import configureStore from '../../../configureStore';
@@ -121,24 +122,9 @@ describe('containers/CSVDownload', () => {
   });
 
   describe('instance', () => {
-    const now = Date.now();
-    const intl = {
-      locale: 'nl',
-      messages,
-      formats: {},
-      timeZone: null,
-      textComponent: 'span',
-      defaultLocale: 'en',
-      defaultFormats: {},
-      formatDate: jest.fn(input => input),
-      formatTime: () => {},
-      formatRelative: () => {},
-      formatNumber: () => {},
-      formatPlural: () => {},
-      formatMessage: () => {},
-      formatHTMLMessage: () => {},
-      now: jest.fn(() => now),
-    };
+    const now = jest.fn(() => Date.now());
+
+    const intlObj = intl({ messages, now });
 
     const data = {
       someField: 'Foo bar',
@@ -148,7 +134,7 @@ describe('containers/CSVDownload', () => {
     const tree = mount(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
-          <CSVDownloadContainer {...nextProps} intl={intl} data={data} />
+          <CSVDownloadContainer {...nextProps} intl={intlObj} data={data} />
         </IntlProvider>
       </Provider>,
     );
