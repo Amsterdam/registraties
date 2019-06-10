@@ -1,38 +1,43 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent } from 'react-testing-library';
 
 import { GlobalError } from '..';
+import { intl } from '../../../../internals/testing/test-utils';
+import messages from '../../../translations/nl.json';
 
-describe('<GlobalError />', () => {
-  describe('rendering', () => {
-    it('should render showing no error by default', () => {
-      const renderedComponent = shallow(<GlobalError />);
-      expect(renderedComponent).toMatchSnapshot();
-    });
+describe('containers/GlobalError', () => {
+  const intlObj = intl({ messages });
 
-    it.skip('should render showing an error when defined', () => {
-      const props = {
-        error: true,
-        errorMessage: 'MOCK_ERROR',
-      };
-      const renderedComponent = shallow(<GlobalError {...props} />);
-      expect(renderedComponent).toMatchSnapshot();
-    });
+  it('should render showing no error by default', () => {
+    const { container } = render(<GlobalError intl={intlObj} />);
+    expect(container).toMatchSnapshot();
   });
 
-  describe('events', () => {
-    it.skip('should render showing no error by default', () => {
-      const props = {
-        error: true,
-        errorMessage: 'MOCK_ERROR',
-        onClose: jest.fn(),
-      };
-      const renderedComponent = shallow(<GlobalError {...props} />);
-      expect(renderedComponent).toMatchSnapshot();
+  it('should render showing an error when defined', () => {
+    const props = {
+      error: true,
+      errorMessage: 'MOCK_ERROR',
+      intl: intlObj,
+    };
+    const { container } = render(<GlobalError {...props} />);
+    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild.classList.contains('no-print')).toEqual(true);
+  });
 
-      renderedComponent.find('button').simulate('click');
-      expect(props.onClose).toHaveBeenCalled();
-      expect(renderedComponent).toMatchSnapshot();
-    });
+  it('should capture click on close button', () => {
+    const onClose = jest.fn();
+    const props = {
+      error: true,
+      errorMessage: 'MOCK_ERROR',
+      onClose,
+      intl: intlObj,
+    };
+
+    render(<GlobalError {...props} />);
+
+    const button = document.getElementsByTagName('button')[0];
+    fireEvent.click(button);
+
+    expect(onClose).toHaveBeenCalled();
   });
 });
