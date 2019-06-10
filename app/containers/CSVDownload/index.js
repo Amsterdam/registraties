@@ -20,7 +20,7 @@ import { makeSelectVerblijfsobjectData } from 'containers/Verblijfsobject/select
 import { makeSelectVestigingData } from 'containers/Vestiging/selectors';
 import { makeSelectWoonplaatsData } from 'containers/Woonplaats/selectors';
 
-export const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
+const IntlDownloadLink = injectIntl(({ intl, ...rest }) => (
   <DownloadLink
     name={`${intl.formatMessage(messages.csv_file_name)}.csv`}
     target="_blank"
