@@ -8,7 +8,7 @@ describe('containers/KadastraalObject/reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('it should handle LOAD_DATA_PENDING', () => {
+  it('should handle LOAD_DATA_PENDING', () => {
     const actionLoadDataPending = {
       type: LOAD_DATA_PENDING,
     };
@@ -18,7 +18,7 @@ describe('containers/KadastraalObject/reducer', () => {
     expect(reducer(prevState, actionLoadDataPending)).toEqual(initialState);
   });
 
-  it('it should handle LOAD_DATA', () => {
+  it('should handle LOAD_DATA', () => {
     const adresseerbaarObjectId = 'foobarbazqux';
     const payload = { adresseerbaarObjectId };
     const actionLoadData = {
@@ -32,7 +32,7 @@ describe('containers/KadastraalObject/reducer', () => {
     expect(reducer(prevState, actionLoadData)).toEqual({ ...initialState, adresseerbaarObjectId });
   });
 
-  it('it should handle LOAD_DATA_SUCCESS', () => {
+  it('should handle LOAD_DATA_SUCCESS', () => {
     const data = {
       count: 1,
       results: [
@@ -75,7 +75,7 @@ describe('containers/KadastraalObject/reducer', () => {
     expect(reducer(prevState, actionLoadDataSuccess)).toEqual({ ...initialState, data });
   });
 
-  it('it should handle LOAD_DATA_FAILED', () => {
+  it('should handle LOAD_DATA_FAILED', () => {
     const error = 'Something very bad happened';
     const payload = error;
     const actionLoadDataFailed = {
@@ -91,7 +91,7 @@ describe('containers/KadastraalObject/reducer', () => {
     expect(reducer(initialState, actionLoadDataFailed)).toEqual({ ...initialState, ...resultState });
   });
 
-  it('it should handle LOAD_DATA_NO_RESULTS', () => {
+  it('should handle LOAD_DATA_NO_RESULTS', () => {
     const actionLoadDataNoResults = {
       type: LOAD_DATA_NO_RESULTS,
     };
