@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,15 +16,15 @@ import { makeSelectKadastraalObjectData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const KadastraalObjectContainer = ({ data, intl, status }) => {
+export const KadastraalObjectContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_OBJECT.NAME);
   const href = OBJECTS.KADASTRAAL_OBJECT.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-KadastraalObjectContainer.propTypes = {
+KadastraalObjectContainerComponent.propTypes = {
   data: PropTypes.oneOfType([dataPropType, PropTypes.arrayOf(dataPropType)]),
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -36,10 +36,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(KadastraalObjectContainerComponent);
 
 export default compose(
-  injectIntl,
   withConnect,
   injectSaga({ key: 'kadastraalObject', saga }),
   injectReducer({ key: 'kadastraalObject', reducer }),
-)(memo(KadastraalObjectContainer));
+)(Intl);

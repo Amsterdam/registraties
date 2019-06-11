@@ -1,0 +1,248 @@
+{
+  "np": {
+    "count": 1,
+    "results": [
+      {
+        "objectnummer": "3512",
+        "indexletter": "A",
+        "indexnummer": 2,
+        "soort_grootte": null,
+        "grootte": null,
+        "koopjaar": "2014",
+        "meer_objecten": true,
+        "register9_tekst": "",
+        "status_code": "B",
+        "toestandsdatum": "2018-09-21",
+        "voorlopige_kadastrale_grens": false,
+        "verblijfsobjecten": {
+          "count": 7,
+          "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?kadastrale_objecten__id=NL.KAD.OnroerendeZaak.00000000000000"
+        },
+        "_adressen": {
+          "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?kadastraalobject=NL.KAD.OnroerendeZaak.00000000000000"
+        },
+        "rechten": [
+          {
+            "_links": {
+              "self": {
+                "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/NL.KAD.ZakelijkRecht.AKR1.0000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.0000000/"
+              }
+            },
+            "_display": "Gemeente Amsterdam - Eigendom (recht van) (1/1)",
+            "id": "NL.KAD.ZakelijkRecht.AKR1.2183560-NL.KAD.OnroerendeZaak.0000000-NL.KAD.Tenaamstelling.AKR1.0000000",
+            "aard_zakelijk_recht": {
+              "code": "2",
+              "omschrijving": "Eigendom (recht van)"
+            },
+            "aard_zakelijk_recht_akr": "VE",
+            "ontstaan_uit": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+                }
+              },
+              "_display": "Vereniging Van Eigenaars Van De Jodenbreestraat 3 Tot En Met 25 (Oneven Nummers) En Valkenburgstraat 238/240 Te Asmterdam",
+              "naam": "Naam #1",
+              "dataset": "brk"
+            },
+            "betrokken_bij": null,
+            "teller": 1,
+            "noemer": 1,
+            "kadastraal_object": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.0000000/"
+                }
+              },
+              "_display": "ASD12 P 03512 A 0002",
+              "id": "NL.KAD.OnroerendeZaak.11530351210002",
+              "aanduiding": "ASD12 P 03512 A 0002",
+              "dataset": "brk"
+            },
+            "kadastraal_subject": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+                }
+              },
+              "_display": "Gemeente Amsterdam",
+              "naam": "Naam #2",
+              "dataset": "brk"
+            },
+            "kadastraal_object_status": "B",
+            "app_rechtsplitstype": {
+              "code": "1",
+              "omschrijving": "HoofdSplitsing"
+            },
+            "dataset": "brk"
+          },
+          {
+            "_links": {
+              "self": {
+                "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/NL.KAD.ZakelijkRecht.AKR1.00000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.00000000000000/"
+              }
+            },
+            "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung - Erfpacht (recht van) (1/1)",
+            "id": "NL.KAD.ZakelijkRecht.AKR1.0000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.00000000000000",
+            "aard_zakelijk_recht": {
+              "code": "3",
+              "omschrijving": "Erfpacht (recht van)"
+            },
+            "aard_zakelijk_recht_akr": "EP",
+            "ontstaan_uit": null,
+            "betrokken_bij": null,
+            "teller": 1,
+            "noemer": 1,
+            "kadastraal_object": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.00000000000000/"
+                }
+              },
+              "_display": "ASD12 P 03512 A 0002",
+              "id": "NL.KAD.OnroerendeZaak.00000000000000",
+              "aanduiding": "ASD12 P 03512 A 0002",
+              "dataset": "brk"
+            },
+            "kadastraal_subject": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.00000000/"
+                }
+              },
+              "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+              "naam": null,
+              "dataset": "brk"
+            },
+            "kadastraal_object_status": "B",
+            "app_rechtsplitstype": null,
+            "dataset": "brk"
+          }
+        ]
+      }
+    ]
+  },
+  "nnp": {
+    "count": 1,
+    "results": [
+      {
+        "objectnummer": "3512",
+        "indexletter": "A",
+        "indexnummer": 2,
+        "soort_grootte": null,
+        "grootte": null,
+        "koopjaar": "2014",
+        "meer_objecten": true,
+        "register9_tekst": "",
+        "status_code": "B",
+        "toestandsdatum": "2018-09-21",
+        "voorlopige_kadastrale_grens": false,
+        "verblijfsobjecten": {
+          "count": 7,
+          "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?kadastrale_objecten__id=NL.KAD.OnroerendeZaak.00000000000000"
+        },
+        "_adressen": {
+          "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?kadastraalobject=NL.KAD.OnroerendeZaak.00000000000000"
+        },
+        "rechten": [
+          {
+            "_links": {
+              "self": {
+                "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/NL.KAD.ZakelijkRecht.AKR1.0000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.0000000/"
+              }
+            },
+            "_display": "Gemeente Amsterdam - Eigendom (recht van) (1/1)",
+            "id": "NL.KAD.ZakelijkRecht.AKR1.2183560-NL.KAD.OnroerendeZaak.0000000-NL.KAD.Tenaamstelling.AKR1.0000000",
+            "aard_zakelijk_recht": {
+              "code": "2",
+              "omschrijving": "Eigendom (recht van)"
+            },
+            "aard_zakelijk_recht_akr": "VE",
+            "ontstaan_uit": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+                }
+              },
+              "_display": "Vereniging Van Eigenaars Van De Jodenbreestraat 3 Tot En Met 25 (Oneven Nummers) En Valkenburgstraat 238/240 Te Asmterdam",
+              "naam": null,
+              "dataset": "brk"
+            },
+            "betrokken_bij": null,
+            "teller": 1,
+            "noemer": 1,
+            "kadastraal_object": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.0000000/"
+                }
+              },
+              "_display": "ASD12 P 03512 A 0002",
+              "id": "NL.KAD.OnroerendeZaak.11530351210002",
+              "aanduiding": "ASD12 P 03512 A 0002",
+              "dataset": "brk"
+            },
+            "kadastraal_subject": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+                }
+              },
+              "_display": "Gemeente Amsterdam",
+              "naam": null,
+              "dataset": "brk"
+            },
+            "kadastraal_object_status": "B",
+            "app_rechtsplitstype": {
+              "code": "1",
+              "omschrijving": "HoofdSplitsing"
+            },
+            "dataset": "brk"
+          },
+          {
+            "_links": {
+              "self": {
+                "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/NL.KAD.ZakelijkRecht.AKR1.00000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.00000000000000/"
+              }
+            },
+            "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung - Erfpacht (recht van) (1/1)",
+            "id": "NL.KAD.ZakelijkRecht.AKR1.0000000-NL.KAD.OnroerendeZaak.00000000000000-NL.KAD.Tenaamstelling.AKR1.00000000000000",
+            "aard_zakelijk_recht": {
+              "code": "3",
+              "omschrijving": "Erfpacht (recht van)"
+            },
+            "aard_zakelijk_recht_akr": "EP",
+            "ontstaan_uit": null,
+            "betrokken_bij": null,
+            "teller": 1,
+            "noemer": 1,
+            "kadastraal_object": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.00000000000000/"
+                }
+              },
+              "_display": "ASD12 P 03512 A 0002",
+              "id": "NL.KAD.OnroerendeZaak.00000000000000",
+              "aanduiding": "ASD12 P 03512 A 0002",
+              "dataset": "brk"
+            },
+            "kadastraal_subject": {
+              "_links": {
+                "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.00000000/"
+                }
+              },
+              "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+              "naam": null,
+              "dataset": "brk"
+            },
+            "kadastraal_object_status": "B",
+            "app_rechtsplitstype": null,
+            "dataset": "brk"
+          }
+        ]
+      }
+    ]
+  }
+}
