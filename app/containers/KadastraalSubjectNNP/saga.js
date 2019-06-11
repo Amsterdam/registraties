@@ -11,20 +11,16 @@ import { loadDataSuccess, loadDataNoResults, loadDataFailed } from './actions';
 
 export function* fetchKadastraalSubjectNNPData() {
   const isNatuurlijkPersoon = false;
+
   try {
     const rechten = yield select(makeSelectKadastraalSubjectLinks(isNatuurlijkPersoon));
 
     if (rechten) {
       const data = yield all([...rechten.map(link => call(request, link, getRequestOptions()))]);
+      const validEntities = data.filter(isValidSubjectNNP);
 
-      if (data) {
-        const validEntities = data.filter(isValidSubjectNNP);
-
-        if (validEntities && validEntities.length) {
-          yield put(loadDataSuccess(data));
-        } else {
-          yield put(loadDataNoResults());
-        }
+      if (validEntities && validEntities.length) {
+        yield put(loadDataSuccess(data));
       } else {
         yield put(loadDataNoResults());
       }
