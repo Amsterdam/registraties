@@ -249,12 +249,18 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
     .filter(Boolean);
 };
 
-export const isValidSubjectNP = subjectNP => isObject(subjectNP) && !!subjectNP.geboortedatum && !!subjectNP.naam;
+const isNotEmptyString = val => typeof val !== 'undefined' && val.toString().length > 0;
 
-export const isValidSubjectNNP = subjectNNP => isObject(subjectNNP) && !!subjectNNP.kvknummer && !!subjectNNP.rsin;
+export const isValidSubjectNP = subjectNP =>
+  isObject(subjectNP) && isNotEmptyString(subjectNP.geboortedatum) && isNotEmptyString(subjectNP.naam);
+
+export const isValidSubjectNNP = subjectNNP =>
+  isObject(subjectNNP) && isNotEmptyString(subjectNNP.kvknummer) && isNotEmptyString(subjectNNP.rsin);
 
 export const isApartment = apartment =>
-  isObject(apartment) && !!apartment.indexletter && apartment.indexletter.toLowerCase() === 'a';
+  isObject(apartment) && isNotEmptyString(apartment.indexletter) && apartment.indexletter.toLowerCase() === 'a';
 
 export const isValidMaatschappelijkeActiviteit = maatschappelijkeActiviteit =>
-  isObject(maatschappelijkeActiviteit) && !!maatschappelijkeActiviteit.kvk_nummer && !!maatschappelijkeActiviteit.naam;
+  isObject(maatschappelijkeActiviteit) &&
+  isNotEmptyString(maatschappelijkeActiviteit.kvk_nummer) &&
+  isNotEmptyString(maatschappelijkeActiviteit.naam);
