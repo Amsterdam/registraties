@@ -13,7 +13,7 @@ import Header from 'components/Header';
 
 const IntlHeader = injectIntl(Header);
 
-const HeaderContainer = ({ onLogin, onLogout, userName }) => {
+export const HeaderContainerComponent = ({ onLogin, onLogout, userName }) => {
   const onLoginLogoutButtonClick = (event, domain) => {
     if (!isAuthenticated()) {
       onLogin(domain);
@@ -31,7 +31,7 @@ const HeaderContainer = ({ onLogin, onLogout, userName }) => {
   );
 };
 
-HeaderContainer.propTypes = {
+HeaderContainerComponent.propTypes = {
   userName: PropTypes.string,
   onLogin: PropTypes.func,
   onLogout: PropTypes.func,
@@ -55,4 +55,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(HeaderContainer);
+export default compose(withConnect)(HeaderContainerComponent);

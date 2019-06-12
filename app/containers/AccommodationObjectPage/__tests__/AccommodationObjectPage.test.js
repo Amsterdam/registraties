@@ -12,7 +12,7 @@ import configureStore from '../../../configureStore';
 
 const store = configureStore({}, history);
 
-describe('AccommodationObjectPageContainer', () => {
+describe('containers/AccommodationObjectPage', () => {
   it('should have props from structured selector', () => {
     const vboId = 'fooBarBaz';
     const tree = mount(
@@ -26,6 +26,7 @@ describe('AccommodationObjectPageContainer', () => {
     const props = tree.find(AccommodationObjectPageComponent).props();
 
     expect(props.summary).toEqual({});
+    expect(props.status).not.toBeUndefined();
     expect(props.loadBAGData).not.toBeUndefined();
     expect(props.loadBAGData({ vboId })).toEqual(loadBAGData({ vboId }));
   });

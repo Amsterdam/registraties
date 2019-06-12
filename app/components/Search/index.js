@@ -110,7 +110,7 @@ const Search = forwardRef(
     const [active, setActive] = useState(startFoldedOut);
 
     return (
-      <Form action="" onSubmit={onSubmit} className="no-print">
+      <Form action="" onSubmit={onSubmit} className="no-print" data-testid="search-form">
         <legend className="visuallyhidden">{formLegendLabel}</legend>
 
         <Wrapper>

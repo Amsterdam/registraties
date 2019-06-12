@@ -323,6 +323,7 @@ exports[`Header matches the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    data-testid="site-header"
   >
     <div
       class="c1"
@@ -384,6 +385,7 @@ exports[`Header matches the snapshot 2`] = `
 <div>
   <div
     class="Header__HeaderWrapper-sc-15eqjjx-1 eSRqiv"
+    data-testid="site-header"
   >
     <div
       class="sc-eNQAEJ gJJdWk"

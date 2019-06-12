@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectCoordinates } from 'containers/Verblijfsobject/selectors';
-import Map from 'components/Map';
+import Map from 'components/Map/Loadable';
 
 const mapStateToProps = createStructuredSelector({
   coordinates: makeSelectCoordinates,

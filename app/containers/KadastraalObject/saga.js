@@ -9,14 +9,14 @@ import { LOAD_DATA } from './constants';
 import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 
 const { API_ROOT } = configuration;
-const BRK_OBJECT_API = `${API_ROOT}brk/object-expand/`;
-
-export const isKadastraalNummer = id => id.startsWith('NL.KAD');
+export const BRK_OBJECT_API = `${API_ROOT}brk/object-expand/`;
+export const BRK_VBO_OBJECT_API = `${BRK_OBJECT_API}?verblijfsobjecten__id=`;
+export const isKadastraalNummer = id => typeof id === 'string' && id.startsWith('NL.KAD');
 
 export function* fetchKadastraalObjectData(adresseerbaarObjectId) {
   const endpoint = isKadastraalNummer(adresseerbaarObjectId)
     ? `${BRK_OBJECT_API}${adresseerbaarObjectId}/`
-    : `${BRK_OBJECT_API}?verblijfsobjecten__id=${adresseerbaarObjectId}`;
+    : `${BRK_VBO_OBJECT_API}${adresseerbaarObjectId}`;
 
   try {
     const data = yield call(request, endpoint, getRequestOptions());

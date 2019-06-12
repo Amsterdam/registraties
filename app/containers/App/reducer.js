@@ -33,6 +33,8 @@ export const initialState = {
   userScopes: [],
 };
 
+export const initialRouteState = { location: '/' };
+
 /* eslint-disable default-case, no-param-reassign */
 export default (state = initialState, action) =>
   produce(state, draft => {
@@ -47,7 +49,7 @@ export default (state = initialState, action) =>
         break;
 
       case SHOW_GLOBAL_ERROR:
-        draft.error = !!payload;
+        draft.error = true;
         draft.errorMessage = payload;
         draft.loading = false;
         break;

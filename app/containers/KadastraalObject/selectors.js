@@ -1,16 +1,17 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray, isAppartment } from 'utils';
+import { formatData, isArray, isAppartment, isObject } from 'utils';
 import { initialState } from './reducer';
 
-const selectKadastraalObject = state => (state && state.kadastraalObject) || initialState;
+export const selectKadastraalObject = state => (state && state.kadastraalObject) || initialState;
+export const allowedDataKeys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
 
 export const makeSelectKadastraalObjectData = createSelector(
   selectKadastraalObject,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
+    if (!isObject(state)) {
       return undefined;
     }
 
@@ -20,7 +21,7 @@ export const makeSelectKadastraalObjectData = createSelector(
 
     const { data: { results } = {} } = state;
 
-    const keys = ['id', 'in_onderzoek', 'koopjaar', 'koopsom', 'objectnummer', 'aanduiding'];
+    const keys = allowedDataKeys;
 
     if (results) {
       return results.map(object => formatData({ data: object, keys, locale }));
@@ -40,7 +41,7 @@ export const makeSelectFromObjectAppartment = key =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!state) {
+      if (!isObject(state)) {
         return undefined;
       }
 
@@ -65,7 +66,7 @@ export const makeSelectFromObject = key =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!state) {
+      if (!isObject(state)) {
         return undefined;
       }
 
@@ -76,7 +77,7 @@ export const makeSelectFromObject = key =>
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
-        return undefined;
+        return null;
       }
 
       return results.map(item => item[key]).filter(Boolean);
@@ -87,7 +88,7 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!state) {
+      if (!isObject(state)) {
         return undefined;
       }
 
@@ -98,7 +99,7 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
       const { data: { results } = {} } = state;
 
       if (!results || !isArray(results) || !results.length) {
-        return undefined;
+        return null;
       }
 
       const foundSubjects = results
