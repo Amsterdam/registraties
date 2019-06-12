@@ -1,0 +1,27 @@
+{
+  "ligplaatsidentificatie": "0363555551024444",
+  "status": {
+    "code": "33",
+    "omschrijving": "Plaats aangewezen"
+  },
+  "hoofdadres": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/0363200000515044/"
+      }
+    },
+    "_display": "Nieuwe Prinsengracht 6G",
+    "landelijk_id": "0363200000515044",
+    "hoofdadres": true,
+    "vbo_status": {
+      "code": "33",
+      "omschrijving": "Plaats aangewezen"
+    },
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 1,
+    "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?ligplaats=0363555551024444"
+  },
+  "dataset": "bag"
+}
