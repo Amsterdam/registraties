@@ -1,81 +1,57 @@
 import React from 'react';
-import { render } from 'react-testing-library';
-import { mount } from 'enzyme';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import history from 'utils/history';
 import { Provider } from 'react-redux';
 
-import * as appActions from 'containers/App/actions';
-import GlobalErrorContainer, { GlobalErrorComponent as GlobalError } from '..';
-import messages from '../../../translations/nl.json';
+import { intl } from '../../../../internals/testing/test-utils';
+import GlobalError, { GlobalErrorContainer } from '..';
+import messages from '../messages';
 import configureStore from '../../../configureStore';
 
 const store = configureStore({}, history);
-const intl = {
-  formatDate: ({ id }) => id,
-  formatMessage: obj => (obj ? obj.id : ''),
-  formatNumber: ({ id }) => id,
-  formatPlural: ({ id }) => id,
-  formatRelative: ({ id }) => id,
-  formatTime: ({ id }) => id,
-  formatHTMLMessage: ({ id }) => id,
-  now: () => Date.now,
-};
 
-const renderGlobalError = (props = {}) => (
-  <Provider store={store}>
-    <IntlProvider locale="nl" messages={messages}>
-      <GlobalErrorContainer intl={intl} {...props} />
-    </IntlProvider>
-  </Provider>
-);
+describe('containers/GlobalError', () => {
+  afterEach(cleanup);
 
-describe('<GlobalError />', () => {
-  const { container, rerender } = render(renderGlobalError());
+  const intlObj = intl({ messages });
 
   it('should render showing no error by default', () => {
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should render showing an error when defined', () => {
-    const props = {
-      error: true,
-      errorMessage: 'MOCK_ERROR',
-    };
-
-    rerender(renderGlobalError(props));
-
-    expect(container.firstChild).toMatchSnapshot();
-    expect(document.getElementsByTagName('button')).toHaveLength(1);
-  });
-
-  it('should close the error when the button is clicked', () => {
-    const resetGlobalErrorSpy = jest.spyOn(appActions, 'resetGlobalError');
-    const tree = mount(
+    const { container } = render(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
           <GlobalError />
         </IntlProvider>
       </Provider>,
     );
-
-    const closeButton = tree.find('button').first();
-    closeButton.simulate('click');
-
-    expect(resetGlobalErrorSpy).toHaveBeenCalled();
+    expect(container).toMatchSnapshot();
   });
 
-  it('should render a feedback button', () => {
+  it('should render showing an error when defined', () => {
     const props = {
       error: true,
       errorMessage: 'MOCK_ERROR',
-      onClose: jest.fn(),
+      intl: intlObj,
     };
-    const renderedComponent = mount(renderGlobalError(props));
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<GlobalErrorContainer {...props} errorMessage="unauthorized" />);
+    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild.classList.contains('no-print')).toEqual(true);
+  });
 
-    renderedComponent.find('button').simulate('click');
-    expect(props.onClose).toHaveBeenCalled();
-    expect(renderedComponent).toMatchSnapshot();
+  it('should capture click on close button', () => {
+    const onClose = jest.fn();
+    const props = {
+      error: true,
+      errorMessage: 'MOCK_ERROR',
+      onClose,
+      intl: intlObj,
+    };
+
+    render(<GlobalErrorContainer {...props} errorMessage="unauthorized" />);
+
+    const button = document.getElementsByTagName('button')[0];
+    fireEvent.click(button);
+
+    expect(onClose).toHaveBeenCalled();
   });
 });

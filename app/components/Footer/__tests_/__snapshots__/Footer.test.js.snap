@@ -3,6 +3,7 @@
 exports[`Footer matches the snapshot 1`] = `
 <div
   class="footer-wrapper no-print"
+  data-testid="site-footer"
 >
   <div
     class="row bg-darkgrey footer"

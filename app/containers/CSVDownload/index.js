@@ -33,6 +33,8 @@ IntlDownloadLink.propTypes = {
   intl: intlShape,
 };
 
+export const plainTextMimetype = 'data:text/plain;charset=utf-8';
+
 export const getData = dataset => {
   const obj = {};
 
@@ -61,125 +63,116 @@ export const getData = dataset => {
   return obj;
 };
 
-class CSVDownloadContainer extends Component {
+export class CSVDownloadContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    const data = new Map();
+    const { data } = prevState;
 
     Object.keys(OBJECTS)
+      // make sure nextProps contains the expected keys
       .filter(key => nextProps[key])
-      .forEach(key => {
-        const stateData = prevState.data[key];
-        const propsData = nextProps[key];
-        const propOrStateHasData = !!(stateData || propsData);
+      // only get the keys for values that aren't yet present in the state
+      .filter(key => {
+        const propOrStateHasData = !!(prevState.data[key] || nextProps[key]);
         const stateHasPropData = Object.keys(prevState.data).includes(key);
+
+        return propOrStateHasData && !stateHasPropData;
+      })
+      .forEach(key => {
+        const propsData = nextProps[key];
         const propAbbr = OBJECTS[key].ABBR;
 
-        if (propOrStateHasData && !stateHasPropData) {
-          if (isArrayOfArrays(propsData)) {
-            propsData.forEach((item, index) => {
-              data.set(`${propAbbr}_${index + 1}`, { ...getData(item) });
-            });
-          } else {
-            data.set(propAbbr, getData(propsData));
-          }
+        if (isArrayOfArrays(propsData)) {
+          propsData.forEach((item, index) => {
+            data.set(`${propAbbr}_${index + 1}`, { ...getData(item) });
+          });
+        } else {
+          data.set(propAbbr, getData(propsData));
         }
       });
 
-    if (!data.size) {
-      return null;
-    }
-
     return { data };
+  }
+
+  /**
+   * Get the configuration that is needed to pass on to the csc2json `parse` method
+   *
+   * @param {Map} data - data set from which field names need to be extracted
+   * @returns {Object}
+   */
+  static getParseConfig(data) {
+    const unwind = new Set();
+    const fields = new Set();
+
+    const setFields = (obj, parentKey, separator = '.') =>
+      Object.keys(obj).forEach(key => {
+        const value = obj[key];
+        const joinedKey = [parentKey, key].filter(Boolean).join(separator);
+
+        if (isObject(value)) {
+          if (parentKey) {
+            unwind.add(joinedKey);
+          }
+
+          setFields(value, joinedKey, separator);
+        } else {
+          fields.add(joinedKey);
+        }
+      });
+
+    setFields(data);
+
+    return { fields: [...fields], unwind: [...unwind] };
   }
 
   constructor(props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
+    const { formatDate, now } = this.props.intl;
+    const data = new Map([['date', formatDate(now())]]);
 
     this.state = {
-      data: {
-        notitie: '',
-        timestamp: 0,
-      },
+      data,
     };
+
+    this.onClick = this.onClick.bind(this);
   }
 
-  getParsedData() {
-    const reduce = (acc, val) => {
-      if (isArray(val)) {
-        acc.push(...val);
-      } else {
-        acc.push(val);
-      }
-
-      return acc;
-    };
-
-    const { locale } = this.props.intl;
-    const date = new Intl.DateTimeFormat(locale).format(new Date());
-    const data = { date };
-    const unwind = new Set();
-
-    this.state.data.forEach((value, key) => {
-      data[key] = value;
-    });
+  getMergedData() {
+    const data = {};
 
     Object.keys(this.props.data).forEach(key => {
       data[key] = this.props.data[key];
     });
 
-    const getKeys = (obj, parentKey, separator = '.') =>
-      Object.keys(obj)
-        .filter(key => !!obj[key])
-        .map(key => {
-          const value = obj[key];
-          const joinedKey = [parentKey, key].filter(Boolean).join(separator);
+    this.state.data.forEach((value, key) => {
+      data[key] = value;
+    });
 
-          if (isObject(value)) {
-            return getKeys(value, joinedKey, separator);
-          }
+    return data;
+  }
 
-          if (isArray(value)) {
-            if (parentKey) {
-              unwind.add(joinedKey);
-            }
+  getParsedData() {
+    const data = this.getMergedData();
 
-            return value
-              .map(item => {
-                Object.keys(item).forEach(itemKey => {
-                  unwind.add(`${joinedKey}${separator}${itemKey}`);
-                });
-
-                return getKeys(item, joinedKey, separator);
-              })
-              .reduce(reduce, []);
-          }
-
-          return joinedKey;
-        })
-        .reduce(reduce, []);
-
-    const fields = new Set([...getKeys(data)]);
-    const parseOptions = { fields: [...fields], unwind: [...unwind] };
+    const parseOptions = CSVDownloadContainer.getParseConfig(data);
 
     return parse(data, parseOptions);
   }
 
-  async onClick(event) {
+  onClick(event) {
     event.persist();
 
     const csv = this.getParsedData();
 
     if (navigator.msSaveBlob) {
       event.preventDefault();
-      const blob = new Blob([csv], { type: 'text/plain;charset=utf-8;' });
+      const blob = new Blob([csv], { type: `${plainTextMimetype};` });
       const fileName = `${this.props.intl.formatMessage(messages.csv_file_name)}.csv`;
 
       window.navigator.msSaveOrOpenBlob(blob, fileName);
     } else {
       // eslint-disable-next-line no-param-reassign
-      event.target.href = `data:text/plain;charset=utf-8,${csv}`;
+      event.target.href = `${plainTextMimetype},${csv}`;
     }
   }
 
@@ -211,10 +204,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
-
-const composed = compose(
-  withConnect,
-  injectIntl,
-)(CSVDownloadContainer);
+const Intl = injectIntl(CSVDownloadContainer);
+const composed = compose(withConnect)(Intl);
 
 export default composed;

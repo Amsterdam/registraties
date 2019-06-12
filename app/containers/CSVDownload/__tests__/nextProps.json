@@ -1,0 +1,769 @@
+{
+  "OPENBARE_RUIMTE": [
+    {
+      "type": "string",
+      "key": "openbare_ruimte_identificatie",
+      "formattedKey": "Openbare ruimte identificatie",
+      "value": "0363300000003480",
+      "formattedValue": "0363300000003480"
+    },
+    {
+      "type": "string",
+      "key": "type",
+      "formattedKey": "Type",
+      "value": "Weg",
+      "formattedValue": "Weg"
+    },
+    {
+      "type": "string",
+      "key": "naam",
+      "formattedKey": "Naam",
+      "value": "Jodenbreestraat",
+      "formattedValue": "Jodenbreestraat"
+    }
+  ],
+  "WOONPLAATS": [
+    {
+      "type": "string",
+      "key": "woonplaatsidentificatie",
+      "formattedKey": "Woonplaatsidentificatie",
+      "value": "3594",
+      "formattedValue": "3594"
+    },
+    {
+      "type": "string",
+      "key": "naam",
+      "formattedKey": "Naam",
+      "value": "Amsterdam",
+      "formattedValue": "Amsterdam"
+    }
+  ],
+  "NUMMERAANDUIDING": [
+    {
+      "type": "string",
+      "key": "nummeraanduidingidentificatie",
+      "formattedKey": "Nummeraanduidingidentificatie",
+      "value": "0363200012087639",
+      "formattedValue": "0363200012087639"
+    },
+    {
+      "type": "string",
+      "key": "begin_geldigheid",
+      "formattedKey": "Begin geldigheid",
+      "value": "2014-01-10",
+      "formattedValue": "10-1-2014"
+    },
+    {
+      "type": "boolean",
+      "key": "einde_geldigheid",
+      "formattedKey": "Einde geldigheid",
+      "value": null,
+      "formattedValue": "n.b."
+    },
+    {
+      "type": "string",
+      "key": "adres",
+      "formattedKey": "Adres",
+      "value": "Jodenbreestraat 25",
+      "formattedValue": "Jodenbreestraat 25"
+    },
+    {
+      "type": "string",
+      "key": "postcode",
+      "formattedKey": "Postcode",
+      "value": "1011NH",
+      "formattedValue": "1011 NH"
+    },
+    {
+      "type": "string",
+      "key": "huisnummer",
+      "formattedKey": "Huisnummer",
+      "value": 25,
+      "formattedValue": 25
+    },
+    {
+      "type": "string",
+      "key": "type",
+      "formattedKey": "Type",
+      "value": "Verblijfsobject",
+      "formattedValue": "Verblijfsobject"
+    },
+    {
+      "type": "boolean",
+      "key": "hoofdadres",
+      "formattedKey": "Hoofdadres",
+      "value": true,
+      "formattedValue": "Ja"
+    }
+  ],
+  "VERBLIJFSOBJECT": [
+    {
+      "type": "string",
+      "key": "verblijfsobjectidentificatie",
+      "formattedKey": "Verblijfsobjectidentificatie",
+      "value": "0363010012086329",
+      "formattedValue": "0363010012086329"
+    },
+    {
+      "type": "object",
+      "key": "status",
+      "formattedKey": "Status",
+      "value": {
+        "code": "21",
+        "omschrijving": "Verblijfsobject in gebruik"
+      },
+      "formattedValue": "Verblijfsobject in gebruik"
+    },
+    {
+      "type": "surface",
+      "key": "oppervlakte",
+      "formattedKey": "Oppervlakte",
+      "value": 15909,
+      "formattedValue": 15909
+    },
+    {
+      "type": "boolean",
+      "key": "verhuurbare_eenheden",
+      "formattedKey": "Verhuurbare eenheden",
+      "value": null,
+      "formattedValue": "n.b."
+    },
+    {
+      "type": "number",
+      "key": "bouwlagen",
+      "formattedKey": "Bouwlagen",
+      "value": 7,
+      "formattedValue": 7
+    },
+    {
+      "type": "boolean",
+      "key": "aantal_kamers",
+      "formattedKey": "Aantal kamers",
+      "value": null,
+      "formattedValue": "n.b."
+    },
+    {
+      "type": "object",
+      "key": "eigendomsverhouding",
+      "formattedKey": "Eigendomsverhouding",
+      "value": {
+        "code": "01",
+        "omschrijving": "Huur"
+      },
+      "formattedValue": "Huur"
+    },
+    {
+      "type": "object",
+      "key": "gebruik",
+      "formattedKey": "Gebruik",
+      "value": {
+        "code": "3141",
+        "omschrijving": "kantoor"
+      },
+      "formattedValue": "kantoor"
+    },
+    {
+      "type": "object",
+      "key": "toegang",
+      "formattedKey": "Toegang",
+      "value": {
+        "code": "08",
+        "omschrijving": "Begane grond (08)"
+      },
+      "formattedValue": "Begane grond (08)"
+    },
+    {
+      "type": "boolean",
+      "key": "indicatie_geconstateerd",
+      "formattedKey": "Indicatie geconstateerd",
+      "value": false,
+      "formattedValue": "Ja"
+    },
+    {
+      "type": "boolean",
+      "key": "aanduiding_in_onderzoek",
+      "formattedKey": "Aanduiding in onderzoek",
+      "value": false,
+      "formattedValue": "Ja"
+    }
+  ],
+  "PAND": [
+    {
+      "type": "string",
+      "key": "pandidentificatie",
+      "formattedKey": "Pandidentificatie",
+      "value": "0363100012185418",
+      "formattedValue": "0363100012185418"
+    },
+    {
+      "type": "object",
+      "key": "status",
+      "formattedKey": "Status",
+      "value": {
+        "code": "31",
+        "omschrijving": "Pand in gebruik"
+      },
+      "formattedValue": "Pand in gebruik"
+    },
+    {
+      "type": "string",
+      "key": "oorspronkelijk_bouwjaar",
+      "formattedKey": "Oorspronkelijk bouwjaar",
+      "value": "1973",
+      "formattedValue": "1973"
+    },
+    {
+      "type": "boolean",
+      "key": "hoogste_bouwlaag",
+      "formattedKey": "Hoogste bouwlaag",
+      "value": null,
+      "formattedValue": "n.b."
+    },
+    {
+      "type": "boolean",
+      "key": "laagste_bouwlaag",
+      "formattedKey": "Laagste bouwlaag",
+      "value": null,
+      "formattedValue": "n.b."
+    },
+    {
+      "type": "number",
+      "key": "verblijfsobjecten",
+      "formattedKey": {
+        "id": "registraties.amount_of"
+      },
+      "value": {
+        "count": 8,
+        "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012185418"
+      },
+      "formattedValue": 8
+    }
+  ],
+  "KADASTRAAL_OBJECT": [
+    [
+      {
+        "type": "string",
+        "key": "id",
+        "formattedKey": "Id",
+        "value": "NL.KAD.OnroerendeZaak.11530351210002",
+        "formattedValue": "NL.KAD.OnroerendeZaak.11530351210002"
+      },
+      {
+        "type": "string",
+        "key": "aanduiding",
+        "formattedKey": "Aanduiding",
+        "value": "ASD12 P 03512 A 0002",
+        "formattedValue": "ASD12 P 03512 A 0002"
+      },
+      {
+        "type": "string",
+        "key": "objectnummer",
+        "formattedKey": "Objectnummer",
+        "value": "4444",
+        "formattedValue": "4444"
+      },
+      {
+        "type": "currency",
+        "key": "koopsom",
+        "formattedKey": "Koopsom",
+        "value": 88888888,
+        "formattedValue": 88888888
+      },
+      {
+        "type": "string",
+        "key": "koopjaar",
+        "formattedKey": "Koopjaar",
+        "value": "2014",
+        "formattedValue": "2014"
+      }
+    ]
+  ],
+  "KADASTRAAL_SUBJECT_NNP": [
+    [
+      {
+        "type": "string",
+        "key": "rsin",
+        "formattedKey": "Rsin",
+        "value": "7777777",
+        "formattedValue": "7777777"
+      },
+      {
+        "type": "string",
+        "key": "kvknummer",
+        "formattedKey": "KVK-nummer",
+        "value": "88888888",
+        "formattedValue": "88888888"
+      },
+      {
+        "type": "object",
+        "key": "rechtsvorm",
+        "formattedKey": "Rechtsvorm",
+        "value": {
+          "code": "10",
+          "omschrijving": "Publiekrechtelijke rechtspersoon"
+        },
+        "formattedValue": "Publiekrechtelijke rechtspersoon"
+      },
+      {
+        "type": "string",
+        "key": "statutaire_naam",
+        "formattedKey": "Statutaire naam",
+        "value": "Gemeente Amsterdam",
+        "formattedValue": "Gemeente Amsterdam"
+      }
+    ]
+  ],
+  "KADASTRAAL_SUBJECT_NP": null,
+  "VESTIGING": [
+    [
+      {
+        "type": "string",
+        "key": "vestigingsnummer",
+        "formattedKey": "Vestigingsnummer",
+        "value": "000003588726",
+        "formattedValue": "000003588726"
+      },
+      {
+        "type": "string",
+        "key": "naam",
+        "formattedKey": "Naam",
+        "value": "De Vervoerregio Amsterdam",
+        "formattedValue": "De Vervoerregio Amsterdam"
+      },
+      {
+        "type": "string",
+        "key": "datum_aanvang",
+        "formattedKey": "Datum aanvang",
+        "value": "2002-12-30",
+        "formattedValue": "30-12-2002"
+      },
+      {
+        "type": "string",
+        "key": "postadres",
+        "formattedKey": "Postadres",
+        "value": "Postbus 626 1000AP Amsterdam",
+        "formattedValue": "Postbus 626 1000AP Amsterdam"
+      },
+      {
+        "type": "string",
+        "key": "bezoekadres",
+        "formattedKey": "Bezoekadres",
+        "value": "Jodenbreestraat 25 1011NH Amsterdam",
+        "formattedValue": "Jodenbreestraat 25 1011NH Amsterdam"
+      },
+      {
+        "type": "object",
+        "key": "activiteiten",
+        "formattedKey": "Activiteiten",
+        "value": [
+          {
+            "activiteitsomschrijving": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam",
+            "sbi_code": "7112",
+            "sbi_omschrijving": "Ingenieurs en overig technisch ontwerp en advies",
+            "hoofdactiviteit": true,
+            "sbi_code_tree": "7112"
+          },
+          {
+            "activiteitsomschrijving": null,
+            "sbi_code": "49392",
+            "sbi_omschrijving": "Openbaar interlokaal personenvervoer over de weg",
+            "hoofdactiviteit": false,
+            "sbi_code_tree": "49392"
+          },
+          {
+            "activiteitsomschrijving": null,
+            "sbi_code": "8211",
+            "sbi_omschrijving": "Brede administratieve dienstverlening",
+            "hoofdactiviteit": false,
+            "sbi_code_tree": "8211"
+          }
+        ],
+        "formattedValue": [
+          [
+            {
+              "type": "string",
+              "key": "activiteitsomschrijving",
+              "formattedKey": "Activiteitsomschrijving",
+              "value": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam",
+              "formattedValue": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam"
+            },
+            {
+              "type": "string",
+              "key": "sbi_code",
+              "formattedKey": "SBI-code",
+              "value": "7112",
+              "formattedValue": "7112"
+            },
+            {
+              "type": "string",
+              "key": "sbi_omschrijving",
+              "formattedKey": "SBI-omschrijving",
+              "value": "Ingenieurs en overig technisch ontwerp en advies",
+              "formattedValue": "Ingenieurs en overig technisch ontwerp en advies"
+            }
+          ],
+          [
+            {
+              "type": "string",
+              "key": "sbi_code",
+              "formattedKey": "SBI-code",
+              "value": "49392",
+              "formattedValue": "49392"
+            },
+            {
+              "type": "string",
+              "key": "sbi_omschrijving",
+              "formattedKey": "SBI-omschrijving",
+              "value": "Openbaar interlokaal personenvervoer over de weg",
+              "formattedValue": "Openbaar interlokaal personenvervoer over de weg"
+            }
+          ],
+          [
+            {
+              "type": "string",
+              "key": "sbi_code",
+              "formattedKey": "SBI-code",
+              "value": "8211",
+              "formattedValue": "8211"
+            },
+            {
+              "type": "string",
+              "key": "sbi_omschrijving",
+              "formattedKey": "SBI-omschrijving",
+              "value": "Brede administratieve dienstverlening",
+              "formattedValue": "Brede administratieve dienstverlening"
+            }
+          ]
+        ]
+      },
+      {
+        "type": "string",
+        "key": "kvk_nummer",
+        "formattedKey": "KVK-nummer",
+        "value": "88888888",
+        "formattedValue": "88888888"
+      }
+    ],
+    [
+      {
+        "type": "string",
+        "key": "vestigingsnummer",
+        "formattedKey": "Vestigingsnummer",
+        "value": "000007678622",
+        "formattedValue": "000007678622"
+      },
+      {
+        "type": "string",
+        "key": "naam",
+        "formattedKey": "Naam",
+        "value": "Dienst Wonen, Zorg en Samenleven",
+        "formattedValue": "Dienst Wonen, Zorg en Samenleven"
+      },
+      {
+        "type": "string",
+        "key": "datum_aanvang",
+        "formattedKey": "Datum aanvang",
+        "value": "1997-05-01",
+        "formattedValue": "1-5-1997"
+      },
+      {
+        "type": "string",
+        "key": "postadres",
+        "formattedKey": "Postadres",
+        "value": "Postbus 1900 1000BX Amsterdam",
+        "formattedValue": "Postbus 1900 1000BX Amsterdam"
+      },
+      {
+        "type": "string",
+        "key": "bezoekadres",
+        "formattedKey": "Bezoekadres",
+        "value": "Jodenbreestraat 25 WZS 1011NH Amsterdam",
+        "formattedValue": "Jodenbreestraat 25 WZS 1011NH Amsterdam"
+      },
+      {
+        "type": "object",
+        "key": "activiteiten",
+        "formattedKey": "Activiteiten",
+        "value": [
+          {
+            "activiteitsomschrijving": "Het verlenen van woondiensten aan burgers, het coördineren van de stedelijke vernieuwing en het formuleren van het Amsterdamse woonbeleid. Het uitvoeren van de Wet maatschappelijke ondersteuning, in nauwe samenwerking met de stadsdelen",
+            "sbi_code": "68202",
+            "sbi_omschrijving": "Gemeentelijke woningbedrijven",
+            "hoofdactiviteit": true,
+            "sbi_code_tree": "68202"
+          }
+        ],
+        "formattedValue": [
+          {
+            "type": "string",
+            "key": "activiteitsomschrijving",
+            "formattedKey": "Activiteitsomschrijving",
+            "value": "Het verlenen van woondiensten aan burgers, het coördineren van de stedelijke vernieuwing en het formuleren van het Amsterdamse woonbeleid. Het uitvoeren van de Wet maatschappelijke ondersteuning, in nauwe samenwerking met de stadsdelen",
+            "formattedValue": "Het verlenen van woondiensten aan burgers, het coördineren van de stedelijke vernieuwing en het formuleren van het Amsterdamse woonbeleid. Het uitvoeren van de Wet maatschappelijke ondersteuning, in nauwe samenwerking met de stadsdelen"
+          },
+          {
+            "type": "string",
+            "key": "sbi_code",
+            "formattedKey": "SBI-code",
+            "value": "68202",
+            "formattedValue": "68202"
+          },
+          {
+            "type": "string",
+            "key": "sbi_omschrijving",
+            "formattedKey": "SBI-omschrijving",
+            "value": "Gemeentelijke woningbedrijven",
+            "formattedValue": "Gemeentelijke woningbedrijven"
+          }
+        ]
+      },
+      {
+        "type": "string",
+        "key": "kvk_nummer",
+        "formattedKey": "KVK-nummer",
+        "value": "34366966",
+        "formattedValue": "34366966"
+      }
+    ],
+    [
+      {
+        "type": "string",
+        "key": "vestigingsnummer",
+        "formattedKey": "Vestigingsnummer",
+        "value": "000007678770",
+        "formattedValue": "000007678770"
+      },
+      {
+        "type": "string",
+        "key": "naam",
+        "formattedKey": "Naam",
+        "value": "Dienst Basisinformatie (DBI)",
+        "formattedValue": "Dienst Basisinformatie (DBI)"
+      },
+      {
+        "type": "string",
+        "key": "datum_aanvang",
+        "formattedKey": "Datum aanvang",
+        "value": "1997-04-01",
+        "formattedValue": "1-4-1997"
+      },
+      {
+        "type": "string",
+        "key": "postadres",
+        "formattedKey": "Postadres",
+        "value": "Postbus 2752 1000CT Amsterdam",
+        "formattedValue": "Postbus 2752 1000CT Amsterdam"
+      },
+      {
+        "type": "string",
+        "key": "bezoekadres",
+        "formattedKey": "Bezoekadres",
+        "value": "Jodenbreestraat 25 - DBI 1011NH Amsterdam",
+        "formattedValue": "Jodenbreestraat 25 - DBI 1011NH Amsterdam"
+      },
+      {
+        "type": "object",
+        "key": "activiteiten",
+        "formattedKey": "Activiteiten",
+        "value": [
+          {
+            "activiteitsomschrijving": "Stelselbeheer basisinformatie voor de gemeente Amsterdam, basisregistraties personen, adressen, gebouwen en topografie, informatieverstrekking uit andere basisregistraties en gemeentelijke kernregistraties",
+            "sbi_code": "8411",
+            "sbi_omschrijving": "Algemeen overheidsbestuur",
+            "hoofdactiviteit": true,
+            "sbi_code_tree": "8411"
+          },
+          {
+            "activiteitsomschrijving": null,
+            "sbi_code": "5812",
+            "sbi_omschrijving": "Databanken",
+            "hoofdactiviteit": false,
+            "sbi_code_tree": "5812"
+          }
+        ],
+        "formattedValue": [
+          [
+            {
+              "type": "string",
+              "key": "activiteitsomschrijving",
+              "formattedKey": "Activiteitsomschrijving",
+              "value": "Stelselbeheer basisinformatie voor de gemeente Amsterdam, basisregistraties personen, adressen, gebouwen en topografie, informatieverstrekking uit andere basisregistraties en gemeentelijke kernregistraties",
+              "formattedValue": "Stelselbeheer basisinformatie voor de gemeente Amsterdam, basisregistraties personen, adressen, gebouwen en topografie, informatieverstrekking uit andere basisregistraties en gemeentelijke kernregistraties"
+            },
+            {
+              "type": "string",
+              "key": "sbi_code",
+              "formattedKey": "SBI-code",
+              "value": "8411",
+              "formattedValue": "8411"
+            },
+            {
+              "type": "string",
+              "key": "sbi_omschrijving",
+              "formattedKey": "SBI-omschrijving",
+              "value": "Algemeen overheidsbestuur",
+              "formattedValue": "Algemeen overheidsbestuur"
+            }
+          ],
+          [
+            {
+              "type": "string",
+              "key": "sbi_code",
+              "formattedKey": "SBI-code",
+              "value": "5812",
+              "formattedValue": "5812"
+            },
+            {
+              "type": "string",
+              "key": "sbi_omschrijving",
+              "formattedKey": "SBI-omschrijving",
+              "value": "Databanken",
+              "formattedValue": "Databanken"
+            }
+          ]
+        ]
+      },
+      {
+        "type": "string",
+        "key": "kvk_nummer",
+        "formattedKey": "KVK-nummer",
+        "value": "88888888",
+        "formattedValue": "88888888"
+      }
+    ],
+    [
+      {
+        "type": "string",
+        "key": "vestigingsnummer",
+        "formattedKey": "Vestigingsnummer",
+        "value": "000007679157",
+        "formattedValue": "000007679157"
+      },
+      {
+        "type": "string",
+        "key": "naam",
+        "formattedKey": "Naam",
+        "value": "Servicehuis Personeel",
+        "formattedValue": "Servicehuis Personeel"
+      },
+      {
+        "type": "string",
+        "key": "datum_aanvang",
+        "formattedKey": "Datum aanvang",
+        "value": "2006-03-01",
+        "formattedValue": "1-3-2006"
+      },
+      {
+        "type": "string",
+        "key": "postadres",
+        "formattedKey": "Postadres",
+        "value": "Postbus 11650 1001GR Amsterdam",
+        "formattedValue": "Postbus 11650 1001GR Amsterdam"
+      },
+      {
+        "type": "string",
+        "key": "bezoekadres",
+        "formattedKey": "Bezoekadres",
+        "value": "Jodenbreestraat 25 shp 1011NH Amsterdam",
+        "formattedValue": "Jodenbreestraat 25 shp 1011NH Amsterdam"
+      },
+      {
+        "type": "object",
+        "key": "activiteiten",
+        "formattedKey": "Activiteiten",
+        "value": [
+          {
+            "activiteitsomschrijving": "Het verzorgen van personeelsbeheer voor alle diensten, stadsdelen en bedrijven van Gemeente Amsterdam",
+            "sbi_code": "69203",
+            "sbi_omschrijving": "Boekhoudkantoren",
+            "hoofdactiviteit": true,
+            "sbi_code_tree": "69203"
+          }
+        ],
+        "formattedValue": [
+          {
+            "type": "string",
+            "key": "activiteitsomschrijving",
+            "formattedKey": "Activiteitsomschrijving",
+            "value": "Het verzorgen van personeelsbeheer voor alle diensten, stadsdelen en bedrijven van Gemeente Amsterdam",
+            "formattedValue": "Het verzorgen van personeelsbeheer voor alle diensten, stadsdelen en bedrijven van Gemeente Amsterdam"
+          },
+          {
+            "type": "string",
+            "key": "sbi_code",
+            "formattedKey": "SBI-code",
+            "value": "69203",
+            "formattedValue": "69203"
+          },
+          {
+            "type": "string",
+            "key": "sbi_omschrijving",
+            "formattedKey": "SBI-omschrijving",
+            "value": "Boekhoudkantoren",
+            "formattedValue": "Boekhoudkantoren"
+          }
+        ]
+      },
+      {
+        "type": "string",
+        "key": "kvk_nummer",
+        "formattedKey": "KVK-nummer",
+        "value": "88888888",
+        "formattedValue": "88888888"
+      }
+    ]
+  ],
+  "GEBIED": [
+    {
+      "type": "object",
+      "key": "buurt",
+      "formattedKey": "Buurt",
+      "value": {
+        "_links": {
+          "self": {
+            "href": "https://acc.api.data.amsterdam.nl/gebieden/buurt/03630000000426/"
+          }
+        },
+        "_display": "Uilenburg (A04f)",
+        "code": "04f",
+        "naam": "Uilenburg",
+        "dataset": "gebieden"
+      },
+      "formattedValue": "Uilenburg"
+    },
+    {
+      "type": "object",
+      "key": "stadsdeel",
+      "formattedKey": "Stadsdeel",
+      "value": {
+        "_links": {
+          "self": {
+            "href": "https://acc.api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/"
+          }
+        },
+        "_display": "Centrum (A)",
+        "code": "A",
+        "naam": "Centrum",
+        "dataset": "gebieden"
+      },
+      "formattedValue": "Centrum"
+    },
+    {
+      "type": "object",
+      "key": "wijk",
+      "formattedKey": "Wijk",
+      "value": {
+        "_links": {
+          "self": {
+            "href": "https://acc.api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/"
+          }
+        },
+        "_display": "Nieuwmarkt/Lastage (04)",
+        "naam": "Nieuwmarkt/Lastage",
+        "vollcode": "A04",
+        "dataset": "gebieden"
+      },
+      "formattedValue": "Nieuwmarkt/Lastage"
+    }
+  ]
+}

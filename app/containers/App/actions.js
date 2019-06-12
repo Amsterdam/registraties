@@ -19,70 +19,53 @@ import {
   UNAUTHORIZED,
 } from './constants';
 
-export function authenticateUser(credentials) {
-  return {
-    type: AUTHENTICATE_USER,
-    payload: credentials,
-  };
-}
+export const authenticateUser = credentials => ({
+  type: AUTHENTICATE_USER,
+  payload: credentials,
+});
 
-export function authorizeUser(credentials) {
-  return {
-    type: AUTHORIZE_USER,
-    payload: credentials,
-  };
-}
+export const authorizeUser = credentials => ({
+  type: AUTHORIZE_USER,
+  payload: credentials,
+});
 
-export function showGlobalError(message) {
-  return {
-    type: SHOW_GLOBAL_ERROR,
-    payload: message,
-  };
-}
+export const showGlobalError = message => ({
+  type: SHOW_GLOBAL_ERROR,
+  payload: message,
+});
 
-export function resetGlobalError() {
-  return {
-    type: RESET_GLOBAL_ERROR,
-  };
-}
+export const resetGlobalError = () => ({
+  type: RESET_GLOBAL_ERROR,
+});
 
-export function doLogin(domain) {
-  return {
-    type: LOGIN,
-    payload: domain,
-  };
-}
+export const doLogin = domain => ({
+  type: LOGIN,
+  payload: domain,
+});
 
-export function doLogout() {
-  return {
-    type: LOGOUT,
-    payload: null,
-  };
-}
+export const doLogout = () => ({
+  type: LOGOUT,
+  payload: null,
+});
 
-export const statusPending = payload => ({
+export const statusPending = () => ({
   type: LOAD_DATA_PENDING,
-  payload,
 });
 
-export const statusSuccess = payload => ({
+export const statusSuccess = () => ({
   type: LOAD_DATA_SUCCESS,
-  payload,
 });
 
-export const statusFailed = payload => ({
+export const statusFailed = () => ({
   type: LOAD_DATA_FAILED,
-  payload,
 });
 
-export const statusUnableToFetch = payload => ({
+export const statusUnableToFetch = () => ({
   type: UNABLE_TO_FETCH,
-  payload,
 });
 
-export const statusUnauthorized = payload => ({
+export const statusUnauthorized = () => ({
   type: UNAUTHORIZED,
-  payload,
 });
 
 export const progress = payload => ({

@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/App/messages should match the snapshot 1`] = `
+Object {
+  "accommodation_object_id": Object {
+    "id": "registraties.accommodation_object.id",
+  },
+  "address": Object {
+    "id": "registraties.address",
+  },
+  "amount_of": Object {
+    "id": "registraties.amount_of",
+  },
+  "area": Object {
+    "id": "registraties.area",
+  },
+  "bag_objects": Object {
+    "id": "registraties.bag_objects",
+  },
+  "brk_objects": Object {
+    "id": "registraties.brk_objects",
+  },
+  "cadastral_object_indication": Object {
+    "id": "registraties.cadastral_object.indication",
+  },
+  "cadastral_object_indications": Object {
+    "id": "registraties.cadastral_object.indications",
+  },
+  "chamber_of_commerce_nr": Object {
+    "id": "registraties.chamber_of_commerce.nr",
+  },
+  "chamber_of_commerce_nrs": Object {
+    "id": "registraties.chamber_of_commerce.nrs",
+  },
+  "close": Object {
+    "id": "registraties.close",
+  },
+  "csv_file_name": Object {
+    "id": "registraties.csv_file_name",
+  },
+  "export_cta": Object {
+    "id": "registraties.export_cta",
+  },
+  "extra_fields": Object {
+    "id": "registraties.extra_fields",
+  },
+  "filled_in_by": Object {
+    "id": "registraties.filled_in_by",
+  },
+  "house_id": Object {
+    "id": "registraties.house.id",
+  },
+  "no": Object {
+    "id": "registraties.yes",
+  },
+  "note": Object {
+    "id": "registraties.note",
+  },
+  "note_remark": Object {
+    "id": "registraties.note_remark",
+  },
+  "number_identification_id": Object {
+    "id": "registraties.number_identification.id",
+  },
+  "on_this_page": Object {
+    "id": "registraties.on_this_page",
+  },
+  "overview": Object {
+    "id": "registraties.overview",
+  },
+  "public_space": Object {
+    "id": "registraties.public_space",
+  },
+  "public_space_id": Object {
+    "id": "registraties.public_space_id",
+  },
+  "report_feedback": Object {
+    "id": "registraties.report_feedback",
+  },
+  "rsin": Object {
+    "id": "registraties.rsin",
+  },
+  "rsins": Object {
+    "id": "registraties.rsins",
+  },
+  "to_stelselpedia": Object {
+    "id": "registraties.to_stelselpedia",
+  },
+  "unknown": Object {
+    "id": "registraties.unknown",
+  },
+  "yes": Object {
+    "id": "registraties.yes",
+  },
+}
+`;

@@ -3,7 +3,7 @@ import React from 'react';
 import './style.scss';
 
 const Footer = () => (
-  <div className="footer-wrapper no-print">
+  <div className="footer-wrapper no-print" data-testid="site-footer">
     <div className="row bg-darkgrey footer">
       <footer className="container footer-component">
         <div className="row">

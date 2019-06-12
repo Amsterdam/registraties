@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
+import { initialState, initialRouteState } from './reducer';
 
 export const selectGlobal = state => (state && state.global) || initialState;
-const selectRoute = state => (state && state.route) || { location: '/' };
+export const selectRoute = state => (state && state.route) || initialRouteState;
 
 export const makeSelectStatus = createSelector(
   selectGlobal,

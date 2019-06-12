@@ -1,5 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GlobalError /> should render a feedback button 1`] = `ReactWrapper {}`;
+exports[`containers/GlobalError should render showing an error when defined 1`] = `
+<div
+  class="no-print cf GlobalError__ErrorWrapper-igrx8k-0 kuoiLJ"
+>
+  <div
+    class="GlobalError__ErrorContainer-igrx8k-1 dDcAQy"
+  >
+    <p
+      class="GlobalError__P-igrx8k-2 fGvvtl"
+    >
+      registraties.unauthorized
+    </p>
+    <button
+      class="GlobalError__Button-igrx8k-3 dCWsfn"
+      type="button"
+    >
+      <img
+        fill="#fff"
+        focusable="false"
+        width="20"
+      />
+      <span
+        class="GlobalError__Label-igrx8k-4 fSyAoo"
+      >
+        registraties.close
+      </span>
+    </button>
+  </div>
+</div>
+`;
 
-exports[`<GlobalError /> should render showing an error when defined 1`] = `null`;
+exports[`containers/GlobalError should render showing no error by default 1`] = `<div />`;

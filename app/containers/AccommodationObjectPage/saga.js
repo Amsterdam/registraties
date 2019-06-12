@@ -103,7 +103,6 @@ export function* fetchData(action) {
 
       yield put(statusSuccess());
     }
-    throw new Error('blah');
   } catch (error) {
     if (error.message === 'Failed to fetch') {
       // unable to fetch

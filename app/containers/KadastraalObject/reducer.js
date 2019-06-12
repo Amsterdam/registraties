@@ -21,6 +21,7 @@ export default (state = initialState, action) =>
 
       case LOAD_DATA:
         draft.adresseerbaarObjectId = action.payload.adresseerbaarObjectId;
+        draft.data = undefined;
         draft.error = false;
         draft.errorMessage = '';
         break;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -11,19 +11,19 @@ import { OBJECTS, LOAD_DATA_FAILED } from 'containers/App/constants';
 import { makeSelectStatus } from 'containers/App/selectors';
 import { makeSelectGebiedData } from 'containers/Nummeraanduiding/selectors';
 
-export const GebiedContainer = ({ data, intl, status }) => {
+export const GebiedContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.GEBIED.NAME);
   const href = OBJECTS.GEBIED.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-GebiedContainer.defaultProps = {
+GebiedContainerComponent.defaultProps = {
   data: undefined,
 };
 
-GebiedContainer.propTypes = {
+GebiedContainerComponent.propTypes = {
   data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -35,8 +35,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(GebiedContainerComponent);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(memo(GebiedContainer));
+export default compose(withConnect)(Intl);
