@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray, isAppartment, isObject } from 'utils';
+import { formatData, isArray, isAppartment } from 'utils';
 import { initialState } from './reducer';
 
 export const selectKadastraalObject = state => (state && state.kadastraalObject) || initialState;
@@ -11,10 +11,6 @@ export const makeSelectKadastraalObjectData = createSelector(
   selectKadastraalObject,
   makeSelectLocale,
   (state, locale) => {
-    if (!isObject(state)) {
-      return undefined;
-    }
-
     if (!state.data) {
       return state.data;
     }
@@ -41,10 +37,6 @@ export const makeSelectFromObjectAppartment = key =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!isObject(state)) {
-        return undefined;
-      }
-
       if (!state.data) {
         return state.data;
       }
@@ -66,10 +58,6 @@ export const makeSelectFromObject = key =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!isObject(state)) {
-        return undefined;
-      }
-
       if (!state.data) {
         return state.data;
       }
@@ -88,10 +76,6 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
   createSelector(
     selectKadastraalObject,
     state => {
-      if (!isObject(state)) {
-        return undefined;
-      }
-
       if (!state.data) {
         return state.data;
       }

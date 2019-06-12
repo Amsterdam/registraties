@@ -107,7 +107,7 @@
             "kadastraal_subject": {
               "_links": {
                 "self": {
-                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.00000000/"
+                  "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000001/"
                 }
               },
               "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
