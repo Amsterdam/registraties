@@ -25,4 +25,9 @@ module.exports = {
   setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
   testRegex: ['tests/.*\\.test\\.js$', '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$'],
   snapshotSerializers: [],
+  moduleFileExtensions: ['js', 'html'],
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+    '^.+\\.html$': '<rootDir>/internals/testing/htmlLoader.js',
+  },
 };

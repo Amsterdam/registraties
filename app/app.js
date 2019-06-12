@@ -14,10 +14,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
-import 'leaflet/dist/leaflet';
 
 // Import root app
-import App from 'containers/App';
+import App from 'containers/App/Loadable';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
