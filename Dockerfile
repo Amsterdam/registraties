@@ -1,4 +1,3 @@
-# FROM node:10.15-stretch AS builder
 FROM zenika/alpine-node:full-icu AS builder
 LABEL maintainer="datapunt@amsterdam.nl"
 
