@@ -1,6 +1,4 @@
-# Using Docker image that comes with nodejs built with full ICU: https://github.com/Zenika/alpine-node/blob/master/full-icu/Dockerfile
-# Also see: https://techoverflow.net/2018/09/19/fixing-nodejs-intl-datetimeformat-not-formatting-properly-for-locales/ and https://nodejs.org/api/intl.html
-FROM zenika/alpine-node:full-icu AS builder
+FROM node:10.15-stretch AS builder
 LABEL maintainer="datapunt@amsterdam.nl"
 
 ARG BUILD_ENV=prod
@@ -9,19 +7,12 @@ ARG BUILD_NUMBER=0
 WORKDIR /deploy
 
 # Run updates and cleanup
-RUN apk update --no-cache && \
-    apk add \
-      autoconf \
-      automake \
-      libpng \
-      libtool \
-      libwebp \
-      libwebp-tools \
-      mesa-gl \
-      nasm \
-      zlib-dev \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      netcat \
+      libglu1 \
       git && \
-      rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 #  Changing git URL because network is blocking git protocol...
 RUN git config --global url."https://".insteadOf git://
@@ -30,7 +21,16 @@ RUN git config --global url."https://github.com/".insteadOf git@github.com:
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
-RUN npm --no-progress ci && npm cache clean --force
+# RUN npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
+RUN npm --production=false \
+        --unsafe-perm \
+        --verbose \
+        --no-progress \
+        ci
+
+RUN npm install --unsafe-perm -g full-icu
+RUN npm cache clean --force
+ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 # Build dependencies
 COPY . /deploy/
@@ -39,6 +39,7 @@ COPY . /deploy/
 ENV NODE_PATH=/deploy/
 ENV NODE_ENV=production
 RUN npm run build
+
 
 # Deploy
 FROM nginx:stable-alpine
