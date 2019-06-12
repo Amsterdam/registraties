@@ -249,8 +249,8 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
     .filter(Boolean);
 };
 
-export const isValidSubjectNP = ({ geboortedatum, naam }) => !!geboortedatum && !!naam;
+export const isValidSubjectNP = subjectNP => isObject(subjectNP) && !!subjectNP.geboortedatum && !!subjectNP.naam;
 
-export const isValidSubjectNNP = ({ kvknummer, rsin }) => !!kvknummer && !!rsin;
+export const isValidSubjectNNP = subjectNNP => isObject(subjectNNP) && !!subjectNNP.kvknummer && !!subjectNNP.rsin;
 
 export const isAppartment = ({ indexletter }) => indexletter.toLowerCase() === 'a';

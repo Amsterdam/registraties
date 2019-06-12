@@ -3,7 +3,7 @@ import reducer, { initialState } from '../reducer';
 
 import { LOAD_DATA, LOAD_DATA_FAILED, LOAD_DATA_SUCCESS, LOAD_DATA_NO_RESULTS } from '../constants';
 
-describe('containers/KadastraalObject/reducer', () => {
+describe('containers/KadastraalSubjectNNP/reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });

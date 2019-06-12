@@ -4,8 +4,8 @@ import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { formatData, isArray, isValidSubjectNNP } from 'utils';
 import { initialState } from './reducer';
 
-const selectKadastraalSubjectNNP = state => (state && state.kadastraalSubjectNNP) || initialState;
-
+export const selectKadastraalSubjectNNP = state => (state && state.kadastraalSubjectNNP) || initialState;
+export const allowedDataKeys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
 /**
  * Niet-natuurlijk persoon
  */
@@ -13,10 +13,6 @@ export const makeSelectKadastraalSubjectNNPData = createSelector(
   selectKadastraalSubjectNNP,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
-      return undefined;
-    }
-
     if (!state.data) {
       return state.data;
     }
@@ -27,7 +23,7 @@ export const makeSelectKadastraalSubjectNNPData = createSelector(
       return data;
     }
 
-    const keys = ['kvknummer', 'rechtsvorm', 'rsin', 'statutaire_naam'];
+    const keys = allowedDataKeys;
 
     const results = data.filter(isValidSubjectNNP).map(subject => formatData({ data: subject, keys, locale }));
 

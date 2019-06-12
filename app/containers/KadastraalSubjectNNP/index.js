@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,19 +16,19 @@ import { makeSelectKadastraalSubjectNNPData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const KadastraalSubjectNNPContainer = ({ data, intl, status }) => {
+export const KadastraalSubjectNNPContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.KADASTRAAL_SUBJECT_NNP.NAME);
   const href = OBJECTS.KADASTRAAL_SUBJECT_NNP.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-KadastraalSubjectNNPContainer.defaultProps = {
+KadastraalSubjectNNPContainerComponent.defaultProps = {
   data: null,
 };
 
-KadastraalSubjectNNPContainer.propTypes = {
+KadastraalSubjectNNPContainerComponent.propTypes = {
   data: PropTypes.arrayOf(dataPropType),
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -40,10 +40,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(KadastraalSubjectNNPContainerComponent);
 
 export default compose(
-  injectIntl,
   withConnect,
   injectSaga({ key: 'kadastraalSubjectNNP', saga }),
   injectReducer({ key: 'kadastraalSubjectNNP', reducer }),
-)(memo(KadastraalSubjectNNPContainer));
+)(Intl);
