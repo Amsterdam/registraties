@@ -30,6 +30,7 @@ describe('containers/App', () => {
     const isAuthenticatedSpy = jest
       .spyOn(auth, 'isAuthenticated')
       .mockImplementationOnce(() => true)
+      .mockImplementationOnce(() => true)
       .mockImplementationOnce(() => false);
 
     const { rerender } = render(
