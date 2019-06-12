@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray, isAppartment } from 'utils';
+import { formatData, isArray, isApartment } from 'utils';
 import { initialState } from './reducer';
 
 export const selectKadastraalObject = state => (state && state.kadastraalObject) || initialState;
@@ -48,7 +48,7 @@ export const makeSelectFromObjectAppartment = key =>
       }
 
       return results
-        .filter(isAppartment)
+        .filter(isApartment)
         .map(item => item[key])
         .filter(Boolean);
     },

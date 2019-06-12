@@ -31,5 +31,6 @@ export default (state = initialState, action) =>
 
       case LOAD_DATA_NO_RESULTS:
         draft.data = null;
+        break;
     }
   });

@@ -253,4 +253,8 @@ export const isValidSubjectNP = subjectNP => isObject(subjectNP) && !!subjectNP.
 
 export const isValidSubjectNNP = subjectNNP => isObject(subjectNNP) && !!subjectNNP.kvknummer && !!subjectNNP.rsin;
 
-export const isAppartment = ({ indexletter }) => indexletter.toLowerCase() === 'a';
+export const isApartment = apartment =>
+  isObject(apartment) && !!apartment.indexletter && apartment.indexletter.toLowerCase() === 'a';
+
+export const isValidMaatschappelijkeActiviteit = maatschappelijkeActiviteit =>
+  isObject(maatschappelijkeActiviteit) && !!maatschappelijkeActiviteit.kvk_nummer && !!maatschappelijkeActiviteit.naam;

@@ -1,0 +1,35 @@
+{
+  "onderneming": {
+    "handelsnamen": [
+      {
+        "handelsnaam": "Acme corp."
+      }
+    ],
+    "totaal_werkzame_personen": 1,
+    "fulltime_werkzame_personen": 1,
+    "parttime_werkzame_personen": 0
+  },
+  "communicatiegegevens": [],
+  "postadres": null,
+  "bezoekadres": null,
+  "vestigingen": {
+    "count": 1,
+    "href": "https://acc.api.data.amsterdam.nl/handelsregister/vestiging/?maatschappelijke_activiteit=100000000001234567"
+  },
+  "naam": "Acme corp.",
+  "kvk_nummer": "12345678",
+  "datum_aanvang": "1970-01-01",
+  "datum_einde": null,
+  "incidenteel_uitlenen_arbeidskrachten": null,
+  "non_mailing": false,
+  "eigenaar_mks_id": null,
+  "eigenaar": "https://acc.api.data.amsterdam.nl/handelsregister/persoon/100000000001234567/",
+  "hoofdvestiging": "https://acc.api.data.amsterdam.nl/handelsregister/vestiging/000001234567/",
+  "activiteiten": [],
+  "_bijzondere_rechts_toestand": {
+    "faillissement": false,
+    "status": null,
+    "duur": null,
+    "reden_insolvatie": null
+  }
+}

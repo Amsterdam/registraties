@@ -112,11 +112,6 @@ describe('containers/KadastraalSubjectNP/saga', () => {
         .next()
         .finish()
         .put({ type: INCREMENT_PROGRESS });
-
-      testSaga(fetchKadastraalSubjectNPData)
-        .next()
-        .finish()
-        .put({ type: INCREMENT_PROGRESS });
     });
   });
 });
