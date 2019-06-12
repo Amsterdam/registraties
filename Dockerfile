@@ -26,8 +26,11 @@ RUN npm --production=false \
         --unsafe-perm \
         --verbose \
         --no-progress \
-        ci && \
-    npm cache clean --force
+        ci
+
+RUN npm install --unsafe-perm -g full-icu
+RUN npm cache clean --force
+ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 # Build dependencies
 COPY . /deploy/

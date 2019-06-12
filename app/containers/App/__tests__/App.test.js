@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render } from 'react-testing-library';
 import { shallow } from 'enzyme';
 import { Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
@@ -20,8 +20,6 @@ const store = configureStore({}, history);
 jest.mock('shared/services/auth/auth');
 
 describe('containers/App', () => {
-  afterEach(cleanup);
-
   it('should get user credentials on mount', () => {
     const showError = jest.fn();
     const onAuthenticateUser = jest.fn();
