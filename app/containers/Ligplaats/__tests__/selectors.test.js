@@ -2,7 +2,7 @@ import ligplaats from './ligplaats.json';
 import { makeSelectLIGNummeraanduidingId } from '../selectors';
 import { initialState } from '../reducer';
 
-describe('containers/makeSelectLIGNummeraanduidingId/selectors', () => {
+describe('containers/Ligplaats/selectors', () => {
   describe('makeSelectKadastraalObjectData', () => {
     it('should return undefined for an empty state', () => {
       expect(makeSelectLIGNummeraanduidingId({ data: { foo: 'bar' } })).toEqual(undefined);
