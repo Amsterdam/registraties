@@ -1,3 +1,5 @@
+# Using Docker image that comes with nodejs built with full ICU: https://github.com/Zenika/alpine-node/blob/master/full-icu/Dockerfile
+# Also see: https://techoverflow.net/2018/09/19/fixing-nodejs-intl-datetimeformat-not-formatting-properly-for-locales/ and https://nodejs.org/api/intl.html
 FROM zenika/alpine-node:full-icu AS builder
 LABEL maintainer="datapunt@amsterdam.nl"
 
