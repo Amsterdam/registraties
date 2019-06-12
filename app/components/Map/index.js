@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import 'leaflet/dist/leaflet';
 import amaps from 'amsterdam-amaps/dist/amaps';
 import 'amsterdam-amaps/dist/nlmaps/dist/assets/css/nlmaps.css';
 import 'leaflet/dist/leaflet.css';

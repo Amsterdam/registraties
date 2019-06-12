@@ -200,13 +200,6 @@ exports[`AccommodationObject should render without problems 1`] = `
   position: relative;
 }
 
-.c10 {
-  height: 200px;
-  width: 100%;
-  position: relative;
-  z-index: 0;
-}
-
 @media print {
   .c5 {
     margin-top: 0;
@@ -446,16 +439,15 @@ exports[`AccommodationObject should render without problems 1`] = `
         />
       </div>
     </section>
-    <section>
+    <div
+      class="no-print  c7"
+      data-testid="progress-wrapper"
+      type="undetermined"
+    >
       <div
-        class="cf c10"
-      >
-        <div
-          id="mapDiv"
-          style="height: 100%;"
-        />
-      </div>
-    </section>
+        class="c8"
+      />
+    </div>
   </aside>
 </div>
 `;
@@ -1031,16 +1023,64 @@ exports[`AccommodationObject should render without problems 2`] = `
         />
       </div>
     </section>
-    <section>
-      <div
-        class="cf Map__MapWrapper-sc-1v5i1wm-0 dwptan"
-      >
-        <div
-          id="mapDiv"
-          style="height: 100%;"
-        />
-      </div>
-    </section>
+    <div
+      class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+      data-testid="progress-wrapper"
+      type="undetermined"
+    >
+      .c0 {
+  height: 19.98px;
+  width: 19.98px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.9980000000000002px;
+  color: #ec0000;
+  display: inline-block;
+  font-size: 1.9980000000000002px;
+  position: relative;
+  text-indent: -99999em;
+  -webkit-transform: translate3D(0,0,0);
+  -ms-transform: translate3D(0,0,0);
+  transform: translate3D(0,0,0);
+  vertical-align: middle;
+  margin: 0;
+}
+
+.c0::before,
+.c0::after {
+  background-color: #fff;
+  content: '';
+  height: 21.978px;
+  position: absolute;
+}
+
+.c0::before {
+  -webkit-animation: rotate 1.5s infinite ease 1.2s;
+  animation: rotate 1.5s infinite ease 1.2s;
+  border-radius: 21.978px 0 0 21.978px;
+  left: -0.9990000000000001px;
+  top: -0.9990000000000001px;
+  -webkit-transform-origin: 10.589400000000001px 10.989px;
+  -ms-transform-origin: 10.589400000000001px 10.989px;
+  transform-origin: 10.589400000000001px 10.989px;
+  width: 10.3854375px;
+}
+
+.c0::after {
+  -webkit-animation: rotate 1.5s infinite ease;
+  animation: rotate 1.5s infinite ease;
+  border-radius: 0 21.978px 21.978px 0;
+  left: 10.3854375px;
+  top: -0.5994px;
+  -webkit-transform-origin: -0.1998px 10.989px;
+  -ms-transform-origin: -0.1998px 10.989px;
+  transform-origin: -0.1998px 10.989px;
+  width: 11.186735400000002px;
+}
+
+<div
+        class="c0"
+      />
+    </div>
     .c0 {
   margin-top: 30px;
 }
