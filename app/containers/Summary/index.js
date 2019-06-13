@@ -11,8 +11,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(Summary);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(Summary);
+export default compose(withConnect)(Intl);

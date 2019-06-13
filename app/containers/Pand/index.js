@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,19 +16,19 @@ import { makeSelectPandData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const PandContainer = ({ data, intl, status }) => {
+export const PandContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.PAND.NAME);
   const href = OBJECTS.PAND.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-PandContainer.defaultProps = {
+PandContainerComponent.defaultProps = {
   data: null,
 };
 
-PandContainer.propTypes = {
+PandContainerComponent.propTypes = {
   data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -40,10 +40,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(PandContainerComponent);
 
 export default compose(
-  injectIntl,
   withConnect,
   injectSaga({ key: 'pand', saga }),
   injectReducer({ key: 'pand', reducer }),
-)(memo(PandContainer));
+)(Intl);

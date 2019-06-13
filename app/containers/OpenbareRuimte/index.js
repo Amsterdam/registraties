@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,19 +16,19 @@ import { makeSelectOpenbareRuimteData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const OpenbareRuimteContainer = ({ data, intl, status }) => {
+export const OpenbareRuimteContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.OPENBARE_RUIMTE.NAME);
   const href = OBJECTS.OPENBARE_RUIMTE.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-OpenbareRuimteContainer.defaultProps = {
+OpenbareRuimteContainerComponent.defaultProps = {
   data: undefined,
 };
 
-OpenbareRuimteContainer.propTypes = {
+OpenbareRuimteContainerComponent.propTypes = {
   data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -40,10 +40,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(OpenbareRuimteContainerComponent);
 
 export default compose(
-  injectIntl,
   withConnect,
   injectSaga({ key: 'openbareRuimte', saga }),
   injectReducer({ key: 'openbareRuimte', reducer }),
-)(memo(OpenbareRuimteContainer));
+)(Intl);
