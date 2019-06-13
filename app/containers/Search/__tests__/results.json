@@ -1,0 +1,72 @@
+[
+  {
+    "label": "Adressen",
+    "content": [
+      {
+        "_display": "Nieuwe Prinsengracht 4Z",
+        "uri": "bag/ligplaats/0363020001036307/"
+      },
+      {
+        "_display": "Nieuwe Prinsengracht 40",
+        "uri": "bag/verblijfsobject/0363010000940054/"
+      },
+      {
+        "_display": "Nieuwe Prinsengracht 41",
+        "uri": "bag/verblijfsobject/0363010000757631/"
+      }
+    ],
+    "total_results": 15
+  },
+  {
+    "label": "Maatschappelijke activiteiten",
+    "content": [
+      {
+        "_display": "Vereniging van eigenaars gebouw Nieuwe Prinsengracht 48 te Amsterdam",
+        "uri": "handelsregister/maatschappelijkeactiviteit/34390861/"
+      },
+      {
+        "_display": "Vereniging van eigenaars gebouw \"Nieuwe Prinsengracht 46\" te Amsterdam",
+        "uri": "handelsregister/maatschappelijkeactiviteit/51535149/"
+      }
+    ],
+    "total_results": 2
+  },
+  {
+    "label": "Kadastrale subjecten",
+    "content": [
+      {
+        "_display": "Vereniging Van Eigenaars Van Het Perceel Nieuwe Prinsengracht 4 Te Amsterdam",
+        "uri": "brk/subject/NL.KAD.Persoon.172042210/"
+      }
+    ],
+    "total_results": 1
+  },
+  {
+    "label": "Monumenten",
+    "content": [
+      {
+        "_display": "Nieuwe Prinsengracht 43 A",
+        "uri": "monumenten/monumenten/74a1037a-d290-49b1-bf69-0d1a95fb6130/"
+      },
+      {
+        "_display": "Nieuwe Prinsengracht 45",
+        "uri": "monumenten/monumenten/127f1c44-6a6c-4139-9ac3-ceb82572ec3e/"
+      },
+      {
+        "_display": "Nieuwe Prinsengracht 47 A",
+        "uri": "monumenten/monumenten/9be183b5-1a99-42a1-94b5-80ce47806d36/"
+      }
+    ],
+    "total_results": 3
+  },
+  {
+    "label": "Kadastrale objecten",
+    "content": [
+      {
+        "_display": "ASD12 P 03512 A 0002",
+        "uri": "brk/object/NL.KAD.OnroerendeZaak.11530351210002/"
+      }
+    ],
+    "total_results": 1
+  }
+]

@@ -15,30 +15,22 @@ import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import messages from './messages';
 
-const SearchContainer = props => {
+export const SearchContainerComponent = props => {
   const inputRef = useRef();
   const suggestRef = useRef();
   const [showSuggest, setShowSuggest] = useState(true);
 
-  const setup = () => {
-    if (inputRef.current) inputRef.current.addEventListener('focusout', onFocusOut, true);
-    if (suggestRef.current) suggestRef.current.addEventListener('focusout', onFocusOut, true);
-
-    document.addEventListener('click', onClick, true);
-  };
-
-  const teardown = () => {
-    if (inputRef.current) inputRef.current.removeEventListener('focusout', onFocusOut);
-    if (suggestRef.current) suggestRef.current.removeEventListener('focusout', onFocusOut);
-
-    document.removeEventListener('click', onClick);
-  };
-
   useEffect(() => {
-    setup();
+    inputRef.current.addEventListener('focusout', onFocusOut, true);
+    suggestRef.current.addEventListener('focusout', onFocusOut, true);
+    document.addEventListener('click', onClick, true);
 
-    return teardown;
-  }, [inputRef.current, suggestRef.current]);
+    return () => {
+      inputRef.current.removeEventListener('focusout', onFocusOut);
+      suggestRef.current.removeEventListener('focusout', onFocusOut);
+      document.removeEventListener('click', onClick);
+    };
+  }, []);
 
   const onFocusOut = event => {
     const { relatedTarget } = event;
@@ -121,12 +113,12 @@ const SearchContainer = props => {
   );
 };
 
-SearchContainer.defaultProps = {
+SearchContainerComponent.defaultProps = {
   results: undefined,
   show: false,
 };
 
-SearchContainer.propTypes = {
+SearchContainerComponent.propTypes = {
   intl: intlShape.isRequired,
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
@@ -153,10 +145,10 @@ const withConnect = connect(
 );
 const withReducer = injectReducer({ key: 'search', reducer });
 const withSaga = injectSaga({ key: 'search', saga });
+const Intl = injectIntl(SearchContainerComponent);
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-  injectIntl,
-)(SearchContainer);
+)(Intl);

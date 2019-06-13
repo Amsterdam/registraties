@@ -31,11 +31,15 @@ export default (state = initialState, action) =>
 
       case TYPE_AHEAD_SUCCESS:
         draft.results = action.payload;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case TYPE_AHEAD_FAILED:
         draft.error = true;
         draft.errorMessage = action.payload;
+        draft.input = '';
+        draft.results = [];
         break;
     }
   });

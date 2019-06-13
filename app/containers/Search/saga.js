@@ -1,30 +1,25 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import request from 'utils/request';
+import { getRequestOptions } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
-import { getAuthHeaders } from 'shared/services/auth/auth';
 
 import { typeAheadFailed, typeAheadSuccess } from './actions';
 import { INPUT_CHANGE, SEARCH_SELECT } from './constants';
 
 const { API_ROOT } = configuration;
-const TYPEAHEAD_API = 'typeahead?q=';
 
-const requestOptions = {
-  headers: getAuthHeaders(),
-};
+export const TYPEAHEAD_API = `${API_ROOT}typeahead?q=`;
 
 export function* inputChange(action) {
   const input = action.payload;
-  const labels = ['Adressen', 'Kadastrale objecten'];
 
   try {
-    const data = yield call(request, `${API_ROOT}${TYPEAHEAD_API}${input}`, requestOptions);
-    const results = data.filter(({ label }) => labels.includes(label));
+    const data = yield call(request, `${TYPEAHEAD_API}${input}`, getRequestOptions());
 
-    if (results) {
-      yield put(typeAheadSuccess(results));
+    if (data) {
+      yield put(typeAheadSuccess(data));
     }
   } catch (error) {
     yield put(typeAheadFailed(error));
@@ -44,6 +39,5 @@ export function* searchSelect(action) {
 }
 
 export default function* watchSearchSaga() {
-  yield takeLatest(INPUT_CHANGE, inputChange);
-  yield takeLatest(SEARCH_SELECT, searchSelect);
+  yield all([takeLatest(INPUT_CHANGE, inputChange), takeLatest(SEARCH_SELECT, searchSelect)]);
 }
