@@ -7,21 +7,19 @@ import { initialState } from './reducer';
 
 const selectOpenbareRuimte = state => (state && state.openbareRuimte) || initialState;
 
+export const allowedDataKeys = ['naam', 'type', 'openbare_ruimte_identificatie'];
+
 export const makeSelectOpenbareRuimteData = createSelector(
   selectOpenbareRuimte,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
-      return undefined;
-    }
-
     const { data } = state;
 
     if (!data) {
       return data;
     }
 
-    const keys = ['naam', 'type', 'openbare_ruimte_identificatie'];
+    const keys = allowedDataKeys;
 
     return formatData({ data, keys, locale });
   },
