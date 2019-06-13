@@ -1,39 +1,38 @@
 import { createSelector } from 'reselect';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { formatData, isArray } from 'utils';
+import { formatData, isArray, isObject } from 'utils';
 
 import { initialState } from './reducer';
 
 const selectNummeraanduiding = state => (state && state.nummeraanduiding) || initialState;
 
+export const allowedDataKeys = [
+  'adres',
+  'hoofdadres',
+  'huisletter',
+  'huisnummer',
+  'huisnummer_toevoeging',
+  'nummeraanduidingidentificatie',
+  'postcode',
+  'woonplaats',
+  'type',
+  'begin_geldigheid',
+  'einde_geldigheid',
+];
+
+export const allowedGebiedDataKeys = ['buurt', 'wijk', 'stadsdeel'];
+
 export const makeSelectNummeraanduidingData = createSelector(
   selectNummeraanduiding,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
-      return undefined;
+    if (!state.data) {
+      return state.data;
     }
 
     const { data } = state;
-
-    if (!data) {
-      return null;
-    }
-
-    const keys = [
-      'adres',
-      'hoofdadres',
-      'huisletter',
-      'huisnummer',
-      'huisnummer_toevoeging',
-      'nummeraanduidingidentificatie',
-      'postcode',
-      'woonplaats',
-      'type',
-      'begin_geldigheid',
-      'einde_geldigheid',
-    ];
+    const keys = allowedDataKeys;
 
     return formatData({ data, keys, locale });
   },
@@ -53,13 +52,9 @@ export const makeSelectAdres = createSelector(
 export const makeSelectWoonplaatsId = createSelector(
   selectNummeraanduiding,
   state => {
-    if (!state) {
-      return undefined;
-    }
-
     const { data } = state;
 
-    if (!data || !data.woonplaats || !data.woonplaats.landelijk_id) {
+    if (!data || !isObject(data.woonplaats) || !data.woonplaats.landelijk_id) {
       return null;
     }
 
@@ -70,13 +65,9 @@ export const makeSelectWoonplaatsId = createSelector(
 export const makeSelectOpenbareRuimteId = createSelector(
   selectNummeraanduiding,
   state => {
-    if (!state) {
-      return undefined;
-    }
-
     const { data } = state;
 
-    if (!data) {
+    if (!data || !isObject(data.openbare_ruimte) || !data.openbare_ruimte.landelijk_id) {
       return null;
     }
 
@@ -88,19 +79,15 @@ export const makeSelectGebiedData = createSelector(
   selectNummeraanduiding,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
-      return undefined;
-    }
-
     const { data } = state;
 
-    if (!data) {
+    if (!data || !isObject(data.buurtcombinatie)) {
       return null;
     }
 
     data.wijk = data.buurtcombinatie;
 
-    const keys = ['buurt', 'wijk', 'stadsdeel'];
+    const keys = allowedGebiedDataKeys;
 
     return formatData({ data, keys, locale });
   },
