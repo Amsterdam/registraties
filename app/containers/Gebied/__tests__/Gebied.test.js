@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { render, cleanup } from 'react-testing-library';
+import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import history from 'utils/history';
 import { Provider } from 'react-redux';
@@ -14,8 +14,6 @@ import configureStore from '../../../configureStore';
 const store = configureStore({}, history);
 
 describe('containers/Gebied', () => {
-  afterEach(cleanup);
-
   it('should have props from structured selector', () => {
     const vboId = 'fooBarBaz';
     const tree = mount(
