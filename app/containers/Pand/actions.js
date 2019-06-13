@@ -9,9 +9,9 @@ import {
   LOAD_LIST_DATA,
 } from './constants';
 
-export const loadData = landelijkId => ({
+export const loadData = pandId => ({
   type: LOAD_DATA,
-  payload: { landelijkId },
+  payload: { pandId },
 });
 
 export const loadDataSuccess = payload => ({
@@ -29,22 +29,22 @@ export const loadDataNoResults = payload => ({
   payload,
 });
 
-export const loadlistData = adresseerbaarObjectId => ({
+export const loadListData = adresseerbaarObjectId => ({
   type: LOAD_LIST_DATA,
   payload: { adresseerbaarObjectId },
 });
 
-export const loadlistDataSuccess = payload => ({
+export const loadListDataSuccess = payload => ({
   type: LOAD_LIST_DATA_SUCCESS,
   payload,
 });
 
-export const loadlistDataFailed = payload => ({
+export const loadListDataFailed = payload => ({
   type: LOAD_LIST_DATA_FAILED,
   payload,
 });
 
-export const loadlistDataNoResults = payload => ({
+export const loadListDataNoResults = payload => ({
   type: LOAD_LIST_DATA_NO_RESULTS,
   payload,
 });

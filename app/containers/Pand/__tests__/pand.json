@@ -1,0 +1,28 @@
+{
+  "pandidentificatie": "0363100012185418",
+  "status": {
+    "code": "31",
+    "omschrijving": "Pand in gebruik"
+  },
+  "oorspronkelijk_bouwjaar": "1973",
+  "hoogste_bouwlaag": null,
+  "laagste_bouwlaag": null,
+  "pandnummer": "",
+  "pandnaam": null,
+  "verblijfsobjecten": {
+    "count": 8,
+    "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012185418"
+  },
+  "bouwblok": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/bouwblok/03630012099987/"
+      }
+    },
+    "id": "03630012099987",
+    "dataset": "gebieden"
+  },
+  "begin_geldigheid": "2010-09-09",
+  "einde_geldigheid": null,
+  "dataset": "bag"
+}
