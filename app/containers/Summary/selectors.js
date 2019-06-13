@@ -48,7 +48,7 @@ export const makeSelectSummary = createSelector(
 
       summary.address = {
         label: messages.address,
-        value: [adres, ' ', postcode],
+        value: [adres, postcode].join(' '),
       };
     }
 
