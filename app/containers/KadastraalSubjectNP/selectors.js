@@ -5,6 +5,16 @@ import { formatData, isArray, isValidSubjectNP } from 'utils';
 import { initialState } from './reducer';
 
 const selectKadastraalSubjectNP = state => (state && state.kadastraalSubjectNP) || initialState;
+export const allowedDataKeys = [
+  'geboortedatum',
+  'geboorteland',
+  'geboorteplaats',
+  'geslacht',
+  'naam',
+  'overlijdensdatum',
+  'voornamen',
+  'voorvoegsels',
+];
 
 /**
  * Natuurlijk persoon
@@ -13,10 +23,6 @@ export const makeSelectKadastraalSubjectNPData = createSelector(
   selectKadastraalSubjectNP,
   makeSelectLocale,
   (state, locale) => {
-    if (!state) {
-      return undefined;
-    }
-
     if (!state.data) {
       return state.data;
     }
@@ -27,16 +33,7 @@ export const makeSelectKadastraalSubjectNPData = createSelector(
       return data;
     }
 
-    const keys = [
-      'geboortedatum',
-      'geboorteland',
-      'geboorteplaats',
-      'geslacht',
-      'naam',
-      'overlijdensdatum',
-      'voornamen',
-      'voorvoegsels',
-    ];
+    const keys = allowedDataKeys;
 
     const results = data.filter(isValidSubjectNP).map(subject => formatData({ data: subject, keys, locale }));
 

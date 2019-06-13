@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { render } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import history from 'utils/history';
 import { Provider } from 'react-redux';
@@ -8,22 +8,23 @@ import { LOAD_DATA_FAILED } from 'containers/App/constants';
 
 import { intl } from '../../../../internals/testing/test-utils';
 import messages from '../../../translations/nl.json';
-import GebiedContainer, { GebiedContainerComponent } from '..';
+import KadastraalSubjectNNPContainer, { KadastraalSubjectNNPContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 
 const store = configureStore({}, history);
 
-describe('containers/Gebied', () => {
+describe('containers/KadastraalSubjectNNP', () => {
+  afterEach(cleanup);
+
   it('should have props from structured selector', () => {
-    const vboId = 'fooBarBaz';
     const tree = mount(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
-          <GebiedContainer match={{ params: { vboId } }} />
+          <KadastraalSubjectNNPContainer />
         </IntlProvider>
       </Provider>,
     );
-    const props = tree.find(GebiedContainerComponent).props();
+    const props = tree.find(KadastraalSubjectNNPContainerComponent).props();
     const propNames = Object.keys(props);
 
     expect(propNames.includes('data')).toEqual(true);
@@ -35,12 +36,11 @@ describe('containers/Gebied', () => {
 
   it('should render a Section component', () => {
     const intlObj = intl({ messages });
-    const vboId = 'fooBarBaz';
 
     const { rerender } = render(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
-          <GebiedContainerComponent match={{ params: { vboId } }} intl={intlObj} />
+          <KadastraalSubjectNNPContainerComponent intl={intlObj} />
         </IntlProvider>
       </Provider>,
     );
@@ -50,7 +50,7 @@ describe('containers/Gebied', () => {
     rerender(
       <Provider store={store}>
         <IntlProvider locale="nl" messages={messages}>
-          <GebiedContainerComponent match={{ params: { vboId } }} intl={intlObj} status={LOAD_DATA_FAILED} />
+          <KadastraalSubjectNNPContainerComponent intl={intlObj} status={LOAD_DATA_FAILED} />
         </IntlProvider>
       </Provider>,
     );

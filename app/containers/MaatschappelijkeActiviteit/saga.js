@@ -4,12 +4,13 @@ import { getRequestOptions } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import { incrementProgress } from 'containers/App/actions';
 import { makeSelectMaatschappelijkeActiviteitIds } from 'containers/Vestiging/selectors';
+import { isValidMaatschappelijkeActiviteit } from 'utils';
 
 import { LOAD_DATA } from './constants';
 import { loadDataFailed, loadDataNoResults, loadDataSuccess } from './actions';
 
 const { API_ROOT } = configuration;
-const MA_API = `${API_ROOT}handelsregister/maatschappelijkeactiviteit/`;
+export const MA_API = `${API_ROOT}handelsregister/maatschappelijkeactiviteit/`;
 
 export function* fetchMaatschappelijkeActiviteitData() {
   const maIds = yield select(makeSelectMaatschappelijkeActiviteitIds);
@@ -17,11 +18,12 @@ export function* fetchMaatschappelijkeActiviteitData() {
   try {
     if (maIds) {
       const data = yield all([...maIds.map(maId => call(request, `${MA_API}${maId}/`, getRequestOptions()))]);
+      const validEntities = data.filter(isValidMaatschappelijkeActiviteit);
 
-      if (!data || !data.length) {
-        yield put(loadDataNoResults());
-      } else {
+      if (validEntities && validEntities.length) {
         yield put(loadDataSuccess(data));
+      } else {
+        yield put(loadDataNoResults());
       }
     } else {
       yield put(loadDataNoResults());
@@ -34,6 +36,6 @@ export function* fetchMaatschappelijkeActiviteitData() {
   }
 }
 
-export default function* watchVerblijfsobjectSaga() {
+export default function* watchMaatschappelijkeActiviteitSaga() {
   yield takeLatest(LOAD_DATA, fetchMaatschappelijkeActiviteitData);
 }

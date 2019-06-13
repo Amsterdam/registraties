@@ -1,0 +1,72 @@
+[
+  {
+    "id": "NL.KAD.Persoon.123456789",
+    "is_natuurlijk_persoon": true,
+    "voornamen": "Tommy",
+    "voorvoegsels": "",
+    "naam": "Shelby",
+    "geslacht": {
+      "code": "M",
+      "omschrijving": "Man"
+    },
+    "aanduiding_naam": {
+      "code": "E",
+      "omschrijving": "Eigen geslachtsnaam"
+    },
+    "geboortedatum": "1890-01-01",
+    "geboorteplaats": "BIRMINGHAM",
+    "geboorteland": {
+      "code": "0000",
+      "omschrijving": "Engeland"
+    },
+    "overlijdensdatum": "",
+    "partner_voornamen": "Grace",
+    "partner_voorvoegsels": "",
+    "partner_naam": "Shelby",
+    "rsin": null,
+    "kvknummer": null,
+    "rechtsvorm": null,
+    "bron": 0,
+    "postadres": null,
+    "aantekeningen": {
+      "count": 0,
+      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456789"
+    },
+    "dataset": "brk"
+  },
+  {
+    "id": "NL.KAD.Persoon.123456790",
+    "is_natuurlijk_persoon": true,
+    "voornamen": "Grace",
+    "voorvoegsels": "",
+    "naam": "Shelby",
+    "geslacht": {
+      "code": "V",
+      "omschrijving": "Vrouw"
+    },
+    "aanduiding_naam": {
+      "code": "E",
+      "omschrijving": "Eigen geslachtsnaam"
+    },
+    "geboortedatum": "1897-01-01",
+    "geboorteplaats": "BELFAST",
+    "geboorteland": {
+      "code": "0001",
+      "omschrijving": "Noord-Ierland"
+    },
+    "overlijdensdatum": "1905-06-06",
+    "partner_voornamen": "Thomas",
+    "partner_voorvoegsels": "",
+    "partner_naam": "Shelby",
+    "rsin": null,
+    "kvknummer": null,
+    "rechtsvorm": null,
+    "bron": 0,
+    "postadres": null,
+    "aantekeningen": {
+      "count": 0,
+      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456790"
+    },
+    "dataset": "brk"
+  }
+]

@@ -8,7 +8,7 @@ import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 import { LOAD_DATA } from './constants';
 
 const { API_ROOT } = configuration;
-const NUMMERAANDUIDING_API = `${API_ROOT}bag/nummeraanduiding/`;
+export const NUMMERAANDUIDING_API = `${API_ROOT}bag/nummeraanduiding/`;
 
 export function* fetchNummeraanduidingData(nummeraanduidingId) {
   try {

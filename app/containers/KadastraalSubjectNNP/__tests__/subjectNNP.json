@@ -1,0 +1,137 @@
+{
+  "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+      }
+    },
+    "_display": "Gemeente Amsterdam",
+    "id": "NL.KAD.Persoon.000000000",
+    "type": 1,
+    "beschikkingsbevoegdheid": null,
+    "is_natuurlijk_persoon": false,
+    "voornamen": null,
+    "voorvoegsels": null,
+    "naam": null,
+    "geslacht": null,
+    "aanduiding_naam": null,
+    "geboortedatum": null,
+    "geboorteplaats": null,
+    "geboorteland": null,
+    "overlijdensdatum": null,
+    "partner_voornamen": null,
+    "partner_voorvoegsels": null,
+    "partner_naam": null,
+    "land_waarnaar_vertrokken": null,
+    "rsin": "1234567",
+    "kvknummer": "12345678",
+    "rechtsvorm": {
+      "code": "10",
+      "omschrijving": "Publiekrechtelijke rechtspersoon"
+    },
+    "statutaire_naam": "Gemeente Amsterdam",
+    "statutaire_zetel": "AMSTERDAM",
+    "bron": 0,
+    "woonadres": {
+      "openbareruimte_naam": "Weesperplein",
+      "huisnummer": 8,
+      "huisletter": "",
+      "toevoeging": "",
+      "postcode": "1018XA",
+      "woonplaats": "AMSTERDAM",
+      "postbus_nummer": null,
+      "postbus_postcode": null,
+      "postbus_woonplaats": null,
+      "buitenland_adres": "",
+      "buitenland_woonplaats": "",
+      "buitenland_regio": "",
+      "buitenland_naam": "",
+      "buitenland_land": null
+    },
+    "postadres": {
+      "openbareruimte_naam": "Weesperplein",
+      "huisnummer": 8,
+      "huisletter": "",
+      "toevoeging": "",
+      "postcode": "1018XA",
+      "woonplaats": "AMSTERDAM",
+      "postbus_nummer": 1104,
+      "postbus_postcode": "1000BC",
+      "postbus_woonplaats": "AMSTERDAM",
+      "buitenland_adres": "",
+      "buitenland_woonplaats": "",
+      "buitenland_regio": "",
+      "buitenland_naam": "",
+      "buitenland_land": null
+    },
+    "aantekeningen": {
+      "count": 0,
+      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.000000000"
+    },
+    "rechten": {
+      "count": 28533,
+      "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.000000000"
+    },
+    "dataset": "brk"
+  },
+  "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000001/": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.00000001/"
+      }
+    },
+    "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+    "id": "NL.KAD.Persoon.00000001",
+    "type": 1,
+    "beschikkingsbevoegdheid": null,
+    "is_natuurlijk_persoon": false,
+    "voornamen": null,
+    "voorvoegsels": null,
+    "naam": null,
+    "geslacht": null,
+    "aanduiding_naam": null,
+    "geboortedatum": null,
+    "geboorteplaats": null,
+    "geboorteland": null,
+    "overlijdensdatum": null,
+    "partner_voornamen": null,
+    "partner_voorvoegsels": null,
+    "partner_naam": null,
+    "land_waarnaar_vertrokken": null,
+    "rsin": "",
+    "kvknummer": "",
+    "rechtsvorm": {
+      "code": "28",
+      "omschrijving": "Rechtspersoon naar buitenlands recht"
+    },
+    "statutaire_naam": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+    "statutaire_zetel": "FRANKFURT AM MAIN",
+    "bron": 1,
+    "woonadres": {
+      "openbareruimte_naam": "",
+      "huisnummer": null,
+      "huisletter": "",
+      "toevoeging": "",
+      "postcode": "",
+      "woonplaats": "",
+      "postbus_nummer": null,
+      "postbus_postcode": null,
+      "postbus_woonplaats": null,
+      "buitenland_adres": "Theodor-Heuss-Allee 70",
+      "buitenland_woonplaats": "60486 FRANKFURT AM MAIN",
+      "buitenland_regio": "",
+      "buitenland_naam": "Bondsrepubliek Duitsland",
+      "buitenland_land": null
+    },
+    "postadres": null,
+    "aantekeningen": {
+      "count": 0,
+      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.00000001"
+    },
+    "rechten": {
+      "count": 2,
+      "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.00000001"
+    },
+    "dataset": "brk"
+  }
+}

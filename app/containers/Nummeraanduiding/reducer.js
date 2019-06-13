@@ -4,9 +4,9 @@ import { LOAD_DATA, LOAD_DATA_SUCCESS, LOAD_DATA_FAILED, LOAD_DATA_NO_RESULTS } 
 
 // The initial state of the App
 export const initialState = {
+  data: undefined,
   error: false,
   errorMessage: '',
-  data: undefined,
   nummeraanduidingId: null,
 };
 
@@ -21,6 +21,7 @@ export default (state = initialState, action) =>
         break;
 
       case LOAD_DATA:
+        draft.data = undefined;
         draft.nummeraanduidingId = action.payload.nummeraanduidingId;
         draft.error = false;
         draft.errorMessage = '';

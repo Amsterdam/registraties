@@ -9,7 +9,7 @@ import { LOAD_DATA } from './constants';
 import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 
 const { API_ROOT } = configuration;
-const LIGPLAATS_API = `${API_ROOT}bag/ligplaats/`;
+export const LIGPLAATS_API = `${API_ROOT}bag/ligplaats/`;
 
 export function* fetchLigplaatsData(ligplaatsId) {
   try {

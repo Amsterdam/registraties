@@ -5,6 +5,7 @@ import { LOAD_DATA_SUCCESS, LOAD_DATA_FAILED, LOAD_DATA, LOAD_DATA_NO_RESULTS } 
 export const initialState = {
   data: undefined,
   error: false,
+  errorMessage: '',
   ligId: null,
 };
 
@@ -14,22 +15,33 @@ export default (state = initialState, action) =>
     switch (action.type) {
       case LOAD_DATA_PENDING:
         draft.data = undefined;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA:
+        draft.data = undefined;
+        draft.error = false;
+        draft.errorMessage = '';
         draft.ligId = action.payload.ligId;
         break;
 
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_FAILED:
         draft.data = null;
-        draft.error = action.payload;
+        draft.error = true;
+        draft.errorMessage = action.payload;
         break;
 
       case LOAD_DATA_NO_RESULTS:
         draft.data = null;
+        draft.error = false;
+        draft.errorMessage = '';
+        break;
     }
   });

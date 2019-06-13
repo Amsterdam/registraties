@@ -1,9 +1,9 @@
 import { LOAD_DATA_PENDING } from 'containers/App/constants';
 import reducer, { initialState } from '../reducer';
-
 import { LOAD_DATA, LOAD_DATA_FAILED, LOAD_DATA_SUCCESS, LOAD_DATA_NO_RESULTS } from '../constants';
+import nummeraanduiding from './nummeraanduiding.json';
 
-describe('containers/KadastraalObject/reducer', () => {
+describe('containers/Nummeraanduiding/reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
@@ -19,50 +19,21 @@ describe('containers/KadastraalObject/reducer', () => {
   });
 
   it('should handle LOAD_DATA', () => {
-    const adresseerbaarObjectId = 'foobarbazqux';
-    const payload = { adresseerbaarObjectId };
+    const nummeraanduidingId = '0363200012087639';
+    const payload = { nummeraanduidingId };
     const actionLoadData = {
       type: LOAD_DATA,
       payload,
     };
 
-    const prevState = { ...initialState, data: { foo: 'bar' } };
+    const prevState = { ...initialState, nummeraanduidingId: '098q394234', data: { foo: 'bar' } };
 
-    expect(reducer(initialState, actionLoadData)).toEqual({ ...initialState, adresseerbaarObjectId });
-    expect(reducer(prevState, actionLoadData)).toEqual({ ...initialState, adresseerbaarObjectId });
+    expect(reducer(initialState, actionLoadData)).toEqual({ ...initialState, nummeraanduidingId });
+    expect(reducer(prevState, actionLoadData)).toEqual({ ...initialState, nummeraanduidingId });
   });
 
   it('should handle LOAD_DATA_SUCCESS', () => {
-    const data = {
-      count: 1,
-      results: [
-        {
-          id: 'NL.KAD.OnroerendeZaak.11487294710107',
-          aanduiding: 'ASD07 K 01739 A 0915',
-          objectnummer: '1739',
-          indexletter: 'A',
-          indexnummer: 107,
-          cultuurcode_bebouwd: {
-            code: '12',
-            omschrijving: 'Wonen (appartement)',
-          },
-          status_code: 'B',
-          toestandsdatum: '2019-04-12',
-          voorlopige_kadastrale_grens: false,
-          verblijfsobjecten: {
-            count: 1,
-            href:
-              'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?kadastrale_objecten__id=NL.KAD.OnroerendeZaak.11487294710107',
-          },
-          _adressen: {
-            href:
-              'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?kadastraalobject=NL.KAD.OnroerendeZaak.11487294710107',
-          },
-          rechten: [],
-          dataset: 'brk',
-        },
-      ],
-    };
+    const data = nummeraanduiding;
     const payload = data;
     const actionLoadDataSuccess = {
       type: LOAD_DATA_SUCCESS,
