@@ -7,8 +7,9 @@ import { LOAD_DATA, LOAD_DATA_FAILED, LOAD_DATA_SUCCESS, LOAD_DATA_NO_RESULTS } 
 export const initialState = {
   data: undefined,
   error: false,
-  landelijkId: null,
+  errorMessage: '',
   loading: false,
+  pandId: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -17,23 +18,32 @@ export default (state = initialState, action) =>
     switch (action.type) {
       case LOAD_DATA_PENDING:
         draft.data = undefined;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA:
-        draft.landelijkId = action.payload.landelijkId;
+        draft.data = undefined;
+        draft.pandId = action.payload.pandId;
         break;
 
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
 
       case LOAD_DATA_FAILED:
         draft.data = null;
-        draft.error = action.payload;
+        draft.error = true;
+        draft.errorMessage = action.payload;
+        draft.pandId = null;
         break;
 
       case LOAD_DATA_NO_RESULTS:
         draft.data = null;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
     }
   });

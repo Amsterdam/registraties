@@ -1,0 +1,15 @@
+{
+  "count": 1,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://acc.api.data.amsterdam.nl/bag/pand/0363100012185418/"
+        }
+      },
+      "_display": "0363100012185418",
+      "landelijk_id": "0363100012185418",
+      "dataset": "bag"
+    }
+  ]
+}
