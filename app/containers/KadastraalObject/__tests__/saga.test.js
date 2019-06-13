@@ -168,11 +168,6 @@ describe('containers/KadastraalObject/saga', () => {
         .next()
         .finish()
         .put({ type: INCREMENT_PROGRESS });
-
-      testSaga(fetchKadastraalObjectData, vboId)
-        .next()
-        .finish()
-        .put({ type: INCREMENT_PROGRESS });
     });
   });
 });

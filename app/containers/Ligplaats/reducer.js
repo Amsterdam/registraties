@@ -42,5 +42,6 @@ export default (state = initialState, action) =>
         draft.data = null;
         draft.error = false;
         draft.errorMessage = '';
+        break;
     }
   });
