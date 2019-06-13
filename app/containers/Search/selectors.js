@@ -1,31 +1,32 @@
+import { isArray } from 'utils';
+
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectSearch = state => (state && state.search) || initialState;
+export const selectSearch = state => (state && state.search) || initialState;
+
+export const allowedDataKeys = ['Adressen', 'Kadastrale objecten'];
 
 export const makeSelectResults = createSelector(
   selectSearch,
   state => {
-    const { results } = state;
-
-    if (!results || !results.length) {
+    if (!isArray(state.results) || !state.results.length) {
       return undefined;
     }
 
     const reId = uri => /([^/]+)\W$/.exec(uri)[1];
-    const isVBO = uri => /verblijfsobject/.test(uri);
-    const isLIG = uri => /ligplaats/.test(uri);
-    const isBRK = uri => /object/.test(uri);
     const mappedResults = {};
 
-    results.forEach(({ content, label }) => {
-      mappedResults[label] = content.map(({ uri, _display }) => ({
-        name: _display,
-        vboId: isVBO(uri) ? reId(uri) : null,
-        ligId: isLIG(uri) ? reId(uri) : null,
-        brkId: isBRK(uri) ? reId(uri) : null,
-      }));
-    });
+    state.results
+      .filter(({ label }) => allowedDataKeys.includes(label))
+      .forEach(({ content, label }) => {
+        mappedResults[label] = content.map(({ uri, _display }) => ({
+          name: _display,
+          vboId: /bag\/verblijfsobject/.test(uri) ? reId(uri) : null,
+          ligId: /bag\/ligplaats/.test(uri) ? reId(uri) : null,
+          brkId: /brk\/object/.test(uri) ? reId(uri) : null,
+        }));
+      });
 
     return mappedResults;
   },

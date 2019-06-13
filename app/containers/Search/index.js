@@ -15,30 +15,55 @@ import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import messages from './messages';
 
-const SearchContainer = props => {
+export const SearchContainerComponent = props => {
   const inputRef = useRef();
   const suggestRef = useRef();
   const [showSuggest, setShowSuggest] = useState(true);
+  const listeners = {
+    inputRef: false,
+    suggestRef: false,
+    document: false,
+  };
 
   const setup = () => {
-    if (inputRef.current) inputRef.current.addEventListener('focusout', onFocusOut, true);
-    if (suggestRef.current) suggestRef.current.addEventListener('focusout', onFocusOut, true);
+    if (inputRef.current && !listeners.inputRef) {
+      inputRef.current.addEventListener('focusout', onFocusOut, true);
+      listeners.inputRef = true;
+    }
 
-    document.addEventListener('click', onClick, true);
+    if (suggestRef.current && !listeners.suggestRef) {
+      suggestRef.current.addEventListener('focusout', onFocusOut, true);
+      listeners.suggestRef = true;
+    }
+
+    if (!listeners.document) {
+      document.addEventListener('click', onClick, true);
+      listeners.document = true;
+    }
   };
 
   const teardown = () => {
-    if (inputRef.current) inputRef.current.removeEventListener('focusout', onFocusOut);
-    if (suggestRef.current) suggestRef.current.removeEventListener('focusout', onFocusOut);
+    if (inputRef.current && listeners.inputRef) {
+      inputRef.current.removeEventListener('focusout', onFocusOut);
+      listeners.inputRef = false;
+    }
 
-    document.removeEventListener('click', onClick);
+    if (suggestRef.current && listeners.suggestRef) {
+      suggestRef.current.removeEventListener('focusout', onFocusOut);
+      listeners.suggestRef = false;
+    }
+
+    if (listeners.document) {
+      document.removeEventListener('click', onClick);
+      listeners.document = false;
+    }
   };
 
   useEffect(() => {
     setup();
 
     return teardown;
-  }, [inputRef.current, suggestRef.current]);
+  }, [suggestRef.current]);
 
   const onFocusOut = event => {
     const { relatedTarget } = event;
@@ -121,12 +146,12 @@ const SearchContainer = props => {
   );
 };
 
-SearchContainer.defaultProps = {
+SearchContainerComponent.defaultProps = {
   results: undefined,
   show: false,
 };
 
-SearchContainer.propTypes = {
+SearchContainerComponent.propTypes = {
   intl: intlShape.isRequired,
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
@@ -153,10 +178,10 @@ const withConnect = connect(
 );
 const withReducer = injectReducer({ key: 'search', reducer });
 const withSaga = injectSaga({ key: 'search', saga });
+const Intl = injectIntl(SearchContainerComponent);
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-  injectIntl,
-)(SearchContainer);
+)(Intl);
