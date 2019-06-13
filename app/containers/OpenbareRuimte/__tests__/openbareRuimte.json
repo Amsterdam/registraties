@@ -1,0 +1,31 @@
+{
+  "openbare_ruimte_identificatie": "0363300000003480",
+  "openbare_ruimte_code": "18066",
+  "begin_geldigheid": "2014-01-10",
+  "einde_geldigheid": null,
+  "status": {
+    "code": "35",
+    "omschrijving": "Naamgeving uitgegeven"
+  },
+  "type": "Weg",
+  "naam": "Jodenbreestraat",
+  "omschrijving": "Deze straat, aangelegd op een gedeelte van de Sint Antoniesdijk, maakte tot in de tweede helft van de zeventiende eeuw deel uit van de Sint Antoniesbreestraat. In die tijd begon de joodse bevolking aanzienlijk toe te nemen en werd dit deel van de Breestraat de belangrijkste straat van de ‘Jodenbuurt’. Sindsdien is de naam Jodenbreestraat in zwang gekomen. Nadat in de oorlogsjaren 1940-1945 de joodse bewoners door de bezetters waren weggevoerd en een groot deel van de bebouwing aan de oneven zijde was gesloopt (en opgestookt in de kachels), is in de jaren zestig de rest van die straatgevel geamoveerd.",
+  "naam_17_posities": "JODENBREESTR",
+  "naam_24_posities": "Jodenbreestraat",
+  "straat_nummer": "",
+  "woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/woonplaats/3594/"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 116,
+    "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?openbare_ruimte=0363300000003480"
+  },
+  "dataset": "bag"
+}
