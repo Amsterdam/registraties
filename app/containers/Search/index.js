@@ -19,51 +19,18 @@ export const SearchContainerComponent = props => {
   const inputRef = useRef();
   const suggestRef = useRef();
   const [showSuggest, setShowSuggest] = useState(true);
-  const listeners = {
-    inputRef: false,
-    suggestRef: false,
-    document: false,
-  };
-
-  const setup = () => {
-    if (inputRef.current && !listeners.inputRef) {
-      inputRef.current.addEventListener('focusout', onFocusOut, true);
-      listeners.inputRef = true;
-    }
-
-    if (suggestRef.current && !listeners.suggestRef) {
-      suggestRef.current.addEventListener('focusout', onFocusOut, true);
-      listeners.suggestRef = true;
-    }
-
-    if (!listeners.document) {
-      document.addEventListener('click', onClick, true);
-      listeners.document = true;
-    }
-  };
-
-  const teardown = () => {
-    if (inputRef.current && listeners.inputRef) {
-      inputRef.current.removeEventListener('focusout', onFocusOut);
-      listeners.inputRef = false;
-    }
-
-    if (suggestRef.current && listeners.suggestRef) {
-      suggestRef.current.removeEventListener('focusout', onFocusOut);
-      listeners.suggestRef = false;
-    }
-
-    if (listeners.document) {
-      document.removeEventListener('click', onClick);
-      listeners.document = false;
-    }
-  };
 
   useEffect(() => {
-    setup();
+    inputRef.current.addEventListener('focusout', onFocusOut, true);
+    suggestRef.current.addEventListener('focusout', onFocusOut, true);
+    document.addEventListener('click', onClick, true);
 
-    return teardown;
-  }, [suggestRef.current]);
+    return () => {
+      inputRef.current.removeEventListener('focusout', onFocusOut);
+      suggestRef.current.removeEventListener('focusout', onFocusOut);
+      document.removeEventListener('click', onClick);
+    };
+  }, []);
 
   const onFocusOut = event => {
     const { relatedTarget } = event;

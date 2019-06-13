@@ -139,8 +139,8 @@ const Search = forwardRef(
               />
             </FoldOut>
 
-            <SuggestWrapper>
-              <Suggest items={results} onSelect={onSelect} ref={suggestRef} as="ul" />
+            <SuggestWrapper ref={suggestRef}>
+              <Suggest items={results} onSelect={onSelect} as="ul" />
             </SuggestWrapper>
           </Container>
         </Wrapper>

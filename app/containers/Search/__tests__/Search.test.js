@@ -114,7 +114,7 @@ describe('containers/KadastraalSubjectNNP', () => {
 
     const input = document.getElementById('searchInput');
     const linksLength = document.getElementsByClassName('links').length;
-    const suggest = document.getElementsByClassName('links')[0];
+    const suggest = document.getElementsByClassName('links')[0].parentElement;
 
     expect(document.getElementsByClassName('links').length).toBeGreaterThan(0);
 
