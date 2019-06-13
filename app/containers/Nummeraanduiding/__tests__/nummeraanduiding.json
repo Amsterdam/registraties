@@ -1,0 +1,97 @@
+{
+  "nummeraanduidingidentificatie": "0363200012087639",
+  "begin_geldigheid": "2014-01-10",
+  "einde_geldigheid": null,
+  "status": {
+    "code": "16",
+    "omschrijving": "Naamgeving uitgegeven"
+  },
+  "bron": null,
+  "adres": "Jodenbreestraat 25",
+  "postcode": "1011NH",
+  "huisnummer": 25,
+  "huisletter": "",
+  "huisnummer_toevoeging": "",
+  "type": "Verblijfsobject",
+  "adres_nummer": "",
+  "openbare_ruimte": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/openbareruimte/0363300000003480/"
+      }
+    },
+    "_display": "Jodenbreestraat",
+    "landelijk_id": "0363300000003480",
+    "dataset": "bag"
+  },
+  "hoofdadres": true,
+  "ligplaats": null,
+  "standplaats": null,
+  "verblijfsobject": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/0363010012086329/",
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurt/03630000000426/"
+      }
+    },
+    "_display": "Uilenburg (A04f)",
+    "code": "04f",
+    "naam": "Uilenburg",
+    "dataset": "gebieden"
+  },
+  "buurtcombinatie": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/"
+      }
+    },
+    "_display": "Nieuwmarkt/Lastage (04)",
+    "naam": "Nieuwmarkt/Lastage",
+    "vollcode": "A04",
+    "dataset": "gebieden"
+  },
+  "gebiedsgerichtwerken": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/"
+      }
+    },
+    "_display": "Centrum-Oost (DX02)",
+    "code": "DX02",
+    "naam": "Centrum-Oost",
+    "dataset": "gebieden"
+  },
+  "grootstedelijkgebied": null,
+  "stadsdeel": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/"
+      }
+    },
+    "_display": "Centrum (A)",
+    "code": "A",
+    "naam": "Centrum",
+    "dataset": "gebieden"
+  },
+  "woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/woonplaats/3594/"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "bouwblok": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/bouwblok/03630012099987/"
+      }
+    },
+    "_display": "YG11",
+    "id": "03630012099987",
+    "dataset": "gebieden"
+  },
+  "dataset": "bag"
+}
