@@ -9,13 +9,12 @@ import TOC from 'components/TOC';
 import { makeSelectTOC } from './selectors';
 import reducer from './reducer';
 
-const Intl = injectIntl(TOC);
-
 const mapStateToProps = createStructuredSelector({
   sections: makeSelectTOC,
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(TOC);
 
 export default compose(
   withConnect,

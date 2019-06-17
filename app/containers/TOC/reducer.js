@@ -12,13 +12,11 @@ import { OBJECTS, LOAD_BAG_DATA } from 'containers/App/constants';
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
-  error: false,
   toc: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export default (state = { toc: [] }, action) =>
+export default (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOAD_BAG_DATA:
