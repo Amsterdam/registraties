@@ -16,7 +16,7 @@
   "woonplaats": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/bag/woonplaats/3594/"
+        "href": "https://api/bag/woonplaats/3594/"
       }
     },
     "_display": "Amsterdam",
@@ -25,7 +25,7 @@
   },
   "adressen": {
     "count": 116,
-    "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?openbare_ruimte=0363300000003480"
+    "href": "https://api/bag/nummeraanduiding/?openbare_ruimte=0363300000003480"
   },
   "dataset": "bag"
 }

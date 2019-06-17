@@ -6,7 +6,7 @@ import subjectNNP from './subjectNNP.json';
 
 describe('containers/KadastraalSubjectNNP/selectors', () => {
   describe('makeSelectKadastraalSubjectNNPData', () => {
-    it.skip('should return undefined for an empty state', () => {
+    it('should return undefined for an empty state', () => {
       expect(makeSelectKadastraalSubjectNNPData({ data: { foo: 'bar' } })).toEqual(undefined);
       expect(makeSelectKadastraalSubjectNNPData(null)).toEqual(undefined);
       expect(makeSelectKadastraalSubjectNNPData(undefined)).toEqual(undefined);
@@ -27,7 +27,7 @@ describe('containers/KadastraalSubjectNNP/selectors', () => {
       const state = {
         kadastraalSubjectNNP: {
           ...initialState,
-          data: [subjectNNP['https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000001/']],
+          data: [subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000001/']],
         },
       };
 
@@ -40,10 +40,10 @@ describe('containers/KadastraalSubjectNNP/selectors', () => {
       expect(makeSelectKadastraalSubjectNNPData(state)).toEqual(null);
     });
 
-    it('should return formatted list of results', () => {
+    it.only('should return formatted list of results', () => {
       const data = [
-        subjectNNP['https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/'],
-        subjectNNP['https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000001/'],
+        subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000000/'],
+        subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000001/'],
       ];
       const state = { kadastraalSubjectNNP: { ...initialState, data } };
       const formattedStateValues = makeSelectKadastraalSubjectNNPData(state);

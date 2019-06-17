@@ -40,7 +40,7 @@
     "formattedKey": { "id": "registraties.amount_of" },
     "value": {
       "count": 2,
-      "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012096240"
+      "href": "https://api/bag/verblijfsobject/?panden__id=0363100012096240"
     },
     "formattedValue": 2
   },

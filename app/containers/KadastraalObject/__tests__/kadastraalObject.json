@@ -1,0 +1,186 @@
+{
+  "count": 1,
+  "results": [
+    {
+      "id": "NL.KAD.OnroerendeZaak.93718395008711",
+      "aanduiding": "ASD00 P 09944 A 0606",
+      "kadastrale_gemeente": {
+        "_links": {
+          "self": {
+            "href": "https://api/brk/kadastrale-gemeente/ASD00/"
+          }
+        },
+        "_display": "ASD12",
+        "naam": "Amsterdam",
+        "gemeente": {
+          "_links": {
+            "self": {
+              "href": "https://api/brk/gemeente/Amsterdam/"
+            }
+          },
+          "_display": "Amsterdam",
+          "gemeente": "Amsterdam",
+          "dataset": "brk"
+        },
+        "dataset": "brk"
+      },
+      "sectie": {
+        "_links": {
+          "self": {
+            "href": "https://api/brk/kadastrale-sectie/ASD00P/"
+          }
+        },
+        "_display": "ASD00P",
+        "sectie": "P",
+        "dataset": "brk"
+      },
+      "objectnummer": "9944",
+      "indexletter": "A",
+      "indexnummer": 2,
+      "soort_grootte": null,
+      "grootte": null,
+      "koopsom": 1234567890,
+      "koopsom_valuta_code": "EUR",
+      "koopjaar": "2014",
+      "meer_objecten": true,
+      "cultuurcode_onbebouwd": null,
+      "cultuurcode_bebouwd": {
+        "code": "21",
+        "omschrijving": "Bedrijvigheid (kantoor)"
+      },
+      "register9_tekst": "",
+      "status_code": "B",
+      "toestandsdatum": "2018-09-21",
+      "voorlopige_kadastrale_grens": false,
+      "in_onderzoek": "",
+      "betrokken_bij": [],
+      "verblijfsobjecten": {
+        "count": 7,
+        "href": "https://api/bag/verblijfsobject/?kadastrale_objecten__id=NL.KAD.OnroerendeZaak.93718395008711"
+      },
+      "_adressen": {
+        "href": "https://api/bag/nummeraanduiding/?kadastraalobject=NL.KAD.OnroerendeZaak.93718395008711"
+      },
+      "rechten": [
+        {
+          "id": "NL.KAD.ZakelijkRecht.AKR1.2183560-NL.KAD.OnroerendeZaak.93718395008711-NL.KAD.Tenaamstelling.AKR1.2183560",
+          "aard_zakelijk_recht": {
+            "code": "2",
+            "omschrijving": "Eigendom (recht van)"
+          },
+          "aard_zakelijk_recht_akr": "VE",
+          "ontstaan_uit": {
+            "_links": {
+              "self": {
+                "href": "https://api/brk/subject/NL.KAD.Persoon.172191279/"
+              }
+            },
+            "_display": "Vereniging Van Eigenaars Van De Jodenbreestraat 3 Tot En Met 25 (Oneven Nummers) En Valkenburgstraat 238/240 Te Asmterdam",
+            "naam": null,
+            "dataset": "brk"
+          },
+          "betrokken_bij": null,
+          "teller": 1,
+          "noemer": 1,
+          "kadastraal_object": {
+            "_links": {
+              "self": {
+                "href": "https://api/brk/object/NL.KAD.OnroerendeZaak.93718395008711/"
+              }
+            },
+            "_display": "ASD00 P 09944 A 0606",
+            "id": "NL.KAD.OnroerendeZaak.93718395008711",
+            "aanduiding": "ASD00 P 09944 A 0606",
+            "dataset": "brk"
+          },
+          "kadastraal_subject": {
+            "_links": {
+              "self": {
+                "href": "https://api/brk/subject/NL.KAD.Persoon.172021017/"
+              }
+            },
+            "_display": "Gemeente Amsterdam",
+            "naam": null,
+            "dataset": "brk"
+          },
+          "kadastraal_object_status": "B",
+          "app_rechtsplitstype": {
+            "code": "1",
+            "omschrijving": "HoofdSplitsing"
+          },
+          "dataset": "brk"
+        },
+        {
+          "_links": {
+            "self": {
+              "href": "https://api/brk/zakelijk-recht/NL.KAD.ZakelijkRecht.AKR1.1480927-NL.KAD.OnroerendeZaak.93718395008711-NL.KAD.Tenaamstelling.AKR1.100000008631058/"
+            }
+          },
+          "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung - Erfpacht (recht van) (1/1)",
+          "id": "NL.KAD.ZakelijkRecht.AKR1.1480927-NL.KAD.OnroerendeZaak.93718395008711-NL.KAD.Tenaamstelling.AKR1.100000008631058",
+          "aard_zakelijk_recht": {
+            "code": "3",
+            "omschrijving": "Erfpacht (recht van)"
+          },
+          "aard_zakelijk_recht_akr": "EP",
+          "ontstaan_uit": null,
+          "betrokken_bij": null,
+          "teller": 1,
+          "noemer": 1,
+          "kadastraal_object": {
+            "_links": {
+              "self": {
+                "href": "https://api/brk/object/NL.KAD.OnroerendeZaak.93718395008711/"
+              }
+            },
+            "_display": "ASD00 P 09944 A 0606",
+            "id": "NL.KAD.OnroerendeZaak.93718395008711",
+            "aanduiding": "ASD00 P 09944 A 0606",
+            "dataset": "brk"
+          },
+          "kadastraal_subject": {
+            "_links": {
+              "self": {
+                "href": "https://api/brk/subject/NL.KAD.Persoon.453929413/"
+              }
+            },
+            "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+            "naam": null,
+            "dataset": "brk"
+          },
+          "kadastraal_object_status": "B",
+          "app_rechtsplitstype": null,
+          "dataset": "brk"
+        }
+      ],
+      "aantekeningen": [],
+      "beperkingen": [
+        {
+          "_links": {
+            "self": {
+              "href": "https://api/wkpb/beperking/3488/"
+            }
+          },
+          "_display": "3851 (Huisvestingsverordening, splitsingsvergunningstelsel, Huisvestingswet)",
+          "id": 3488,
+          "inschrijfnummer": 3851,
+          "datum_in_werking": "2010-01-01",
+          "datum_einde": null,
+          "kadastrale_objecten": {
+            "count": 270817,
+            "href": "https://api/brk/object/?beperkingen__id=3488"
+          },
+          "documenten": {
+            "count": 1,
+            "href": "https://api/wkpb/brondocument/?beperking=3488"
+          },
+          "beperkingcode": {
+            "code": "HS",
+            "omschrijving": "Huisvestingsverordening, splitsingsvergunningstelsel, Huisvestingswet"
+          }
+        }
+      ],
+      "dataset": "brk"
+    }
+  ]
+}
