@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 import { getRequestOptions } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
@@ -9,7 +9,7 @@ import { loadDataFailed, loadDataSuccess, loadIdNoResults, loadIdSuccess, loadId
 import { LOAD_DATA, LOAD_ID } from './constants';
 
 const { API_ROOT } = configuration;
-const VERBLIJFSOBJECT_API = `${API_ROOT}bag/verblijfsobject/`;
+export const VERBLIJFSOBJECT_API = `${API_ROOT}bag/verblijfsobject/`;
 export const API_BY_BRK_OBJECT_ID = `${VERBLIJFSOBJECT_API}?kadastrale_objecten__id=`;
 
 // eslint-disable-next-line consistent-return
@@ -50,6 +50,5 @@ export function* fetchVerblijfsobjectData(adresseerbaarObjectId) {
 }
 
 export default function* watchVerblijfsobjectSaga() {
-  yield takeLatest(LOAD_DATA, fetchVerblijfsobjectData);
-  yield takeLatest(LOAD_ID, fetchVerblijfsobjectId);
+  yield all([takeLatest(LOAD_DATA, fetchVerblijfsobjectData), takeLatest(LOAD_ID, fetchVerblijfsobjectId)]);
 }

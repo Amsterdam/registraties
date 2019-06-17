@@ -225,8 +225,13 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
             return formatData({ data: value });
           }
         } else if (isArray(value)) {
-          // const valueList = value.filter(isValidValue(value)).map(obj => obj.omschrijving);
-          const valueList = value.map(obj => formatData({ data: obj, keys: childKeys[key] }));
+          const valueList = value.map(obj => {
+            if (obj.omschrijving || obj.name) {
+              return obj.omschrijving || obj.naam;
+            }
+
+            return formatData({ data: obj, keys: childKeys[key] });
+          });
 
           if (valueList.length) {
             formattedValue = valueList.length === 1 ? valueList[0] : valueList;
