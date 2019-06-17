@@ -92,8 +92,10 @@ describe('containers/KadastraalSubjectNNP/saga', () => {
 
       expectSaga(fetchKadastraalSubjectNNPData)
         .withState(state)
-        .provide([[select(makeSelectKadastraalSubjectLinks), undefined]])
-        .provide([[matchers.call.fn(request), throwError(error)]])
+        .provide([
+          [select(makeSelectKadastraalSubjectLinks), undefined],
+          [matchers.call.fn(request), throwError(error)],
+        ])
         .put({
           type: LOAD_DATA_FAILED,
         })

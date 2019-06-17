@@ -5,6 +5,7 @@ import { getRequestOptions } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 import { makeSelectVerblijfsobjectId } from 'containers/Verblijfsobject/selectors';
 import { incrementProgress } from 'containers/App/actions';
+import { getIdFromURL, isArray, isObject } from 'utils';
 
 import { LOAD_DATA, LOAD_IDS } from './constants';
 import {
@@ -17,17 +18,20 @@ import {
 } from './actions';
 
 const { API_ROOT } = configuration;
-const VESTIGING_API = `${API_ROOT}handelsregister/vestiging/`;
+
+export const VESTIGING_API = `${API_ROOT}handelsregister/vestiging/`;
+
+export const VESTIGING_BY_VBO_ID_API = `${VESTIGING_API}?verblijfsobject=`;
 
 export function* fetchVestigingIdData() {
-  const vboId = yield select(makeSelectVerblijfsobjectId);
-
   try {
+    const vboId = yield select(makeSelectVerblijfsobjectId);
+
     if (vboId) {
       // getting data to extract vestiging id from
-      const data = yield call(request, `${VESTIGING_API}?verblijfsobject=${vboId}`, getRequestOptions());
+      const data = yield call(request, `${VESTIGING_BY_VBO_ID_API}${vboId}`, getRequestOptions());
 
-      if (!data.count || !data.results.length) {
+      if (!isObject(data) || !data.count || !isArray(data.results) || !data.results.length) {
         yield put(loadIdsNoResults());
       } else {
         yield put(loadIdsSuccess());
@@ -47,15 +51,15 @@ export function* fetchVestigingIdData() {
 
 export function* fetchVestigingData(vestigingIdData) {
   try {
-    const vestigingIds = vestigingIdData.map(({ _links: { self: { href } } }) =>
-      href.replace(/(?:[^\d]+)(\d+)(?:[^\d]*)/, '$1'),
-    );
+    const vestigingIds = vestigingIdData.map(({ _links: { self: { href } } }) => getIdFromURL(href));
 
     const data = yield all([
       ...vestigingIds.map(vestigingId => call(request, `${VESTIGING_API}${vestigingId}/`, getRequestOptions())),
     ]);
 
-    if (!data || !data.length) {
+    const validEntities = data.filter(Boolean);
+
+    if (!validEntities.length) {
       yield put(loadDataNoResults());
     } else {
       yield put(loadDataSuccess(data));
@@ -70,6 +74,5 @@ export function* fetchVestigingData(vestigingIdData) {
 }
 
 export default function* watchVestigingSaga() {
-  yield takeLatest(LOAD_DATA, fetchVestigingData);
-  yield takeLatest(LOAD_IDS, fetchVestigingIdData);
+  yield all([takeLatest(LOAD_DATA, fetchVestigingData), takeLatest(LOAD_IDS, fetchVestigingIdData)]);
 }

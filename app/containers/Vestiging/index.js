@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -51,4 +51,4 @@ export default compose(
   injectReducer({ key: 'vestiging', reducer }),
   injectSaga({ key: 'maatschappelijkeActiviteit', saga: maSaga }),
   injectReducer({ key: 'maatschappelijkeActiviteit', reducer: maReducer }),
-)(memo(VestigingContainer));
+)(VestigingContainer);

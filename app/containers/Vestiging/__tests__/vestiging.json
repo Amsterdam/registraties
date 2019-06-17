@@ -1,0 +1,109 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api/handelsregister/vestiging/0000123456789/"
+    }
+  },
+  "maatschappelijke_activiteit": "https://api/handelsregister/maatschappelijkeactiviteit/67959849/",
+  "vestigingsnummer": "0000123456789",
+  "hoofdvestiging": true,
+  "naam": "Peter Griffin",
+  "datum_aanvang": "2017-01-31",
+  "datum_einde": null,
+  "datum_voortzetting": null,
+  "commerciele_vestiging": {
+    "totaal_werkzame_personen": 1,
+    "fulltime_werkzame_personen": 0,
+    "parttime_werkzame_personen": 1,
+    "import_activiteit": false,
+    "export_activiteit": false
+  },
+  "niet_commerciele_vestiging": null,
+  "communicatiegegevens": [
+    {
+      "domeinnaam": null,
+      "emailadres": null,
+      "toegangscode": "31",
+      "communicatie_nummer": "555-0112",
+      "soort_communicatie_nummer": "Telefoon"
+    }
+  ],
+  "postadres": {
+    "volledig_adres": "31 Spooner Street, Quahog",
+    "toevoeging_adres": null,
+    "afgeschermd": false,
+    "postbus_nummer": null,
+    "bag_numid": "0363200000123456",
+    "bag_vbid": "0363010000123456",
+    "bag_nummeraanduiding": "https://api.data.amsterdam.nl/bag/nummeraanduiding/0363200000123456/",
+    "bag_adresseerbaar_object": "https://api.data.amsterdam.nl/bag/verblijfsobject/0363010000123456/",
+    "straat_huisnummer": null,
+    "postcode_woonplaats": null,
+    "regio": null,
+    "land": null,
+    "geometrie": {
+      "type": "Point",
+      "coordinates": [123456.0, 456789.0]
+    },
+    "straatnaam": "Spooner Street",
+    "toevoegingadres": null,
+    "huisletter": "",
+    "huisnummer": "31",
+    "huisnummertoevoeging": "",
+    "postcode": "",
+    "plaats": "Quahog",
+    "correctie": null,
+    "correctie_level": null,
+    "updated_at": null,
+    "query_string": null
+  },
+  "bezoekadres": {
+    "volledig_adres": "31 Spooner Street, Quahog",
+    "toevoeging_adres": null,
+    "afgeschermd": false,
+    "postbus_nummer": null,
+    "bag_numid": "0363200000123456",
+    "bag_vbid": "0363010000123456",
+    "bag_nummeraanduiding": "https://api.data.amsterdam.nl/bag/nummeraanduiding/0363200000123456/",
+    "bag_adresseerbaar_object": "https://api.data.amsterdam.nl/bag/verblijfsobject/0363010000123456/",
+    "straat_huisnummer": null,
+    "postcode_woonplaats": null,
+    "regio": null,
+    "land": null,
+    "geometrie": {
+      "type": "Point",
+      "coordinates": [123456.0, 456789.0]
+    },
+    "straatnaam": "Spooner Street",
+    "toevoegingadres": null,
+    "huisletter": "",
+    "huisnummer": "31",
+    "huisnummertoevoeging": "",
+    "postcode": "",
+    "plaats": "Quahog",
+    "correctie": null,
+    "correctie_level": null,
+    "updated_at": null,
+    "query_string": null
+  },
+  "activiteiten": [
+    {
+      "activiteitsomschrijving": "Cartoon character",
+      "sbi_code": "9999",
+      "sbi_omschrijving": "Father of the Griffin family",
+      "hoofdactiviteit": true,
+      "sbi_code_tree": "9999"
+    }
+  ],
+  "handelsnamen": [
+    {
+      "handelsnaam": "Family Guy"
+    }
+  ],
+  "_bijzondere_rechts_toestand": {
+    "faillissement": false,
+    "status": null,
+    "duur": null,
+    "reden_insolvatie": null
+  }
+}

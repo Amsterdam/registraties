@@ -254,7 +254,7 @@ export const formatData = ({ data, keys, locale = 'default' }) => {
     .filter(Boolean);
 };
 
-const isNotEmptyString = val => typeof val !== 'undefined' && val.toString().length > 0;
+const isNotEmptyString = val => Object.prototype.toString.call(val) === '[object String]' && val.toString().length > 0;
 
 export const isValidSubjectNP = subjectNP =>
   isObject(subjectNP) && isNotEmptyString(subjectNP.geboortedatum) && isNotEmptyString(subjectNP.naam);
@@ -269,3 +269,25 @@ export const isValidMaatschappelijkeActiviteit = maatschappelijkeActiviteit =>
   isObject(maatschappelijkeActiviteit) &&
   isNotEmptyString(maatschappelijkeActiviteit.kvk_nummer) &&
   isNotEmptyString(maatschappelijkeActiviteit.naam);
+
+/**
+ * Get id from end of URL
+ *
+ * @param {String} URL
+ * @return {String}
+ */
+export const getIdFromURL = URL => {
+  const isEmptyString = isNotEmptyString(URL) === false;
+
+  if (isEmptyString) {
+    return '';
+  }
+
+  const matches = URL.match(/.+\b(\d+)\/?$/);
+
+  if (isArray(matches) && matches.length === 2) {
+    return matches[1];
+  }
+
+  return '';
+};
