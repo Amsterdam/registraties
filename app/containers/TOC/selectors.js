@@ -6,11 +6,5 @@ const selectTOC = state => (state && state.toc) || initialState;
 
 export const makeSelectTOC = createSelector(
   selectTOC,
-  state => {
-    if (!state) {
-      return undefined;
-    }
-
-    return state.toc;
-  },
+  ({ toc }) => toc,
 );
