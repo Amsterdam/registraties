@@ -6,6 +6,11 @@
     "code": "21",
     "omschrijving": "Verblijfsobject in gebruik"
   },
+  "bbox": [122305, 486239, 122305, 486239],
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [122182, 486236]
+  },
   "oppervlakte": 6474,
   "bouwlaag_toegang": null,
   "status_coordinaat": {
