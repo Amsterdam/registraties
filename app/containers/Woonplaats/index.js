@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,19 +16,19 @@ import { makeSelectWoonplaatsData } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-export const WoonplaatsContainer = ({ data, intl, status }) => {
+export const WoonplaatsContainerComponent = ({ data, intl, status }) => {
   const name = intl.formatMessage(OBJECTS.WOONPLAATS.NAME);
   const href = OBJECTS.WOONPLAATS.STELSELPEDIA_LINK;
-  const render = data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
+  const render = !!data || status !== LOAD_DATA_FAILED ? <Section data={data} name={name} href={href} /> : null;
 
   return render;
 };
 
-WoonplaatsContainer.defaultProps = {
+WoonplaatsContainerComponent.defaultProps = {
   data: undefined,
 };
 
-WoonplaatsContainer.propTypes = {
+WoonplaatsContainerComponent.propTypes = {
   data: dataPropType,
   intl: intlShape.isRequired,
   status: PropTypes.string,
@@ -40,10 +40,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
+const Intl = injectIntl(WoonplaatsContainerComponent);
 
 export default compose(
-  injectIntl,
   withConnect,
   injectSaga({ key: 'woonplaats', saga }),
   injectReducer({ key: 'woonplaats', reducer }),
-)(memo(WoonplaatsContainer));
+)(Intl);

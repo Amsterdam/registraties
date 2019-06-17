@@ -1,12 +1,14 @@
 import produce from 'immer';
 import { LOAD_DATA_PENDING } from 'containers/App/constants';
-import { LOAD_DATA_SUCCESS, LOAD_DATA_FAILED, LOAD_DATA_NO_RESULTS } from './constants';
+import { LOAD_DATA, LOAD_DATA_SUCCESS, LOAD_DATA_FAILED, LOAD_DATA_NO_RESULTS } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
-  error: false,
   data: undefined,
+  error: false,
+  errorMessage: '',
+  loading: false,
+  woonplaatsId: undefined,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -17,16 +19,25 @@ export default (state = initialState, action) =>
         draft.data = undefined;
         break;
 
+      case LOAD_DATA:
+        draft.data = undefined;
+        draft.woonplaatsId = action.payload.woonplaatsId;
+        break;
+
       case LOAD_DATA_SUCCESS:
         draft.data = action.payload;
         break;
 
       case LOAD_DATA_FAILED:
-        draft.error = action.payload;
+        draft.data = null;
+        draft.error = true;
+        draft.errorMessage = action.payload;
         break;
 
       case LOAD_DATA_NO_RESULTS:
         draft.data = null;
+        draft.error = false;
+        draft.errorMessage = '';
         break;
     }
   });

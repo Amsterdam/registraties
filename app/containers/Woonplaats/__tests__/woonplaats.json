@@ -1,0 +1,34 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api/bag/woonplaats/3594/"
+    }
+  },
+  "_display": "Amsterdam",
+  "sleutelverzendend": "03630022796658",
+  "woonplaatsidentificatie": "3594",
+  "date_modified": "2019-06-16T22:53:20.033736Z",
+  "document_mutatie": "2014-01-10",
+  "document_nummer": "GV00001729_AC00AC",
+  "begin_geldigheid": "2014-01-10",
+  "einde_geldigheid": null,
+  "mutatie_gebruiker": "DBI",
+  "naam": "Amsterdam",
+  "naam_17_posities": "AMSTERDAM",
+  "gemeente": {
+    "_display": "Amsterdam",
+    "_links": {
+      "self": {
+        "href": "https://api/brk/gemeente/Amsterdam/"
+      }
+    },
+    "naam": "Amsterdam",
+    "code": "0363",
+    "dataset": "bag"
+  },
+  "openbare_ruimtes": {
+    "count": 6317,
+    "href": "https://api/bag/openbareruimte/?woonplaats=3594"
+  },
+  "dataset": "bag"
+}
