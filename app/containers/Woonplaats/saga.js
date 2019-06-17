@@ -9,7 +9,7 @@ import { loadDataSuccess, loadDataFailed, loadDataNoResults } from './actions';
 import { LOAD_DATA } from './constants';
 
 const { API_ROOT } = configuration;
-const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
+export const WOONPLAATS_API = `${API_ROOT}bag/woonplaats/`;
 
 export function* fetchWoonplaatsData() {
   const woonplaatsId = yield select(makeSelectWoonplaatsId);
