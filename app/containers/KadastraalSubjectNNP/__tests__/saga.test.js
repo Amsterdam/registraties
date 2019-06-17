@@ -41,7 +41,7 @@ describe('containers/KadastraalSubjectNNP/saga', () => {
         .provide([[matchers.call.fn(request), dynamic(({ args }) => subjectNNP[args[0]])]])
         .put({
           type: LOAD_DATA_SUCCESS,
-          payload: [subjectNNP['https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/'], undefined],
+          payload: [subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000000/'], undefined],
         })
         .put({ type: INCREMENT_PROGRESS })
         .run();

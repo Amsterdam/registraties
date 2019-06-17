@@ -7,7 +7,7 @@
   "hoofdadres": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/0363200000515044/"
+        "href": "https://api/bag/nummeraanduiding/0363200000515044/"
       }
     },
     "_display": "Nieuwe Prinsengracht 6G",
@@ -21,7 +21,7 @@
   },
   "adressen": {
     "count": 1,
-    "href": "https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?ligplaats=0363555551024444"
+    "href": "https://api/bag/nummeraanduiding/?ligplaats=0363555551024444"
   },
   "dataset": "bag"
 }

@@ -19,7 +19,7 @@ export const makeSelectSummary = createSelector(
     makeSelectKadastraalSubjectNNPData,
     makeSelectOpenbareRuimteData,
   ],
-  (adr = [], vbo = [], num = [], pnd = [], brko = [], nnp = [], opr = []) => {
+  (adr, vbo, num, pnd, brko, nnp, opr) => {
     const summary = {};
 
     const getValue = (dataset, id, valueSeparator = ', ') => {
@@ -30,10 +30,7 @@ export const makeSelectSummary = createSelector(
           values.add(item.value);
         } else if (isArray(item)) {
           const matchingItem = item.find(({ key }) => key === id);
-
-          if (matchingItem) {
-            values.add(matchingItem.value);
-          }
+          values.add(matchingItem.value);
         }
       });
 
@@ -42,7 +39,7 @@ export const makeSelectSummary = createSelector(
       return valueSeparator ? valuesArray.join(valueSeparator) : valuesArray;
     };
 
-    if (adr && adr.length) {
+    if (isArray(adr)) {
       const adres = getValue(adr, 'adres');
       const postcode = getValue(adr, 'postcode');
 
@@ -52,7 +49,7 @@ export const makeSelectSummary = createSelector(
       };
     }
 
-    if (opr && opr.length) {
+    if (isArray(opr)) {
       const oprId = getValue(opr, 'openbare_ruimte_identificatie');
 
       summary.public_space_id = {
@@ -61,7 +58,7 @@ export const makeSelectSummary = createSelector(
       };
     }
 
-    if (num && num.length) {
+    if (isArray(num)) {
       const numId = getValue(num, 'nummeraanduidingidentificatie');
 
       summary.number_identification_id = {
@@ -70,7 +67,7 @@ export const makeSelectSummary = createSelector(
       };
     }
 
-    if (vbo && vbo.length) {
+    if (isArray(vbo)) {
       const vboId = getValue(vbo, 'verblijfsobjectidentificatie');
 
       summary.accommodation_object_id = {
@@ -79,7 +76,7 @@ export const makeSelectSummary = createSelector(
       };
     }
 
-    if (pnd && pnd.length) {
+    if (isArray(pnd)) {
       const pndId = getValue(pnd, 'pandidentificatie');
 
       summary.house_id = {
@@ -88,42 +85,35 @@ export const makeSelectSummary = createSelector(
       };
     }
 
-    if (brko && brko.length) {
+    if (isArray(brko)) {
       const objectNrs = getValue(brko, 'aanduiding', null);
 
-      if (objectNrs.length) {
-        const label =
-          objectNrs.length > 1 ? messages.cadastral_object_indications : messages.cadastral_object_indication;
+      const label = objectNrs.length > 1 ? messages.cadastral_object_indications : messages.cadastral_object_indication;
 
-        summary.cadastral_object_nr = {
-          label,
-          value: objectNrs.join(', '),
-        };
-      }
+      summary.cadastral_object_nr = {
+        label,
+        value: objectNrs.join(', '),
+      };
     }
 
-    if (nnp && nnp.length) {
+    if (isArray(nnp)) {
       const kvkNrs = getValue(nnp, 'kvknummer', null);
 
-      if (kvkNrs.length) {
-        const kvkNrsLabel = kvkNrs.length > 1 ? messages.chamber_of_commerce_nrs : messages.chamber_of_commerce_nr;
+      const kvkNrsLabel = kvkNrs.length > 1 ? messages.chamber_of_commerce_nrs : messages.chamber_of_commerce_nr;
 
-        summary.chamber_of_commerce_nr = {
-          label: kvkNrsLabel,
-          value: kvkNrs.join(', '),
-        };
-      }
+      summary.chamber_of_commerce_nr = {
+        label: kvkNrsLabel,
+        value: kvkNrs.join(', '),
+      };
 
       const rsinNrs = getValue(nnp, 'rsin', null);
 
-      if (rsinNrs.length) {
-        const rsinNrsLabel = rsinNrs.length > 1 ? messages.rsins : messages.rsin;
+      const rsinNrsLabel = rsinNrs.length > 1 ? messages.rsins : messages.rsin;
 
-        summary.RSIN = {
-          label: rsinNrsLabel,
-          value: rsinNrs.join(', '),
-        };
-      }
+      summary.RSIN = {
+        label: rsinNrsLabel,
+        value: rsinNrs.join(', '),
+      };
     }
 
     return summary;

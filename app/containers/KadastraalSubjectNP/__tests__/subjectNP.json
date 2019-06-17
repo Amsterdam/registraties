@@ -30,7 +30,7 @@
     "postadres": null,
     "aantekeningen": {
       "count": 0,
-      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456789"
+      "href": "https://api/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456789"
     },
     "dataset": "brk"
   },
@@ -65,7 +65,7 @@
     "postadres": null,
     "aantekeningen": {
       "count": 0,
-      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456790"
+      "href": "https://api/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456790"
     },
     "dataset": "brk"
   }

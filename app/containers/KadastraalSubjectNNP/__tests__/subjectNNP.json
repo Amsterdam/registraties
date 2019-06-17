@@ -1,8 +1,8 @@
 {
-  "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/": {
+  "https://api/brk/subject/NL.KAD.Persoon.000000000/": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000000/"
+        "href": "https://api/brk/subject/NL.KAD.Persoon.000000000/"
       }
     },
     "_display": "Gemeente Amsterdam",
@@ -66,18 +66,18 @@
     },
     "aantekeningen": {
       "count": 0,
-      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.000000000"
+      "href": "https://api/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.000000000"
     },
     "rechten": {
       "count": 28533,
-      "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.000000000"
+      "href": "https://api/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.000000000"
     },
     "dataset": "brk"
   },
-  "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.000000001/": {
+  "https://api/brk/subject/NL.KAD.Persoon.000000001/": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.00000001/"
+        "href": "https://api/brk/subject/NL.KAD.Persoon.00000001/"
       }
     },
     "_display": "Universal-Investment-Gesellschaft mit beschränkter Haftung",
@@ -126,11 +126,11 @@
     "postadres": null,
     "aantekeningen": {
       "count": 0,
-      "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.00000001"
+      "href": "https://api/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.00000001"
     },
     "rechten": {
       "count": 2,
-      "href": "https://acc.api.data.amsterdam.nl/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.00000001"
+      "href": "https://api/brk/zakelijk-recht/?kadastraal_subject=NL.KAD.Persoon.00000001"
     },
     "dataset": "brk"
   }

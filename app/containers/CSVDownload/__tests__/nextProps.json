@@ -234,7 +234,7 @@
       },
       "value": {
         "count": 8,
-        "href": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?panden__id=0363100012185418"
+        "href": "https://api/bag/verblijfsobject/?panden__id=0363100012185418"
       },
       "formattedValue": 8
     }
@@ -721,7 +721,7 @@
       "value": {
         "_links": {
           "self": {
-            "href": "https://acc.api.data.amsterdam.nl/gebieden/buurt/03630000000426/"
+            "href": "https://api/gebieden/buurt/03630000000426/"
           }
         },
         "_display": "Uilenburg (A04f)",
@@ -738,7 +738,7 @@
       "value": {
         "_links": {
           "self": {
-            "href": "https://acc.api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/"
+            "href": "https://api/gebieden/stadsdeel/03630000000018/"
           }
         },
         "_display": "Centrum (A)",
@@ -755,7 +755,7 @@
       "value": {
         "_links": {
           "self": {
-            "href": "https://acc.api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/"
+            "href": "https://api/gebieden/buurtcombinatie/3630012052033/"
           }
         },
         "_display": "Nieuwmarkt/Lastage (04)",

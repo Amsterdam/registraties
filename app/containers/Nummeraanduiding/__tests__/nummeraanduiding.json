@@ -17,7 +17,7 @@
   "openbare_ruimte": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/bag/openbareruimte/0363300000003480/"
+        "href": "https://api/bag/openbareruimte/0363300000003480/"
       }
     },
     "_display": "Jodenbreestraat",
@@ -27,11 +27,11 @@
   "hoofdadres": true,
   "ligplaats": null,
   "standplaats": null,
-  "verblijfsobject": "https://acc.api.data.amsterdam.nl/bag/verblijfsobject/0363010012086329/",
+  "verblijfsobject": "https://api/bag/verblijfsobject/0363010012086329/",
   "buurt": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurt/03630000000426/"
+        "href": "https://api/gebieden/buurt/03630000000426/"
       }
     },
     "_display": "Uilenburg (A04f)",
@@ -42,7 +42,7 @@
   "buurtcombinatie": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/"
+        "href": "https://api/gebieden/buurtcombinatie/3630012052033/"
       }
     },
     "_display": "Nieuwmarkt/Lastage (04)",
@@ -53,7 +53,7 @@
   "gebiedsgerichtwerken": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/"
+        "href": "https://api/gebieden/gebiedsgerichtwerken/DX02/"
       }
     },
     "_display": "Centrum-Oost (DX02)",
@@ -65,7 +65,7 @@
   "stadsdeel": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/"
+        "href": "https://api/gebieden/stadsdeel/03630000000018/"
       }
     },
     "_display": "Centrum (A)",
@@ -76,7 +76,7 @@
   "woonplaats": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/bag/woonplaats/3594/"
+        "href": "https://api/bag/woonplaats/3594/"
       }
     },
     "_display": "Amsterdam",
@@ -86,7 +86,7 @@
   "bouwblok": {
     "_links": {
       "self": {
-        "href": "https://acc.api.data.amsterdam.nl/gebieden/bouwblok/03630012099987/"
+        "href": "https://api/gebieden/bouwblok/03630012099987/"
       }
     },
     "_display": "YG11",

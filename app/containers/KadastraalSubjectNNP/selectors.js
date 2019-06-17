@@ -24,7 +24,6 @@ export const makeSelectKadastraalSubjectNNPData = createSelector(
     }
 
     const keys = allowedDataKeys;
-
     const results = data.filter(isValidSubjectNNP).map(subject => formatData({ data: subject, keys, locale }));
 
     if (!results.length) {

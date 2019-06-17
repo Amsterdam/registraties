@@ -2,6 +2,7 @@ import { LOAD_DATA_PENDING } from 'containers/App/constants';
 import reducer, { initialState } from '../reducer';
 
 import { LOAD_DATA, LOAD_DATA_FAILED, LOAD_DATA_SUCCESS, LOAD_DATA_NO_RESULTS } from '../constants';
+import subjectNNP from './subjectNNP.json';
 
 describe('containers/KadastraalSubjectNNP/reducer', () => {
   it('should return the initial state', () => {
@@ -35,33 +36,7 @@ describe('containers/KadastraalSubjectNNP/reducer', () => {
   it('should handle LOAD_DATA_SUCCESS', () => {
     const data = {
       count: 1,
-      results: [
-        {
-          id: 'NL.KAD.OnroerendeZaak.11487294710107',
-          aanduiding: 'ASD07 K 01739 A 0915',
-          objectnummer: '1739',
-          indexletter: 'A',
-          indexnummer: 107,
-          cultuurcode_bebouwd: {
-            code: '12',
-            omschrijving: 'Wonen (appartement)',
-          },
-          status_code: 'B',
-          toestandsdatum: '2019-04-12',
-          voorlopige_kadastrale_grens: false,
-          verblijfsobjecten: {
-            count: 1,
-            href:
-              'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/?kadastrale_objecten__id=NL.KAD.OnroerendeZaak.11487294710107',
-          },
-          _adressen: {
-            href:
-              'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/?kadastraalobject=NL.KAD.OnroerendeZaak.11487294710107',
-          },
-          rechten: [],
-          dataset: 'brk',
-        },
-      ],
+      results: [subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000000/']],
     };
     const payload = data;
     const actionLoadDataSuccess = {

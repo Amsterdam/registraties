@@ -1,0 +1,99 @@
+{
+  "verblijfsobjectidentificatie": "0363010000864314",
+  "begin_geldigheid": "2013-02-23",
+  "einde_geldigheid": null,
+  "status": {
+    "code": "21",
+    "omschrijving": "Verblijfsobject in gebruik"
+  },
+  "oppervlakte": 6474,
+  "bouwlaag_toegang": null,
+  "status_coordinaat": {
+    "code": "DEF",
+    "omschrijving": "Definitief punt"
+  },
+  "verhuurbare_eenheden": null,
+  "bouwlagen": null,
+  "type_woonobject": {
+    "code": "",
+    "omschrijving": ""
+  },
+  "woningvoorraad": false,
+  "aantal_kamers": null,
+  "reden_afvoer": null,
+  "reden_opvoer": null,
+  "eigendomsverhouding": {
+    "code": "01",
+    "omschrijving": "Huur"
+  },
+  "financieringswijze": null,
+  "gebruik": {
+    "code": "3141",
+    "omschrijving": "kantoor"
+  },
+  "ligging": {
+    "code": "04",
+    "omschrijving": "Hoekgebouw"
+  },
+  "locatie_ingang": null,
+  "toegang": null,
+  "hoofdadres": {
+    "_links": {
+      "self": {
+        "href": "https://api/bag/nummeraanduiding/0363200000406187/"
+      }
+    },
+    "_display": "Weesperstraat 113",
+    "landelijk_id": "0363200000406187",
+    "hoofdadres": true,
+    "vbo_status": {
+      "code": "21",
+      "omschrijving": "Verblijfsobject in gebruik"
+    },
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 1,
+    "href": "https://api/bag/nummeraanduiding/?verblijfsobject=0363010000864314"
+  },
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://api/gebieden/buurt/03630000000516/"
+      }
+    },
+    "_display": "Weesperbuurt (A08a)",
+    "code": "08a",
+    "naam": "Weesperbuurt",
+    "dataset": "gebieden"
+  },
+  "panden": {
+    "count": 1,
+    "href": "https://api/bag/pand/?verblijfsobjecten__id=0363010000864314"
+  },
+  "kadastrale_objecten": {
+    "count": 1,
+    "href": "https://api/brk/object/?verblijfsobjecten__id=0363010000864314"
+  },
+  "bouwblok": {
+    "_links": {
+      "self": {
+        "href": "https://api/gebieden/bouwblok/03630012100915/"
+      }
+    },
+    "_display": "YL31",
+    "id": "03630012100915",
+    "dataset": "gebieden"
+  },
+  "indicatie_geconstateerd": false,
+  "aanduiding_in_onderzoek": false,
+  "gebruiksdoelen": [
+    {
+      "code": "1500",
+      "omschrijving": "kantoorfunctie",
+      "code_plus": "",
+      "omschrijving_plus": ""
+    }
+  ],
+  "dataset": "bag"
+}

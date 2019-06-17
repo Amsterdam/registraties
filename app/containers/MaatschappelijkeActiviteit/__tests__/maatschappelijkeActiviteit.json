@@ -14,7 +14,7 @@
   "bezoekadres": null,
   "vestigingen": {
     "count": 1,
-    "href": "https://acc.api.data.amsterdam.nl/handelsregister/vestiging/?maatschappelijke_activiteit=100000000001234567"
+    "href": "https://api/handelsregister/vestiging/?maatschappelijke_activiteit=100000000001234567"
   },
   "naam": "Acme corp.",
   "kvk_nummer": "12345678",
@@ -23,8 +23,8 @@
   "incidenteel_uitlenen_arbeidskrachten": null,
   "non_mailing": false,
   "eigenaar_mks_id": null,
-  "eigenaar": "https://acc.api.data.amsterdam.nl/handelsregister/persoon/100000000001234567/",
-  "hoofdvestiging": "https://acc.api.data.amsterdam.nl/handelsregister/vestiging/000001234567/",
+  "eigenaar": "https://api/handelsregister/persoon/100000000001234567/",
+  "hoofdvestiging": "https://api/handelsregister/vestiging/000001234567/",
   "activiteiten": [],
   "_bijzondere_rechts_toestand": {
     "faillissement": false,
