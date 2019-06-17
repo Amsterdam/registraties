@@ -1,0 +1,33 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api/handelsregister/vestiging/?verblijfsobject=0363010000123456"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 1,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://acc.api.data.amsterdam.nl/handelsregister/vestiging/0000123456789/"
+        }
+      },
+      "naam": "Peter Griffin",
+      "locatie": {
+        "plaats": "Quahog",
+        "straatnaam": "Spooner street",
+        "postcode": "",
+        "huisnummer": "31",
+        "toevoeging": "",
+        "correctie": null,
+        "kvk_adres": "31 Spooner street Quahog"
+      }
+    }
+  ]
+}

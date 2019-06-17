@@ -1,9 +1,10 @@
 import {
+  getIdFromURL,
+  isApartment,
   isArray,
   isArrayOfArrays,
-  isObject,
   isDate,
-  isApartment,
+  isObject,
   isValidMaatschappelijkeActiviteit,
   isValidSubjectNNP,
   isValidSubjectNP,
@@ -140,5 +141,24 @@ describe('isValidMaatschappelijkeActiviteit', () => {
     expect(isValidMaatschappelijkeActiviteit({ kvk_nummer: '12345678', naam: '' })).toEqual(false);
     expect(isValidMaatschappelijkeActiviteit({ kvk_nummer: '', naam: 'Acme corp.' })).toEqual(false);
     expect(isValidMaatschappelijkeActiviteit({ kvk_nummer: '12345678', naam: 'Acme corp.' })).toEqual(true);
+  });
+});
+
+describe('getIdFromURL', () => {
+  it('should return an empty string', () => {
+    expect(getIdFromURL(null)).toEqual('');
+    expect(getIdFromURL(undefined)).toEqual('');
+    expect(getIdFromURL([])).toEqual('');
+    expect(getIdFromURL({})).toEqual('');
+    expect(getIdFromURL('')).toEqual('');
+    expect(getIdFromURL()).toEqual('');
+    expect(getIdFromURL('//api/bag/some-api-endpoint/aksghdyuags/')).toEqual('');
+    expect(getIdFromURL('//api/bag/some-api-endpoint/aksghd0783798546yuags/')).toEqual('');
+    expect(getIdFromURL('//api/bag/some-api-endpoint/652347654375a')).toEqual('');
+  });
+
+  it('should return an id', () => {
+    expect(getIdFromURL('//api/bag/some-api-endpoint/652347654375/')).toEqual('652347654375');
+    expect(getIdFromURL('//api/bag/some-api-endpoint/087698345000001')).toEqual('087698345000001');
   });
 });
