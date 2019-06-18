@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Ul = styled.ul`
   padding-left: 0;
 
-  &.depth-1 {
+  &.depth-0 {
     padding: 0 0 30px;
 
     ul {
@@ -14,7 +14,7 @@ const Ul = styled.ul`
   }
   list-style: none;
 
-  &.depth-2 {
+  &.depth-1 {
     & > li {
       padding-left: 0;
 

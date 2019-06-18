@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Section matches the snapshot 1`] = `
-.c1 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
 .c2 {
   position: relative;
 }
@@ -61,6 +56,11 @@ exports[`Section matches the snapshot 1`] = `
   -ms-transform-origin: -0.1998px 10.989px;
   transform-origin: -0.1998px 10.989px;
   width: 11.186735400000002px;
+}
+
+.c1 {
+  margin-top: 30px;
+  margin-top: 0;
 }
 
 .c0 {

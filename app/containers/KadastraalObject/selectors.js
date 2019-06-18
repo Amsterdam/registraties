@@ -15,7 +15,9 @@ export const makeSelectKadastraalObjectData = createSelector(
       return state.data;
     }
 
-    const { data: { results } = {} } = state;
+    const {
+      data: { results },
+    } = state;
 
     const keys = allowedDataKeys;
 
@@ -41,7 +43,9 @@ export const makeSelectFromObjectAppartment = key =>
         return state.data;
       }
 
-      const { data: { results } = {} } = state;
+      const {
+        data: { results },
+      } = state;
 
       if (!results || !isArray(results) || !results.length) {
         return null;
@@ -62,7 +66,9 @@ export const makeSelectFromObject = key =>
         return state.data;
       }
 
-      const { data: { results } = {} } = state;
+      const {
+        data: { results },
+      } = state;
 
       if (!results || !isArray(results) || !results.length) {
         return null;
@@ -80,7 +86,9 @@ export const makeSelectKadastraalSubjectLinks = (isNatuurlijkPersoon = true) =>
         return state.data;
       }
 
-      const { data: { results } = {} } = state;
+      const {
+        data: { results },
+      } = state;
 
       if (!results || !isArray(results) || !results.length) {
         return null;

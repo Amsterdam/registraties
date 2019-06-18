@@ -82,22 +82,6 @@ describe('containers/App', () => {
     expect(queryByTestId('search-foldout')).toHaveStyleRule('display', 'block');
   });
 
-  it('should NOT render the Search container component', () => {
-    global.history.replaceState({}, '', 'http://localhost/vbo/0363010000864314/');
-
-    const { queryByTestId } = render(
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <IntlProvider locale="nl" messages={messages}>
-            <AppContainer />
-          </IntlProvider>
-        </ConnectedRouter>
-      </Provider>,
-    );
-
-    expect(queryByTestId('search-foldout')).toHaveStyleRule('display', 'none');
-  });
-
   it('should render global styles', () => {
     const tree = shallow(<App onAuthenticateUser={() => {}} showError={() => {}} />);
 

@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccommodationObject should render without problems 1`] = `
-.c5 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
 .c1 {
   background-color: #fff;
   border: 1px solid #000;
@@ -196,14 +191,13 @@ exports[`AccommodationObject should render without problems 1`] = `
   color: white;
 }
 
-.c4 {
-  position: relative;
+.c5 {
+  margin-top: 30px;
+  margin-top: 0;
 }
 
-@media print {
-  .c5 {
-    margin-top: 0;
-  }
+.c4 {
+  position: relative;
 }
 
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
@@ -274,6 +268,12 @@ exports[`AccommodationObject should render without problems 1`] = `
 @media print {
   .c6 {
     display: none;
+  }
+}
+
+@media print {
+  .c5 {
+    margin-top: 0;
   }
 }
 
@@ -551,52 +551,13 @@ exports[`AccommodationObject should render without problems 2`] = `
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
       >
-        .c0 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
-.c1 {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  background-color: #b4b4b4;
-  color: white;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.c1:hover {
-  background-color: #009dec;
-  color: white;
-}
-
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
-}
-
-@media print {
-  .c1 {
-    display: none;
-  }
-}
-
-<h3
-          class="c0"
+        <h3
+          class="SectionHeading__H3-sc-1b88sed-0 cGzNal"
           id="Woonplaats"
         >
           Woonplaats
           <a
-            class="c1"
+            class="styled__StelselpediaLink-sc-1knhnhj-5 hPPVtv"
             href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/"
             rel="noopener noreferrer"
             target="_blank"
@@ -669,52 +630,13 @@ exports[`AccommodationObject should render without problems 2`] = `
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
       >
-        .c0 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
-.c1 {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  background-color: #b4b4b4;
-  color: white;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.c1:hover {
-  background-color: #009dec;
-  color: white;
-}
-
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
-}
-
-@media print {
-  .c1 {
-    display: none;
-  }
-}
-
-<h3
-          class="c0"
+        <h3
+          class="SectionHeading__H3-sc-1b88sed-0 cGzNal"
           id="Nummeraanduiding"
         >
           Nummeraanduiding
           <a
-            class="c1"
+            class="styled__StelselpediaLink-sc-1knhnhj-5 hPPVtv"
             href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-2/"
             rel="noopener noreferrer"
             target="_blank"
@@ -787,52 +709,13 @@ exports[`AccommodationObject should render without problems 2`] = `
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
       >
-        .c0 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
-.c1 {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  background-color: #b4b4b4;
-  color: white;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.c1:hover {
-  background-color: #009dec;
-  color: white;
-}
-
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
-}
-
-@media print {
-  .c1 {
-    display: none;
-  }
-}
-
-<h3
-          class="c0"
+        <h3
+          class="SectionHeading__H3-sc-1b88sed-0 cGzNal"
           id="Openbare ruimte"
         >
           Openbare ruimte
           <a
-            class="c1"
+            class="styled__StelselpediaLink-sc-1knhnhj-5 hPPVtv"
             href="//www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/"
             rel="noopener noreferrer"
             target="_blank"
@@ -916,52 +799,13 @@ exports[`AccommodationObject should render without problems 2`] = `
       <section
         class="Section__SectionWrapper-sc-1jybffj-0 Dkpju"
       >
-        .c0 {
-  margin-top: 30px;
-  margin-top: 0;
-}
-
-.c1 {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  background-color: #b4b4b4;
-  color: white;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.c1:hover {
-  background-color: #009dec;
-  color: white;
-}
-
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
-}
-
-@media print {
-  .c1 {
-    display: none;
-  }
-}
-
-<h3
-          class="c0"
+        <h3
+          class="SectionHeading__H3-sc-1b88sed-0 cGzNal"
           id="Kadastraal object"
         >
           Kadastraal object
           <a
-            class="c1"
+            class="styled__StelselpediaLink-sc-1knhnhj-5 hPPVtv"
             href="//www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/"
             rel="noopener noreferrer"
             target="_blank"
@@ -1223,11 +1067,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         class="c0"
       />
     </div>
-    .c0 {
-  margin-top: 30px;
-}
-
-.c2 {
+    .c2 {
   width: 100%;
   resize: vertical;
   min-height: 79px;
@@ -1238,16 +1078,20 @@ exports[`AccommodationObject should render without problems 2`] = `
   font-weight: bold;
 }
 
-@media print {
-  .c0 {
-    margin-top: 0;
-  }
+.c0 {
+  margin-top: 30px;
 }
 
 @media print {
   .c1 {
     display: block;
     margin-top: 1cm;
+  }
+}
+
+@media print {
+  .c0 {
+    margin-top: 0;
   }
 }
 

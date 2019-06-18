@@ -1,6 +1,14 @@
 import queryStringParser from './query-string-parser';
 
 describe('The query string parser service', () => {
+  it('returns null', () => {
+    expect(queryStringParser()).toEqual(null);
+    expect(queryStringParser(undefined)).toEqual(null);
+    expect(queryStringParser('')).toEqual(null);
+    expect(queryStringParser(0)).toEqual(null);
+    expect(queryStringParser(null)).toEqual(null);
+  });
+
   it('turns a query string into an object', () => {
     expect(queryStringParser('?a=b&one=1&bool=false')).toEqual({
       a: 'b',
