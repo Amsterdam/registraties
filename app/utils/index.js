@@ -12,14 +12,25 @@ const dateFields = [
 const currencyFields = ['koopsom'];
 
 /**
- * Kadastraal object nummer regular expression
+ * Finds the depth of an array and its values
+ * When the given parameter isn't an array or it is an array, but it doesn't have any arrays as children, 0 is returned.
+ *
+ * @param  {Any} array - source object to find the depth off
+ * @returns {Number}
  */
-export const reKadastraalObjectNr = /([A-Z]{3}\d{2})\s?([A-Z]{1,2})\s?(\d{4,5})\s?(A|G)\s?(\d{,4})/;
+export const findArrayDepth = array => {
+  let depth = 0;
 
-/**
- * Kadastraal object nummer regular expression with groups
- */
-export const reKadastraalObjectNrGroups = /(?<gemeente>[A-Z]{3}\d{2})\s?(?<sectie>[A-Z]{1,2})\s?(?<objectNummer>\d{4,5})\s?(?<indexLetter>A|G)\s?(?<indexNummer>\d{,4})/;
+  if (!isArray(array)) return depth;
+
+  array.forEach(item => {
+    if (isArray(item)) {
+      depth = findArrayDepth(item) + 1;
+    }
+  });
+
+  return depth;
+};
 
 /**
  * Object detector
@@ -62,7 +73,7 @@ export const isDate = (key, value) =>
  * @param {String[]} keys - list of field keys to match against
  * @returns {Function}
  */
-const isValidKey = keys =>
+export const isValidKey = keys =>
   /**
    * @param {String} key - field key to match to the items in `keys`
    * @returns {Boolean}
@@ -75,7 +86,7 @@ const isValidKey = keys =>
  * @param {Object} data
  * @returns {Function}
  */
-const isValidValue = data =>
+export const isValidValue = data =>
   /**
    * Checks if the value of the field with identifier `key` is either a primitive or is an object that has possible
    * readable values.
@@ -84,6 +95,12 @@ const isValidValue = data =>
    * @returns {Boolean}
    */
   key => {
+    const hasOwnProperty = Object.prototype.hasOwnProperty.call(data, key);
+
+    if (!hasOwnProperty) {
+      return false;
+    }
+
     const value = data[key];
     const valueIsObject = isObject(value);
     const readableKeys = ['omschrijving', 'count', 'kvk_adres', 'naam'];
@@ -98,7 +115,7 @@ const isValidValue = data =>
  * @param {Any} value
  * @returns {Boolean}
  */
-const isCount = value => isObject(value) && value.count;
+export const isCount = value => isObject(value) && Object.prototype.hasOwnProperty.call(value, 'count');
 
 /**
  * (Dutch) postcode detector
@@ -106,7 +123,7 @@ const isCount = value => isObject(value) && value.count;
  * @param {Any} value
  * @returns {Boolean}
  */
-const isPostCode = value => /^\d{4}[A-Z]{2}$/i.test(value);
+export const isPostCode = value => /^\d{4}\s?[A-Z]{2}$/i.test(value);
 
 /**
  * Currency detector
@@ -115,7 +132,8 @@ const isPostCode = value => /^\d{4}[A-Z]{2}$/i.test(value);
  * @param {Any} value
  * @returns {Boolean}
  */
-const isCurrency = (key, value) => value && currencyFields.includes(key) && !Number.isNaN(value);
+export const isCurrency = (key, value) =>
+  !!value && currencyFields.includes(key) && !Number.isNaN(Number.parseInt(value, 10));
 
 /**
  * Field key formatter
@@ -124,7 +142,7 @@ const isCurrency = (key, value) => value && currencyFields.includes(key) && !Num
  * @param {String} key
  * @returns {String}
  */
-const formatKey = key =>
+export const formatKey = key =>
   key
     .split('_')
     .map((part, index) => (index === 0 ? `${part.charAt(0).toUpperCase()}${part.slice(1)}` : part))

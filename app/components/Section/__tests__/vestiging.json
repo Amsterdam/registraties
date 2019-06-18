@@ -1,0 +1,129 @@
+[
+  {
+    "type": "string",
+    "key": "vestigingsnummer",
+    "formattedKey": "Vestigingsnummer",
+    "value": "000003588726",
+    "formattedValue": "000003588726"
+  },
+  {
+    "type": "string",
+    "key": "naam",
+    "formattedKey": "Naam",
+    "value": "De Vervoerregio Amsterdam",
+    "formattedValue": "De Vervoerregio Amsterdam"
+  },
+  {
+    "type": "string",
+    "key": "datum_aanvang",
+    "formattedKey": "Datum aanvang",
+    "value": "2002-12-30",
+    "formattedValue": "30-12-2002"
+  },
+  {
+    "type": "string",
+    "key": "postadres",
+    "formattedKey": "Postadres",
+    "value": "Postbus 626 1000AP Amsterdam",
+    "formattedValue": "Postbus 626 1000AP Amsterdam"
+  },
+  {
+    "type": "string",
+    "key": "bezoekadres",
+    "formattedKey": "Bezoekadres",
+    "value": "Jodenbreestraat 25 1011NH Amsterdam",
+    "formattedValue": "Jodenbreestraat 25 1011NH Amsterdam"
+  },
+  {
+    "type": "object",
+    "key": "activiteiten",
+    "formattedKey": "Activiteiten",
+    "value": [
+      {
+        "activiteitsomschrijving": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam",
+        "sbi_code": "7112",
+        "sbi_omschrijving": "Ingenieurs en overig technisch ontwerp en advies",
+        "hoofdactiviteit": true,
+        "sbi_code_tree": "7112"
+      },
+      {
+        "activiteitsomschrijving": null,
+        "sbi_code": "49392",
+        "sbi_omschrijving": "Openbaar interlokaal personenvervoer over de weg",
+        "hoofdactiviteit": false,
+        "sbi_code_tree": "49392"
+      },
+      {
+        "activiteitsomschrijving": null,
+        "sbi_code": "8211",
+        "sbi_omschrijving": "Brede administratieve dienstverlening",
+        "hoofdactiviteit": false,
+        "sbi_code_tree": "8211"
+      }
+    ],
+    "formattedValue": [
+      [
+        {
+          "type": "string",
+          "key": "activiteitsomschrijving",
+          "formattedKey": "Activiteitsomschrijving",
+          "value": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam",
+          "formattedValue": "Verbetering van de bereikbaarheid, leefbaarheid en de economische ontwikkeling. Samenwerkingsverband van vijftien gemeenten; de gemeenten Aalsmeer, Amstelveen, Amsterdam, Beemster, Diemen, Edam-Volendam, Haarlemmermeer, Landsmeer, Oostzaan, Ouder-Amstel, Purmerend, Uithoorn, Waterland, Wormerland, Zaanstad vormen samen De Vervoerregio Amsterdam"
+        },
+        {
+          "type": "string",
+          "key": "sbi_code",
+          "formattedKey": "SBI-code",
+          "value": "7112",
+          "formattedValue": "7112"
+        },
+        {
+          "type": "string",
+          "key": "sbi_omschrijving",
+          "formattedKey": "SBI-omschrijving",
+          "value": "Ingenieurs en overig technisch ontwerp en advies",
+          "formattedValue": "Ingenieurs en overig technisch ontwerp en advies"
+        }
+      ],
+      [
+        {
+          "type": "string",
+          "key": "sbi_code",
+          "formattedKey": "SBI-code",
+          "value": "49392",
+          "formattedValue": "49392"
+        },
+        {
+          "type": "string",
+          "key": "sbi_omschrijving",
+          "formattedKey": "SBI-omschrijving",
+          "value": "Openbaar interlokaal personenvervoer over de weg",
+          "formattedValue": "Openbaar interlokaal personenvervoer over de weg"
+        }
+      ],
+      [
+        {
+          "type": "string",
+          "key": "sbi_code",
+          "formattedKey": "SBI-code",
+          "value": "8211",
+          "formattedValue": "8211"
+        },
+        {
+          "type": "string",
+          "key": "sbi_omschrijving",
+          "formattedKey": "SBI-omschrijving",
+          "value": "Brede administratieve dienstverlening",
+          "formattedValue": "Brede administratieve dienstverlening"
+        }
+      ]
+    ]
+  },
+  {
+    "type": "string",
+    "key": "kvk_nummer",
+    "formattedKey": "KVK-nummer",
+    "value": "34374879",
+    "formattedValue": "34374879"
+  }
+]

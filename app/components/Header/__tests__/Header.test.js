@@ -1,16 +1,35 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@datapunt/asc-ui';
 import 'jest-styled-components';
-import Header from '..';
 import messages from '../../../translations/nl.json';
 
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();
 
 describe('Header', () => {
-  afterEach(cleanup);
+  let Header;
+  const OLD_ENV = process.env;
+
+  beforeEach(() => {
+    // eslint-disable-next-line
+    Header = require('../index.js').default;
+  });
+
+  beforeAll(() => {
+    process.env.HOST = 'localhost';
+    process.env.PORT = 8080;
+    process.env.HTTPS = true;
+  });
+
+  afterAll(() => {
+    delete process.env.HTTPS;
+    delete process.env.PORT;
+    delete process.env.HOST;
+
+    process.env = { ...OLD_ENV };
+  });
 
   it('matches the snapshot', () => {
     const { container, rerender } = render(

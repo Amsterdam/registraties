@@ -1,13 +1,20 @@
 import {
+  findArrayDepth,
+  formatKey,
   getIdFromURL,
   isApartment,
   isArray,
   isArrayOfArrays,
+  isCount,
+  isCurrency,
   isDate,
   isObject,
+  isPostCode,
+  isValidKey,
   isValidMaatschappelijkeActiviteit,
   isValidSubjectNNP,
   isValidSubjectNP,
+  isValidValue,
 } from '..';
 
 const nr = Date.now();
@@ -86,6 +93,104 @@ describe('isDate', () => {
   });
 });
 
+describe('isValidKey', () => {
+  it('should return a boolean', () => {
+    const keys = ['foo', 'bar', 'baz', 'qux'];
+    const filterFunc = isValidKey(keys);
+
+    expect(filterFunc(null)).toEqual(false);
+    expect(filterFunc(undefined)).toEqual(false);
+    expect(filterFunc('')).toEqual(false);
+    expect(filterFunc('zork')).toEqual(false);
+    expect(filterFunc('baz')).toEqual(true);
+  });
+});
+
+describe('isValidValue', () => {
+  it('should return a boolean', () => {
+    const data = {
+      gebruik: {
+        code: '3141',
+        omschrijving: 'kantoor',
+      },
+      buurt: {
+        code: '04f',
+        naam: 'Uilenburg',
+        dataset: 'gebieden',
+      },
+      verblijfsobjecten: {
+        count: 7,
+      },
+      someKey: {
+        value: 'Blah',
+      },
+      locatie: {
+        kvk_adres: 'Here be an address',
+      },
+    };
+    const filterFunc = isValidValue(data);
+
+    expect(filterFunc('someKey')).toEqual(false);
+    expect(filterFunc('zork')).toEqual(false);
+    expect(filterFunc('')).toEqual(false);
+    expect(filterFunc(undefined)).toEqual(false);
+    expect(filterFunc(null)).toEqual(false);
+
+    expect(filterFunc('gebruik')).toEqual(true);
+    expect(filterFunc('buurt')).toEqual(true);
+    expect(filterFunc('verblijfsobjecten')).toEqual(true);
+    expect(filterFunc('locatie')).toEqual(true);
+  });
+});
+
+describe('isCount', () => {
+  it('should return a boolean', () => {
+    expect(isCount({ count: 0 })).toEqual(true);
+    expect(isCount({ count: Infinity })).toEqual(true);
+
+    expect(isCount({ notCount: 0 })).toEqual(false);
+    expect(isCount(null)).toEqual(false);
+    expect(isCount(undefined)).toEqual(false);
+    expect(isCount('')).toEqual(false);
+  });
+});
+
+describe('isPostCode', () => {
+  it('should return a boolean', () => {
+    expect(isPostCode('1000AA')).toEqual(true);
+    expect(isPostCode('1000 AA')).toEqual(true);
+
+    expect(isPostCode('100 AA')).toEqual(false);
+    expect(isPostCode('1000')).toEqual(false);
+    expect(isPostCode(null)).toEqual(false);
+    expect(isPostCode(undefined)).toEqual(false);
+    expect(isPostCode('')).toEqual(false);
+  });
+});
+
+describe('isCurrency', () => {
+  it('should return a boolean', () => {
+    expect(isCurrency('koopsom', 2537642)).toEqual(true);
+    expect(isCurrency('koopsom', '2537642')).toEqual(true);
+
+    expect(isCurrency('koopsommen', 2537642)).toEqual(false);
+    expect(isCurrency('koopsommen', '2537642')).toEqual(false);
+
+    expect(isCurrency(null)).toEqual(false);
+    expect(isCurrency(undefined)).toEqual(false);
+    expect(isCurrency('', 2537642)).toEqual(false);
+    expect(isCurrency('koopsom', {})).toEqual(false);
+  });
+});
+
+describe('formatKey', () => {
+  it('returns a formatted key', () => {
+    expect(formatKey('key')).toEqual('Key');
+    expect(formatKey('a_key')).toEqual('A key');
+    expect(formatKey('here_be-a_key')).toEqual('Here be-a key');
+  });
+});
+
 describe('isValidSubjectNP', () => {
   it('should return a boolean', () => {
     expect(isValidSubjectNP(null)).toEqual(false);
@@ -160,5 +265,24 @@ describe('getIdFromURL', () => {
   it('should return an id', () => {
     expect(getIdFromURL('//api/bag/some-api-endpoint/652347654375/')).toEqual('652347654375');
     expect(getIdFromURL('//api/bag/some-api-endpoint/087698345000001')).toEqual('087698345000001');
+  });
+});
+
+describe('findArrayDepth', () => {
+  it('should return a number', () => {
+    const flat = ['foo'];
+    const shallow = ['foo', 'bar', ['foo', 'bar']];
+    const deep = ['foo', 'bar', ['foo', 'bar', ['foo', 'bar']]];
+    const veryDeep = ['foo', 'bar', ['foo', 'bar', ['foo', 'bar', ['foo', 'bar']]]];
+
+    expect(findArrayDepth('foo')).toEqual(0);
+    expect(findArrayDepth('')).toEqual(0);
+    expect(findArrayDepth(null)).toEqual(0);
+    expect(findArrayDepth(undefined)).toEqual(0);
+    expect(findArrayDepth({})).toEqual(0);
+    expect(findArrayDepth(flat)).toEqual(0);
+    expect(findArrayDepth(shallow)).toEqual(1);
+    expect(findArrayDepth(deep)).toEqual(2);
+    expect(findArrayDepth(veryDeep)).toEqual(3);
   });
 });

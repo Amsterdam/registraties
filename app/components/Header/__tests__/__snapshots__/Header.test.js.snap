@@ -336,7 +336,7 @@ exports[`Header matches the snapshot 1`] = `
         >
           <a
             class="c8 c9"
-            href="http://undefined:undefined/"
+            href="https://localhost:8080/"
           >
             <span
               class="c10 c11"
@@ -344,7 +344,7 @@ exports[`Header matches the snapshot 1`] = `
           </a>
           <a
             class="c12 c13"
-            href="http://undefined:undefined/"
+            href="https://localhost:8080/"
           >
             Registraties
           </a>
@@ -398,7 +398,7 @@ exports[`Header matches the snapshot 2`] = `
         >
           <a
             class="sc-ckVGcZ dbIcbn"
-            href="http://undefined:undefined/"
+            href="https://localhost:8080/"
           >
             <span
               class="sc-dxgOiQ kyqLhc"
@@ -406,7 +406,7 @@ exports[`Header matches the snapshot 2`] = `
           </a>
           <a
             class="sc-kgoBCf sc-kGXeez ciQiUp"
-            href="http://undefined:undefined/"
+            href="https://localhost:8080/"
           >
             Registraties
           </a>

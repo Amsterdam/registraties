@@ -29,7 +29,7 @@ const ERROR_MESSAGES = {
 // success
 const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state'];
 
-const scopes = [
+export const scopes = [
   // Kadaster
   // Alle attributen van een kadastraal niet-natuurlijk subject,
   // inclusief alle rechten op kadastrale objecten
@@ -45,19 +45,15 @@ const scopes = [
   // Handelsregister
   'HR/R', // Leesrechten
 ];
-const clientId = 'registraties';
 
-const domainList = ['datapunt', 'grip'];
+export const clientId = 'registraties';
 
-function getDomain(domain) {
-  // TODO
-  // Add business logic for the GRIP or datapunt indentity provider (for instance by mapping the domain from the url)
-  // ex: parse https://waternet.data.amsterdam.nl, if(waternet) return grip
-  // default value is datapunt
-  return domain || domainList[0];
-}
+export const domainList = ['datapunt', 'grip'];
 
-const encodedScopes = encodeURIComponent(scopes.join(' '));
+export const getDomain = domain => domain || domainList[0];
+
+export const encodedScopes = encodeURIComponent(scopes.join(' '));
+
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
 export const AUTH_PATH = domain =>
@@ -67,15 +63,15 @@ export const AUTH_PATH = domain =>
 //
 // `location.pathname` string at the moment we redirect to the
 // OAuth2 authorization service, and need to get back to afterwards
-const RETURN_PATH = 'returnPath';
+export const RETURN_PATH = 'returnPath';
 // The OAuth2 state(token) (OAuth terminology, has nothing to do with
 // our app state), which is a random string
-const STATE_TOKEN = 'stateToken';
+export const STATE_TOKEN = 'stateToken';
 // The access token returned by the OAuth2 authorization service
 // containing user scopes and name
-const ACCESS_TOKEN = 'accessToken';
+export const ACCESS_TOKEN = 'accessToken';
 
-const OAUTH_DOMAIN = 'oauthDomain';
+export const OAUTH_DOMAIN = 'oauthDomain';
 
 let returnPath;
 let tokenData = {};
@@ -87,7 +83,7 @@ let tokenData = {};
  * @param description {string} Error description as returned from the
  * service.
  */
-function handleError(code, description) {
+const handleError = (code, description) => {
   sessionStorage.removeItem(STATE_TOKEN);
 
   // Remove parameters from the URL, as set by the error callback from the
@@ -95,18 +91,19 @@ function handleError(code, description) {
   location.assign(`${location.protocol}//${location.host}${location.pathname}`);
 
   throw new Error(`Authorization service responded with error ${code} [${description}] (${ERROR_MESSAGES[code]})`);
-}
+};
 
 /**
  * Handles errors in case they were returned by the OAuth2 authorization
  * service.
  */
-function catchError() {
+export const catchError = () => {
   const params = queryStringParser(location.search);
+
   if (params && params.error) {
     handleError(params.error, params.error_description);
   }
-}
+};
 
 /**
  * Returns the access token from the params specified.
@@ -118,7 +115,7 @@ function catchError() {
  * @return {string} The access token in case the params for a valid callback,
  * null otherwise.
  */
-function getAccessTokenFromParams(params) {
+export const getAccessTokenFromParams = params => {
   if (!params) {
     return null;
   }
@@ -142,12 +139,12 @@ function getAccessTokenFromParams(params) {
   }
 
   return stateTokenValid && paramsValid ? params.access_token : null;
-}
+};
 
 /**
  * Gets the access token and return path, and clears the session storage.
  */
-function handleCallback() {
+export const handleCallback = () => {
   const params = queryStringParser(location.hash);
   const accessToken = getAccessTokenFromParams(params);
 
@@ -158,11 +155,10 @@ function handleCallback() {
     sessionStorage.removeItem(RETURN_PATH);
     sessionStorage.removeItem(STATE_TOKEN);
 
-    // Clean up URL; remove query and hash
-    // https://stackoverflow.com/questions/4508574/remove-hash-from-url
-    history.replaceState('', document.title, returnPath);
+    // location.assign(returnPath);
+    history.replaceState({}, document.title, returnPath);
   }
-}
+};
 
 /**
  * Returns the access token from session storage when available.
@@ -180,12 +176,13 @@ export function getOauthDomain() {
 /**
  * Restores the access token from session storage when available.
  */
-function restoreAccessToken() {
+export const restoreAccessToken = () => {
   const accessToken = getAccessToken();
+
   if (accessToken) {
     tokenData = accessTokenParser(accessToken);
   }
-}
+};
 
 /**
  * Redirects to the OAuth2 authorization service.
@@ -250,11 +247,11 @@ export function isAuthenticated() {
 }
 
 export function getScopes() {
-  return tokenData.scopes || [];
+  return (!!tokenData && tokenData.scopes) || [];
 }
 
 export function getName() {
-  return tokenData.name || '';
+  return (!!tokenData && tokenData.name) || '';
 }
 
 /**
@@ -265,7 +262,7 @@ export function getName() {
  */
 export function getAuthHeaders() {
   const accessToken = getAccessToken();
-  return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {};
+  return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 }
 
 export function getRequestOptions() {
@@ -275,32 +272,16 @@ export function getRequestOptions() {
 }
 
 export function authenticate() {
-  try {
-    initAuth();
-  } catch (error) {
-    window.Raven.captureMessage(error);
-  }
-
-  returnPath = getReturnPath();
-
-  if (returnPath) {
-    // Timeout needed because the change is otherwise not being handled in
-    // Firefox browsers. This is possibly due to AngularJS changing the
-    // `location.hash` at the same time.
-    window.setTimeout(() => {
-      location.hash = returnPath;
-    });
-  }
+  initAuth();
 
   const accessToken = getAccessToken();
 
   if (accessToken) {
-    const credentials = {
+    return {
       userName: getName(),
       userScopes: getScopes(),
       accessToken: getAccessToken(),
     };
-    return credentials;
   }
 
   return null;

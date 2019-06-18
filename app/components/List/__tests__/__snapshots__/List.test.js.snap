@@ -6,23 +6,23 @@ exports[`List should match the snapshot 1`] = `
   list-style: none;
 }
 
-.c0.depth-1 {
+.c0.depth-0 {
   padding: 0 0 30px;
 }
 
-.c0.depth-1 ul {
+.c0.depth-0 ul {
   padding: 0;
 }
 
-.c0.depth-2 > li {
+.c0.depth-1 > li {
   padding-left: 0;
 }
 
-.c0.depth-2 > li > ul {
+.c0.depth-1 > li > ul {
   padding-bottom: 30px;
 }
 
-.c0.depth-2 > li:before {
+.c0.depth-1 > li:before {
   content: none;
 }
 

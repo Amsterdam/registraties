@@ -6,12 +6,6 @@ import subjectNP from './subjectNP.json';
 
 describe('containers/KadastraalSubjectNNP/selectors', () => {
   describe('makeSelectKadastraalSubjectNNPData', () => {
-    it.skip('should return undefined for an empty state', () => {
-      expect(makeSelectKadastraalSubjectNPData({ data: { foo: 'bar' } })).toEqual(undefined);
-      expect(makeSelectKadastraalSubjectNPData(null)).toEqual(undefined);
-      expect(makeSelectKadastraalSubjectNPData(undefined)).toEqual(undefined);
-    });
-
     it('should return the value of data', () => {
       expect(makeSelectKadastraalSubjectNPData({ kadastraalSubjectNP: { ...initialState, data: null } })).toEqual(null);
       expect(makeSelectKadastraalSubjectNPData({ kadastraalSubjectNP: { ...initialState, data: [] } })).toEqual([]);

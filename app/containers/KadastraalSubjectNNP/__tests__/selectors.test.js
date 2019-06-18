@@ -40,7 +40,7 @@ describe('containers/KadastraalSubjectNNP/selectors', () => {
       expect(makeSelectKadastraalSubjectNNPData(state)).toEqual(null);
     });
 
-    it.only('should return formatted list of results', () => {
+    it('should return formatted list of results', () => {
       const data = [
         subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000000/'],
         subjectNNP['https://api/brk/subject/NL.KAD.Persoon.000000001/'],
