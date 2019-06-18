@@ -71,6 +71,7 @@
     "@babel/polyfill": "7.4.3",
     "@datapunt/asc-assets": "^0.6.3",
     "@datapunt/asc-ui": "^0.6.6",
+    "@sentry/browser": "^5.4.0",
     "amsterdam-amaps": "^2.0.1",
     "amsterdam-stijl": "^3.0.5",
     "chalk": "2.4.2",

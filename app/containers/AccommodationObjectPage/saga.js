@@ -1,9 +1,10 @@
 import { call, put, select, spawn, takeLatest } from 'redux-saga/effects';
+import * as Sentry from '@sentry/browser';
 
 import appSaga from 'containers/App/saga';
 import {
+  exceptionOccurred,
   maxProgressCount,
-  resetGlobalError,
   resetProgress,
   showGlobalError,
   statusFailed,
@@ -41,7 +42,6 @@ import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors'
 export function* fetchData(action) {
   yield put(resetProgress());
   yield put(statusPending());
-  yield put(resetGlobalError());
 
   const { vboId, ligId, brkId } = action.payload;
 
@@ -127,6 +127,11 @@ export function* fetchData(action) {
       yield put(showGlobalError('service_unavailable'));
     } else {
       yield put(showGlobalError('unknown_error'));
+    }
+
+    if (!(error.response && error.response.status === 401)) {
+      const eventId = Sentry.captureException(error);
+      yield put(exceptionOccurred(eventId));
     }
 
     yield put(statusFailed(error));

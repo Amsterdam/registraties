@@ -94,4 +94,7 @@ export default defineMessages({
   filled_in_by: {
     id: `${scope}.filled_in_by`,
   },
+  report_feedback: {
+    id: `${scope}.report_feedback`,
+  },
 });

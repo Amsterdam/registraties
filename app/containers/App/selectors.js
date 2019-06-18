@@ -48,3 +48,8 @@ export const makeSelectProgress = createSelector(
   selectGlobal,
   ({ progress }) => progress,
 );
+
+export const makeSelectErrorEventId = createSelector(
+  selectGlobal,
+  ({ errorEventId }) => errorEventId,
+);

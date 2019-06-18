@@ -2,6 +2,7 @@ import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
   COMPLETE_PROGRESS,
+  EXCEPTION_OCCURRED,
   INCREMENT_PROGRESS,
   LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
@@ -92,4 +93,9 @@ export const maxProgressCount = payload => ({
 export const loadBAGData = payload => ({
   type: LOAD_BAG_DATA,
   payload,
+});
+
+export const exceptionOccurred = eventId => ({
+  type: EXCEPTION_OCCURRED,
+  payload: eventId,
 });

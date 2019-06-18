@@ -2,25 +2,27 @@
 
 exports[`containers/GlobalError should render showing an error when defined 1`] = `
 <div
-  class="no-print cf GlobalError__ErrorWrapper-sc-1ygzfct-0 fDxdan"
+  class="no-print cf GlobalError__ErrorWrapper-igrx8k-0 kuoiLJ"
 >
   <div
-    class="GlobalError__ErrorContainer-sc-1ygzfct-1 hamGfo"
+    class="GlobalError__ErrorContainer-igrx8k-1 dDcAQy"
   >
     <p
-      class="GlobalError__P-sc-1ygzfct-2 iYlIGQ"
-    />
+      class="GlobalError__P-igrx8k-2 fGvvtl"
+    >
+      registraties.unauthorized
+    </p>
     <button
-      class="GlobalError__Button-sc-1ygzfct-3 hPfAeg"
+      class="GlobalError__Button-igrx8k-3 dCWsfn"
       type="button"
     >
       <img
         fill="#fff"
         focusable="false"
-        width="14"
+        width="20"
       />
       <span
-        class="GlobalError__Label-sc-1ygzfct-4 gqwtoq"
+        class="GlobalError__Label-igrx8k-4 fSyAoo"
       >
         registraties.close
       </span>
@@ -29,8 +31,4 @@ exports[`containers/GlobalError should render showing an error when defined 1`] 
 </div>
 `;
 
-exports[`containers/GlobalError should render showing no error by default 1`] = `
-<div>
-  
-</div>
-`;
+exports[`containers/GlobalError should render showing no error by default 1`] = `<div />`;

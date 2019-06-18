@@ -6,7 +6,7 @@ import { push } from 'connected-react-router';
 
 import { login, logout } from 'shared/services/auth/auth';
 import watchAppSaga, { callLogin, callLogout } from '../saga';
-import { LOGIN, LOGOUT, SHOW_GLOBAL_ERROR } from '../constants';
+import { LOGIN, LOGOUT, SHOW_GLOBAL_ERROR, EXCEPTION_OCCURRED } from '../constants';
 
 describe('containers/App/saga', () => {
   it('should watch appSaga', () => {
@@ -31,24 +31,20 @@ describe('containers/App/saga', () => {
         .isDone();
     });
 
-    it('should catch exceptions', done => {
-      global.console.error = jest.fn();
+    it('should catch exceptions', async () => {
       const error = new Error('panic!!1!');
 
-      expectSaga(callLogin, action)
+      return expectSaga(callLogin, action)
         .provide([[matchers.call.fn(login), throwError(error)]])
         .put({
           type: SHOW_GLOBAL_ERROR,
-          payload: 'LOGIN_FAILED',
+          payload: 'login_failed',
         })
+        .put.like({ action: { type: EXCEPTION_OCCURRED } })
         .run()
         .catch(e => {
           expect(e).toBe(error);
-          done();
         });
-
-      expect(global.console.error).toHaveBeenCalled();
-      global.console.error.mockReset();
     });
   });
 
@@ -63,24 +59,20 @@ describe('containers/App/saga', () => {
         .isDone();
     });
 
-    it('should catch exceptions', done => {
-      global.console.error = jest.fn();
+    it('should catch exceptions', async () => {
       const error = new Error('panic!!2!');
 
-      expectSaga(callLogout)
+      return expectSaga(callLogout)
         .provide([[matchers.call.fn(logout), throwError(error)]])
         .put({
           type: SHOW_GLOBAL_ERROR,
-          payload: 'LOGOUT_FAILED',
+          payload: 'logout_failed',
         })
+        .put.like({ action: { type: EXCEPTION_OCCURRED } })
         .run()
         .catch(e => {
           expect(e).toBe(error);
-          done();
         });
-
-      expect(global.console.error).toHaveBeenCalled();
-      global.console.error.mockReset();
     });
   });
 });

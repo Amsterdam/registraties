@@ -74,6 +74,9 @@ Object {
   "public_space_id": Object {
     "id": "registraties.public_space_id",
   },
+  "report_feedback": Object {
+    "id": "registraties.report_feedback",
+  },
   "rsin": Object {
     "id": "registraties.rsin",
   },

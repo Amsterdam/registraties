@@ -4,6 +4,7 @@ import appSaga from 'containers/App/saga';
 import * as appActions from 'containers/App/actions';
 import * as appConstants from 'containers/App/constants';
 import * as appSelectors from 'containers/App/selectors';
+
 import * as kadastraalObjectSaga from 'containers/KadastraalObject/saga';
 import { fetchKadastraalSubjectNNPData } from 'containers/KadastraalSubjectNNP/saga';
 import { fetchKadastraalSubjectNPData } from 'containers/KadastraalSubjectNP/saga';
@@ -15,8 +16,10 @@ import { fetchVerblijfsobjectData, fetchVerblijfsobjectId } from 'containers/Ver
 import { fetchVestigingIdData } from 'containers/Vestiging/saga';
 import { fetchWoonplaatsData } from 'containers/Woonplaats/saga';
 import { fetchMaatschappelijkeActiviteitData } from 'containers/MaatschappelijkeActiviteit/saga';
+
 import * as verblijfsobjectSelectors from 'containers/Verblijfsobject/selectors';
 import { makeSelectOpenbareRuimteId } from 'containers/Nummeraanduiding/selectors';
+
 import { loadDataNoResults as loadKadastraalObjectDataNoResults } from 'containers/KadastraalObject/actions';
 import { loadDataNoResults as loadKadastraalSubjectNPDataNoResults } from 'containers/KadastraalSubjectNP/actions';
 import { loadDataNoResults as loadKadastraalSubjectNNPDataNoResults } from 'containers/KadastraalSubjectNNP/actions';
@@ -26,6 +29,16 @@ import { loadDataNoResults as loadOpenbareRuimteDataNoResults } from 'containers
 import { makeSelectLIGNummeraanduidingId } from 'containers/Ligplaats/selectors';
 
 import watchAccommodationObjectPageSaga, { fetchData } from '../saga';
+
+jest.mock('@sentry/browser', () => {
+  const actual = jest.requireActual('@sentry/browser');
+
+  return {
+    __esModule: true,
+    ...actual,
+    captureException: jest.fn(() => 'some random string 456'),
+  };
+});
 
 describe('containers/AccommodationObjectPage/saga', () => {
   const action = { type: appConstants.LOAD_BAG_DATA };
@@ -51,8 +64,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .put(appActions.resetProgress())
       .next()
       .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
       .next()
       .put(appActions.maxProgressCount(10))
       .next()
@@ -90,8 +101,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .put(appActions.resetProgress())
       .next()
       .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
       .next()
       .put(appActions.maxProgressCount(10))
       .next()
@@ -135,8 +144,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .next()
       .put(appActions.statusPending())
       .next()
-      .put(appActions.resetGlobalError())
-      .next()
       .put(appActions.maxProgressCount(11))
       .next()
       .call(fetchVerblijfsobjectId, brkId)
@@ -176,8 +183,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .next()
       .put(appActions.statusPending())
       .next()
-      .put(appActions.resetGlobalError())
-      .next()
       .put(appActions.maxProgressCount(11))
       .next()
       .call(fetchVerblijfsobjectId, brkId)
@@ -213,8 +218,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .next()
       .put(appActions.statusPending())
       .next()
-      .put(appActions.resetGlobalError())
-      .next()
       .put(appActions.maxProgressCount(4))
       .next()
       .call(fetchLigplaatsData, ligId)
@@ -246,8 +249,6 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .next()
       .put(appActions.statusPending())
       .next()
-      .put(appActions.resetGlobalError())
-      .next()
       .put(appActions.maxProgressCount(4))
       .next()
       .call(fetchLigplaatsData, ligId)
@@ -271,152 +272,170 @@ describe('containers/AccommodationObjectPage/saga', () => {
       .isDone();
   });
 
-  it('should catch exceptions', () => {
+  describe('exceptions', () => {
     const vboId = '0363010001008599';
-    const error = new Error('Something bad happened');
 
-    // unable to fetch
-    error.message = 'Failed to fetch';
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .put(appActions.showGlobalError('unable_to_fetch'))
-      .next()
-      .put(appActions.statusUnableToFetch())
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+    it('catches failed-to-fetch', () => {
+      const error = new Error('Something bad happened');
+      error.message = 'Failed to fetch';
 
-    error.message = undefined;
-    error.response = {
-      status: 401,
-    };
-    // unauthorized authenticated
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .select(appSelectors.makeSelectIsAuthenticated)
-      .next(true)
-      .put(appActions.showGlobalError('session_expired'))
-      .next()
-      .put(appActions.statusUnauthorized())
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .put(appActions.showGlobalError('unable_to_fetch'))
+        .next()
+        .put(appActions.statusUnableToFetch())
+        .next()
+        .put(appActions.exceptionOccurred('some random string 456'))
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
 
-    // unauthorized NOT authenticated
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .select(appSelectors.makeSelectIsAuthenticated)
-      .next(false)
-      .put(appActions.showGlobalError('unauthorized'))
-      .next()
-      .put(appActions.statusUnauthorized())
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+    it('catches 401 authenticated', () => {
+      const error = new Error('Something bad happened');
+      error.response = {
+        status: 401,
+      };
 
-    error.response = {
-      status: 404,
-    };
-    // unable to find resource
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .put(appActions.showGlobalError('resource_not_found'))
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .select(appSelectors.makeSelectIsAuthenticated)
+        .next(true)
+        .put(appActions.showGlobalError('session_expired'))
+        .next()
+        .put(appActions.statusUnauthorized())
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
 
-    error.response = {
-      status: 500,
-    };
-    // server error
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .put(appActions.showGlobalError('server_error'))
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+    it('catches 401 NOT authenticated', () => {
+      const error = new Error('Something bad happened');
+      error.response = {
+        status: 401,
+      };
 
-    error.response = {
-      status: 503,
-    };
-    // service unavailable
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .put(appActions.showGlobalError('service_unavailable'))
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .select(appSelectors.makeSelectIsAuthenticated)
+        .next(false)
+        .put(appActions.showGlobalError('unauthorized'))
+        .next()
+        .put(appActions.statusUnauthorized())
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
 
-    delete error.response;
-    // general error
-    testSaga(fetchData, { ...action, payload: { vboId } })
-      .next()
-      .put(appActions.resetProgress())
-      .next()
-      .put(appActions.statusPending())
-      .next()
-      .put(appActions.resetGlobalError())
-      .next()
-      .put(appActions.maxProgressCount(10))
-      .throw(error)
-      .put(appActions.showGlobalError('unknown_error'))
-      .next()
-      .put(appActions.statusFailed(error))
-      .next()
-      .isDone();
+    it('catches 404', () => {
+      const error = new Error('Something bad happened');
+      error.response = {
+        status: 404,
+      };
+
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .put(appActions.showGlobalError('resource_not_found'))
+        .next()
+        .put(appActions.exceptionOccurred('some random string 456'))
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
+
+    it('catches 500', () => {
+      const error = new Error('Something bad happened');
+      error.response = {
+        status: 500,
+      };
+
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .put(appActions.showGlobalError('server_error'))
+        .next()
+        .put(appActions.exceptionOccurred('some random string 456'))
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
+
+    it('catches 503', () => {
+      const error = new Error('Something bad happened');
+      error.response = {
+        status: 503,
+      };
+
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .put(appActions.showGlobalError('service_unavailable'))
+        .next()
+        .put(appActions.exceptionOccurred('some random string 456'))
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
+
+    it('catches unknown error', () => {
+      const error = new Error('Something bad happened');
+      error.response = null;
+
+      testSaga(fetchData, { ...action, payload: { vboId } })
+        .next()
+        .put(appActions.resetProgress())
+        .next()
+        .put(appActions.statusPending())
+        .next()
+        .put(appActions.maxProgressCount(10))
+        .throw(error)
+        .put(appActions.showGlobalError('unknown_error'))
+        .next()
+        .put(appActions.exceptionOccurred('some random string 456'))
+        .next()
+        .put(appActions.statusFailed(error))
+        .next()
+        .isDone();
+    });
   });
 });

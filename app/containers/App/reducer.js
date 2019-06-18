@@ -4,6 +4,7 @@ import {
   AUTHENTICATE_USER,
   AUTHORIZE_USER,
   COMPLETE_PROGRESS,
+  EXCEPTION_OCCURRED,
   INCREMENT_PROGRESS,
   LOAD_BAG_DATA,
   LOAD_DATA_FAILED,
@@ -22,6 +23,7 @@ import {
 export const initialState = {
   accessToken: undefined,
   error: false,
+  errorEventId: undefined,
   errorMessage: '',
   loading: false,
   progress: {
@@ -52,12 +54,14 @@ export default (state = initialState, action) =>
         draft.error = true;
         draft.errorMessage = payload;
         draft.loading = false;
+        draft.errorEventId = undefined;
         break;
 
       case RESET_GLOBAL_ERROR:
         draft.error = false;
         draft.errorMessage = '';
         draft.loading = false;
+        draft.errorEventId = undefined;
         break;
 
       case LOAD_DATA_PENDING:
@@ -104,6 +108,10 @@ export default (state = initialState, action) =>
         draft.vboId = payload.vboId;
         draft.ligId = payload.ligId;
         draft.brkId = payload.brkId;
+        break;
+
+      case EXCEPTION_OCCURRED:
+        draft.errorEventId = payload;
         break;
     }
   });
