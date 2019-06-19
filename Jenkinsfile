@@ -16,12 +16,12 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
     }
 }
 
+String PROJECT = "registraties"
+
 node {
     stage("Checkout") {
         checkout scm
     }
-
-    String  PROJECT = "registraties"
 
     stage("Lint") {
         tryStep "lint start", {
@@ -75,6 +75,17 @@ if (BRANCH == "master") {
     }
 
     node {
+        stage("Create Sentry release") {
+            environment {
+                VERSION = sh(script: 'npx sentry-cli releases propose-version', , returnStdout: true).trim()
+            }
+            steps {
+                sh "curl -H 'Authorization: DSN {DSN}' https://sentry.data.amsterdam.nl/api/0/projects/"
+                sh "npx sentry-cli releases new -p ${PROJECT} ${VERSION}"
+                sh "npx sentry-cli releases set-commits --auto ${VERSION}"
+            }
+        }
+
         stage("Deploy to ACC") {
             tryStep "deployment", {
                 build job: 'Subtask_Openstack_Playbook',
