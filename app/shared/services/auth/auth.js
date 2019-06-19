@@ -1,8 +1,7 @@
-/* eslint-disable no-restricted-globals */
 /**
  * @jest-environment jsdom
  */
-
+import history from 'utils/history';
 import queryStringParser from './services/query-string-parser/query-string-parser';
 import stateTokenGenerator from './services/state-token-generator/state-token-generator';
 import accessTokenParser from './services/access-token-parser/access-token-parser';
@@ -86,9 +85,11 @@ let tokenData = {};
 const handleError = (code, description) => {
   sessionStorage.removeItem(STATE_TOKEN);
 
+  const { protocol, host, pathname } = global.location;
+
   // Remove parameters from the URL, as set by the error callback from the
   // OAuth2 authorization service, to clean up the URL.
-  location.assign(`${location.protocol}//${location.host}${location.pathname}`);
+  global.location.assign(`${protocol}//${host}${pathname}`);
 
   throw new Error(`Authorization service responded with error ${code} [${description}] (${ERROR_MESSAGES[code]})`);
 };
@@ -98,7 +99,7 @@ const handleError = (code, description) => {
  * service.
  */
 export const catchError = () => {
-  const params = queryStringParser(location.search);
+  const params = queryStringParser(global.location.search);
 
   if (params && params.error) {
     handleError(params.error, params.error_description);
@@ -145,7 +146,7 @@ export const getAccessTokenFromParams = params => {
  * Gets the access token and return path, and clears the session storage.
  */
 export const handleCallback = () => {
-  const params = queryStringParser(location.hash);
+  const params = queryStringParser(global.location.hash);
   const accessToken = getAccessTokenFromParams(params);
 
   if (accessToken) {
@@ -155,8 +156,7 @@ export const handleCallback = () => {
     sessionStorage.removeItem(RETURN_PATH);
     sessionStorage.removeItem(STATE_TOKEN);
 
-    // location.assign(returnPath);
-    history.replaceState({}, document.title, returnPath);
+    history.replace(returnPath);
   }
 };
 
@@ -198,23 +198,25 @@ export function login(domain) {
     throw new Error('crypto library is not available on the current browser');
   }
 
+  const { protocol, host, pathname } = global.location;
+
   sessionStorage.removeItem(ACCESS_TOKEN);
-  sessionStorage.setItem(RETURN_PATH, location);
+  sessionStorage.setItem(RETURN_PATH, pathname);
   sessionStorage.setItem(STATE_TOKEN, stateToken);
   sessionStorage.setItem(OAUTH_DOMAIN, domain);
 
-  const redirectUri = encodeURIComponent(`${location.protocol}//${location.host}/`);
+  const redirectUri = encodeURIComponent(`${protocol}//${host}/`);
   const newLocation = `${CONFIGURATION.AUTH_ROOT}${AUTH_PATH(
     domain,
   )}&state=${encodedStateToken}&redirect_uri=${redirectUri}`;
 
-  location.assign(newLocation);
+  global.location.assign(newLocation);
 }
 
 export function logout() {
   sessionStorage.removeItem(ACCESS_TOKEN);
   sessionStorage.removeItem(OAUTH_DOMAIN);
-  location.reload();
+  global.location.reload();
 }
 
 /**
