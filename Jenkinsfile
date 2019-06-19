@@ -75,7 +75,7 @@ if (BRANCH == "master") {
     }
 
     node {
-        String VERSION = sh(script: 'npx sentry-cli releases propose-version', , returnStdout: true).trim()
+        String VERSION = sh(script: 'sentry-cli releases propose-version', , returnStdout: true).trim()
 
         stage("Sentry release") {
             tryStep "authenticate", {
@@ -83,8 +83,8 @@ if (BRANCH == "master") {
             }
 
             tryStep "create release", {
-                sh "npx sentry-cli releases new -p ${PROJECT} ${VERSION}"
-                sh "npx sentry-cli releases set-commits --auto ${VERSION}"
+                sh "sentry-cli releases new -p ${PROJECT} ${VERSION}"
+                sh "sentry-cli releases set-commits --auto ${VERSION}"
             }
         }
 

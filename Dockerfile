@@ -28,7 +28,7 @@ RUN npm --production=false \
         --no-progress \
         ci
 
-RUN npm install --unsafe-perm -g full-icu
+RUN npm install --unsafe-perm -g full-icu @sentry/cli
 RUN npm cache clean --force
 ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
