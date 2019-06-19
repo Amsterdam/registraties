@@ -75,9 +75,7 @@ if (BRANCH == "master") {
     }
 
     node {
-        environment {
-            VERSION = sh(script: 'npx sentry-cli releases propose-version', , returnStdout: true).trim()
-        }
+        String VERSION = sh(script: 'npx sentry-cli releases propose-version', , returnStdout: true).trim()
 
         stage("Sentry release") {
             tryStep "authenticate", {
