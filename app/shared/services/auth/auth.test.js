@@ -1,3 +1,4 @@
+import history from 'utils/history';
 import * as accessTokenParser from './services/access-token-parser/access-token-parser';
 import * as stateTokengenerator from './services/state-token-generator/state-token-generator';
 import * as auth from './auth';
@@ -12,9 +13,11 @@ const params = {
   expires_in: '36000',
   access_token: accessToken,
 };
+const returnPath = '/vbo/0363010000940054/';
 
 jest.mock('./services/access-token-parser/access-token-parser');
 jest.mock('./services/state-token-generator/state-token-generator');
+jest.mock('utils/history');
 
 describe('shared/services/auth', () => {
   afterEach(() => {
@@ -52,18 +55,22 @@ describe('shared/services/auth', () => {
   });
 
   describe('handleError', () => {
-    const locationAssignSpy = jest.spyOn(window.location, 'assign');
+    beforeEach(() => {
+      jest.spyOn(window.location, 'assign');
+    });
+
+    afterEach(() => {
+      window.location.assign.mockRestore();
+    });
 
     it('should throw an error', () => {
       expect(() => {
         auth.handleError('invalid_request', 'description goes here');
 
         expect(sessionStorage.removeItem).toHaveBeenCalledWith(auth.STATE_TOKEN);
-        expect(locationAssignSpy).toHaveBeenCalled();
+        expect(window.location.assign).toHaveBeenCalled();
       }).toThrow();
     });
-
-    window.location.assign.mockRestore();
   });
 
   describe('catchError', () => {
@@ -118,12 +125,12 @@ describe('shared/services/auth', () => {
   });
 
   describe('handleCallback', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       // mocking console.error to catch error shown by JSDOM because of the history replace state call
       global.console.error = jest.fn();
     });
 
-    afterAll(() => {
+    afterEach(() => {
       global.console.error.mockRestore();
     });
 
@@ -141,11 +148,11 @@ describe('shared/services/auth', () => {
       auth.handleCallback();
 
       expect(sessionStorage.removeItem).not.toHaveBeenCalled();
+
+      expect(history.replace).not.toHaveBeenCalled();
     });
 
     it('should set access token in state', () => {
-      const returnPath = 'https://localhost:8080/vbo/0363010000940054/';
-
       jest
         .spyOn(sessionStorage, 'getItem')
         .mockImplementationOnce(() => state)
@@ -161,6 +168,8 @@ describe('shared/services/auth', () => {
       expect(sessionStorage.setItem).toHaveBeenCalledWith(auth.ACCESS_TOKEN, params.access_token);
       expect(sessionStorage.removeItem).toHaveBeenCalledWith(auth.RETURN_PATH);
       expect(sessionStorage.removeItem).toHaveBeenLastCalledWith(auth.STATE_TOKEN);
+
+      expect(history.replace).toHaveBeenCalledWith(returnPath);
     });
   });
 
@@ -232,11 +241,11 @@ describe('shared/services/auth', () => {
   describe('login', () => {
     const domain = 'localhost';
 
-    beforeAll(() => {
+    beforeEach(() => {
       jest.spyOn(window.location, 'assign');
     });
 
-    afterAll(() => {
+    afterEach(() => {
       window.location.assign.mockRestore();
     });
 
@@ -250,7 +259,6 @@ describe('shared/services/auth', () => {
 
     it('should handle login correctly', () => {
       const stateToken = 'BB4W/JEiBeAt7nB6vgVO+Q==';
-      const returnPath = '/vbo/0363010000940054/';
 
       jest.spyOn(stateTokengenerator, 'default').mockImplementationOnce(() => stateToken);
       global.history.replaceState({}, '', returnPath);
@@ -258,7 +266,7 @@ describe('shared/services/auth', () => {
       auth.login(domain);
 
       expect(sessionStorage.removeItem).toHaveBeenCalledWith(auth.ACCESS_TOKEN);
-      expect(sessionStorage.setItem).toHaveBeenNthCalledWith(1, auth.RETURN_PATH, window.location);
+      expect(sessionStorage.setItem).toHaveBeenNthCalledWith(1, auth.RETURN_PATH, returnPath);
       expect(sessionStorage.setItem).toHaveBeenNthCalledWith(2, auth.STATE_TOKEN, stateToken);
       expect(sessionStorage.setItem).toHaveBeenNthCalledWith(3, auth.OAUTH_DOMAIN, domain);
 
@@ -288,8 +296,6 @@ describe('shared/services/auth', () => {
       auth.initAuth(); // reset the value of returnPath
 
       expect(auth.getReturnPath()).toEqual('');
-
-      const returnPath = 'https://localhost:8080/vbo/0363010000940054/';
 
       jest
         .spyOn(sessionStorage, 'getItem')
@@ -365,17 +371,23 @@ describe('shared/services/auth', () => {
   });
 
   describe('authenticate', () => {
+    beforeEach(() => {
+      jest
+        .spyOn(sessionStorage, 'getItem')
+        .mockImplementationOnce(() => accessToken)
+        .mockImplementationOnce(() => state)
+        .mockImplementationOnce(() => returnPath);
+    });
+
     it('should call initAuth', () => {
-      expect(auth.getReturnPath()).not.toBeUndefined();
+      expect(auth.getReturnPath()).not.toEqual('');
 
       auth.authenticate();
 
-      expect(auth.getReturnPath()).toEqual('');
+      expect(auth.getReturnPath()).toEqual(returnPath);
     });
 
     it('should return null', () => {
-      jest.spyOn(sessionStorage, 'getItem').mockImplementation(() => '');
-
       expect(auth.authenticate()).toEqual(null);
     });
 
