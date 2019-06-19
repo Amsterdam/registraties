@@ -75,12 +75,14 @@ if (BRANCH == "master") {
     }
 
     node {
-        stage("Create Sentry release") {
+        stage("Sentry release") {
             environment {
                 VERSION = sh(script: 'npx sentry-cli releases propose-version', , returnStdout: true).trim()
             }
-            steps {
+            tryStep "authenticate", {
                 sh "curl -H 'Authorization: DSN {DSN}' https://sentry.data.amsterdam.nl/api/0/projects/"
+            }
+            tryStep "create release", {
                 sh "npx sentry-cli releases new -p ${PROJECT} ${VERSION}"
                 sh "npx sentry-cli releases set-commits --auto ${VERSION}"
             }
