@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/GlobalError matches the snapshot 1`] = `
+.c0 {
+  background-color: #ec0000;
+  color: white;
+}
+
+.c1 {
+  max-width: 1024px;
+  padding: 11px 16px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c2 {
+  margin: 0;
+  max-width: calc(100% - 60px);
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c3 {
+  height: 25px;
+  margin-left: 10px;
+  width: 25px;
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  float: right;
+  background: transparent;
+  cursor: pointer;
+}
+
+.c4 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+<div
+  class="no-print cf c0"
+>
+  <div
+    class="c1"
+  >
+    <p
+      class="c2"
+    >
+      Whoops! Something went wrong here...
+    </p>
+    <button
+      class="c3"
+      type="button"
+    >
+      <img
+        fill="#fff"
+        focusable="false"
+        width="20"
+      />
+      <span
+        class="c4"
+      >
+        Close
+      </span>
+    </button>
+  </div>
+</div>
+`;
