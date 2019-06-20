@@ -4,6 +4,9 @@ LABEL maintainer="datapunt@amsterdam.nl"
 ARG BUILD_ENV=prod
 ARG BUILD_NUMBER=0
 
+ARG GIT_COMMIT
+ENV GIT_COMMIT ${GIT_COMMIT}
+
 WORKDIR /deploy
 
 # Run updates and cleanup
