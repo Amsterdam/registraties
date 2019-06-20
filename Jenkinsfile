@@ -59,11 +59,9 @@ node {
     }
 }
 
-
 String BRANCH = "${env.BRANCH_NAME}"
 
 if (BRANCH == "master") {
-
     node {
         stage('Push acceptance image') {
             tryStep "image tagging", {
@@ -75,20 +73,18 @@ if (BRANCH == "master") {
     }
 
     node {
-        String VERSION = sh(script: 'sentry-cli releases propose-version', , returnStdout: true).trim()
-
-        stage("Sentry release") {
-            tryStep "authenticate", {
-                sh "curl -H 'Authorization: DSN {DSN}' https://sentry.data.amsterdam.nl/api/0/projects/"
-            }
-
-            tryStep "create release", {
-                sh "sentry-cli releases new -p ${PROJECT} ${VERSION}"
-                sh "sentry-cli releases set-commits --auto ${VERSION}"
-            }
-        }
-
         stage("Deploy to ACC") {
+            String GIT_COMMIT = sh(script: 'git log --pretty=format:"%H" | head -1', returnStdout: true)
+            String GIT_PREVIOUS_COMMIT = sh(script: 'git log --pretty=format:"%H" | head -2 | tail -1', returnStdout: true)
+
+            tryStep "Sentry release", {
+                sh label: '', script: "curl https://sentry.data.amsterdam.nl/api/0/organizations/sentry/releases/ \
+                    -X POST \
+                    -H 'Authorization: Bearer 81f08e755ede455a9a45285dba263f83745159255eb54f1c8a9a131ddbb4a8f0' \
+                    -H 'Content-Type: application/json' \
+                    -d '{\"version\": \"${GIT_COMMIT}\", \"projects\":[\"${PROJECT}\"]}'"
+            }
+
             tryStep "deployment", {
                 build job: 'Subtask_Openstack_Playbook',
                 parameters: [
