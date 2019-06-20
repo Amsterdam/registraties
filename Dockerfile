@@ -9,9 +9,9 @@ WORKDIR /deploy
 # Run updates and cleanup
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      netcat \
-      libglu1 \
-      git && \
+    netcat \
+    libglu1 \
+    git && \
     rm -rf /var/lib/apt/lists/*
 
 #  Changing git URL because network is blocking git protocol...
@@ -28,7 +28,7 @@ RUN npm --production=false \
         --no-progress \
         ci
 
-RUN npm install --unsafe-perm -g full-icu @sentry/cli
+RUN npm install --unsafe-perm -g full-icu
 RUN npm cache clean --force
 ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
@@ -40,7 +40,6 @@ ENV NODE_PATH=/deploy/
 ENV NODE_ENV=production
 RUN npm run build
 
-
 # Deploy
 FROM nginx:stable-alpine
 ARG BUILD_ENV=prod
@@ -50,4 +49,4 @@ COPY default.conf /etc/nginx/conf.d/
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
+  && ln -sf /dev/stderr /var/log/nginx/error.log
