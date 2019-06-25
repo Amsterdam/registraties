@@ -1,11 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import './style.scss';
+const FooterComponent = styled.footer`
+  .footer-component {
+    padding: 20px;
+  }
+`;
 
 const Footer = () => (
   <div className="footer-wrapper no-print" data-testid="site-footer">
     <div className="row bg-darkgrey footer">
-      <footer className="container footer-component">
+      <FooterComponent className="container">
         <div className="row">
           <div className="col-12">
             <h3 className="c-footer__heading">Contact</h3>
@@ -25,8 +30,9 @@ const Footer = () => (
             </p>
           </div>
         </div>
-      </footer>
+      </FooterComponent>
     </div>
+
     <div className="container grid-below-footer">
       <div className="row">
         <div className="col-12">

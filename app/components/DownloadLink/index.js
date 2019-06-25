@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@datapunt/asc-ui';
 
-import './style.scss';
-
 const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
   <Button
     as="a"
