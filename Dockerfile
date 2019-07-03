@@ -21,15 +21,15 @@ RUN git config --global url."https://github.com/".insteadOf git@github.com:
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
+RUN npm install --unsafe-perm -g full-icu
+RUN npm cache clean --force
+ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
+
 RUN npm --production=false \
         --unsafe-perm \
         --verbose \
         --no-progress \
         ci
-
-RUN npm install --unsafe-perm -g full-icu
-RUN npm cache clean --force
-ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 # Build dependencies
 COPY . /deploy/
