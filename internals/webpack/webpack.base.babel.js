@@ -31,11 +31,6 @@ module.exports = options => ({
         use: ['@svgr/webpack'],
       },
       {
-        test: /.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-
-      {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         exclude: /node_modules/,
         use: {
@@ -48,13 +43,6 @@ module.exports = options => ({
         // This is the place to add your own loaders (e.g. sass/less etc.)
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        // Preprocess 3rd party .css files located in node_modules
-        test: /\.css$/,
-        include: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
       {

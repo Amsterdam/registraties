@@ -2,6 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import 'amsterdam-stijl/dist/css/ams-stijl.css';
 
 const GlobalStyle = createGlobalStyle`
+  *[disabled] {
+    background-color: #e6e6e6 !important;
+    color: #767676 !important;
+  }
+
   html,
   body {
     height: 100%;
