@@ -64,6 +64,7 @@ const environment = process.env.NODE_ENV;
 Sentry.init({
   environment,
   dsn: 'https://e102f85871f147a182e002f4e1a2b631@sentry.data.amsterdam.nl/15',
+  release: `${process.env.GIT_COMMIT}`,
 });
 
 // Chunked polyfill for browsers without Intl support

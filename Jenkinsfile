@@ -53,6 +53,7 @@ node {
                 "--shm-size 1G " +
                 "--build-arg BUILD_ENV=acc " +
                 "--build-arg BUILD_NUMBER=${env.BUILD_NUMBER} " +
+                "--build-arg GIT_COMMIT=${env.GIT_COMMIT} " +
                 ". ")
             image.push()
         }

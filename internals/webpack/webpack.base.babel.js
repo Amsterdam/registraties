@@ -112,7 +112,11 @@ module.exports = options => ({
       },
     ],
   },
-  plugins: options.plugins.concat([new webpack.EnvironmentPlugin()]),
+  plugins: options.plugins.concat([
+    new webpack.EnvironmentPlugin({
+      GIT_COMMIT: '',
+    }),
+  ]),
   resolve: {
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
