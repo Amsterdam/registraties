@@ -25,7 +25,6 @@ COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
 RUN npm install --unsafe-perm -g full-icu
-RUN npm cache clean --force
 ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 RUN npm --production=false \
