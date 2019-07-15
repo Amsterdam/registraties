@@ -89,7 +89,7 @@
     "jest-localstorage-mock": "^2.4.0",
     "json2csv": "^4.5.0",
     "leaflet": "^1.4.0",
-    "lodash": "4.17.11",
+    "lodash": "^4.17.14",
     "lodash.clonedeep": "^4.5.0",
     "minimist": "1.2.0",
     "mock-local-storage": "^1.1.8",
