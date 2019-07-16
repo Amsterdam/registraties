@@ -7,8 +7,6 @@ ARG BUILD_NUMBER=0
 ARG GIT_COMMIT
 ENV GIT_COMMIT ${GIT_COMMIT}
 
-WORKDIR /deploy
-
 # Run updates and cleanup
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -20,6 +18,8 @@ RUN apt-get update && \
 #  Changing git URL because network is blocking git protocol...
 RUN git config --global url."https://".insteadOf git://
 RUN git config --global url."https://github.com/".insteadOf git@github.com:
+
+WORKDIR /deploy
 
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
