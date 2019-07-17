@@ -7,8 +7,6 @@ ARG BUILD_NUMBER=0
 ARG GIT_COMMIT
 ENV GIT_COMMIT ${GIT_COMMIT}
 
-WORKDIR /deploy
-
 # Run updates and cleanup
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -21,11 +19,12 @@ RUN apt-get update && \
 RUN git config --global url."https://".insteadOf git://
 RUN git config --global url."https://github.com/".insteadOf git@github.com:
 
+WORKDIR /deploy
+
 COPY package.json package-lock.json /deploy/
 COPY internals /deploy/internals/
 
 RUN npm install --unsafe-perm -g full-icu
-RUN npm cache clean --force
 ENV NODE_ICU_DATA="/usr/local/lib/node_modules/full-icu"
 
 RUN npm --production=false \
