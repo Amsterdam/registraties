@@ -20,7 +20,8 @@ String PROJECT = "registraties"
 
 node {
     stage("Checkout") {
-        checkout scm
+        def scmVars = checkout(scm)
+        env.GIT_COMMIT = scmVars.GIT_COMMIT
     }
 
     stage("Lint") {
