@@ -2,7 +2,7 @@
 const html = require('../index.html');
 
 describe('app.js', () => {
-  it('should have correct Piwik site id', () => {
+  it('should have correct Matomo site id', () => {
     document.body.innerHTML = html;
     const script = document.getElementsByTagName('script')[0].innerHTML;
     const match = script.match(/_paq\.push\(\['setSiteId', '([^']+)'\]\)/);
