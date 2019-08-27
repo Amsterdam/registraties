@@ -79,7 +79,7 @@ const StyledNav = styled.nav`
 
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper data-testid="site-header">
-    <StyledHeader title="Registraties" homeLink={CONFIGURATION.ROOT} tall>
+    <StyledHeader title="Registraties" homeLink={CONFIGURATION.ROOT} tall={false} fullWidth={false}>
       <StyledNav className="no-print">
         <ul className="links horizontal">
           {isAuthenticated ? (
