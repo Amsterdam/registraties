@@ -135,7 +135,7 @@
     "compression-webpack-plugin": "2.0.0",
     "coveralls": "3.0.3",
     "css-loader": "2.1.1",
-    "dyson": "^2.0.3",
+    "dyson": "^2.0.5",
     "dyson-generators": "^0.2.0",
     "dyson-image": "^0.2.0",
     "enzyme": "3.9.0",
