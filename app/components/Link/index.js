@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Typography as T } from '@datapunt/asc-ui';
-import ChevronRight from '@datapunt/asc-assets/lib/Icons/Chevron-Right.svg';
+import { ChevronRight } from '@datapunt/asc-assets';
 
 const StyledT = styled(T)`
   padding: 0 !important;

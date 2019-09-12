@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { intlShape } from 'react-intl';
 
 import CONFIGURATION from 'shared/services/configuration/configuration';
-import LoginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
-import LogoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
+import { Login, Logout } from '@datapunt/asc-assets';
 import { Header as HeaderComponent } from '@datapunt/asc-ui';
 import messages from './messages';
 
@@ -85,14 +84,14 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
           {isAuthenticated ? (
             <li>
               <button type="button" onClick={onLoginLogoutButtonClick}>
-                <LogoutIcon focusable="false" width={20} />
+                <Logout focusable="false" width={20} />
                 <span>{intl.formatMessage(messages.log_out)}</span>
               </button>
             </li>
           ) : (
             <li>
               <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                <LoginIcon focusable="false" width={20} />
+                <Login focusable="false" width={20} />
                 <span>{intl.formatMessage(messages.log_in)}</span>
               </button>
             </li>
