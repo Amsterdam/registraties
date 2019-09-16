@@ -16,11 +16,17 @@ exports[`containers/GlobalError should render showing an error when defined 1`] 
       class="GlobalError__Button-igrx8k-3 dCWsfn"
       type="button"
     >
-      <img
+      <svg
         fill="#fff"
         focusable="false"
+        viewBox="0 0 32 32"
         width="20"
-      />
+      >
+        <path
+          d="M29.333 5.47L26.53 2.668 16 13.187 5.47 2.666 2.668 5.47 13.187 16 2.666 26.53l2.804 2.803L16 18.813l10.53 10.52 2.803-2.804L18.813 16z"
+          fill-rule="evenodd"
+        />
+      </svg>
       <span
         class="GlobalError__Label-igrx8k-4 fSyAoo"
       >

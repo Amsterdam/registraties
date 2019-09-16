@@ -154,11 +154,17 @@ exports[`Search matches the snapshot 1`] = `
       size="20"
       type="button"
     >
-      <img
+      <svg
         data-testid="searchToggle-search-icon"
         focusable="false"
+        viewBox="0 0 32 32"
         width="20"
-      />
+      >
+        <path
+          d="M32 29.119l-9.825-9.825a12.217 12.217 0 1 0-2.88 2.881L29.118 32 32 29.119zm-19.771-8.746a8.145 8.145 0 1 1 0-16.289 8.145 8.145 0 0 1 0 16.29z"
+          fill-rule="evenodd"
+        />
+      </svg>
       <span
         class="visuallyhidden"
         data-testid="searchToggle-label"
@@ -240,7 +246,7 @@ exports[`Search should render results 1`] = `
   fill: #ec0000;
 }
 
-.c15 {
+.c14 {
   vertical-align: baseline;
   margin-right: 5px;
 }
@@ -358,70 +364,6 @@ exports[`Search should render results 1`] = `
   margin: 0 auto;
 }
 
-.c14 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-}
-
-.c14:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c14:hover {
-  color: #ec0000;
-}
-
-.c16 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-}
-
-.c16:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c16:hover {
-  color: #ec0000;
-}
-
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
   .c10 a {
     height: 26px;
@@ -465,11 +407,17 @@ exports[`Search should render results 1`] = `
       size="20"
       type="button"
     >
-      <img
+      <svg
         data-testid="searchToggle-search-icon"
         focusable="false"
+        viewBox="0 0 32 32"
         width="20"
-      />
+      >
+        <path
+          d="M32 29.119l-9.825-9.825a12.217 12.217 0 1 0-2.88 2.881L29.118 32 32 29.119zm-19.771-8.746a8.145 8.145 0 1 1 0-16.289 8.145 8.145 0 0 1 0 16.29z"
+          fill-rule="evenodd"
+        />
+      </svg>
       <span
         class="visuallyhidden"
         data-testid="searchToggle-label"
@@ -523,15 +471,21 @@ exports[`Search should render results 1`] = `
             >
               <li>
                 <a
-                  class="c12 c13 c14"
+                  class="c12 c13 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
                   data-vbo-id="0363010000740956"
                   href="/"
                 >
-                  <img
-                    class="c15"
+                  <svg
+                    class="c14"
                     focusable="false"
+                    viewBox="0 0 32 32"
                     width="14"
-                  />
+                  >
+                    <path
+                      d="M9.757 32l-2.9-2.91L19.937 16 6.857 2.91 9.757 0l16 16z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
                   <span
                     class="linklabel"
                   >
@@ -541,15 +495,21 @@ exports[`Search should render results 1`] = `
               </li>
               <li>
                 <a
-                  class="c12 c13 c16"
+                  class="c12 c13 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
                   data-vbo-id="0363010000740957"
                   href="/"
                 >
-                  <img
-                    class="c15"
+                  <svg
+                    class="c14"
                     focusable="false"
+                    viewBox="0 0 32 32"
                     width="14"
-                  />
+                  >
+                    <path
+                      d="M9.757 32l-2.9-2.91L19.937 16 6.857 2.91 9.757 0l16 16z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
                   <span
                     class="linklabel"
                   >

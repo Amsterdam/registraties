@@ -19,7 +19,7 @@ describe('components/GlobalError', () => {
     expect(container.getElementsByTagName('button')).toHaveLength(1);
 
     Array.from(container.getElementsByTagName('svg')).forEach(svgElement => {
-      expect(svgElement.getAttribute('focusable')).toEqual(false);
+      expect(svgElement.getAttribute('focusable')).toEqual('false');
     });
   });
 

@@ -78,27 +78,32 @@ const StyledNav = styled.nav`
 
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper data-testid="site-header">
-    <StyledHeader title="Registraties" homeLink={CONFIGURATION.ROOT} tall>
-      <StyledNav className="no-print">
-        <ul className="links horizontal">
-          {isAuthenticated ? (
-            <li>
-              <button type="button" onClick={onLoginLogoutButtonClick}>
-                <Logout focusable="false" width={20} />
-                <span>{intl.formatMessage(messages.log_out)}</span>
-              </button>
-            </li>
-          ) : (
-            <li>
-              <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                <Login focusable="false" width={20} />
-                <span>{intl.formatMessage(messages.log_in)}</span>
-              </button>
-            </li>
-          )}
-        </ul>
-      </StyledNav>
-    </StyledHeader>
+    <StyledHeader
+      tall
+      title="Registraties"
+      homeLink={CONFIGURATION.ROOT}
+      navigation={
+        <StyledNav className="no-print">
+          <ul className="links horizontal">
+            {isAuthenticated ? (
+              <li>
+                <button type="button" onClick={onLoginLogoutButtonClick}>
+                  <Logout focusable="false" width={20} />
+                  <span>{intl.formatMessage(messages.log_out)}</span>
+                </button>
+              </li>
+            ) : (
+              <li>
+                <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
+                  <Login focusable="false" width={20} />
+                  <span>{intl.formatMessage(messages.log_in)}</span>
+                </button>
+              </li>
+            )}
+          </ul>
+        </StyledNav>
+      }
+    />
   </HeaderWrapper>
 );
 

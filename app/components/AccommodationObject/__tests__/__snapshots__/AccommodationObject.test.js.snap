@@ -488,54 +488,8 @@ exports[`AccommodationObject should render without problems 2`] = `
     data-testid="progress-wrapper"
     type="determined"
   >
-    .c0 {
-  height: 60px;
-  width: 60px;
-  position: absolute;
-  -webkit-clip: rect(0,60px,60px,30px);
-  clip: rect(0,60px,60px,30px);
-  will-change: clip;
-}
-
-.c0::before,
-.c0::after {
-  border-radius: 50%;
-  border: 6px solid;
-  border-color: #ec0000;
-  -webkit-clip: rect(0,30px,60px,0);
-  clip: rect(0,30px,60px,0);
-  content: '';
-  position: absolute;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  -webkit-transition: -webkit-transform 0.1s ease-in;
-  -webkit-transition: transform 0.1s ease-in;
-  transition: transform 0.1s ease-in;
-  height: 48px;
-  width: 48px;
-  will-change: transform;
-}
-
-.c0::before {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-.c0::after {
-  display: none;
-}
-
-@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
-  .c0 {
-    top: calc(50% - 30px);
-    left: calc(50% - 30px);
-  }
-}
-
-<div
-      class="c0"
+    <div
+      class="Progress__Pie-yfxggj-1 kSDXxs"
     />
     <div
       class="Progress__Label-yfxggj-2 fWvHLa"
@@ -573,57 +527,8 @@ exports[`AccommodationObject should render without problems 2`] = `
           data-testid="progress-wrapper"
           type="undetermined"
         >
-          .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-            class="c0"
+          <div
+            class="Progress__Pie-yfxggj-1 fJhYlZ"
           />
         </div>
       </section>
@@ -652,57 +557,8 @@ exports[`AccommodationObject should render without problems 2`] = `
           data-testid="progress-wrapper"
           type="undetermined"
         >
-          .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-            class="c0"
+          <div
+            class="Progress__Pie-yfxggj-1 fJhYlZ"
           />
         </div>
       </section>
@@ -731,57 +587,8 @@ exports[`AccommodationObject should render without problems 2`] = `
           data-testid="progress-wrapper"
           type="undetermined"
         >
-          .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-            class="c0"
+          <div
+            class="Progress__Pie-yfxggj-1 fJhYlZ"
           />
         </div>
       </section>
@@ -821,57 +628,8 @@ exports[`AccommodationObject should render without problems 2`] = `
           data-testid="progress-wrapper"
           type="undetermined"
         >
-          .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-            class="c0"
+          <div
+            class="Progress__Pie-yfxggj-1 fJhYlZ"
           />
         </div>
       </section>
@@ -895,57 +653,8 @@ exports[`AccommodationObject should render without problems 2`] = `
         data-testid="progress-wrapper"
         type="undetermined"
       >
-        .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-          class="c0"
+        <div
+          class="Progress__Pie-yfxggj-1 fJhYlZ"
         />
       </div>
     </section>
@@ -955,57 +664,8 @@ exports[`AccommodationObject should render without problems 2`] = `
         data-testid="progress-wrapper"
         type="undetermined"
       >
-        .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-          class="c0"
+        <div
+          class="Progress__Pie-yfxggj-1 fJhYlZ"
         />
       </div>
     </section>
@@ -1014,57 +674,8 @@ exports[`AccommodationObject should render without problems 2`] = `
       data-testid="progress-wrapper"
       type="undetermined"
     >
-      .c0 {
-  height: 19.98px;
-  width: 19.98px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1.9980000000000002px;
-  color: #ec0000;
-  display: inline-block;
-  font-size: 1.9980000000000002px;
-  position: relative;
-  text-indent: -99999em;
-  -webkit-transform: translate3D(0,0,0);
-  -ms-transform: translate3D(0,0,0);
-  transform: translate3D(0,0,0);
-  vertical-align: middle;
-  margin: 0;
-}
-
-.c0::before,
-.c0::after {
-  background-color: #fff;
-  content: '';
-  height: 21.978px;
-  position: absolute;
-}
-
-.c0::before {
-  -webkit-animation: rotate 1.5s infinite ease 1.2s;
-  animation: rotate 1.5s infinite ease 1.2s;
-  border-radius: 21.978px 0 0 21.978px;
-  left: -0.9990000000000001px;
-  top: -0.9990000000000001px;
-  -webkit-transform-origin: 10.589400000000001px 10.989px;
-  -ms-transform-origin: 10.589400000000001px 10.989px;
-  transform-origin: 10.589400000000001px 10.989px;
-  width: 10.3854375px;
-}
-
-.c0::after {
-  -webkit-animation: rotate 1.5s infinite ease;
-  animation: rotate 1.5s infinite ease;
-  border-radius: 0 21.978px 21.978px 0;
-  left: 10.3854375px;
-  top: -0.5994px;
-  -webkit-transform-origin: -0.1998px 10.989px;
-  -ms-transform-origin: -0.1998px 10.989px;
-  transform-origin: -0.1998px 10.989px;
-  width: 11.186735400000002px;
-}
-
-<div
-        class="c0"
+      <div
+        class="Progress__Pie-yfxggj-1 fJhYlZ"
       />
     </div>
     .c2 {
@@ -1141,65 +752,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         data-testid="accommodation-object-filled-in-by"
       />
     </section>
-    .c1 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: normal;
-  padding: 0 10px 0 10px;
-  -webkit-transition: color 0.1s ease-in-out,background-color 0.1s ease-in-out;
-  transition: color 0.1s ease-in-out,background-color 0.1s ease-in-out;
-  background: #ffffff;
-  padding: 0 10px 0 10px;
-  min-height: 38px;
-  line-height: 1em;
-  color: #004699;
-  border: 1px solid #004699;
-}
-
-.c1:focus {
-  outline-color: #FEC813;
-  outline-style: solid;
-  outline-width: 3px;
-}
-
-.c1:hover {
-  background: #E6E6E6;
-}
-
-.c1:after {
-  content: '';
-  display: block;
-  min-height: inherit;
-  font-size: 0;
-}
-
-.c1:hover {
-  outline: 1px solid #004699;
-}
-
-.c1 svg {
-  width: 30px;
-  height: 30px;
-}
-
-.c1 svg rect,
-.c1 svg polygon,
-.c1 svg path {
-  fill: #ffffff;
-}
-
-.c0 {
+    .c0 {
   margin-top: 30px;
 }
 
@@ -1220,7 +773,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         </h3>
       </header>
       <a
-        class="c1"
+        class="sc-gZMcBi kDLxnL"
         download="registraties_export.csv"
         rel="noopener noreferrer"
         tabindex="0"

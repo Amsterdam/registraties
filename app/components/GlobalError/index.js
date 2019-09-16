@@ -52,12 +52,12 @@ const GlobalError = ({ onClose, errorMessageLabel, closeLabel, feedbackLabel, sh
       <P>{errorMessageLabel}</P>
       {showReportDialog && (
         <Button type="button" onClick={showReportDialog} data-testid="globalerror-showReportDialog">
-          <Alert focusable="false" width={20} fill="#fff" />
+          <Alert width={20} fill="#fff" />
           <Label>{feedbackLabel}</Label>
         </Button>
       )}
       <Button type="button" onClick={onClose}>
-        <Close focusable="false" width={20} fill="#fff" />
+        <Close width={20} fill="#fff" />
         <Label>{closeLabel}</Label>
       </Button>
     </ErrorContainer>

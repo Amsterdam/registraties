@@ -15,7 +15,7 @@ exports[`Suggest matches the snapshot 1`] = `
   fill: #ec0000;
 }
 
-.c5 {
+.c4 {
   vertical-align: baseline;
   margin-right: 5px;
 }
@@ -39,102 +39,6 @@ exports[`Suggest matches the snapshot 1`] = `
   margin-top: 8px !important;
 }
 
-.c4 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-}
-
-.c4:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c4:hover {
-  color: #ec0000;
-}
-
-.c6 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-}
-
-.c6:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c6:hover {
-  color: #ec0000;
-}
-
-.c7 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-}
-
-.c7:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c7:hover {
-  color: #ec0000;
-}
-
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
   .c0 a {
     height: 26px;
@@ -155,15 +59,21 @@ exports[`Suggest matches the snapshot 1`] = `
     >
       <li>
         <a
-          class="c2 c3 c4"
+          class="c2 c3 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
           data-brk-id="0363010000740956"
           href="/"
         >
-          <img
-            class="c5"
+          <svg
+            class="c4"
             focusable="false"
+            viewBox="0 0 32 32"
             width="14"
-          />
+          >
+            <path
+              d="M9.757 32l-2.9-2.91L19.937 16 6.857 2.91 9.757 0l16 16z"
+              fill-rule="evenodd"
+            />
+          </svg>
           <span
             class="linklabel"
           >
@@ -173,15 +83,21 @@ exports[`Suggest matches the snapshot 1`] = `
       </li>
       <li>
         <a
-          class="c2 c3 c6"
+          class="c2 c3 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
           data-lig-id="0363010000740956"
           href="/"
         >
-          <img
-            class="c5"
+          <svg
+            class="c4"
             focusable="false"
+            viewBox="0 0 32 32"
             width="14"
-          />
+          >
+            <path
+              d="M9.757 32l-2.9-2.91L19.937 16 6.857 2.91 9.757 0l16 16z"
+              fill-rule="evenodd"
+            />
+          </svg>
           <span
             class="linklabel"
           >
@@ -191,15 +107,21 @@ exports[`Suggest matches the snapshot 1`] = `
       </li>
       <li>
         <a
-          class="c2 c3 c7"
+          class="c2 c3 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
           data-vbo-id="0363010000740958"
           href="/"
         >
-          <img
-            class="c5"
+          <svg
+            class="c4"
             focusable="false"
+            viewBox="0 0 32 32"
             width="14"
-          />
+          >
+            <path
+              d="M9.757 32l-2.9-2.91L19.937 16 6.857 2.91 9.757 0l16 16z"
+              fill-rule="evenodd"
+            />
+          </svg>
           <span
             class="linklabel"
           >

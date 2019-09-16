@@ -2,7 +2,7 @@
 
 exports[`DownloadLink matches the snapshot 1`] = `
 <a
-  class="sc-bdVaJa sc-dnqmqq kPPkLl"
+  class="sc-gZMcBi yDTyN"
   download="filename.csv"
   tabindex="0"
 >
@@ -12,7 +12,7 @@ exports[`DownloadLink matches the snapshot 1`] = `
 
 exports[`DownloadLink matches the snapshot 2`] = `
 <a
-  class="sc-bdVaJa sc-dnqmqq kPPkLl"
+  class="sc-gZMcBi yDTyN"
   disabled=""
   download="filename.csv"
   tabindex="-1"
