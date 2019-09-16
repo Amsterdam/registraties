@@ -85,7 +85,7 @@ exports[`Header matches the snapshot 1`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-TOsTZ gDDGjF"
+      class="sc-TOsTZ jhxQdU"
       id="header"
     >
       <header
@@ -159,7 +159,7 @@ exports[`Header matches the snapshot 2`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-TOsTZ gDDGjF"
+      class="sc-TOsTZ jhxQdU"
       id="header"
     >
       <header

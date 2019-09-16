@@ -80,26 +80,25 @@ const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper data-testid="site-header">
     <StyledHeader
       tall
+      fullWidth={false}
       title="Registraties"
       homeLink={CONFIGURATION.ROOT}
       navigation={
         <StyledNav className="no-print">
           <ul className="links horizontal">
-            {isAuthenticated ? (
-              <li>
+            <li>
+              {isAuthenticated ? (
                 <button type="button" onClick={onLoginLogoutButtonClick}>
                   <Logout focusable="false" width={20} />
                   <span>{intl.formatMessage(messages.log_out)}</span>
                 </button>
-              </li>
-            ) : (
-              <li>
+              ) : (
                 <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
                   <Login focusable="false" width={20} />
                   <span>{intl.formatMessage(messages.log_in)}</span>
                 </button>
-              </li>
-            )}
+              )}
+            </li>
           </ul>
         </StyledNav>
       }
