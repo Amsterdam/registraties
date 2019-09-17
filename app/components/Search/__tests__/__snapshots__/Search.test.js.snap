@@ -119,7 +119,7 @@ exports[`Search matches the snapshot 1`] = `
 
 @media (max-width:1200px) {
   .c0 {
-    padding-top: 100px;
+    padding-top: 54px;
   }
 }
 
@@ -372,7 +372,7 @@ exports[`Search should render results 1`] = `
 
 @media (max-width:1200px) {
   .c0 {
-    padding-top: 100px;
+    padding-top: 54px;
   }
 }
 

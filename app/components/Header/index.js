@@ -10,19 +10,6 @@ import messages from './messages';
 
 const StyledHeader = styled(HeaderComponent)`
   max-width: 1080px;
-  margin: 0 auto;
-
-  a {
-    line-height: normal;
-  }
-
-  h1 {
-    padding: 0 !important;
-
-    a {
-      font-weight: normal !important;
-    }
-  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -67,7 +54,18 @@ const StyledNav = styled.nav`
   }
 
   @media (max-width: 720px) {
+    top: 0;
     right: 0;
+
+    button {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+    }
+
+    .links li {
+      margin: 0;
+    }
 
     .login-adw,
     span {

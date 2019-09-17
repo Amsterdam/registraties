@@ -3,19 +3,6 @@
 exports[`Header matches the snapshot 1`] = `
 .c1 {
   max-width: 1080px;
-  margin: 0 auto;
-}
-
-.c1 a {
-  line-height: normal;
-}
-
-.c1 h1 {
-  padding: 0 !important;
-}
-
-.c1 h1 a {
-  font-weight: normal !important;
 }
 
 .c0 {
@@ -70,7 +57,18 @@ exports[`Header matches the snapshot 1`] = `
 
 @media (max-width:720px) {
   .c2 {
+    top: 0;
     right: 0;
+  }
+
+  .c2 button {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+  }
+
+  .c2 .links li {
+    margin: 0;
   }
 
   .c2 .login-adw,
@@ -163,7 +161,7 @@ exports[`Header matches the snapshot 2`] = `
       id="header"
     >
       <header
-        class="sc-gzVnrw Header__StyledHeader-sc-15eqjjx-0 egtpxo sc-fAjcbJ eiECdr"
+        class="sc-gzVnrw Header__StyledHeader-sc-15eqjjx-0 NarrX sc-fAjcbJ eiECdr"
       >
         <h1
           class="sc-kjoXOD jEhmHa"
@@ -187,7 +185,7 @@ exports[`Header matches the snapshot 2`] = `
           class="sc-cHGsZl dFLCjq"
         >
           <nav
-            class="no-print Header__StyledNav-sc-15eqjjx-2 jTrQPp"
+            class="no-print Header__StyledNav-sc-15eqjjx-2 aAMtn"
           >
             <ul
               class="links horizontal"
