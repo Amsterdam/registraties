@@ -249,4 +249,31 @@ describe('containers/Search', () => {
     // Next, test if the input is populated with the clicked item
     expect(input.value).toEqual(`${clickedItemLabel} `);
   });
+
+  it('search field should be focused after a suggestion is clicked, to continue typing', () => {
+    const props = {
+      onChange: () => {},
+      onSearchSelect: () => {},
+      intl: intlObj,
+      suggestionResults,
+    };
+
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <ThemeProvider>
+            <SearchContainerComponent {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const input = document.getElementById('searchInput');
+    const suggestedItems = document.getElementsByTagName('a');
+
+    const clickedItem = suggestedItems[0];
+    fireEvent.click(clickedItem);
+
+    expect(input).toEqual(document.activeElement);
+  });
 });
