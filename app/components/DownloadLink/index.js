@@ -4,7 +4,6 @@ import { Link } from '@datapunt/asc-ui';
 
 const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
   <Link
-    as="a"
     href={null}
     download={name}
     onClick={onClick}
