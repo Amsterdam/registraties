@@ -21,6 +21,7 @@ describe('Search', () => {
   const testProps = {
     onChange: () => {},
     onSelect: () => {},
+    onSuggestionSelect: () => {},
     formLegendLabel: 'Legend text',
     searchLabel: 'Toggle text',
     searchTermLabel: 'Term text',
