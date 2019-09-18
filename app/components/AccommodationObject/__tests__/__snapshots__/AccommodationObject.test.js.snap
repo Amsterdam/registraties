@@ -773,7 +773,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         </h3>
       </header>
       <a
-        class="sc-gZMcBi kDLxnL sc-EHOje htmEbB"
+        class="sc-gZMcBi grAADZ sc-EHOje htmEbB"
         download="registraties_export.csv"
         rel="noopener noreferrer"
         tabindex="0"

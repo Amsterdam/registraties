@@ -83,14 +83,14 @@ exports[`Header matches the snapshot 1`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-TOsTZ jhxQdU"
+      class="sc-frDJqD draFdW"
       id="header"
     >
       <header
-        class="sc-gzVnrw c1 sc-fAjcbJ eiECdr"
+        class="sc-gzVnrw c1 sc-TOsTZ jnQENo"
       >
         <h1
-          class="sc-kjoXOD jEhmHa"
+          class="sc-ksYbfQ jNsosU"
         >
           <a
             class="sc-bwzfXH gajXgj"
@@ -101,14 +101,14 @@ exports[`Header matches the snapshot 1`] = `
             />
           </a>
           <a
-            class="sc-gisBJw eoTepN sc-gZMcBi kDLxnL sc-EHOje htmEbB"
+            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
         <nav
-          class="sc-cHGsZl dFLCjq"
+          class="sc-hmzhuo ikOysu"
         >
           <nav
             class="no-print c2"
@@ -142,7 +142,7 @@ exports[`Header matches the snapshot 1`] = `
           </nav>
         </nav>
         <div
-          class="sc-caSCKo cVWIld"
+          class="sc-kgAjT kQKKqJ"
         />
       </header>
     </div>
@@ -157,14 +157,14 @@ exports[`Header matches the snapshot 2`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-TOsTZ jhxQdU"
+      class="sc-frDJqD draFdW"
       id="header"
     >
       <header
-        class="sc-gzVnrw Header__StyledHeader-sc-15eqjjx-0 NarrX sc-fAjcbJ eiECdr"
+        class="sc-gzVnrw Header__StyledHeader-sc-15eqjjx-0 NarrX sc-TOsTZ jnQENo"
       >
         <h1
-          class="sc-kjoXOD jEhmHa"
+          class="sc-ksYbfQ jNsosU"
         >
           <a
             class="sc-bwzfXH gajXgj"
@@ -175,14 +175,14 @@ exports[`Header matches the snapshot 2`] = `
             />
           </a>
           <a
-            class="sc-gisBJw eoTepN sc-gZMcBi kDLxnL sc-EHOje htmEbB"
+            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
         <nav
-          class="sc-cHGsZl dFLCjq"
+          class="sc-hmzhuo ikOysu"
         >
           <nav
             class="no-print Header__StyledNav-sc-15eqjjx-2 aAMtn"
@@ -215,7 +215,7 @@ exports[`Header matches the snapshot 2`] = `
           </nav>
         </nav>
         <div
-          class="sc-caSCKo cVWIld"
+          class="sc-kgAjT kQKKqJ"
         />
       </header>
     </div>

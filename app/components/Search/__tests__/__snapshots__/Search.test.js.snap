@@ -471,7 +471,7 @@ exports[`Search should render results 1`] = `
             >
               <li>
                 <a
-                  class="c12 c13 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
+                  class="c12 c13 sc-gZMcBi grAADZ sc-EHOje htmEbB"
                   data-vbo-id="0363010000740956"
                   href="/"
                 >
@@ -495,7 +495,7 @@ exports[`Search should render results 1`] = `
               </li>
               <li>
                 <a
-                  class="c12 c13 sc-gZMcBi kDLxnL sc-EHOje htmEbB"
+                  class="c12 c13 sc-gZMcBi grAADZ sc-EHOje htmEbB"
                   data-vbo-id="0363010000740957"
                   href="/"
                 >
