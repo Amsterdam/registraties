@@ -44,7 +44,7 @@ describe('containers/Search/reducer', () => {
     const prevState = { ...initialState, results: ['a', 'b', 'c'] };
 
     expect(reducer(initialState, actionInputChanged)).toEqual({ ...initialState, input });
-    expect(reducer(prevState, actionInputChanged)).toEqual({ ...initialState, input });
+    expect(reducer(prevState, actionInputChanged)).toEqual({ ...prevState, input });
   });
 
   it('should handle TYPE_AHEAD_SUCCESS', () => {
