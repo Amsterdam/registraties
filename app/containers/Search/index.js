@@ -9,7 +9,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Search from 'components/Search';
 
-import { makeSelectResults } from './selectors';
+import { makeSelectResults, makeSelectSuggestionResults } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
@@ -69,6 +69,19 @@ export const SearchContainerComponent = props => {
     inputRef.current.value = text;
   };
 
+  const onSuggestionSelect = event => {
+    event.preventDefault();
+    event.persist();
+
+    const {
+      currentTarget: { text },
+    } = event;
+
+    inputRef.current.value = `${text} `;
+    props.onChange(`${text} `);
+    inputRef.current.focus();
+  };
+
   const onSubmit = event => {
     event.preventDefault();
   };
@@ -91,7 +104,7 @@ export const SearchContainerComponent = props => {
     }
   };
 
-  const { intl, results, show } = props;
+  const { intl, results, suggestionResults, show } = props;
   const visibleResults = showSuggest ? results : {};
 
   return (
@@ -99,9 +112,11 @@ export const SearchContainerComponent = props => {
       onChange={onChange}
       onFocus={onFocus}
       onSelect={onSelect}
+      onSuggestionSelect={onSuggestionSelect}
       onSubmit={onSubmit}
       ref={inputRef}
       suggestRef={suggestRef}
+      suggestionResults={suggestionResults}
       results={visibleResults}
       formLegendLabel={intl.formatMessage(messages.search_form_legend)}
       searchTermLabel={intl.formatMessage(messages.search_term)}
@@ -115,6 +130,7 @@ export const SearchContainerComponent = props => {
 
 SearchContainerComponent.defaultProps = {
   results: undefined,
+  suggestionResults: undefined,
   show: false,
 };
 
@@ -123,11 +139,13 @@ SearchContainerComponent.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
   results: PropTypes.shape({}),
+  suggestionResults: PropTypes.shape({}),
   show: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   results: makeSelectResults,
+  suggestionResults: makeSelectSuggestionResults,
 });
 
 const mapDispatchToProps = dispatch =>

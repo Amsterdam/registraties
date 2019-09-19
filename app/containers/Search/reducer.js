@@ -26,7 +26,6 @@ export default (state = initialState, action) =>
 
       case INPUT_CHANGE:
         draft.input = action.payload;
-        draft.results = [];
         break;
 
       case TYPE_AHEAD_SUCCESS:

@@ -1,6 +1,13 @@
-import { allowedDataKeys, makeSelectResults, selectSearch } from '../selectors';
+import {
+  allowedDataKeys,
+  allowedSuggestionDataKeys,
+  makeSelectResults,
+  selectSearch,
+  makeSelectSuggestionResults,
+} from '../selectors';
 import { initialState } from '../reducer';
 import results from './results.json';
+import resultsSuggestions from './resultsSuggestions.json';
 
 describe('containers/Search/selectors', () => {
   describe('selectSearch', () => {
@@ -21,6 +28,7 @@ describe('containers/Search/selectors', () => {
       expect(makeSelectResults({ search: { ...initialState, results: 'results' } })).toEqual(undefined);
       expect(makeSelectResults({ search: { ...initialState, results: {} } })).toEqual(undefined);
       expect(makeSelectResults({ search: { ...initialState, results: null } })).toEqual(undefined);
+      expect(makeSelectResults({ search: { ...initialState, results: [] } })).toEqual(undefined);
       expect(makeSelectResults({ search: { ...initialState, data: [] } })).toEqual(undefined);
     });
 
@@ -44,6 +52,37 @@ describe('containers/Search/selectors', () => {
       expect(Adressen[0].vboId).toEqual(null);
       expect(Adressen[0].brkId).toEqual(null);
       expect(Adressen[0].ligId).not.toEqual(null);
+    });
+  });
+
+  describe('makeSelectSuggestionResults', () => {
+    it('should return undefined', () => {
+      expect(makeSelectSuggestionResults({ search: { ...initialState, results: 'results' } })).toEqual(undefined);
+      expect(makeSelectSuggestionResults({ search: { ...initialState, results: {} } })).toEqual(undefined);
+      expect(makeSelectSuggestionResults({ search: { ...initialState, results: null } })).toEqual(undefined);
+      expect(makeSelectSuggestionResults({ search: { ...initialState, results: [] } })).toEqual(undefined);
+      expect(makeSelectSuggestionResults({ search: { ...initialState, data: [] } })).toEqual(undefined);
+    });
+
+    it('should filter unsupported values', () => {
+      const mappedResults = makeSelectSuggestionResults({ search: { ...initialState, results: resultsSuggestions } });
+      const keysIntersect = resultsSuggestions
+        .map(({ label }) => label)
+        .filter(key => allowedSuggestionDataKeys.includes(key));
+
+      expect(Object.keys(mappedResults)).toHaveLength(keysIntersect.length);
+
+      Object.keys(mappedResults).forEach(key => {
+        expect(allowedSuggestionDataKeys.includes(key)).toEqual(true);
+      });
+    });
+
+    it('should return mapped resultsSuggestions', () => {
+      const mappedResults = makeSelectSuggestionResults({ search: { ...initialState, results: resultsSuggestions } });
+      const { Straatnamen } = mappedResults;
+
+      // eslint-disable-next-line no-underscore-dangle
+      expect(Straatnamen[0].name).toEqual(resultsSuggestions[0].content[0]._display);
     });
   });
 });

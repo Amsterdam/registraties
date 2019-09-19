@@ -1,0 +1,98 @@
+[
+  {
+    "label": "Straatnamen",
+    "content": [
+      {
+        "_display": "Weegbreestraat",
+        "uri": "bag/openbareruimte/0363300000004831/"
+      },
+      {
+        "_display": "Weegschaalhof",
+        "uri": "bag/openbareruimte/0363300000004832/"
+      },
+      {
+        "_display": "Weenahof",
+        "uri": "bag/openbareruimte/0363300000001586/"
+      }
+    ],
+    "total_results": 13
+  },
+  {
+    "label": "Openbare ruimtes",
+    "content": [
+      {
+        "_display": "Weerslootbrug (kunstwerk)",
+        "uri": "bag/openbareruimte/0363300011951727/"
+      },
+      {
+        "_display": "Weesperpoort (kunstwerk)",
+        "uri": "bag/openbareruimte/0363300011950636/"
+      },
+      {
+        "_display": "Weesperzijdebrug (kunstwerk)",
+        "uri": "bag/openbareruimte/0363300011951721/"
+      }
+    ],
+    "total_results": 6
+  },
+  {
+    "label": "Panden",
+    "content": [
+      {
+        "_display": "Sporthal De Weeren",
+        "uri": "bag/pand/0363100012072889/"
+      },
+      {
+        "_display": "Weerklank  -centrum voor  jong auditief gehandicatoen",
+        "uri": "bag/pand/0363100012243143/"
+      }
+    ],
+    "total_results": 2
+  },
+  {
+    "label": "Gebieden",
+    "content": [
+      {
+        "_display": "Weesperbuurt (buurt)",
+        "uri": "gebieden/buurt/03630000000516/"
+      },
+      {
+        "_display": "Weesperbuurt/Plantage (wijk)",
+        "uri": "gebieden/buurtcombinatie/3630012052031/"
+      },
+      {
+        "_display": "Weespertrekvaart (buurt)",
+        "uri": "gebieden/buurt/03630000000778/"
+      }
+    ],
+    "total_results": 5
+  },
+  {
+    "label": "Monumenten",
+    "content": [
+      {
+        "_display": "Weerenkapel",
+        "uri": "monumenten/monumenten/d9df2285-77f5-4088-97ee-6706b2ef51ee/"
+      },
+      {
+        "_display": "Weesperflat",
+        "uri": "monumenten/monumenten/6b894559-6700-4dc1-a5dd-c34050eace86/"
+      }
+    ],
+    "total_results": 26
+  },
+  {
+    "label": "Datasets",
+    "content": [
+      {
+        "_display": "Sport en recreatie - Sport (Amsterdam)",
+        "uri": "dcatd/datasets/9RtUohS6IGDAtQ"
+      },
+      {
+        "_display": "Prognoses (Wijken)",
+        "uri": "dcatd/datasets/-9UTD5hstRJN4A"
+      }
+    ],
+    "total_results": 61
+  }
+]
