@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@datapunt/asc-ui';
+import { Link } from '@datapunt/asc-ui';
 
 const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
-  <Button
-    as="a"
+  <Link
     href={null}
     download={name}
     onClick={onClick}
@@ -14,7 +13,7 @@ const DownloadLink = ({ name, label, onClick, disabled, ...rest }) => (
     {...rest}
   >
     {label}
-  </Button>
+  </Link>
 );
 
 DownloadLink.defaultProps = {

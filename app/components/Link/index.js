@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typography as T } from '@datapunt/asc-ui';
-import ChevronRight from '@datapunt/asc-assets/lib/Icons/Chevron-Right.svg';
+import { Link as T } from '@datapunt/asc-ui';
+import { ChevronRight } from '@datapunt/asc-assets';
 
 const StyledT = styled(T)`
   padding: 0 !important;
@@ -24,7 +24,7 @@ const StyledIcon = styled(ChevronRight)`
 `;
 
 const Link = ({ href, onClick, className, label, ...rest }) => (
-  <StyledT element="a" href={href} onClick={onClick} className={className} {...rest}>
+  <StyledT href={href} onClick={onClick} className={className} {...rest}>
     <StyledIcon focusable="false" width={14} />
     <span className="linklabel">{label}</span>
   </StyledT>

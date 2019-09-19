@@ -27,8 +27,7 @@ module.exports = options => ({
     rules: [
       {
         test: /\.svg$/,
-        exclude: /asc-ui/,
-        use: ['@svgr/webpack'],
+        use: ['@svgr/webpack', 'url-loader'],
       },
       {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
@@ -48,20 +47,6 @@ module.exports = options => ({
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: 'file-loader',
-      },
-      {
-        test: /\.svg$/,
-        include: /asc-ui/,
-        use: [
-          {
-            loader: 'svg-url-loader',
-            options: {
-              // Inline files smaller than 10 kB
-              limit: 10 * 1024,
-              noquotes: true,
-            },
-          },
-        ],
       },
       {
         test: /\.(jpg|png|gif)$/,
@@ -121,6 +106,9 @@ module.exports = options => ({
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
+    alias: {
+      "styled-components": path.resolve(process.cwd(), "node_modules", "styled-components"),
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

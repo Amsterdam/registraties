@@ -1,167 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header matches the snapshot 1`] = `
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  z-index: 0;
-  padding: 0 15px;
-  background-color: #ffffff;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  height: 100%;
-  margin: 0 auto;
-  max-width: none;
-}
-
-.c5:after {
-  content: '';
-  display: block;
-  min-height: inherit;
-  font-size: 0;
-}
-
-.c13 {
-  color: #004699;
-  display: inline-block;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  -webkit-letter-spacing: -0.01562em;
-  -moz-letter-spacing: -0.01562em;
-  -ms-letter-spacing: -0.01562em;
-  letter-spacing: -0.01562em;
-  line-height: 1;
-  font-style: normal;
-  font-stretch: normal;
-  -webkit-letter-spacing: normal;
-  -moz-letter-spacing: normal;
-  -ms-letter-spacing: normal;
-  letter-spacing: normal;
-  margin: 0px;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  color: #000;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c13:focus {
-  outline: none;
-  background-color: #FEC813;
-}
-
-.c13:hover {
-  color: #ec0000;
-}
-
-.c13:hover {
-  color: inherit;
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-}
-
-.c11 {
-  display: block;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-image: url("img");
-}
-
-.c9 {
-  display: inline-block;
-  height: 30px;
-  width: 68px;
-}
-
-.c9:focus {
-  outline-color: #FEC813;
-  outline-style: solid;
-  outline-width: 3px;
-}
-
-.c7 {
-  height: 50px;
-  margin: 0;
-  font-family: 'AvenirNextLTW01-Demi',sans-serif;
-  font-weight: bold;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: normal;
-  -webkit-justify-content: normal;
-  -ms-flex-pack: normal;
-  justify-content: normal;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.c7 .c8 {
-  margin-right: 10px;
-}
-
 .c1 {
-  background-color: #ffffff;
-  margin: 0 auto;
-  width: 100%;
-  max-width: none;
-  box-shadow: 0 4px rgba(0,0,0,0.04);
-}
-
-.c1 .c14 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  margin-left: 15px;
-}
-
-.c3 {
   max-width: 1080px;
-  margin: 0 auto;
-}
-
-.c3 a {
-  line-height: normal;
-}
-
-.c3 h1 {
-  padding: 0 !important;
-}
-
-.c3 h1 a {
-  font-weight: normal !important;
 }
 
 .c0 {
@@ -169,14 +10,14 @@ exports[`Header matches the snapshot 1`] = `
   z-index: 2;
 }
 
-.c16 {
+.c2 {
   position: absolute;
   top: 5px;
   right: 20px;
   z-index: 101;
 }
 
-.c16 button {
+.c2 button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -185,116 +26,21 @@ exports[`Header matches the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c16 button > * {
+.c2 button > * {
   vertical-align: middle;
   margin-right: 5px;
 }
 
-.c16 button:hover,
-.c16 button:focus {
+.c2 button:hover,
+.c2 button:focus {
   color: #ec0000;
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c16 button:hover svg,
-.c16 button:focus svg {
+.c2 button:hover svg,
+.c2 button:focus svg {
   fill: #ec0000;
-}
-
-@media screen and (max-width:375px) {
-  .c13 {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width:375.02px) {
-  .c13 {
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width:1200.02px) {
-  .c9 {
-    height: 68px;
-    width: 100px;
-  }
-
-  .c9 .c10 {
-    background-image: url("img");
-  }
-}
-
-@media screen and (min-width:1200.02px) {
-  .c7 .c8 {
-    margin-right: 40px;
-  }
-}
-
-@media screen and (max-width:1200px) {
-  .c1 {
-    position: fixed;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-  }
-
-  .c1 .c12 {
-    margin-top: -2px;
-  }
-}
-
-@media screen and (min-width:1200.02px) {
-  .c1 {
-    box-shadow: none;
-    position: relative;
-  }
-
-  .c1:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 50px;
-    margin-top: -50px;
-    background-color: #F5F5F5;
-  }
-
-  .c1 .c4 {
-    z-index: 100;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-
-  .c1 .c2 {
-    background-color: transparent;
-  }
-
-  .c1 .c12 {
-    margin-top: 0px;
-    -webkit-align-self: flex-start;
-    -ms-flex-item-align: start;
-    align-self: flex-start;
-    line-height: 38px;
-    font-size: 30px;
-  }
-
-  .c1 .c6 {
-    height: 78px;
-    padding: 15px 0;
-  }
-
-  .c1 .c14 {
-    -webkit-flex-basis: 100%;
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
-    margin-left: 25px;
-    margin-right: 25px;
-    height: 50px;
-  }
 }
 
 @media (min-width:1200px) {
@@ -304,18 +50,29 @@ exports[`Header matches the snapshot 1`] = `
 }
 
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
-  .c16 button {
+  .c2 button {
     height: 30px;
   }
 }
 
 @media (max-width:720px) {
-  .c16 {
+  .c2 {
+    top: 0;
     right: 0;
   }
 
-  .c16 .login-adw,
-  .c16 span {
+  .c2 button {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+  }
+
+  .c2 .links li {
+    margin: 0;
+  }
+
+  .c2 .login-adw,
+  .c2 span {
     display: none;
   }
 }
@@ -326,34 +83,35 @@ exports[`Header matches the snapshot 1`] = `
     data-testid="site-header"
   >
     <div
-      class="c1"
+      class="sc-frDJqD draFdW"
+      id="header"
     >
       <header
-        class="c2 c3 c4 c5"
+        class="sc-gzVnrw c1 sc-TOsTZ jnQENo"
       >
         <h1
-          class="c6 c7"
+          class="sc-ksYbfQ jNsosU"
         >
           <a
-            class="c8 c9"
+            class="sc-bwzfXH gajXgj"
             href="https://localhost:8080/"
           >
             <span
-              class="c10 c11"
+              class="sc-bdVaJa cPtgyk"
             />
           </a>
           <a
-            class="c12 c13"
+            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
-        <div
-          class="c14 c15"
+        <nav
+          class="sc-hmzhuo ikOysu"
         >
           <nav
-            class="no-print c16"
+            class="no-print c2"
           >
             <ul
               class="links horizontal"
@@ -363,10 +121,18 @@ exports[`Header matches the snapshot 1`] = `
                   class="login"
                   type="button"
                 >
-                  <img
+                  <svg
                     focusable="false"
+                    viewBox="0 0 36 36"
                     width="20"
-                  />
+                  >
+                    <path
+                      d="M20 2v4h10v24H20v4h14V2H20z"
+                    />
+                    <path
+                      d="M18.82 8.81L16 11.64 20.36 16H2v4h18.36L16 24.36l2.82 2.83 9.2-9.19-9.2-9.19z"
+                    />
+                  </svg>
                   <span>
                     Inloggen
                   </span>
@@ -374,7 +140,10 @@ exports[`Header matches the snapshot 1`] = `
               </li>
             </ul>
           </nav>
-        </div>
+        </nav>
+        <div
+          class="sc-kgAjT kQKKqJ"
+        />
       </header>
     </div>
   </div>
@@ -388,34 +157,35 @@ exports[`Header matches the snapshot 2`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-eNQAEJ gJJdWk"
+      class="sc-frDJqD draFdW"
+      id="header"
     >
       <header
-        class="sc-bxivhb Header__StyledHeader-sc-15eqjjx-0 egtpxo sc-chPdSV bHlKv"
+        class="sc-gzVnrw Header__StyledHeader-sc-15eqjjx-0 NarrX sc-TOsTZ jnQENo"
       >
         <h1
-          class="sc-jKJlTe eUAGBL"
+          class="sc-ksYbfQ jNsosU"
         >
           <a
-            class="sc-ckVGcZ dbIcbn"
+            class="sc-bwzfXH gajXgj"
             href="https://localhost:8080/"
           >
             <span
-              class="sc-dxgOiQ kyqLhc"
+              class="sc-bdVaJa cPtgyk"
             />
           </a>
           <a
-            class="sc-kgoBCf sc-kGXeez ciQiUp"
+            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
-        <div
-          class="sc-kpOJdX eKiqBq"
+        <nav
+          class="sc-hmzhuo ikOysu"
         >
           <nav
-            class="no-print Header__StyledNav-sc-15eqjjx-2 jTrQPp"
+            class="no-print Header__StyledNav-sc-15eqjjx-2 aAMtn"
           >
             <ul
               class="links horizontal"
@@ -424,10 +194,18 @@ exports[`Header matches the snapshot 2`] = `
                 <button
                   type="button"
                 >
-                  <img
+                  <svg
                     focusable="false"
+                    viewBox="0 0 36 36"
                     width="20"
-                  />
+                  >
+                    <path
+                      d="M16 6V2H2v32h14v-4H6V6h10z"
+                    />
+                    <path
+                      d="M24.82 8.81L22 11.64 26.36 16H8v4h18.36L22 24.36l2.82 2.83 9.2-9.19-9.2-9.19z"
+                    />
+                  </svg>
                   <span>
                     Uitloggen
                   </span>
@@ -435,7 +213,10 @@ exports[`Header matches the snapshot 2`] = `
               </li>
             </ul>
           </nav>
-        </div>
+        </nav>
+        <div
+          class="sc-kgAjT kQKKqJ"
+        />
       </header>
     </div>
   </div>

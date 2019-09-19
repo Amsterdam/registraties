@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CloseIcon from '@datapunt/asc-assets/lib/Icons/Close.svg';
-import AlertIcon from '@datapunt/asc-assets/lib/Icons/Alert.svg';
+import { Close, Alert } from '@datapunt/asc-assets';
 
 const ErrorWrapper = styled.div`
   background-color: #ec0000;
@@ -53,12 +52,12 @@ const GlobalError = ({ onClose, errorMessageLabel, closeLabel, feedbackLabel, sh
       <P>{errorMessageLabel}</P>
       {showReportDialog && (
         <Button type="button" onClick={showReportDialog} data-testid="globalerror-showReportDialog">
-          <AlertIcon focusable="false" width={20} fill="#fff" />
+          <Alert width={20} fill="#fff" />
           <Label>{feedbackLabel}</Label>
         </Button>
       )}
       <Button type="button" onClick={onClose}>
-        <CloseIcon focusable="false" width={20} fill="#fff" />
+        <Close width={20} fill="#fff" />
         <Label>{closeLabel}</Label>
       </Button>
     </ErrorContainer>

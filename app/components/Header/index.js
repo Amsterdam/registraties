@@ -4,26 +4,12 @@ import styled from 'styled-components';
 import { intlShape } from 'react-intl';
 
 import CONFIGURATION from 'shared/services/configuration/configuration';
-import LoginIcon from '@datapunt/asc-assets/lib/Icons/Login.svg';
-import LogoutIcon from '@datapunt/asc-assets/lib/Icons/Logout.svg';
+import { Login, Logout } from '@datapunt/asc-assets';
 import { Header as HeaderComponent } from '@datapunt/asc-ui';
 import messages from './messages';
 
 const StyledHeader = styled(HeaderComponent)`
   max-width: 1080px;
-  margin: 0 auto;
-
-  a {
-    line-height: normal;
-  }
-
-  h1 {
-    padding: 0 !important;
-
-    a {
-      font-weight: normal !important;
-    }
-  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -68,7 +54,18 @@ const StyledNav = styled.nav`
   }
 
   @media (max-width: 720px) {
+    top: 0;
     right: 0;
+
+    button {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+    }
+
+    .links li {
+      margin: 0;
+    }
 
     .login-adw,
     span {
@@ -79,27 +76,31 @@ const StyledNav = styled.nav`
 
 const Header = ({ isAuthenticated, intl, onLoginLogoutButtonClick }) => (
   <HeaderWrapper data-testid="site-header">
-    <StyledHeader title="Registraties" homeLink={CONFIGURATION.ROOT} tall>
-      <StyledNav className="no-print">
-        <ul className="links horizontal">
-          {isAuthenticated ? (
+    <StyledHeader
+      tall
+      fullWidth={false}
+      title="Registraties"
+      homeLink={CONFIGURATION.ROOT}
+      navigation={
+        <StyledNav className="no-print">
+          <ul className="links horizontal">
             <li>
-              <button type="button" onClick={onLoginLogoutButtonClick}>
-                <LogoutIcon focusable="false" width={20} />
-                <span>{intl.formatMessage(messages.log_out)}</span>
-              </button>
+              {isAuthenticated ? (
+                <button type="button" onClick={onLoginLogoutButtonClick}>
+                  <Logout focusable="false" width={20} />
+                  <span>{intl.formatMessage(messages.log_out)}</span>
+                </button>
+              ) : (
+                <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
+                  <Login focusable="false" width={20} />
+                  <span>{intl.formatMessage(messages.log_in)}</span>
+                </button>
+              )}
             </li>
-          ) : (
-            <li>
-              <button className="login" type="button" onClick={event => onLoginLogoutButtonClick(event, 'datapunt')}>
-                <LoginIcon focusable="false" width={20} />
-                <span>{intl.formatMessage(messages.log_in)}</span>
-              </button>
-            </li>
-          )}
-        </ul>
-      </StyledNav>
-    </StyledHeader>
+          </ul>
+        </StyledNav>
+      }
+    />
   </HeaderWrapper>
 );
 
