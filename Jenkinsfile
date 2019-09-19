@@ -63,6 +63,38 @@ node {
 
 String BRANCH = "${env.BRANCH_NAME}"
 
+if (BRANCH == "develop") {
+
+    node {
+        stage('Push acceptance image') {
+            tryStep "image tagging", {
+                def image = docker.image("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}")
+                image.pull()
+                image.push("acceptance")
+            }
+        }
+    }
+
+    stage('Waiting for approval') {
+        slackSend channel: '#ci-channel', color: 'warning', message: 'registraties is waiting for Acceptance Release - please confirm'
+        timeout(10) {
+          input "Deploy branch `develop` to Acceptance?"
+        }
+    }
+
+    node {
+        stage("Deploy to ACC") {
+            tryStep "deployment", {
+                build job: 'Subtask_Openstack_Playbook',
+                parameters: [
+                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-registraties.yml'],
+                ]
+            }
+        }
+    }
+}
+
 if (BRANCH == "master") {
     node {
         stage('Push acceptance image') {
