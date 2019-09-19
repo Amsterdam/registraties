@@ -11,14 +11,16 @@ import messages from '../../../translations/nl.json';
 import SearchContainer, { SearchContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 import { initialState } from '../reducer';
-import { makeSelectResults } from '../selectors';
+import { makeSelectResults, makeSelectSuggestionResults } from '../selectors';
 import resultsSrc from './results.json';
+import resultsSuggestionsSrc from './resultsSuggestions.json';
 
 const store = configureStore({}, history);
 const intlObj = intl({ messages });
 const results = makeSelectResults({ search: { ...initialState, results: resultsSrc } });
+const suggestionResults = makeSelectSuggestionResults({ search: { ...initialState, results: resultsSuggestionsSrc } });
 
-describe('containers/KadastraalSubjectNNP', () => {
+describe('containers/Search', () => {
   it('should have props from structured selector', () => {
     const tree = mount(
       <Provider store={store}>
@@ -35,6 +37,7 @@ describe('containers/KadastraalSubjectNNP', () => {
 
     expect(propNames.includes('show')).toEqual(true);
     expect(propNames.includes('results')).toEqual(true);
+    expect(propNames.includes('suggestionResults')).toEqual(true);
     expect(propNames.includes('onSearchSelect')).toEqual(true);
     expect(propNames.includes('onChange')).toEqual(true);
 
@@ -215,4 +218,62 @@ describe('containers/KadastraalSubjectNNP', () => {
   });
 
   it('should prevent the form from being submit', () => {});
+
+  it('should fill the search field with the clicked suggestion', () => {
+    const props = {
+      onChange: () => {},
+      onSearchSelect: () => {},
+      intl: intlObj,
+      suggestionResults,
+    };
+
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <ThemeProvider>
+            <SearchContainerComponent {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const input = document.getElementById('searchInput');
+    // First test if the input was initially empty
+    expect(input.value).toEqual('');
+
+    const suggestedItems = document.getElementsByTagName('a');
+    const clickedItem = suggestedItems[0];
+    fireEvent.click(clickedItem);
+
+    const clickedItemLabel = clickedItem.getElementsByClassName('linklabel')[0].innerHTML;
+    // Next, test if the input is populated with the clicked item
+    expect(input.value).toEqual(`${clickedItemLabel} `);
+  });
+
+  it('search field should be focused after a suggestion is clicked, to continue typing', () => {
+    const props = {
+      onChange: () => {},
+      onSearchSelect: () => {},
+      intl: intlObj,
+      suggestionResults,
+    };
+
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <ThemeProvider>
+            <SearchContainerComponent {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const input = document.getElementById('searchInput');
+    const suggestedItems = document.getElementsByTagName('a');
+
+    const clickedItem = suggestedItems[0];
+    fireEvent.click(clickedItem);
+
+    expect(input).toEqual(document.activeElement);
+  });
 });

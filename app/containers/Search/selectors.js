@@ -31,3 +31,24 @@ export const makeSelectResults = createSelector(
     return mappedResults;
   },
 );
+
+export const allowedSuggestionDataKeys = ['Straatnamen'];
+export const makeSelectSuggestionResults = createSelector(
+  selectSearch,
+  state => {
+    if (!isArray(state.results) || !state.results.length) {
+      return undefined;
+    }
+
+    const mappedResults = {};
+    state.results
+      .filter(({ label }) => allowedSuggestionDataKeys.includes(label))
+      .forEach(({ content, label }) => {
+        mappedResults[label] = content.map(({ _display }) => ({
+          name: _display,
+        }));
+      });
+
+    return mappedResults;
+  },
+);

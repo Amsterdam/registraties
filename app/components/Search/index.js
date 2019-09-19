@@ -97,8 +97,10 @@ const Search = forwardRef(
       onChange,
       onFocus,
       onSelect,
+      onSuggestionSelect,
       onSubmit,
       results,
+      suggestionResults,
       searchHintLabel,
       searchLabel,
       searchTermLabel,
@@ -140,6 +142,7 @@ const Search = forwardRef(
             </FoldOut>
 
             <SuggestWrapper ref={suggestRef}>
+              <Suggest items={suggestionResults} onSelect={onSuggestionSelect} as="ul" />
               <Suggest items={results} onSelect={onSelect} as="ul" />
             </SuggestWrapper>
           </Container>
@@ -153,6 +156,7 @@ Search.defaultProps = {
   onFocus: null,
   onSubmit: null,
   results: {},
+  suggestionResults: {},
   suggestRef: undefined,
   startFoldedOut: false,
 };
@@ -161,7 +165,15 @@ Search.propTypes = {
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   onSelect: PropTypes.func.isRequired,
+  onSuggestionSelect: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
+  suggestionResults: PropTypes.shape({
+    Straatnamen: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }),
+    ),
+  }),
   results: PropTypes.shape({
     Adressen: PropTypes.arrayOf(
       PropTypes.shape({
