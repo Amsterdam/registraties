@@ -75,13 +75,6 @@ if (BRANCH == "develop") {
         }
     }
 
-    stage('Waiting for approval') {
-        slackSend channel: '#ci-channel', color: 'warning', message: 'registraties is waiting for Acceptance Release - please confirm'
-        timeout(10) {
-          input "Deploy branch `develop` to Acceptance?"
-        }
-    }
-
     node {
         stage("Deploy to ACC") {
             tryStep "deployment", {
