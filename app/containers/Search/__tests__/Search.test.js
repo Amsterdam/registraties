@@ -50,6 +50,7 @@ describe('containers/Search', () => {
     const props = {
       onChange,
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
     };
 
@@ -74,6 +75,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect,
+      pushSearchHistory: () => {},
       intl: intlObj,
       results,
     };
@@ -101,6 +103,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       results,
     };
@@ -223,6 +226,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       suggestionResults,
     };
@@ -254,6 +258,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       suggestionResults,
     };

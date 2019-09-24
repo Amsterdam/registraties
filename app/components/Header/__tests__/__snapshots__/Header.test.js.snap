@@ -83,32 +83,32 @@ exports[`Header matches the snapshot 1`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-frDJqD draFdW"
+      class="draFdW"
       id="header"
     >
       <header
-        class="sc-gzVnrw c1 sc-TOsTZ jnQENo"
+        class="c1 jnQENo"
       >
         <h1
-          class="sc-ksYbfQ jNsosU"
+          class="jNsosU"
         >
           <a
-            class="sc-bwzfXH gajXgj"
+            class="gajXgj"
             href="https://localhost:8080/"
           >
             <span
-              class="sc-bdVaJa cPtgyk"
+              class="cPtgyk"
             />
           </a>
           <a
-            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
+            class="hHDqvX grAADZ htmEbB"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
         <nav
-          class="sc-hmzhuo ikOysu"
+          class="ikOysu"
         >
           <nav
             class="no-print c2"
@@ -142,7 +142,7 @@ exports[`Header matches the snapshot 1`] = `
           </nav>
         </nav>
         <div
-          class="sc-kgAjT kQKKqJ"
+          class="kQKKqJ"
         />
       </header>
     </div>

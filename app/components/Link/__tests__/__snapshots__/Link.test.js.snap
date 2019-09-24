@@ -21,7 +21,7 @@ exports[`Link matches the snapshot 1`] = `
 }
 
 <a
-  class="c0 sc-gZMcBi grAADZ sc-EHOje htmEbB"
+  class="c0 grAADZ htmEbB"
   href="//some-url.com"
 >
   <svg
