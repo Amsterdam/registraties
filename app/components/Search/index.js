@@ -148,7 +148,7 @@ const Search = forwardRef(
               <Suggest items={results} onSelect={onSelect} as="ul" />
             </SuggestWrapper>
           </Container>
-          <SearchHistory />
+          {active && <SearchHistory />}
         </Wrapper>
       </Form>
     );
