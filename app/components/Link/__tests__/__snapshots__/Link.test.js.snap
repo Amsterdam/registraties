@@ -1,6 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link matches the snapshot 1`] = `
+.c2 {
+  margin: 0;
+  color: #000000;
+  font-weight: inherit;
+  font-size: 1rem;
+  -webkit-letter-spacing: inherit;
+  -moz-letter-spacing: inherit;
+  -ms-letter-spacing: inherit;
+  letter-spacing: inherit;
+  line-height: 1.25;
+  margin-bottom: 0;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-weight: 700;
+  color: #000000;
+}
+
+.c1:focus {
+  background-color: #FEC813;
+}
+
+.c1 .c4 {
+  margin: 3px;
+}
+
+.c1 .c4 svg rect,
+.c1 .c4 svg polygon,
+.c1 .c4 svg path {
+  fill: #000000;
+}
+
+.c1:hover {
+  color: #ec0000;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c1:hover .c4 svg rect,
+.c1:hover .c4 svg polygon,
+.c1:hover .c4 svg path {
+  fill: #ec0000;
+}
+
 .c0 {
   padding: 0 !important;
 }
@@ -15,17 +70,17 @@ exports[`Link matches the snapshot 1`] = `
   fill: #ec0000;
 }
 
-.c1 {
+.c3 {
   vertical-align: baseline;
   margin-right: 5px;
 }
 
 <a
-  class="c0 sc-gZMcBi grAADZ sc-EHOje htmEbB"
+  class="c0 c1 c2"
   href="//some-url.com"
 >
   <svg
-    class="c1"
+    class="c3"
     focusable="false"
     viewBox="0 0 32 32"
     width="14"
