@@ -66,8 +66,8 @@ export const SearchContainerComponent = props => {
       currentTarget: { dataset, text },
     } = event;
 
-    props.onSearchSelect({ ...dataset });
     props.pushSearchHistory({ ...dataset, text });
+    props.onSearchSelect({ ...dataset });
     inputRef.current.value = text;
   };
 
