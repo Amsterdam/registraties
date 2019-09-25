@@ -28,8 +28,7 @@ describe('injectSaga decorator', () => {
   });
 
   beforeEach(() => {
-    // eslint-disable-next-line prefer-destructuring
-    store = configureStore({}, memoryHistory);
+    ({ store } = configureStore({}, memoryHistory));
     injectors = {
       injectSaga: jest.fn(),
       ejectSaga: jest.fn(),

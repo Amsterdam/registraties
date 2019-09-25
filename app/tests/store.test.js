@@ -9,8 +9,7 @@ describe('configureStore', () => {
   let store;
 
   beforeAll(() => {
-    // eslint-disable-next-line prefer-destructuring
-    store = configureStore({}, browserHistory).store;
+    ({ store } = configureStore({}, browserHistory));
   });
 
   describe('injectedReducers', () => {

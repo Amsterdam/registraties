@@ -21,8 +21,7 @@ describe('injectors', () => {
 
   describe('getInjectors', () => {
     beforeEach(() => {
-      // eslint-disable-next-line prefer-destructuring
-      store = configureStore({}, memoryHistory).store;
+      ({ store } = configureStore({}, memoryHistory));
     });
 
     it('should return injectors', () => {
@@ -43,8 +42,7 @@ describe('injectors', () => {
 
   describe('ejectSaga helper', () => {
     beforeEach(() => {
-      // eslint-disable-next-line prefer-destructuring
-      store = configureStore({}, memoryHistory).store;
+      ({ store } = configureStore({}, memoryHistory));
       injectSaga = injectSagaFactory(store, true);
       ejectSaga = ejectSagaFactory(store, true);
     });
@@ -119,8 +117,7 @@ describe('injectors', () => {
 
   describe('injectSaga helper', () => {
     beforeEach(() => {
-      // eslint-disable-next-line prefer-destructuring
-      store = configureStore({}, memoryHistory).store;
+      ({ store } = configureStore({}, memoryHistory));
       injectSaga = injectSagaFactory(store, true);
       ejectSaga = ejectSagaFactory(store, true);
     });

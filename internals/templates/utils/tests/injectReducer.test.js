@@ -26,8 +26,7 @@ describe('injectReducer decorator', () => {
   });
 
   beforeEach(() => {
-    // eslint-disable-next-line prefer-destructuring
-    store = configureStore({}, memoryHistory).store;
+    ({ store } = configureStore({}, memoryHistory));
     injectors = {
       injectReducer: jest.fn(),
     };
