@@ -17,19 +17,19 @@ const getRenderedComponent = props =>
 describe('SearchHistoryItem', () => {
   it('should not be rendered if no searchHistory is passed', () => {
     const { container } = getRenderedComponent({});
-    expect(container.firstChild).toBe(null);
+    expect(container.firstChild).toBeNull();
   });
 
   it('should not be rendered if emtpy searchHistory is passed', () => {
     const { container } = getRenderedComponent({ searchHistory: [] });
-    expect(container.firstChild).toBe(null);
+    expect(container.firstChild).toBeNull();
   });
 
   it('should render if searchHistory is passed', () => {
     const { container } = getRenderedComponent({
       searchHistory: [{ text: 'foo', url: '/foo-url' }],
     });
-    expect(!!container.firstChild).toBe(true);
+    expect(container.firstChild).toBeTruthy();
   });
 
   it('should contain searchHistory links', () => {
