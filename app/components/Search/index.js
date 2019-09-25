@@ -54,6 +54,7 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: 1;
   position: relative;
+  margin-bottom: ${({ active }) => (active ? '40px' : '0px')};
 `;
 
 const Container = styled.div`
@@ -116,8 +117,7 @@ const Search = forwardRef(
     return (
       <Form action="" onSubmit={onSubmit} className="no-print" data-testid="search-form">
         <legend className="visuallyhidden">{formLegendLabel}</legend>
-
-        <Wrapper>
+        <Wrapper active={active}>
           <StyledToggle
             data-testid="search-toggle"
             onClick={() => setActive(!active)}
