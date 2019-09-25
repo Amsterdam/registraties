@@ -212,6 +212,61 @@ exports[`Search matches the snapshot 1`] = `
 `;
 
 exports[`Search should render results 1`] = `
+.c15 {
+  margin: 0;
+  color: #000000;
+  font-weight: inherit;
+  font-size: 1rem;
+  -webkit-letter-spacing: inherit;
+  -moz-letter-spacing: inherit;
+  -ms-letter-spacing: inherit;
+  letter-spacing: inherit;
+  line-height: 1.25;
+  margin-bottom: 0;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c14 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-weight: 700;
+  color: #000000;
+}
+
+.c14:focus {
+  background-color: #FEC813;
+}
+
+.c14 .c17 {
+  margin: 3px;
+}
+
+.c14 .c17 svg rect,
+.c14 .c17 svg polygon,
+.c14 .c17 svg path {
+  fill: #000000;
+}
+
+.c14:hover {
+  color: #ec0000;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c14:hover .c17 svg rect,
+.c14:hover .c17 svg polygon,
+.c14:hover .c17 svg path {
+  fill: #ec0000;
+}
+
 .c3 {
   padding: 10px;
   z-index: 1;
@@ -248,7 +303,7 @@ exports[`Search should render results 1`] = `
   fill: #ec0000;
 }
 
-.c14 {
+.c16 {
   vertical-align: baseline;
   margin-right: 5px;
 }
@@ -475,12 +530,12 @@ exports[`Search should render results 1`] = `
             >
               <li>
                 <a
-                  class="c12 c13 sc-gZMcBi grAADZ sc-EHOje htmEbB"
+                  class="c12 c13 c14 c15"
                   data-vbo-id="0363010000740956"
                   href="/"
                 >
                   <svg
-                    class="c14"
+                    class="c16"
                     focusable="false"
                     viewBox="0 0 32 32"
                     width="14"
@@ -499,12 +554,12 @@ exports[`Search should render results 1`] = `
               </li>
               <li>
                 <a
-                  class="c12 c13 sc-gZMcBi grAADZ sc-EHOje htmEbB"
+                  class="c12 c13 c14 c15"
                   data-vbo-id="0363010000740957"
                   href="/"
                 >
                   <svg
-                    class="c14"
+                    class="c16"
                     focusable="false"
                     viewBox="0 0 32 32"
                     width="14"
