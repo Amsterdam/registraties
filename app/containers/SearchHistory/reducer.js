@@ -13,7 +13,7 @@ export default (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case PUSH_SEARCH_HISTORY:
-        draft.searchHistory = uniqBy([action.payload, ...state.searchHistory], 'text');
+        draft.searchHistory = uniqBy([action.payload, ...state.searchHistory], 'text').slice(0, 10);
         break;
     }
   });

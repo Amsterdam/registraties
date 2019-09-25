@@ -64,4 +64,20 @@ describe('containers/SearchHistory/reducer', () => {
     newState = reducer(newState, actionB);
     expect(newState).toEqual(expectedState);
   });
+
+  it('should only allow 10 items in search history', () => {
+    let state = { ...initialState };
+    for (let i = 0; i < 30; i += 1) {
+      const action = {
+        type: PUSH_SEARCH_HISTORY,
+        payload: {
+          vboId: 'fooVboId',
+          text: `fooLabel-${i}`,
+        },
+      };
+      state = reducer(state, action);
+    }
+
+    expect(state.searchHistory.length).toEqual(10);
+  });
 });
