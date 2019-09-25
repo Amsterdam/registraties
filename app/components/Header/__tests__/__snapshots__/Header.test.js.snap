@@ -1,7 +1,221 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header matches the snapshot 1`] = `
+.c11 {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-image: url("img");
+}
+
+.c9 {
+  display: inline-block;
+  height: 30px;
+  width: 68px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c9.c9:focus {
+  outline-color: #FEC813;
+  outline-style: solid;
+  outline-offset: 0px;
+  outline-width: 3px;
+}
+
+.c15 {
+  margin: 0;
+  color: #000000;
+  font-weight: inherit;
+  font-size: 1rem;
+  -webkit-letter-spacing: inherit;
+  -moz-letter-spacing: inherit;
+  -ms-letter-spacing: inherit;
+  letter-spacing: inherit;
+  line-height: 1.25;
+  margin-bottom: 0;
+  font-stretch: normal;
+  -webkit-letter-spacing: normal;
+  -moz-letter-spacing: normal;
+  -ms-letter-spacing: normal;
+  letter-spacing: normal;
+}
+
+.c14 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-weight: 700;
+  color: #000000;
+}
+
+.c14:focus {
+  background-color: #FEC813;
+}
+
+.c14 .c20 {
+  margin: 3px;
+}
+
+.c14 .c20 svg rect,
+.c14 .c20 svg polygon,
+.c14 .c20 svg path {
+  fill: #000000;
+}
+
+.c14:hover {
+  color: #ec0000;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c14:hover .c20 svg rect,
+.c14:hover .c20 svg polygon,
+.c14:hover .c20 svg path {
+  fill: #ec0000;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 0;
+  padding: 0 10px;
+  background-color: #ffffff;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.c5::after {
+  content: '';
+  display: block;
+  min-height: inherit;
+  font-size: 0;
+}
+
+.c5 .c21 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 17px;
+  right: 45px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c13 {
+  margin: 0px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: #000;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c13:hover {
+  color: inherit;
+}
+
+.c7 {
+  margin: 0;
+  font-weight: 700;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: normal;
+  -webkit-justify-content: normal;
+  -ms-flex-pack: normal;
+  justify-content: normal;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  box-sizing: content-box;
+}
+
+.c7 .c8 {
+  margin-right: 10px;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 100%;
+}
+
 .c1 {
+  background-color: #ffffff;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1430px;
+  box-shadow: 0 4px rgba(0,0,0,0.04);
+  box-sizing: content-box;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.c1 .c16 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.c3 {
   max-width: 1080px;
 }
 
@@ -10,14 +224,14 @@ exports[`Header matches the snapshot 1`] = `
   z-index: 2;
 }
 
-.c2 {
+.c18 {
   position: absolute;
   top: 5px;
   right: 20px;
   z-index: 101;
 }
 
-.c2 button {
+.c18 button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -26,21 +240,124 @@ exports[`Header matches the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c2 button > * {
+.c18 button > * {
   vertical-align: middle;
   margin-right: 5px;
 }
 
-.c2 button:hover,
-.c2 button:focus {
+.c18 button:hover,
+.c18 button:focus {
   color: #ec0000;
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c2 button:hover svg,
-.c2 button:focus svg {
+.c18 button:hover svg,
+.c18 button:focus svg {
   fill: #ec0000;
+}
+
+@media screen and (min-width:1200px) {
+  .c9 {
+    height: 68px;
+    width: 100px;
+  }
+
+  .c9 .c10 {
+    background-image: url("img");
+  }
+}
+
+@media screen and (min-width:540px) {
+  .c5 {
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width:1199px) {
+  .c19 {
+    display: none;
+  }
+}
+
+@media screen and (max-width:374px) {
+  .c13 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width:375px) {
+  .c13 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  .c7 .c8 {
+    margin-right: 40px;
+  }
+}
+
+@media screen and (max-width:1199px) {
+  .c1 .c12 {
+    margin-top: -2px;
+  }
+
+  .c1 .c4 {
+    height: 50px;
+    padding-right: 0;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  .c1 {
+    box-shadow: none;
+    position: relative;
+  }
+
+  .c1:after {
+    content: '';
+    display: block;
+    left: 0;
+    right: 0;
+    height: 50px;
+    margin-top: -50px;
+    background-color: #F5F5F5;
+  }
+
+  .c1 .c4 {
+    z-index: 100;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .c1 .c2 {
+    background-color: transparent;
+  }
+
+  .c1 .c12 {
+    margin-top: 0px;
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+    line-height: 38px;
+    font-size: 30px;
+  }
+
+  .c1 .c6 {
+    height: 78px;
+    padding: 15px 0;
+  }
+
+  .c1 .c16 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 50px;
+  }
 }
 
 @media (min-width:1200px) {
@@ -50,29 +367,29 @@ exports[`Header matches the snapshot 1`] = `
 }
 
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none) {
-  .c2 button {
+  .c18 button {
     height: 30px;
   }
 }
 
 @media (max-width:720px) {
-  .c2 {
+  .c18 {
     top: 0;
     right: 0;
   }
 
-  .c2 button {
+  .c18 button {
     width: 50px;
     height: 50px;
     padding: 0;
   }
 
-  .c2 .links li {
+  .c18 .links li {
     margin: 0;
   }
 
-  .c2 .login-adw,
-  .c2 span {
+  .c18 .login-adw,
+  .c18 span {
     display: none;
   }
 }
@@ -83,35 +400,35 @@ exports[`Header matches the snapshot 1`] = `
     data-testid="site-header"
   >
     <div
-      class="sc-frDJqD draFdW"
+      class="c1"
       id="header"
     >
       <header
-        class="sc-gzVnrw c1 sc-TOsTZ jnQENo"
+        class="c2 c3 c4 c5"
       >
         <h1
-          class="sc-ksYbfQ jNsosU"
+          class="c6 c7"
         >
           <a
-            class="sc-bwzfXH gajXgj"
+            class="c8 c9"
             href="https://localhost:8080/"
           >
             <span
-              class="sc-bdVaJa cPtgyk"
+              class="c10 c11"
             />
           </a>
           <a
-            class="sc-cJSrbW hHDqvX sc-gZMcBi grAADZ sc-EHOje htmEbB"
+            class="c12 c13 c14 c15"
             href="https://localhost:8080/"
           >
             Registraties
           </a>
         </h1>
         <nav
-          class="sc-hmzhuo ikOysu"
+          class="c16 c17"
         >
           <nav
-            class="no-print c2"
+            class="no-print c18"
           >
             <ul
               class="links horizontal"
@@ -142,7 +459,7 @@ exports[`Header matches the snapshot 1`] = `
           </nav>
         </nav>
         <div
-          class="sc-kgAjT kQKKqJ"
+          class="c19"
         />
       </header>
     </div>
