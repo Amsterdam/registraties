@@ -7,7 +7,7 @@ import Map from 'components/Map/Loadable';
 import MapContainer from '..';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('containers/Map', () => {
   it('should have props from structured selector', () => {

@@ -27,7 +27,8 @@ describe('injectReducer decorator', () => {
   });
 
   beforeEach(() => {
-    store = configureStore({}, memoryHistory);
+    // eslint-disable-next-line prefer-destructuring
+    store = configureStore({}, memoryHistory).store;
     injectors = {
       injectReducer: jest.fn(),
     };
@@ -76,7 +77,8 @@ describe('useInjectReducer hook', () => {
       injectReducer: jest.fn(),
     };
     reducerInjectors.default = jest.fn().mockImplementation(() => injectors);
-    store = configureStore({}, memoryHistory);
+    // eslint-disable-next-line prefer-destructuring
+    store = configureStore({}, memoryHistory).store;
     ComponentWithReducer = () => {
       useInjectReducer({ key: 'test', reducer });
       return null;

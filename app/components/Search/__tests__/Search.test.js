@@ -6,7 +6,7 @@ import 'jest-styled-components';
 import { ThemeProvider } from '@datapunt/asc-ui';
 import Search from '..';
 import configureStore from '../../../configureStore';
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('Search', () => {
   const results = {

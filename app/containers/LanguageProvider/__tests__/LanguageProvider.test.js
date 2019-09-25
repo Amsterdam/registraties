@@ -33,7 +33,8 @@ describe('<ConnectedLanguageProvider />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    // eslint-disable-next-line prefer-destructuring
+    store = configureStore({}, browserHistory).store;
   });
 
   it('should render the default language messages', () => {

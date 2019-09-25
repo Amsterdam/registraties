@@ -11,7 +11,7 @@ import HeaderContainer, { HeaderContainerComponent } from '..';
 import messages from '../../../translations/nl.json';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 jest.mock('shared/services/auth/auth');
 
