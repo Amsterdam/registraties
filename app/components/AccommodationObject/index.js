@@ -21,6 +21,7 @@ import TOC from 'containers/TOC';
 import Map from 'containers/Map';
 import messages from 'containers/App/messages';
 import { LOAD_DATA_SUCCESS } from 'containers/App/constants';
+import DocumentTitle from 'components/DocumentTitle';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
 
@@ -33,6 +34,7 @@ class AccommodationObjectComponent extends React.Component {
     this.state = {
       filledInBy: '',
       notitie: '',
+      documentTitle: '',
     };
 
     this.onInput = this.onInput.bind(this);
@@ -44,13 +46,31 @@ class AccommodationObjectComponent extends React.Component {
     this.props.loadBAGData({ vboId, ligId, brkId });
   }
 
+  setStateDocumentTitle() {
+    const { vboId, ligId, brkId } = this.props.match.params;
+    let type;
+    if (vboId !== undefined) {
+      type = 'VBO';
+    } else if (ligId !== undefined) {
+      type = 'LIG';
+    } else if (brkId !== undefined) {
+      type = 'BRK';
+    }
+    const id = vboId || ligId || brkId;
+    const base = 'Registratie';
+    const documentTitle = type && id ? `${base} ${type} ${id}` : base;
+    this.setState({ documentTitle });
+  }
+
   componentDidMount() {
     this.initiateFetch();
+    this.setStateDocumentTitle();
   }
 
   componentDidUpdate(prevProps) {
     if (!equal(prevProps.match.params, this.props.match.params)) {
       this.initiateFetch();
+      this.setStateDocumentTitle();
     }
   }
 
@@ -81,12 +101,13 @@ class AccommodationObjectComponent extends React.Component {
 
   render() {
     const { onInput } = this;
-    const { filledInBy, notitie } = this.state;
+    const { filledInBy, notitie, documentTitle } = this.state;
     const { intl, status } = this.props;
     const { formatMessage } = intl;
 
     return (
       <Wrapper>
+        <DocumentTitle title={documentTitle} />
         <Progress />
         <article className="col-7">
           <section>

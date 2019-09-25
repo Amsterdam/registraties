@@ -45,8 +45,8 @@ export const App = ({ onAuthenticateUser, showError }) => {
             <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
             <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
             <Route exact path="/brk/:brkId/" component={AccommodationObjectPage} />
-            <Route path="/" component={HomePage} />
-            <Route path="" component={NotFoundPage} />
+            <Route exact path="/" component={HomePage} />
+            <Route component={NotFoundPage} />
           </Switch>
         </main>
         <div className="container-fluid">
