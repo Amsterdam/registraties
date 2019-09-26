@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchHistoryItem = styled.li`
+export const SearchHistoryItemWrapper = styled.li`
   margin: 0 8px 4px 0;
   padding: 0;
   display: inline-block;
