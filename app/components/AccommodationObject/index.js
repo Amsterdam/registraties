@@ -57,7 +57,8 @@ class AccommodationObjectComponent extends React.Component {
       type = 'BRK';
     }
     const id = vboId || ligId || brkId;
-    const base = 'Registratie';
+    const { intl } = this.props;
+    const base = intl.formatMessage(messages.registration);
     const documentTitle = type && id ? `${base} ${type} ${id}` : base;
     this.setState({ documentTitle });
   }

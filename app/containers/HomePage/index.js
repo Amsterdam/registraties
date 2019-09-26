@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import DocumentTitle from 'components/DocumentTitle';
 
 const Img = styled.img`
   width: 100%;
@@ -13,7 +12,6 @@ const Picture = styled.picture`
 
 const HomePage = () => (
   <>
-    <DocumentTitle title="Registraties" />
     <Picture>
       <source
         media="(min-width: 700px)"

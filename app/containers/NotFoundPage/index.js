@@ -1,16 +1,20 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import DocumentTitle from 'components/DocumentTitle';
 
 import messages from './messages';
 
-const NotFound = () => (
+const NotFound = ({ intl }) => (
   <article>
-    <DocumentTitle title="Registraties 404" />
+    <DocumentTitle title={`${intl.formatMessage(messages.document_title)} 404`} />
     <h1>
       <FormattedMessage {...messages.header} />
     </h1>
   </article>
 );
 
-export default NotFound;
+NotFound.propTypes = {
+  intl: intlShape.isRequired,
+};
+
+export default injectIntl(NotFound);
