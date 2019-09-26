@@ -10,7 +10,7 @@ import messages from '../../../translations/nl.json';
 import AccommodationObjectPageContainer, { AccommodationObjectPageComponent } from '..';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('containers/AccommodationObjectPage', () => {
   it('should have props from structured selector', () => {

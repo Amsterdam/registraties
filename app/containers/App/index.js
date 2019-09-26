@@ -20,6 +20,7 @@ import { showGlobalError, authenticateUser } from './actions';
 import saga from './saga';
 
 import GlobalStyles from '../../global-styles';
+import { URL_ROUTE_PREFIX_VBO, URL_ROUTE_PREFIX_LIG, URL_ROUTE_PREFIX_BRK } from '../../utils/routing/constants';
 
 export const App = ({ onAuthenticateUser, showError }) => {
   const { pathname } = document.location;
@@ -42,9 +43,9 @@ export const App = ({ onAuthenticateUser, showError }) => {
         <GlobalError />
         <main className="content container">
           <Switch>
-            <Route exact path="/vbo/:vboId/" component={AccommodationObjectPage} />
-            <Route exact path="/lig/:ligId/" component={AccommodationObjectPage} />
-            <Route exact path="/brk/:brkId/" component={AccommodationObjectPage} />
+            <Route exact path={`/${URL_ROUTE_PREFIX_VBO}/:vboId/`} component={AccommodationObjectPage} />
+            <Route exact path={`/${URL_ROUTE_PREFIX_LIG}/:ligId/`} component={AccommodationObjectPage} />
+            <Route exact path={`/${URL_ROUTE_PREFIX_BRK}/:brkId/`} component={AccommodationObjectPage} />
             <Route exact path="/" component={HomePage} />
             <Route component={NotFoundPage} />
           </Switch>

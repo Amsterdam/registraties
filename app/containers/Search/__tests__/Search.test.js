@@ -15,7 +15,7 @@ import { makeSelectResults, makeSelectSuggestionResults } from '../selectors';
 import resultsSrc from './results.json';
 import resultsSuggestionsSrc from './resultsSuggestions.json';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 const intlObj = intl({ messages });
 const results = makeSelectResults({ search: { ...initialState, results: resultsSrc } });
 const suggestionResults = makeSelectSuggestionResults({ search: { ...initialState, results: resultsSuggestionsSrc } });
@@ -50,6 +50,7 @@ describe('containers/Search', () => {
     const props = {
       onChange,
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
     };
 
@@ -74,6 +75,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect,
+      pushSearchHistory: () => {},
       intl: intlObj,
       results,
     };
@@ -101,6 +103,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       results,
     };
@@ -223,6 +226,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       suggestionResults,
     };
@@ -254,6 +258,7 @@ describe('containers/Search', () => {
     const props = {
       onChange: () => {},
       onSearchSelect: () => {},
+      pushSearchHistory: () => {},
       intl: intlObj,
       suggestionResults,
     };

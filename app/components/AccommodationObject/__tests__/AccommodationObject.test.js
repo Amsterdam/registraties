@@ -11,7 +11,7 @@ import messages from '../../../translations/nl.json';
 import AccommodationObject from '..';
 import * as styledComponents from '../styled';
 import configureStore from '../../../configureStore';
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();

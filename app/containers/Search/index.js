@@ -13,6 +13,7 @@ import { makeSelectResults, makeSelectSuggestionResults } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
+import { pushSearchHistory } from '../SearchHistory/actions';
 import messages from './messages';
 
 export const SearchContainerComponent = props => {
@@ -65,6 +66,7 @@ export const SearchContainerComponent = props => {
       currentTarget: { dataset, text },
     } = event;
 
+    props.pushSearchHistory({ ...dataset, text });
     props.onSearchSelect({ ...dataset });
     inputRef.current.value = text;
   };
@@ -138,6 +140,7 @@ SearchContainerComponent.propTypes = {
   intl: intlShape.isRequired,
   onChange: PropTypes.func.isRequired,
   onSearchSelect: PropTypes.func.isRequired,
+  pushSearchHistory: PropTypes.func.isRequired,
   results: PropTypes.shape({}),
   suggestionResults: PropTypes.shape({}),
   show: PropTypes.bool,
@@ -153,6 +156,7 @@ const mapDispatchToProps = dispatch =>
     {
       onChange: inputChanged,
       onSearchSelect: searchSelect,
+      pushSearchHistory,
     },
     dispatch,
   );

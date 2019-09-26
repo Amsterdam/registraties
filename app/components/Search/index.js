@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Toggle from 'components/SearchToggle';
 import Suggest from 'components/Suggest';
+import SearchHistory from 'containers/SearchHistory';
 
 const Form = styled.form`
   display: flex;
@@ -53,12 +54,14 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: 1;
   position: relative;
+  margin-bottom: ${({ active }) => (active ? '40px' : '0px')};
 `;
 
 const Container = styled.div`
   min-width: 70px;
   max-width: 620px;
   margin: 0 auto;
+  position: relative;
 
   @media (max-width: 650px) {
     max-width: calc(100vw - 30px);
@@ -71,7 +74,7 @@ const SuggestWrapper = styled.div`
   max-width: 620px;
   width: 100%;
   top: calc(100% - 11px);
-  z-index: -1;
+  z-index: 1;
 
   @media (max-width: 650px) {
     max-width: calc(100vw - 30px);
@@ -114,8 +117,7 @@ const Search = forwardRef(
     return (
       <Form action="" onSubmit={onSubmit} className="no-print" data-testid="search-form">
         <legend className="visuallyhidden">{formLegendLabel}</legend>
-
-        <Wrapper>
+        <Wrapper active={active}>
           <StyledToggle
             data-testid="search-toggle"
             onClick={() => setActive(!active)}
@@ -146,6 +148,7 @@ const Search = forwardRef(
               <Suggest items={results} onSelect={onSelect} as="ul" />
             </SuggestWrapper>
           </Container>
+          {active && <SearchHistory />}
         </Wrapper>
       </Form>
     );

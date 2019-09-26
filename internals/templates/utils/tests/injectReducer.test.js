@@ -26,7 +26,7 @@ describe('injectReducer decorator', () => {
   });
 
   beforeEach(() => {
-    store = configureStore({}, memoryHistory);
+    ({ store } = configureStore({}, memoryHistory));
     injectors = {
       injectReducer: jest.fn(),
     };
@@ -43,9 +43,7 @@ describe('injectReducer decorator', () => {
 
   it('should set a correct display name', () => {
     expect(ComponentWithReducer.displayName).toBe('withReducer(Component)');
-    expect(
-      injectReducer({ key: 'test', reducer })(() => null).displayName,
-    ).toBe('withReducer(Component)');
+    expect(injectReducer({ key: 'test', reducer })(() => null).displayName).toBe('withReducer(Component)');
   });
 
   it('should propagate props', () => {

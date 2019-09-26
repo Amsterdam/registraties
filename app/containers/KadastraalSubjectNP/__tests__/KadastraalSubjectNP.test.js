@@ -11,7 +11,7 @@ import messages from '../../../translations/nl.json';
 import KadastraalSubjectNPContainer, { KadastraalSubjectNPContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('containers/KadastraalSubjectNNP', () => {
   afterEach(cleanup);
