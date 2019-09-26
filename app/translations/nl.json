@@ -30,6 +30,8 @@
   "registraties.overview": "Overzicht",
   "registraties.public_space_id": "Openbare ruimte-ID",
   "registraties.public_space": "Openbare ruimte",
+  "registraties.registration": "Registratie",
+  "registraties.registration_plural": "Registraties",
   "registraties.rsin": "RSIN-nummer",
   "registraties.rsins": "RSIN-nummers",
   "registraties.session_expired": "Er kan geen verbinding gemaakt worden met de externe data bronnen. Waarschijnlijk is de sessie verlopen. Log opnieuw in.",
@@ -66,5 +68,6 @@
   "registraties.error_reporting_success_message": "Je bericht is verstuurd. Bedankt voor de moeite!",
   "registraties.error_reporting_error_generic": "Er ging iets niet goed met het versturen van je feedback. Probeer het nogmaals.",
   "registraties.error_reporting_error_form": "Niet alle velden zijn correct ingevuld.",
-  "registraties.report_feedback": "Feedback verzenden"
+  "registraties.report_feedback": "Feedback verzenden",
+  "registraties.page_not_found": "Pagina niet gevonden"
 }

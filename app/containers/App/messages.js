@@ -97,4 +97,7 @@ export default defineMessages({
   report_feedback: {
     id: `${scope}.report_feedback`,
   },
+  registration: {
+    id: `${scope}.registration`,
+  },
 });
