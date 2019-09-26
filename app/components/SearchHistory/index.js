@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape } from 'react-intl';
 
 import SearchHistoryItem from 'components/SearchHistoryItem';
 import { SearchHistoryList, SearchHistoryLabel, SearchHistoryWrapper } from './styles';
+import messages from './messages';
 
-const SearchHistory = ({ searchHistory }) =>
+const SearchHistory = ({ searchHistory, intl }) =>
   searchHistory.length > 0 && (
     <SearchHistoryWrapper>
-      <SearchHistoryLabel>Onlangs gezocht op:</SearchHistoryLabel>
+      <SearchHistoryLabel>{intl.formatMessage(messages.search_history_header)}:</SearchHistoryLabel>
       <SearchHistoryList>
         {searchHistory.map(item => (
           <SearchHistoryItem key={item.id} url={item.url} text={item.text} />
@@ -28,6 +30,7 @@ SearchHistory.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   ),
+  intl: intlShape.isRequired,
 };
 
 export default SearchHistory;
