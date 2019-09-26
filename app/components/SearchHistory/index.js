@@ -10,7 +10,7 @@ const SearchHistory = ({ searchHistory }) =>
       <SearchHistoryLabel>Onlangs gezocht op:</SearchHistoryLabel>
       <SearchHistoryList>
         {searchHistory.map(item => (
-          <SearchHistoryItem key={item.url} url={item.url} text={item.text} />
+          <SearchHistoryItem key={item.id} url={item.url} text={item.text} />
         ))}
       </SearchHistoryList>
     </SearchHistoryWrapper>
@@ -25,6 +25,7 @@ SearchHistory.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
     }),
   ),
 };

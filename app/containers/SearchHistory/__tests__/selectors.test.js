@@ -16,9 +16,9 @@ describe('containers/SearchHistory/selectors', () => {
     });
 
     const expectedResults = [
-      { vboId: 'vboId', text: 'fooA', url: '/vbo/vboId/' },
-      { ligId: 'ligId', text: 'fooB', url: '/lig/ligId/' },
-      { brkId: 'brkId', text: 'fooC', url: '/brk/brkId/' },
+      { vboId: 'vboId', text: 'fooA', url: '/vbo/vboId/', id: 'vboId' },
+      { ligId: 'ligId', text: 'fooB', url: '/lig/ligId/', id: 'ligId' },
+      { brkId: 'brkId', text: 'fooC', url: '/brk/brkId/', id: 'brkId' },
     ];
 
     expect(results).toEqual(expectedResults);
