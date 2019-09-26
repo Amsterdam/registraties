@@ -9,7 +9,7 @@ import GlobalError, { GlobalErrorContainer } from '..';
 import messages from '../messages';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('containers/GlobalError', () => {
   afterEach(cleanup);

@@ -11,7 +11,7 @@ import messages from '../../../translations/nl.json';
 import OpenbareRuimteContainer, { OpenbareRuimteContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 describe('containers/OpenbareRuimte', () => {
   afterEach(cleanup);

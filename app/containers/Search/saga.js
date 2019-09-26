@@ -7,6 +7,7 @@ import configuration from 'shared/services/configuration/configuration';
 
 import { typeAheadFailed, typeAheadSuccess } from './actions';
 import { INPUT_CHANGE, SEARCH_SELECT } from './constants';
+import { getURL } from '../../utils/routing/utils';
 
 const { API_ROOT } = configuration;
 
@@ -27,15 +28,8 @@ export function* inputChange(action) {
 }
 
 export function* searchSelect(action) {
-  const { vboId, ligId, brkId } = action.payload;
-
-  if (vboId) {
-    yield put(push(`/vbo/${vboId}/`));
-  } else if (ligId) {
-    yield put(push(`/lig/${ligId}/`));
-  } else if (brkId) {
-    yield put(push(`/brk/${brkId}/`));
-  }
+  const url = getURL(action.payload);
+  yield put(push(url));
 }
 
 export default function* watchSearchSaga() {

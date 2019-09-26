@@ -11,7 +11,7 @@ import ProgressContainer, { ProgressContainerComponent } from '..';
 import messages from '../../../translations/nl.json';
 import configureStore from '../../../configureStore';
 
-const store = configureStore({}, history);
+const { store } = configureStore({}, history);
 
 jest.mock('components/Progress', () => jest.requireActual('components/Progress'));
 

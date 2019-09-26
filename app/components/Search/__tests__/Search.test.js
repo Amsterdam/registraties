@@ -1,8 +1,17 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
+import { Provider } from 'react-redux';
+import history from 'utils/history';
 import 'jest-styled-components';
 import { ThemeProvider } from '@datapunt/asc-ui';
+import { IntlProvider } from 'react-intl';
 import Search from '..';
+import configureStore from '../../../configureStore';
+import messages from '../../../translations/nl.json';
+
+const { store } = configureStore({}, history);
+const intlProvider = new IntlProvider({ locale: 'nl', messages });
+const { intl } = intlProvider.getChildContext();
 
 describe('Search', () => {
   const results = {
@@ -30,7 +39,11 @@ describe('Search', () => {
 
   const renderSearch = props => (
     <ThemeProvider>
-      <Search {...props} />
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages} intl={intl}>
+          <Search {...props} />
+        </IntlProvider>
+      </Provider>
     </ThemeProvider>
   );
 

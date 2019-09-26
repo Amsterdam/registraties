@@ -14,7 +14,7 @@ import pand from './pand.json';
 import subjectNP from './subjectNP.json';
 import vestiging from './vestiging.json';
 
-const store = configureStore({}, browserHistory);
+const { store } = configureStore({}, browserHistory);
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();
 
