@@ -25,6 +25,8 @@ import DocumentTitle from 'components/DocumentTitle';
 import SectionHeading from 'components/SectionHeading';
 import ArticleHeading from 'components/ArticleHeading';
 
+import { extractId } from 'utils/routing/utils';
+
 import { Textarea, Aside, Label, Wrapper } from './styled';
 
 class AccommodationObjectComponent extends React.Component {
@@ -47,19 +49,10 @@ class AccommodationObjectComponent extends React.Component {
   }
 
   setStateDocumentTitle() {
-    const { vboId, ligId, brkId } = this.props.match.params;
-    let type;
-    if (vboId !== undefined) {
-      type = 'VBO';
-    } else if (ligId !== undefined) {
-      type = 'LIG';
-    } else if (brkId !== undefined) {
-      type = 'BRK';
-    }
-    const id = vboId || ligId || brkId;
+    const id = extractId(this.props.match.params);
     const { intl } = this.props;
     const base = intl.formatMessage(messages.registration);
-    const documentTitle = type && id ? `${base} ${type} ${id}` : base;
+    const documentTitle = id ? `${base} ${id.type.toUpperCase()} ${id.id}` : base;
     this.setState({ documentTitle });
   }
 
