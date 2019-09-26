@@ -7,11 +7,7 @@ export const SearchHistoryItemWrapper = styled.li`
   font-size: 14px;
   line-height: 1.25;
 
-  &:after {
+  &:not(:last-child):after {
     content: ',';
-  }
-
-  &:last-child:after {
-    content: '';
   }
 `;
