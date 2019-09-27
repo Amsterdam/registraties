@@ -30,14 +30,20 @@ export const SearchContainerComponent = props => {
     document.addEventListener('click', onClick, true);
 
     return () => {
-      inputRef.current.removeEventListener('focusout', onFocusOut);
-      suggestRef.current.removeEventListener('focusout', onFocusOut);
-      document.removeEventListener('click', onClick);
+      inputRef.current.removeEventListener('focusout', onFocusOut, true);
+      suggestRef.current.removeEventListener('focusout', onFocusOut, true);
+      document.removeEventListener('click', onClick, true);
     };
   }, []);
 
   const onFocusOut = event => {
     const { relatedTarget } = event;
+    // Fix for browser where relatedTarget is `null`
+    // Maybe a better solution would be to use React's `onFocus` and `onBlur` vs. refs + focusout
+    if (relatedTarget == null) {
+      setShowSuggest(false);
+      return;
+    }
     const { current: input } = inputRef;
     const { current: suggest } = suggestRef;
 
