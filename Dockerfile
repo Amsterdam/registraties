@@ -39,7 +39,7 @@ COPY . /deploy/
 # Build
 ENV NODE_PATH=/deploy/
 ENV NODE_ENV=production
-RUN npm run build
+RUN npm cache verify && npm run build
 
 # Deploy
 FROM nginx:stable-alpine
