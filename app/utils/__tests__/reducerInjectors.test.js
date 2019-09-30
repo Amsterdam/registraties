@@ -31,6 +31,7 @@ describe('reducer injectors', () => {
   describe('getInjectors', () => {
     beforeEach(() => {
       ({ store } = configureStore({}, memoryHistory));
+      store.persistor.flush = jest.fn();
     });
 
     it('should return injectors', () => {
@@ -51,6 +52,7 @@ describe('reducer injectors', () => {
   describe('injectReducer helper', () => {
     beforeEach(() => {
       ({ store } = configureStore({}, memoryHistory));
+      store.persistor.flush = jest.fn();
       injectReducer = injectReducerFactory(store, true);
     });
 
@@ -95,6 +97,12 @@ describe('reducer injectors', () => {
       injectReducer('test', identity);
 
       expect(store.replaceReducer).toHaveBeenCalledTimes(2);
+    });
+
+    it('should flush the persisted after injecting reducer', () => {
+      store.persistor.flush = jest.fn();
+      injectReducer('test', reducer);
+      expect(store.persistor.flush).toHaveBeenCalledTimes(1);
     });
   });
 });

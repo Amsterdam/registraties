@@ -17,10 +17,9 @@ export function injectReducerFactory(store, isValid) {
     if (Reflect.has(store.injectedReducers, key) && store.injectedReducers[key] === reducer) return;
 
     // Flush the persisted state to localstorage before the store is replaced with a new reducer
-    store.persistor.flush().then(() => {
-      store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
-      store.replaceReducer(createReducer(store.injectedReducers));
-    });
+    store.persistor.flush();
+    store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
+    store.replaceReducer(createReducer(store.injectedReducers));
   };
 }
 
