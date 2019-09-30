@@ -16,8 +16,11 @@ export function injectReducerFactory(store, isValid) {
     // Check `store.injectedReducers[key] === reducer` for hot reloading when a key is the same but a reducer is different
     if (Reflect.has(store.injectedReducers, key) && store.injectedReducers[key] === reducer) return;
 
-    store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
-    store.replaceReducer(createReducer(store.injectedReducers));
+    // Flush the persisted state to localstorage before the store is replaced with a new reducer
+    store.persistor.flush().then(() => {
+      store.injectedReducers[key] = reducer; // eslint-disable-line no-param-reassign
+      store.replaceReducer(createReducer(store.injectedReducers));
+    });
   };
 }
 
