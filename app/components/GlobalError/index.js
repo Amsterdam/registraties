@@ -14,23 +14,21 @@ const ErrorContainer = styled.div`
   padding: 11px 16px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
 `;
 
 const P = styled.p`
   margin: 0;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 35px);
   flex: 1;
 `;
 
 const Button = styled.button`
   height: 25px;
-  margin-left: 10px;
   width: 25px;
-  -webkit-appearance: none;
-  appearance: none;
+  margin-left: 10px;
+  padding: 0;
   border: 0;
-  float: right;
+  appearance: none;
   background: transparent;
   cursor: pointer;
 `;
