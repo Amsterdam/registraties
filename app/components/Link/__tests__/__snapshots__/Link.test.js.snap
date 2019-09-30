@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link matches the snapshot 1`] = `
-.c2 {
+.c0 {
   margin: 0;
   color: #000000;
   font-weight: inherit;
@@ -56,16 +56,16 @@ exports[`Link matches the snapshot 1`] = `
   fill: #ec0000;
 }
 
-.c0 {
+.c2 {
   padding: 0 !important;
 }
 
-.c0:focus {
+.c2:focus {
   outline: 4px solid #ffc90e !important;
 }
 
-.c0:hover,
-.c0:focus {
+.c2:hover,
+.c2:focus {
   color: #ec0000;
   fill: #ec0000;
 }

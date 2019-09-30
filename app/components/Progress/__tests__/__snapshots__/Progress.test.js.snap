@@ -100,7 +100,7 @@ exports[`Progress matches the snapshot 1`] = `
 }
 
 <div
-  class="no-print  c0"
+  class="c0 no-print "
   data-testid="progress-wrapper"
   type="determined"
 >

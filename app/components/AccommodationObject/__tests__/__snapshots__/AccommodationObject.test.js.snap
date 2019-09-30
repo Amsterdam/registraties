@@ -281,7 +281,7 @@ exports[`AccommodationObject should render without problems 1`] = `
   class="c0"
 >
   <div
-    class="no-print  c1"
+    class="c1 no-print "
     data-testid="progress-wrapper"
     type="determined"
   >
@@ -320,7 +320,7 @@ exports[`AccommodationObject should render without problems 1`] = `
           </a>
         </h3>
         <div
-          class="no-print  c7"
+          class="c7 no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -350,7 +350,7 @@ exports[`AccommodationObject should render without problems 1`] = `
           </a>
         </h3>
         <div
-          class="no-print  c7"
+          class="c7 no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -380,7 +380,7 @@ exports[`AccommodationObject should render without problems 1`] = `
           </a>
         </h3>
         <div
-          class="no-print  c7"
+          class="c7 no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -421,7 +421,7 @@ exports[`AccommodationObject should render without problems 1`] = `
           </a>
         </h3>
         <div
-          class="no-print  c7"
+          class="c7 no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -442,11 +442,11 @@ exports[`AccommodationObject should render without problems 1`] = `
     </section>
   </article>
   <aside
-    class="col-4 c9"
+    class="c9 col-4"
   >
     <section>
       <div
-        class="no-print  c7"
+        class="c7 no-print "
         data-testid="progress-wrapper"
         type="undetermined"
       >
@@ -457,7 +457,7 @@ exports[`AccommodationObject should render without problems 1`] = `
     </section>
     <section>
       <div
-        class="no-print  c7"
+        class="c7 no-print "
         data-testid="progress-wrapper"
         type="undetermined"
       >
@@ -467,7 +467,7 @@ exports[`AccommodationObject should render without problems 1`] = `
       </div>
     </section>
     <div
-      class="no-print  c7"
+      class="c7 no-print "
       data-testid="progress-wrapper"
       type="undetermined"
     >
@@ -484,7 +484,7 @@ exports[`AccommodationObject should render without problems 2`] = `
   class="styled__Wrapper-sc-1knhnhj-0 ghwqLQ"
 >
   <div
-    class="no-print  Progress__Wrapper-yfxggj-0 gwLcqF"
+    class="Progress__Wrapper-yfxggj-0 gwLcqF no-print "
     data-testid="progress-wrapper"
     type="determined"
   >
@@ -569,7 +569,7 @@ exports[`AccommodationObject should render without problems 2`] = `
           </a>
         </h3>
         <div
-          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -648,7 +648,7 @@ exports[`AccommodationObject should render without problems 2`] = `
           </a>
         </h3>
         <div
-          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -727,7 +727,7 @@ exports[`AccommodationObject should render without problems 2`] = `
           </a>
         </h3>
         <div
-          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -817,7 +817,7 @@ exports[`AccommodationObject should render without problems 2`] = `
           </a>
         </h3>
         <div
-          class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+          class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
           data-testid="progress-wrapper"
           type="undetermined"
         >
@@ -887,11 +887,11 @@ exports[`AccommodationObject should render without problems 2`] = `
     </section>
   </article>
   <aside
-    class="col-4 styled__Aside-sc-1knhnhj-2 kgWEpv"
+    class="styled__Aside-sc-1knhnhj-2 kgWEpv col-4"
   >
     <section>
       <div
-        class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+        class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
         data-testid="progress-wrapper"
         type="undetermined"
       >
@@ -951,7 +951,7 @@ exports[`AccommodationObject should render without problems 2`] = `
     </section>
     <section>
       <div
-        class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+        class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
         data-testid="progress-wrapper"
         type="undetermined"
       >
@@ -1010,7 +1010,7 @@ exports[`AccommodationObject should render without problems 2`] = `
       </div>
     </section>
     <div
-      class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+      class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
       data-testid="progress-wrapper"
       type="undetermined"
     >
@@ -1108,14 +1108,14 @@ exports[`AccommodationObject should render without problems 2`] = `
         </h3>
       </header>
       <label
-        class="no-print c1"
+        class="c1 no-print"
         for="areaNotitie"
       >
         Notitie
         :
       </label>
       <textarea
-        class="input no-print c2"
+        class="c2 input no-print"
         id="areaNotitie"
         name="notitie"
         placeholder="Je notitie wordt niet bewaard, maar is wel te zien in de export."
@@ -1125,7 +1125,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         data-testid="accommodation-object-notitie"
       />
       <label
-        class="no-print c1"
+        class="c1 no-print"
         for="inputFilledInBy"
       >
         Ingevuld door
@@ -1141,7 +1141,7 @@ exports[`AccommodationObject should render without problems 2`] = `
         data-testid="accommodation-object-filled-in-by"
       />
     </section>
-    .c2 {
+    .c1 {
   margin: 0;
   color: #000000;
   font-weight: inherit;
@@ -1159,7 +1159,7 @@ exports[`AccommodationObject should render without problems 2`] = `
   letter-spacing: normal;
 }
 
-.c1 {
+.c2 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -1170,29 +1170,29 @@ exports[`AccommodationObject should render without problems 2`] = `
   color: #000000;
 }
 
-.c1:focus {
+.c2:focus {
   background-color: #FEC813;
 }
 
-.c1 .c3 {
+.c2 .c3 {
   margin: 3px;
 }
 
-.c1 .c3 svg rect,
-.c1 .c3 svg polygon,
-.c1 .c3 svg path {
+.c2 .c3 svg rect,
+.c2 .c3 svg polygon,
+.c2 .c3 svg path {
   fill: #000000;
 }
 
-.c1:hover {
+.c2:hover {
   color: #ec0000;
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c1:hover .c3 svg rect,
-.c1:hover .c3 svg polygon,
-.c1:hover .c3 svg path {
+.c2:hover .c3 svg rect,
+.c2:hover .c3 svg polygon,
+.c2:hover .c3 svg path {
   fill: #ec0000;
 }
 

@@ -55,7 +55,7 @@ exports[`components/GlobalError matches the snapshot 1`] = `
 }
 
 <div
-  class="no-print cf c0"
+  class="c0 no-print cf"
 >
   <div
     class="c1"

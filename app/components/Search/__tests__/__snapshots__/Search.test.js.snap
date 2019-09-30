@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search matches the snapshot 1`] = `
-.c3 {
+.c2 {
   padding: 10px;
   z-index: 1;
   width: 50px;
@@ -10,16 +10,16 @@ exports[`Search matches the snapshot 1`] = `
   background: none;
 }
 
-.c3:hover {
+.c2:hover {
   background-color: #ec0000;
   cursor: pointer;
 }
 
-.c3:hover svg {
+.c2:hover svg {
   fill: white;
 }
 
-.c3:focus {
+.c2:focus {
   outline: 4px solid #fec813;
 }
 
@@ -107,7 +107,7 @@ exports[`Search matches the snapshot 1`] = `
   z-index: 1;
 }
 
-.c2 {
+.c3 {
   position: absolute;
   right: 0;
   top: -50px;
@@ -139,7 +139,7 @@ exports[`Search matches the snapshot 1`] = `
 
 <form
   action=""
-  class="no-print c0"
+  class="c0 no-print"
   data-testid="search-form"
 >
   <legend
@@ -212,7 +212,7 @@ exports[`Search matches the snapshot 1`] = `
 `;
 
 exports[`Search should render results 1`] = `
-.c15 {
+.c12 {
   margin: 0;
   color: #000000;
   font-weight: inherit;
@@ -230,7 +230,7 @@ exports[`Search should render results 1`] = `
   letter-spacing: normal;
 }
 
-.c14 {
+.c13 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -241,33 +241,33 @@ exports[`Search should render results 1`] = `
   color: #000000;
 }
 
-.c14:focus {
+.c13:focus {
   background-color: #FEC813;
 }
 
-.c14 .c17 {
+.c13 .c17 {
   margin: 3px;
 }
 
-.c14 .c17 svg rect,
-.c14 .c17 svg polygon,
-.c14 .c17 svg path {
+.c13 .c17 svg rect,
+.c13 .c17 svg polygon,
+.c13 .c17 svg path {
   fill: #000000;
 }
 
-.c14:hover {
+.c13:hover {
   color: #ec0000;
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c14:hover .c17 svg rect,
-.c14:hover .c17 svg polygon,
-.c14:hover .c17 svg path {
+.c13:hover .c17 svg rect,
+.c13:hover .c17 svg polygon,
+.c13:hover .c17 svg path {
   fill: #ec0000;
 }
 
-.c3 {
+.c2 {
   padding: 10px;
   z-index: 1;
   width: 50px;
@@ -276,29 +276,29 @@ exports[`Search should render results 1`] = `
   background: none;
 }
 
-.c3:hover {
+.c2:hover {
   background-color: #ec0000;
   cursor: pointer;
 }
 
-.c3:hover svg {
+.c2:hover svg {
   fill: white;
 }
 
-.c3:focus {
+.c2:focus {
   outline: 4px solid #fec813;
 }
 
-.c13 {
+.c14 {
   padding: 0 !important;
 }
 
-.c13:focus {
+.c14:focus {
   outline: 4px solid #ffc90e !important;
 }
 
-.c13:hover,
-.c13:focus {
+.c14:hover,
+.c14:focus {
   color: #ec0000;
   fill: #ec0000;
 }
@@ -312,7 +312,7 @@ exports[`Search should render results 1`] = `
   padding-left: 4px;
 }
 
-.c12 {
+.c15 {
   margin-left: 4px !important;
 }
 
@@ -411,7 +411,7 @@ exports[`Search should render results 1`] = `
   z-index: 1;
 }
 
-.c2 {
+.c3 {
   position: absolute;
   right: 0;
   top: -50px;
@@ -449,7 +449,7 @@ exports[`Search should render results 1`] = `
 
 <form
   action=""
-  class="no-print c0"
+  class="c0 no-print"
   data-testid="search-form"
 >
   <legend
@@ -517,7 +517,7 @@ exports[`Search should render results 1`] = `
         class="c9"
       >
         <ul
-          class=" links c10"
+          class="c10  links"
         >
           <li>
             <strong
