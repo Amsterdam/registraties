@@ -10,7 +10,7 @@ exports[`Map matches the snapshot 1`] = `
 
 <section>
   <div
-    class="cf c0"
+    class="c0 cf"
   >
     <div
       id="mapDiv"

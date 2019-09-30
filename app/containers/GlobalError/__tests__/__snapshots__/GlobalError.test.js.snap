@@ -2,7 +2,7 @@
 
 exports[`containers/GlobalError should render showing an error when defined 1`] = `
 <div
-  class="no-print cf GlobalError__ErrorWrapper-igrx8k-0 kuoiLJ"
+  class="GlobalError__ErrorWrapper-igrx8k-0 kuoiLJ no-print cf"
 >
   <div
     class="GlobalError__ErrorContainer-igrx8k-1 dDcAQy"

@@ -84,7 +84,7 @@ exports[`Section matches the snapshot 1`] = `
     
   </h3>
   <div
-    class="no-print  c2"
+    class="c2 no-print "
     data-testid="progress-wrapper"
     type="undetermined"
   >

@@ -9,7 +9,7 @@ exports[`Footer matches the snapshot 1`] = `
     class="row bg-darkgrey footer"
   >
     <footer
-      class="container Footer__FooterComponent-cs8red-0 btfHny"
+      class="Footer__FooterComponent-cs8red-0 btfHny container"
     >
       <div
         class="row"
