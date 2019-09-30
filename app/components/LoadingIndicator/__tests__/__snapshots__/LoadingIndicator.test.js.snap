@@ -2,7 +2,7 @@
 
 exports[`LoadingIndicator matches the snapshot 1`] = `
 <div
-  class="no-print  Progress__Wrapper-yfxggj-0 fHvQdR"
+  class="Progress__Wrapper-yfxggj-0 fHvQdR no-print "
   data-testid="progress-wrapper"
   type="undetermined"
 >
