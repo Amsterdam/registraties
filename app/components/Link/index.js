@@ -6,6 +6,7 @@ import { ChevronRight } from '@datapunt/asc-assets';
 
 const StyledT = styled(T)`
   padding: 0 !important;
+  font-weight: 400;
 
   &:focus {
     outline: 4px solid #ffc90e !important;

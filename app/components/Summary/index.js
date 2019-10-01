@@ -9,6 +9,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 const Dt = styled.dt`
   font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
 `;
 
 const Dd = styled.dd`

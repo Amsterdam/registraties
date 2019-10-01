@@ -49,7 +49,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Key = styled.strong`
-  font-weight: bold;
   margin-top: 20px;
 `;
 
@@ -65,7 +64,8 @@ export const Textarea = styled.textarea`
 `;
 
 export const Label = styled.label`
-  font-weight: bold;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
 
   @media print {
     display: block;
