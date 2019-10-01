@@ -21,7 +21,7 @@ export const getSearchHistoryLocalStorage = () => {
     const searchHistory = JSON.parse(searchHistoryString) || [];
     return searchHistory;
   } catch (error) {
-    console.error('Invalid searchHistory in localstorage');
+    console.error('Invalid searchHistory in localstorage'); // eslint-disable-line no-console
     localStorage.removeItem(SEARCH_HISTORY_STORAGE_KEY);
   }
   return [];
