@@ -9,7 +9,7 @@ import messages from '../../../translations/nl.json';
 import SummaryContainer from '..';
 import configureStore from '../../../configureStore';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 
 describe('containers/Summary', () => {
   it('should have props from structured selector', () => {

@@ -26,7 +26,7 @@ describe('injectReducer decorator', () => {
   });
 
   beforeEach(() => {
-    ({ store } = configureStore({}, memoryHistory));
+    store = configureStore({}, memoryHistory);
     injectors = {
       injectReducer: jest.fn(),
     };
