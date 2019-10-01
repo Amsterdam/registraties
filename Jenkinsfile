@@ -26,22 +26,22 @@ node {
 
     stage("Lint") {
         tryStep "lint start", {
-            sh "docker-compose -p ${PROJECT}_lint_${env.GIT_COMMIT} up --build --exit-code-from test-lint test-lint"
+            sh "docker-compose -p ${PROJECT}_${env.GIT_COMMIT} up --exit-code-from test-lint test-lint"
         }
         always {
             tryStep "lint stop", {
-                sh "docker-compose -p ${PROJECT}_lint_${env.GIT_COMMIT} down -v || true"
+                sh "docker-compose -p ${PROJECT}_${env.GIT_COMMIT} down -v || true"
             }
         }
     }
 
     stage("Test") {
         tryStep "test start", {
-            sh "docker-compose -p ${PROJECT}_test_${env.GIT_COMMIT} up --build --exit-code-from test-unit-integration test-unit-integration"
+            sh "docker-compose -p ${PROJECT}_${env.GIT_COMMIT} up --exit-code-from test-unit-integration test-unit-integration"
         }
         always {
             tryStep "test stop", {
-                sh "docker-compose -p ${PROJECT}_test_${env.GIT_COMMIT} down -v || true"
+                sh "docker-compose -p ${PROJECT}_${env.GIT_COMMIT} down -v || true"
             }
         }
     }
