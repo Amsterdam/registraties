@@ -16,7 +16,7 @@ import configureStore from '../../../configureStore';
 import nextProps from './nextProps.json';
 import exportData from './exportData.json';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 const { getDerivedStateFromProps, getParseConfig } = CSVDownloadContainer;
 
 jest.mock('json2csv');

@@ -28,7 +28,7 @@ describe('injectSaga decorator', () => {
   });
 
   beforeEach(() => {
-    ({ store } = configureStore({}, memoryHistory));
+    store = configureStore({}, memoryHistory);
     injectors = {
       injectSaga: jest.fn(),
       ejectSaga: jest.fn(),

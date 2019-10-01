@@ -11,7 +11,7 @@ import messages from '../../../translations/nl.json';
 import GebiedContainer, { GebiedContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 
 describe('containers/Gebied', () => {
   it('should have props from structured selector', () => {

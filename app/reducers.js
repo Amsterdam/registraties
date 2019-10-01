@@ -4,8 +4,6 @@
 
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 import history from 'utils/history';
 import globalReducer from 'containers/App/reducer';
@@ -24,13 +22,5 @@ export default function createReducer(injectedReducers = {}) {
     ...injectedReducers,
   });
 
-  const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['searchHistory'],
-  };
-
-  const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-  return persistedReducer;
+  return rootReducer;
 }
