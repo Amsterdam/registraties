@@ -11,7 +11,7 @@ import messages from '../../../translations/nl.json';
 import WoonplaatsContainer, { WoonplaatsContainerComponent } from '..';
 import configureStore from '../../../configureStore';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 
 describe('containers/Woonplaats', () => {
   afterEach(cleanup);

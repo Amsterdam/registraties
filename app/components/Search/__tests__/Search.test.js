@@ -9,7 +9,7 @@ import Search from '..';
 import configureStore from '../../../configureStore';
 import messages from '../../../translations/nl.json';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 const intlProvider = new IntlProvider({ locale: 'nl', messages });
 const { intl } = intlProvider.getChildContext();
 

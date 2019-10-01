@@ -9,7 +9,7 @@ import messages from '../../../translations/nl.json';
 import TOCContainer from '..';
 import configureStore from '../../../configureStore';
 
-const { store } = configureStore({}, history);
+const store = configureStore({}, history);
 describe('containers/TOC', () => {
   it('should have props from structured selector', () => {
     const tree = mount(

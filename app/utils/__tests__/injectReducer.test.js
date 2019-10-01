@@ -27,7 +27,7 @@ describe('injectReducer decorator', () => {
   });
 
   beforeEach(() => {
-    ({ store } = configureStore({}, memoryHistory));
+    store = configureStore({}, memoryHistory);
     injectors = {
       injectReducer: jest.fn(),
     };
@@ -76,7 +76,7 @@ describe('useInjectReducer hook', () => {
       injectReducer: jest.fn(),
     };
     reducerInjectors.default = jest.fn().mockImplementation(() => injectors);
-    ({ store } = configureStore({}, memoryHistory));
+    store = configureStore({}, memoryHistory);
     ComponentWithReducer = () => {
       useInjectReducer({ key: 'test', reducer });
       return null;
