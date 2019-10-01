@@ -64,14 +64,14 @@ describe('containers/Search', () => {
       </Provider>,
     );
 
-    const value = 'Here be dragons';
+    const value = 'Here be dragons ';
     const input = document.getElementById('searchInput');
 
     fireEvent.change(input, { target: { value } });
 
     jest.runAllTimers();
 
-    expect(onChange).toHaveBeenCalledWith(value);
+    expect(onChange).toHaveBeenCalledWith('Here be dragons');
   });
 
   it('should not call the onChange handler when trimmed value length smaller than 3', () => {
@@ -100,7 +100,7 @@ describe('containers/Search', () => {
 
     jest.runAllTimers();
 
-    expect(onChange).not.toHaveBeenCalledWith(value);
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('should call the onSearchSelect handler', () => {
