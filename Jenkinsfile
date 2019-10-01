@@ -47,29 +47,19 @@ node {
     }
 }
 
-node {
-    stage("Build acceptance image") {
-        tryStep "build", {
-            def image = docker.build("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}",
-                "--shm-size 1G " +
-                "--build-arg BUILD_ENV=acc " +
-                "--build-arg BUILD_NUMBER=${env.BUILD_NUMBER} " +
-                "--build-arg GIT_COMMIT=${env.GIT_COMMIT} " +
-                ". ")
-            image.push()
-        }
-    }
-}
-
 String BRANCH = "${env.BRANCH_NAME}"
 
 if (BRANCH == "develop") {
 
     node {
-        stage('Push acceptance image') {
-            tryStep "image tagging", {
-                def image = docker.image("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}")
-                image.pull()
+        stage("Build and Push acceptance image") {
+            tryStep "build", {
+                def image = docker.build("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}",
+                    "--shm-size 1G " +
+                    "--build-arg BUILD_ENV=acc " +
+                    "--build-arg BUILD_NUMBER=${env.BUILD_NUMBER} " +
+                    "--build-arg GIT_COMMIT=${env.GIT_COMMIT} " +
+                    ". ")
                 image.push("acceptance")
             }
         }
