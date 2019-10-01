@@ -9,6 +9,10 @@ const Strong = styled.strong`
 
 const StyledLink = styled(Link)`
   margin-left: 4px !important;
+  line-height: 26px;
+  span {
+    vertical-align: top;
+  }
 `;
 
 const Ul = styled.ul`
