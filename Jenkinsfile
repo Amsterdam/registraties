@@ -26,37 +26,23 @@ node {
 
     stage("Lint") {
         tryStep "lint start", {
-            sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-lint test-lint"
+            sh "docker-compose -p ${PROJECT}_lint_${env.GIT_COMMIT} up --build --exit-code-from test-lint test-lint"
         }
         always {
             tryStep "lint stop", {
-                sh "docker-compose -p ${PROJECT} down -v || true"
+                sh "docker-compose -p ${PROJECT}_lint_${env.GIT_COMMIT} down -v || true"
             }
         }
     }
 
     stage("Test") {
         tryStep "test start", {
-            sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
+            sh "docker-compose -p ${PROJECT}_test_${env.GIT_COMMIT} up --build --exit-code-from test-unit-integration test-unit-integration"
         }
         always {
-            tryStep "lint stop", {
-                sh "docker-compose -p ${PROJECT} down -v || true"
+            tryStep "test stop", {
+                sh "docker-compose -p ${PROJECT}_test_${env.GIT_COMMIT} down -v || true"
             }
-        }
-    }
-}
-
-node {
-    stage("Build acceptance image") {
-        tryStep "build", {
-            def image = docker.build("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}",
-                "--shm-size 1G " +
-                "--build-arg BUILD_ENV=acc " +
-                "--build-arg BUILD_NUMBER=${env.BUILD_NUMBER} " +
-                "--build-arg GIT_COMMIT=${env.GIT_COMMIT} " +
-                ". ")
-            image.push()
         }
     }
 }
@@ -66,10 +52,14 @@ String BRANCH = "${env.BRANCH_NAME}"
 if (BRANCH == "develop") {
 
     node {
-        stage('Push acceptance image') {
-            tryStep "image tagging", {
-                def image = docker.image("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}")
-                image.pull()
+        stage("Build and Push acceptance image") {
+            tryStep "build", {
+                def image = docker.build("build.app.amsterdam.nl:5000/ois/registraties:${env.BUILD_NUMBER}",
+                    "--shm-size 1G " +
+                    "--build-arg BUILD_ENV=acc " +
+                    "--build-arg BUILD_NUMBER=${env.BUILD_NUMBER} " +
+                    "--build-arg GIT_COMMIT=${env.GIT_COMMIT} " +
+                    ". ")
                 image.push("acceptance")
             }
         }
