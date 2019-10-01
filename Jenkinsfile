@@ -40,7 +40,7 @@ node {
             sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
         }
         always {
-            tryStep "lint stop", {
+            tryStep "test stop", {
                 sh "docker-compose -p ${PROJECT} down -v || true"
             }
         }
