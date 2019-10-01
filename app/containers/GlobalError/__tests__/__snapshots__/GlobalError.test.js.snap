@@ -5,15 +5,15 @@ exports[`containers/GlobalError should render showing an error when defined 1`] 
   class="GlobalError__ErrorWrapper-igrx8k-0 kuoiLJ no-print cf"
 >
   <div
-    class="GlobalError__ErrorContainer-igrx8k-1 dDcAQy"
+    class="GlobalError__ErrorContainer-igrx8k-1 fzdsQd"
   >
     <p
-      class="GlobalError__P-igrx8k-2 fGvvtl"
+      class="GlobalError__P-igrx8k-2 ggvfIV"
     >
       registraties.unauthorized
     </p>
     <button
-      class="GlobalError__Button-igrx8k-3 dCWsfn"
+      class="GlobalError__Button-igrx8k-3 eBtExR"
       type="button"
     >
       <svg
