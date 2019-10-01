@@ -14,15 +14,11 @@ exports[`components/GlobalError matches the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .c2 {
   margin: 0;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 35px);
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -30,14 +26,13 @@ exports[`components/GlobalError matches the snapshot 1`] = `
 
 .c3 {
   height: 25px;
-  margin-left: 10px;
   width: 25px;
-  -webkit-appearance: none;
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: 0;
-  float: right;
   background: transparent;
   cursor: pointer;
 }
