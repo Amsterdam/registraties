@@ -4,6 +4,7 @@ import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
+import { debounce } from 'lodash';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -52,11 +53,17 @@ export const SearchContainerComponent = props => {
     setShowSuggest(true);
   };
 
+  const debouncedOnChange = debounce(props.onChange, 200);
+
   const onChange = event => {
     event.persist();
 
     const { target } = event;
-    props.onChange(target.value);
+
+    const trimmedValue = target.value.trim();
+    if (trimmedValue.length < 3) return;
+
+    debouncedOnChange(trimmedValue);
   };
 
   const onSelect = event => {

@@ -46,6 +46,8 @@ describe('containers/Search', () => {
   });
 
   it('should call the onChange handler', () => {
+    jest.useFakeTimers();
+
     const onChange = jest.fn();
     const props = {
       onChange,
@@ -62,12 +64,43 @@ describe('containers/Search', () => {
       </Provider>,
     );
 
-    const value = 'Here be dragons';
+    const value = 'Here be dragons ';
     const input = document.getElementById('searchInput');
 
     fireEvent.change(input, { target: { value } });
 
-    expect(onChange).toHaveBeenCalledWith(value);
+    jest.runAllTimers();
+
+    expect(onChange).toHaveBeenCalledWith('Here be dragons');
+  });
+
+  it('should not call the onChange handler when trimmed value length smaller than 3', () => {
+    jest.useFakeTimers();
+
+    const onChange = jest.fn();
+    const props = {
+      onChange,
+      onSearchSelect: () => {},
+      pushSearchHistory: () => {},
+      intl: intlObj,
+    };
+
+    render(
+      <Provider store={store}>
+        <IntlProvider locale="nl" messages={messages}>
+          <SearchContainerComponent {...props} />
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const value = ' a2 ';
+    const input = document.getElementById('searchInput');
+
+    fireEvent.change(input, { target: { value } });
+
+    jest.runAllTimers();
+
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('should call the onSearchSelect handler', () => {
