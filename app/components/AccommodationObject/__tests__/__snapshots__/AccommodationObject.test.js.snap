@@ -1075,7 +1075,8 @@ exports[`AccommodationObject should render without problems 2`] = `
 }
 
 .c1 {
-  font-weight: bold;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
 }
 
 .c0 {
@@ -1232,7 +1233,8 @@ exports[`AccommodationObject should render without problems 2`] = `
 
 exports[`styled components should match the snapshot 1`] = `
 .c0 {
-  font-weight: bold;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
 }
 
 @media print {

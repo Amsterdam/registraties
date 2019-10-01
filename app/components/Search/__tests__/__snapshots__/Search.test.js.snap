@@ -38,8 +38,9 @@ exports[`Search matches the snapshot 1`] = `
 
 .c6 {
   font-size: 18px;
-  font-weight: bold;
   line-height: 25px;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 
@@ -291,6 +292,7 @@ exports[`Search should render results 1`] = `
 
 .c14 {
   padding: 0 !important;
+  font-weight: 400;
 }
 
 .c14:focus {
@@ -342,8 +344,9 @@ exports[`Search should render results 1`] = `
 
 .c6 {
   font-size: 18px;
-  font-weight: bold;
   line-height: 25px;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 

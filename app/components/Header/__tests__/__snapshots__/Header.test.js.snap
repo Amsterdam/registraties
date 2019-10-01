@@ -219,6 +219,11 @@ exports[`Header matches the snapshot 1`] = `
   max-width: 1080px;
 }
 
+.c5 a {
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
+}
+
 .c0 {
   position: relative;
   z-index: 2;
@@ -478,7 +483,7 @@ exports[`Header matches the snapshot 2`] = `
       id="header"
     >
       <header
-        class="sc-gzVnrw sc-TOsTZ jnQENo Header__StyledHeader-sc-15eqjjx-0 NarrX"
+        class="sc-gzVnrw sc-TOsTZ jnQENo Header__StyledHeader-sc-15eqjjx-0 bWufNh"
       >
         <h1
           class="sc-ksYbfQ jNsosU"
