@@ -7,6 +7,7 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import { pushSearchHistoryLocalStorage } from 'utils/searchHistory';
 import Search from 'components/Search';
 
 import { makeSelectResults, makeSelectSuggestionResults } from './selectors';
@@ -14,6 +15,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
 import { pushSearchHistory } from '../SearchHistory/actions';
+
 import messages from './messages';
 
 export const SearchContainerComponent = props => {
@@ -54,7 +56,6 @@ export const SearchContainerComponent = props => {
     event.persist();
 
     const { target } = event;
-
     props.onChange(target.value);
   };
 
@@ -67,6 +68,8 @@ export const SearchContainerComponent = props => {
     } = event;
 
     props.pushSearchHistory({ ...dataset, text });
+    pushSearchHistoryLocalStorage({ ...dataset, text });
+
     props.onSearchSelect({ ...dataset });
     inputRef.current.value = text;
   };
