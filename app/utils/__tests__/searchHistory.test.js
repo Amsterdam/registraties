@@ -2,7 +2,12 @@
  * Test search history utility functions
  */
 import 'jest-localstorage-mock';
-import { getCleanSearchHistory, pushSearchHistoryLocalStorage, getSearchHistoryLocalStorage } from '../searchHistory';
+import {
+  getCleanSearchHistory,
+  pushSearchHistoryLocalStorage,
+  getSearchHistoryLocalStorage,
+  SEARCH_HISTORY_STORAGE_KEY,
+} from '../searchHistory';
 
 describe('searchHistory utils', () => {
   describe('getCleanSearchHistory', () => {
@@ -53,10 +58,24 @@ describe('searchHistory utils', () => {
     it('Should return the search history list from localstorage', () => {
       const stringSearchHistory =
         '[{"vboId":"0363010000758829","text":"Oudezijds Achterburgwal 2"},{"vboId":"0363010001009652","text":"Oudezijds Achterburgwal 3A"},{"vboId":"0363010000819482","text":"Stadionweg 30"}]';
-      localStorage.setItem('searchHistory', stringSearchHistory);
+      localStorage.setItem(SEARCH_HISTORY_STORAGE_KEY, stringSearchHistory);
 
       const searchHistory = getSearchHistoryLocalStorage();
       expect(searchHistory).toStrictEqual(JSON.parse(stringSearchHistory));
+    });
+
+    it('Should return an empty list if the localstorage searchHistory is broken', () => {
+      const stringSearchHistory = '[]{';
+      localStorage.setItem(SEARCH_HISTORY_STORAGE_KEY, stringSearchHistory);
+
+      expect(getSearchHistoryLocalStorage()).toStrictEqual([]);
+    });
+
+    it('Should reset localstorage searchHistory if it is broken', () => {
+      const stringSearchHistory = '[]{';
+      localStorage.setItem(SEARCH_HISTORY_STORAGE_KEY, stringSearchHistory);
+      getSearchHistoryLocalStorage();
+      expect(localStorage.getItem(SEARCH_HISTORY_STORAGE_KEY)).toBeNull();
     });
   });
 
@@ -67,7 +86,7 @@ describe('searchHistory utils', () => {
 
     it('Should add a new search to localstorage', () => {
       pushSearchHistoryLocalStorage({ vboId: '0363010000758829', text: 'Oudezijds Achterburgwal 2' });
-      const searchHistory = localStorage.getItem('searchHistory');
+      const searchHistory = localStorage.getItem(SEARCH_HISTORY_STORAGE_KEY);
 
       const stringSearchHistory = '[{"vboId":"0363010000758829","text":"Oudezijds Achterburgwal 2"}]';
       expect(searchHistory).toStrictEqual(stringSearchHistory);

@@ -1,6 +1,6 @@
 import { uniqBy } from 'lodash';
 
-const SEARCH_HISTORY_STORAGE_KEY = 'searchHistory';
+export const SEARCH_HISTORY_STORAGE_KEY = 'searchHistory';
 const MAX_SEARCH_ITEMS = 10;
 
 export const getCleanSearchHistory = (newSearch, searchHistory) =>
@@ -17,6 +17,12 @@ export const pushSearchHistoryLocalStorage = newSearch => {
 
 export const getSearchHistoryLocalStorage = () => {
   const searchHistoryString = localStorage.getItem(SEARCH_HISTORY_STORAGE_KEY);
-  const searchHistory = JSON.parse(searchHistoryString) || [];
-  return searchHistory;
+  try {
+    const searchHistory = JSON.parse(searchHistoryString) || [];
+    return searchHistory;
+  } catch (error) {
+    console.error('Invalid searchHistory in localstorage');
+    localStorage.removeItem(SEARCH_HISTORY_STORAGE_KEY);
+  }
+  return [];
 };
