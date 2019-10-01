@@ -99,10 +99,18 @@ describe('reducer injectors', () => {
       expect(store.replaceReducer).toHaveBeenCalledTimes(2);
     });
 
-    it('should flush the persisted after injecting reducer', () => {
+    it('should flush the persisted state when injecting reducer', () => {
       store.persistor.flush = jest.fn();
       injectReducer('test', reducer);
       expect(store.persistor.flush).toHaveBeenCalledTimes(1);
+    });
+
+    it('should flush before replaceReducer is called', () => {
+      const callOrder = [];
+      store.persistor.flush = jest.fn().mockImplementation(() => callOrder.push('flush'));
+      store.replaceReducer = jest.fn().mockImplementation(() => callOrder.push('replaceReducer'));
+      injectReducer('test', reducer);
+      expect(callOrder).toEqual(['flush', 'replaceReducer']);
     });
   });
 });
