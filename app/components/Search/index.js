@@ -19,8 +19,9 @@ const Form = styled.form`
 
 const Label = styled.label`
   font-size: 18px;
-  font-weight: bold;
   line-height: 25px;
+  font-family: Avenir Next LT W01 Demi;
+  font-weight: 400;
   margin-bottom: 10px;
 `;
 

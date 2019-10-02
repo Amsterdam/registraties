@@ -30,6 +30,11 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.4em !important;
   }
 
+  h1, h2, h3, h4, h5, h6, h7, strong {
+    font-family: Avenir Next LT W01 Demi;
+    font-weight: 400;
+  }
+
   ul li {
     margin: 0;
     padding: 0;

@@ -10,6 +10,10 @@ import messages from './messages';
 
 const StyledHeader = styled(HeaderComponent)`
   max-width: 1080px;
+  a {
+    font-family: Avenir Next LT W01 Demi;
+    font-weight: 400;
+  }
 `;
 
 const HeaderWrapper = styled.div`

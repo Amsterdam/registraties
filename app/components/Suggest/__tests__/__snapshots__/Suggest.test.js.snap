@@ -58,6 +58,7 @@ exports[`Suggest matches the snapshot 1`] = `
 
 .c4 {
   padding: 0 !important;
+  font-weight: 400;
 }
 
 .c4:focus {
