@@ -13,5 +13,8 @@ Architectural decision records are available in [docs/adr](./docs/adr/README.md)
 - branch `master` requires confirmation in Jenkins to be deployed to [production](https://registraties.amsterdam.nl)
 - additionally all branches will have linting and testing run when pushed to
 
+## Authenticating on local dev server
+In order reach the City Data authentication screen and sign in, the local dev server needs to be exposed on port 8080. The npm start command should do this (see the --port=8080 flag).
+
 ## Thanks to
 <a href="http://browserstack.com/"><img src="app/images/browserstack-logo-600x315.png" height="130" alt="BrowserStack Logo" /></a>
