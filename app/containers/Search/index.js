@@ -4,7 +4,7 @@ import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
-import { debounce } from 'lodash';
+import { debounce, delay } from 'lodash';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -38,9 +38,7 @@ export const SearchContainerComponent = props => {
 
   const onFocusOut = event => {
     const { relatedTarget } = event;
-    // Fix for browser where relatedTarget is `null`
-    // Maybe a better overall solution would be to use React's `onFocus` and `onBlur` vs. refs + focusout
-    if (relatedTarget == null) return;
+
     const { current: input } = inputRef;
     const { current: suggest } = suggestRef;
 
@@ -48,7 +46,16 @@ export const SearchContainerComponent = props => {
     const blurFromSuggest = !suggest || (suggest !== null && !suggest.contains(relatedTarget));
 
     if (blurFromInput && blurFromSuggest) {
-      setShowSuggest(false);
+      // Fix for Safari, Safari iOS
+      // ==========================
+      // In Safari the focusout event is triggered before
+      // the click is handled. And because the links are hidden,
+      // they are not followed.
+      // Maybe a better overall solution would be
+      // to use React's `onFocus` and `onBlur` vs. refs + focusout.
+      // Cause this solution is still subject to a possible
+      // race condition, although 200ms seems more than fine.
+      delay(() => setShowSuggest(false), 200);
     }
   };
 
