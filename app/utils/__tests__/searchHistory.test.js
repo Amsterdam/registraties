@@ -10,6 +10,14 @@ import {
 } from '../searchHistory';
 
 describe('searchHistory utils', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    console.error.mockRestore(); // eslint-disable-line no-console
+  });
+
   describe('getCleanSearchHistory', () => {
     it('Should return a clean search history of max 10 item', () => {
       const searchHistory = [];
