@@ -8,7 +8,7 @@ import { getRequestOptions } from 'shared/services/auth/auth';
 
 import results from './results.json';
 import watchSearchSaga, { TYPEAHEAD_API, inputChange, searchSelect } from '../saga';
-import { INPUT_CHANGE, SEARCH_SELECT, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED } from '../constants';
+import { INPUT_CHANGE, SEARCH_SELECT, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_LOADING, TYPE_AHEAD_FAILED } from '../constants';
 
 describe('containers/Search/saga', () => {
   it('should watch watchSearchSaga', () => {
@@ -48,6 +48,20 @@ describe('containers/Search/saga', () => {
         .run();
     });
 
+    it('should dispatch type ahead loading states', () => {
+      expectSaga(inputChange, action)
+        .provide([[matchers.call.fn(request), results]])
+        .put({
+          type: TYPE_AHEAD_LOADING,
+          payload: true,
+        })
+        .put({
+          type: TYPE_AHEAD_LOADING,
+          payload: false,
+        })
+        .run();
+    });
+
     it('should catch exceptions', () => {
       const error = new Error('panic!!2!');
 
@@ -56,6 +70,22 @@ describe('containers/Search/saga', () => {
         .put({
           type: TYPE_AHEAD_FAILED,
           payload: error,
+        })
+        .run();
+    });
+
+    it('should set loading to state to false after exceptions', () => {
+      const error = new Error('panic!!2!');
+
+      expectSaga(inputChange, action)
+        .provide([[matchers.call.fn(request), throwError(error)]])
+        .put({
+          type: TYPE_AHEAD_FAILED,
+          payload: error,
+        })
+        .put({
+          type: TYPE_AHEAD_LOADING,
+          payload: false,
         })
         .run();
     });

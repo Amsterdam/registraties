@@ -146,4 +146,14 @@ describe('Search', () => {
 
     expect(onSelect).toHaveBeenCalled();
   });
+
+  it('should render loadingIndicator', () => {
+    const { queryByTestId } = render(renderSearch({ ...testProps, isLoading: true }));
+    expect(queryByTestId('progress-wrapper')).toBeTruthy();
+  });
+
+  it('should not render loadingIndicator', () => {
+    const { queryByTestId } = render(renderSearch({ ...testProps, isLoading: false }));
+    expect(queryByTestId('progress-wrapper')).toBeNull();
+  });
 });

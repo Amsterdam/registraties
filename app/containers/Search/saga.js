@@ -5,7 +5,7 @@ import request from 'utils/request';
 import { getRequestOptions } from 'shared/services/auth/auth';
 import configuration from 'shared/services/configuration/configuration';
 
-import { typeAheadFailed, typeAheadSuccess } from './actions';
+import { typeAheadFailed, typeAheadSuccess, typeAheadLoading } from './actions';
 import { INPUT_CHANGE, SEARCH_SELECT } from './constants';
 import { getURL } from '../../utils/routing/utils';
 
@@ -17,13 +17,16 @@ export function* inputChange(action) {
   const input = action.payload;
 
   try {
+    yield put(typeAheadLoading(true));
     const data = yield call(request, `${TYPEAHEAD_API}${input}`, getRequestOptions());
 
     if (data) {
       yield put(typeAheadSuccess(data));
+      yield put(typeAheadLoading(false));
     }
   } catch (error) {
     yield put(typeAheadFailed(error));
+    yield put(typeAheadLoading(false));
   }
 }
 

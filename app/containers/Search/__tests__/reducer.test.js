@@ -1,5 +1,5 @@
 import reducer, { initialState } from '../reducer';
-import { INPUT_CHANGE, SEARCH_SELECT, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED } from '../constants';
+import { INPUT_CHANGE, SEARCH_SELECT, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED, TYPE_AHEAD_LOADING } from '../constants';
 
 describe('containers/Search/reducer', () => {
   it('should return the initial state', () => {
@@ -73,5 +73,17 @@ describe('containers/Search/reducer', () => {
     };
 
     expect(reducer(initialState, actionTypeAheadFailed)).toEqual({ ...initialState, ...resultState });
+  });
+
+  it('should handle TYPE_AHEAD_LOADING', () => {
+    const payload = true;
+    const actionTypeAheadLoading = {
+      type: TYPE_AHEAD_LOADING,
+      payload,
+    };
+    const resultState = {
+      loading: true,
+    };
+    expect(reducer(initialState, actionTypeAheadLoading)).toEqual({ ...initialState, ...resultState });
   });
 });

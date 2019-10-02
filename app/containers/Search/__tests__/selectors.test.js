@@ -4,6 +4,7 @@ import {
   makeSelectResults,
   selectSearch,
   makeSelectSuggestionResults,
+  makeIsLoading,
 } from '../selectors';
 import { initialState } from '../reducer';
 import results from './results.json';
@@ -83,6 +84,16 @@ describe('containers/Search/selectors', () => {
 
       // eslint-disable-next-line no-underscore-dangle
       expect(Straatnamen[0].name).toEqual(resultsSuggestions[0].content[0]._display);
+    });
+  });
+
+  describe('makeIsLoading', () => {
+    it('should return true', () => {
+      expect(makeIsLoading({ search: { ...initialState, loading: true } })).toBeTruthy();
+    });
+
+    it('should return false', () => {
+      expect(makeIsLoading({ search: { ...initialState, loading: false } })).toBeFalsy();
     });
   });
 });

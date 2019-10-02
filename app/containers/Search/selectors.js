@@ -52,3 +52,8 @@ export const makeSelectSuggestionResults = createSelector(
     return mappedResults;
   },
 );
+
+export const makeIsLoading = createSelector(
+  selectSearch,
+  state => state.loading,
+);
