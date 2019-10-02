@@ -81,6 +81,11 @@ exports[`Suggest matches the snapshot 1`] = `
 
 .c5 {
   margin-left: 4px !important;
+  line-height: 26px;
+}
+
+.c5 span {
+  vertical-align: top;
 }
 
 .c0 {

@@ -314,6 +314,11 @@ exports[`Search should render results 1`] = `
 
 .c15 {
   margin-left: 4px !important;
+  line-height: 26px;
+}
+
+.c15 span {
+  vertical-align: top;
 }
 
 .c10 {
