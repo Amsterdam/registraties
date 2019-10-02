@@ -15,6 +15,6 @@ export const SearchHistoryItemWrapper = styled.li`
     text-decoration: none;
     color: initial;
     cursor: initial;
-    mouse-events: none;
+    pointer-events: none;
   }
 `;
