@@ -10,4 +10,11 @@ export const SearchHistoryItemWrapper = styled.li`
   &:not(:last-child):after {
     content: ',';
   }
+
+  a.active {
+    text-decoration: none;
+    color: initial;
+    cursor: initial;
+    pointer-events: none;
+  }
 `;
