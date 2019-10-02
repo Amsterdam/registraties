@@ -196,7 +196,7 @@ describe('containers/Search', () => {
 
     expect(document.getElementsByClassName('links')).toHaveLength(linksLength);
 
-    // remove focus from Suggest component and move focus to input element  by clicking
+    // remove focus from Suggest component and move focus to input element by clicking
     fireEvent(
       suggest,
       new MouseEvent('focusout', {
@@ -217,7 +217,7 @@ describe('containers/Search', () => {
       }),
     );
 
-    expect(document.getElementsByClassName('links')).toHaveLength(0);
+    expect(document.getElementsByClassName('links')).toHaveLength(linksLength);
 
     // put focus back on input element
     fireEvent(
@@ -250,10 +250,8 @@ describe('containers/Search', () => {
       }),
     );
 
-    expect(document.getElementsByClassName('links')).toHaveLength(0);
+    expect(document.getElementsByClassName('links')).toHaveLength(linksLength);
   });
-
-  it('should prevent the form from being submit', () => {});
 
   it('should fill the search field with the clicked suggestion', () => {
     const props = {

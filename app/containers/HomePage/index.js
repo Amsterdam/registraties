@@ -8,6 +8,9 @@ const Img = styled.img`
 const Picture = styled.picture`
   max-width: 100%;
   width: 100%;
+  @media screen and (max-width: 576px) {
+    margin-top: 15px;
+  }
 `;
 
 const HomePage = () => (
