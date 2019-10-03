@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { SEARCH_SELECT, INPUT_CHANGE, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED, TYPE_AHEAD_LOADING } from './constants';
+import { SEARCH_SELECT, INPUT_CHANGE, TYPE_AHEAD_SUCCESS, TYPE_AHEAD_FAILED } from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -26,12 +26,14 @@ export default (state = initialState, action) =>
 
       case INPUT_CHANGE:
         draft.input = action.payload;
+        draft.loading = true;
         break;
 
       case TYPE_AHEAD_SUCCESS:
         draft.results = action.payload;
         draft.error = false;
         draft.errorMessage = '';
+        draft.loading = false;
         break;
 
       case TYPE_AHEAD_FAILED:
@@ -39,10 +41,7 @@ export default (state = initialState, action) =>
         draft.errorMessage = action.payload;
         draft.input = '';
         draft.results = [];
-        break;
-
-      case TYPE_AHEAD_LOADING:
-        draft.loading = action.payload;
+        draft.loading = false;
         break;
     }
   });

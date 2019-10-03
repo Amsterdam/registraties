@@ -33,12 +33,4 @@ describe('containers/Search/actions', () => {
     };
     testActionCreator(actions.typeAheadFailed, constants.TYPE_AHEAD_FAILED, payload);
   });
-
-  it('should dispatch typeAheadLoading action', () => {
-    const payload = {
-      someProp: 'zork',
-      another: 'bazbar',
-    };
-    testActionCreator(actions.typeAheadLoading, constants.TYPE_AHEAD_LOADING, payload);
-  });
 });
