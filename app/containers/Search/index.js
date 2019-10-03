@@ -36,11 +36,16 @@ export const SearchContainerComponent = props => {
     };
   }, []);
 
+  // Bug in Safari, Safari iOS
+  // ==========================
+  // In Safari the focusout event is triggered before
+  // the click is handled. And because the links are hidden,
+  // they are not followed.
+  // Maybe a better overall solution would be
+  // to use React's `onFocus` and `onBlur` vs. refs + focusout.
   const onFocusOut = event => {
     const { relatedTarget } = event;
-    // Fix for browser where relatedTarget is `null`
-    // Maybe a better overall solution would be to use React's `onFocus` and `onBlur` vs. refs + focusout
-    if (relatedTarget == null) return;
+
     const { current: input } = inputRef;
     const { current: suggest } = suggestRef;
 

@@ -217,7 +217,7 @@ describe('containers/Search', () => {
       }),
     );
 
-    expect(document.getElementsByClassName('links')).toHaveLength(linksLength);
+    expect(document.getElementsByClassName('links')).toHaveLength(0);
 
     // put focus back on input element
     fireEvent(
@@ -250,7 +250,7 @@ describe('containers/Search', () => {
       }),
     );
 
-    expect(document.getElementsByClassName('links')).toHaveLength(linksLength);
+    expect(document.getElementsByClassName('links')).toHaveLength(0);
   });
 
   it('should fill the search field with the clicked suggestion', () => {
