@@ -26,12 +26,14 @@ export default (state = initialState, action) =>
 
       case INPUT_CHANGE:
         draft.input = action.payload;
+        draft.loading = true;
         break;
 
       case TYPE_AHEAD_SUCCESS:
         draft.results = action.payload;
         draft.error = false;
         draft.errorMessage = '';
+        draft.loading = false;
         break;
 
       case TYPE_AHEAD_FAILED:
@@ -39,6 +41,7 @@ export default (state = initialState, action) =>
         draft.errorMessage = action.payload;
         draft.input = '';
         draft.results = [];
+        draft.loading = false;
         break;
     }
   });

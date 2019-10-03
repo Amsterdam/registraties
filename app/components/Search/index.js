@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Toggle from 'components/SearchToggle';
 import Suggest from 'components/Suggest';
 import SearchHistory from 'containers/SearchHistory';
+import LoadingIndicator from 'components/LoadingIndicator';
 
 const Form = styled.form`
   display: flex;
@@ -69,6 +70,16 @@ const Container = styled.div`
   }
 `;
 
+const LoadingIndicatorWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 14px;
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
 const SuggestWrapper = styled.div`
   position: absolute;
   min-width: 70px;
@@ -110,6 +121,7 @@ const Search = forwardRef(
       searchTermLabel,
       startFoldedOut,
       suggestRef,
+      isLoading,
     },
     ref,
   ) => {
@@ -130,18 +142,21 @@ const Search = forwardRef(
             <FoldOut active={active} data-testid="search-foldout">
               <Label htmlFor="searchInput">{searchTermLabel}</Label>
               <Hint>{searchHintLabel}</Hint>
-              <Input
-                autoCapitalize="off"
-                autoCorrect="off"
-                defaultValue=""
-                autoComplete="off"
-                id="searchInput"
-                onChange={onChange}
-                onFocus={onFocus}
-                ref={ref}
-                spellCheck={false}
-                type="text"
-              />
+              <InputWrapper>
+                <LoadingIndicatorWrapper>{isLoading ? <LoadingIndicator /> : null}</LoadingIndicatorWrapper>
+                <Input
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  defaultValue=""
+                  autoComplete="off"
+                  id="searchInput"
+                  onChange={onChange}
+                  onFocus={onFocus}
+                  ref={ref}
+                  spellCheck={false}
+                  type="text"
+                />
+              </InputWrapper>
             </FoldOut>
 
             <SuggestWrapper ref={suggestRef}>
@@ -163,6 +178,7 @@ Search.defaultProps = {
   suggestionResults: {},
   suggestRef: undefined,
   startFoldedOut: false,
+  isLoading: false,
 };
 
 Search.propTypes = {
@@ -202,6 +218,7 @@ Search.propTypes = {
   searchTermLabel: PropTypes.string.isRequired,
   searchHintLabel: PropTypes.string.isRequired,
   startFoldedOut: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 
 export default Search;

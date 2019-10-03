@@ -11,7 +11,7 @@ import injectReducer from 'utils/injectReducer';
 import { pushSearchHistoryLocalStorage } from 'utils/searchHistory';
 import Search from 'components/Search';
 
-import { makeSelectResults, makeSelectSuggestionResults } from './selectors';
+import { makeSelectResults, makeSelectSuggestionResults, makeIsLoading } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { inputChanged, searchSelect } from './actions';
@@ -119,7 +119,7 @@ export const SearchContainerComponent = props => {
     }
   };
 
-  const { intl, results, suggestionResults, show } = props;
+  const { intl, results, suggestionResults, show, isLoading } = props;
   const visibleResults = showSuggest ? results : {};
 
   return (
@@ -139,6 +139,7 @@ export const SearchContainerComponent = props => {
       searchLabel={intl.formatMessage(messages.search)}
       as="form"
       startFoldedOut={show}
+      isLoading={isLoading}
     />
   );
 };
@@ -157,11 +158,13 @@ SearchContainerComponent.propTypes = {
   results: PropTypes.shape({}),
   suggestionResults: PropTypes.shape({}),
   show: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   results: makeSelectResults,
   suggestionResults: makeSelectSuggestionResults,
+  isLoading: makeIsLoading,
 });
 
 const mapDispatchToProps = dispatch =>
