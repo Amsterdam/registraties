@@ -91,7 +91,7 @@
     "leaflet": "^1.4.0",
     "lodash": "^4.17.14",
     "lodash.clonedeep": "^4.5.0",
-    "minimist": "1.2.0",
+    "minimist": "1.2.2",
     "mock-local-storage": "^1.1.8",
     "proj4": "^2.5.0",
     "react": "16.8.6",
